@@ -37,7 +37,10 @@
 									"script": {
 										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
 										"exec": [
-											""
+											"// check if test is executed\r",
+											"pm.test(\"Test is executed\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -90,7 +93,10 @@
 									"script": {
 										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
 										"exec": [
-											""
+											"// check if test is executed\r",
+											"pm.test(\"Test is executed\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -134,7 +140,10 @@
 									"script": {
 										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
 										"exec": [
-											""
+											"// check if test is executed\r",
+											"pm.test(\"Test is executed\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -294,7 +303,10 @@
 											"// Execute standard tests from PrS using eval()\r",
 											"eval(globals.commonTests)();\r",
 											"\r",
-											"//var responseData = pm.response.json();\r",
+											"// check if payment is retrieved\r",
+											"pm.test(\"Payment is updated\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
 											"pm.test(\"Payment status is READY_FOR_EXECUTION\", () => {\r",
 											"    let jsonDataPaymentState = pm.response.json().paymentState;\r",
 											"    jsonDataPaymentState == \"READY_FOR_EXECUTION\";\r",
@@ -681,7 +693,7 @@
 	],
 	"variable": [
 		{
-			"id": "d187323b-bf63-4cf4-9bd4-6829da48c0a9",
+			"id": "4541f829-d4f4-4511-992f-72f017e5c048",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
