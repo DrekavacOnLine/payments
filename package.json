@@ -1,0 +1,13 @@
+{
+  "name": "payments",
+  "version": "1.0.0",
+  "description": "Project for running payments tests",
+  "scripts": {
+    "api-test-automation": "newman run tests/DBAN-CH-PSD2-Group-API-integrate-SEPA-AND-SWIFT-payments.postman_collection.json -e env/MDB-R191-TEST.postman_environment.json -d data/MDB-R191-TEST.postman_data.json --reporters cli,junit,html,htmlextra --reporter-junit-export rpt.xml --reporter-html-export report/index.html --reporter-htmlextra-export report/rpt_ex.html"
+  },
+  "author": "DAP",
+  "dependencies": {
+    "newman": "^4.5.4",
+    "newman-reporter-html": "^1.0.3"
+  }
+}

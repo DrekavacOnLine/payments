@@ -1,0 +1,690 @@
+{
+	"info": {
+		"_postman_id": "42f91276-3900-4231-840a-83a9dd755394",
+		"name": "DBAN-CH-PSD2-Group-API-integrate-SEPA-&-SWIFT-payments",
+		"description": "Integration of payment endpoints for SEPA and SWIFT payments against DBAN\r\n\r\nBased on clarification call from 24th of August 2018 efforts have been estimated to 140PD of development\r\n\r\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "MDB-R191-TEST v3 - using data file",
+			"item": [
+				{
+					"name": "Tests",
+					"item": [
+						{
+							"name": "_Test session",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"//specify list of tests to be executed in exact order",
+											"var testSession = [",
+											"    \"SWIFT payment CRUD\",",
+											"    \"SWIFT payment CD\"",
+											"    ]; ",
+											"",
+											"// Session initiate from PrS using eval()",
+											"eval(globals.sessionInit)(testSession, request.name,\"testSession\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://postman-echo.com/get?foo1=bar1",
+									"protocol": "https",
+									"host": [
+										"postman-echo",
+										"com"
+									],
+									"path": [
+										"get"
+									],
+									"query": [
+										{
+											"key": "foo1",
+											"value": "bar1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SWIFT payment CRUD",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"var requestsToRun = [\"Create SWIFT payment\",",
+											"                     \"Get SWIFT payment\", ",
+											"                     \"Update SWIFT payment\",",
+											"                     \"Delete SWIFT payment\"]; ",
+											"",
+											"// Session initiate from PrS using eval()",
+											"eval(globals.sessionInit)(requestsToRun, request.name,\"requestsToRun\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "SWIFT payment CD",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"var requestsToRun = [\"Create SWIFT payment\",",
+											"                     \"Delete SWIFT payment\"]; ",
+											"                     ",
+											"// Session initiate from PrS using eval()",
+											"eval(globals.sessionInit)(requestsToRun, request.name,\"requestsToRun\");"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Requests",
+					"item": [
+						{
+							"name": "Create SWIFT payment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
+										"exec": [
+											"\r",
+											"// Execute standard tests from PrS using eval()\r",
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(\"Payment is created\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"pm.test(\"Instructed amount is correct\", () => {\r",
+											"  let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
+											"  let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
+											"  pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+											"});\r",
+											"pm.test(\"Execution date is correct\", () => {\r",
+											"  let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
+											"  let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
+											"  pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate);\r",
+											"});\r",
+											"pm.test(\"State is correct\", () => {\r",
+											"  let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+											"  pm.expect(jsonDataResponsePaymentState).to.eql(\"AUTHORISATION_REQUIRED\");\r",
+											"});\r",
+											"pm.test(\"Creditor agent is correct\", () => {\r",
+											"  let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent;\r",
+											"  let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent;\r",
+											"  pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
+											"});\r",
+											"pm.test(\"Debtor address is correct\", () => {\r",
+											"  let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
+											"  let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
+											"  pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.adrLine1);\r",
+											"  pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
+											"  pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
+											"});\r",
+											"pm.test(\"Debtor account is correct\", () => {\r",
+											"  let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
+											"  let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo;   \r",
+											"  pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+											"});\r",
+											"pm.test(\"Creditor account is correct\", () => {\r",
+											"  let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
+											"  let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
+											"  pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+											"});\r",
+											"pm.test(\"Charge bearer is correct\", () => {\r",
+											"  let jsonDataResponsePaymentState = pm.response.json().chargeBearer;\r",
+											"  pm.expect(jsonDataResponsePaymentState).to.eql(\"SHAR\");\r",
+											"});\r",
+											"\r",
+											"// check if payment is created\r",
+											"if (pm.response.to.have.status(201)){\r",
+											"    var responseData = JSON.parse(responseBody);\r",
+											"    pm.globals.set(\"newPaymentID\", responseData.paymentId);\r",
+											"    console.log(\"New payment ID: \" + pm.globals.get(\"newPaymentID\"));\r",
+											"}\r",
+											"else {\r",
+											"    console.log(\"Failed to create payment with ID:\" + pm.globals.get(\"newPaymentID\"));\r",
+											"    pm.globals.unset(\"newPaymentID\");\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
+										"exec": [
+											"// Session navigate from PrS using eval()",
+											"eval(globals.sessionNavigate)(request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json, application/hal+json"
+									},
+									{
+										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"SALA\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": \"1304182224-0000002\",\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"EUR\"\n            },\n            \"value\": 119.99\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"Standard payment 2105-2\",\n            \"structured\":  \"VRG VIRT Lohnverrechnung\"\n        },\n        \"instructionIdentification\": \"CLVL-1-17082815400103-1\",\n    \t\"requestedExecutionDate\": {{PrS:payDate}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"MDB-R191-Test\",\n            \"address\": {\n            \t\"adrLine1\": \"Kreissparkasse fdsdfs\",\n            \t\"adrLine2\": \"AM WOLLHAUS 14\",\n            \t\"buildingNm\": \"string\",\n            \t\"postalCode\": 2234,\n            \t\"townName\": \"Maxtown\",\n            \t\"country\": \"CH\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"string\",\n    \t\t\"name2\": \"string\",\n    \t\t\"street\": \"string\",\n    \t\t\"city\": \"string\",\n    \t\t\"country\": \"HU\"\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": \"Schachenallee 31\",\n            \t\"postalCode\": \"5004\",\n            \t\"townName\": \"Aarau\"\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    }\n}"
+								},
+								"url": {
+									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
+									"host": [
+										"{{environment}}"
+									],
+									"path": [
+										"banking-api",
+										"payment",
+										"swift",
+										"{{tenant}}",
+										"v2",
+										"credittransfer"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get SWIFT payment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c6df6266-295d-4173-82f3-407111575864",
+										"exec": [
+											"// Execute standard tests from PrS using eval()\r",
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"//var responseData = pm.response.json();\r",
+											"pm.test(\"Payment status is READY_FOR_EXECUTION\", () => {\r",
+											"    let jsonDataPaymentState = pm.response.json().paymentState;\r",
+											"    jsonDataPaymentState == \"READY_FOR_EXECUTION\";\r",
+											"}); \r",
+											"\r",
+											"pm.test(\"Debtor is correct\", () => {\r",
+											"  let jsonDataDebtorName = pm.response.json().paymentInformation.debtor.name;\r",
+											"  let jsonDataDebtorAccount = pm.response.json().paymentInformation.debtorAccountNo;\r",
+											"  pm.expect(jsonDataDebtorName).to.eql(JSON.parse(data.debtorAccountName));\r",
+											"  pm.expect(jsonDataDebtorAccount).to.eql(JSON.parse(data.debtorAccountNo));\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "7e8dccc6-4b69-4f2b-9bff-a4f3c44a3a36",
+										"exec": [
+											"// Session navigate from PrS using eval()",
+											"eval(globals.sessionNavigate)(request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, application/hal+json"
+									},
+									{
+										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"storeOnly\": true,\r\n\r\n  \"paymentInformation\": {\r\n    \"debtor\": {\r\n      \"name\": \"Freddy Hinz\",\r\n      \"adrLine1\": \"Schachenallee 31\",\r\n      \"adrLine2\": \"string\",\r\n      \"buildingNm\": \"string\",\r\n      \"postalCode\": 5004,\r\n      \"townName\": \"Aarau\",\r\n      \"country\": \"CH\"\r\n    },\r\n    \"debtorAccount\": {\r\n      \"accountNo\": \"CH4512312001000030903\",\r\n      \"bankCode\": \"CLXNCHZZMDB\"\r\n    },\r\n    \"creditor\": {\r\n      \"name\": \"Max Creditor\",\r\n      \"adrLine1\": \"Kreissparkasse fdsdfs\",\r\n      \"adrLine2\": \"AM WOLLHAUS 14\",\r\n      \"buildingNm\": \"string\",\r\n      \"postalCode\": 2234,\r\n      \"townName\": \"Maxtown\",\r\n      \"country\": \"CH\"\r\n    },\r\n\"creditorAccount\": {\r\n\t  \"accountNo\": \"CH4908465123456789012\",\r\n\t  \"bankCode\": \"BSILCH22XXX\"\r\n\t},\r\n    \"instructedAmount\": {\r\n      \"currency\": {\r\n        \"code\": \"EUR\"\r\n      },\r\n      \"value\": 9299292.22\r\n    },\r\n    \"requestedExecutionDate\": \"2019-08-26\",\r\n    \"instructionPriority\": \"NORMAL\",\r\n    \"remittanceInformation\": {\r\n      \"unstructured\": \"Amazon payment 12345\",\r\n      \"structured\": \"string\"\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentID}}",
+									"host": [
+										"{{environment}}"
+									],
+									"path": [
+										"banking-api",
+										"payment",
+										"swift",
+										"{{tenant}}",
+										"v2",
+										"credittransfer",
+										"{{newPaymentID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update SWIFT payment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "96ee9651-4e6e-4a83-a257-55d56e136859",
+										"exec": [
+											"\r",
+											"eval(globals.commonTests)();\r",
+											"// check if payment is updated\r",
+											"pm.test(\"Payment is updated\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"pm.test(\"Instructed amount is correct\", () => {\r",
+											"  let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
+											"  let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
+											"  pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+											"});\r",
+											"pm.test(\"Execution date is correct\", () => {\r",
+											"  let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
+											"  let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
+											"  pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate);\r",
+											"});\r",
+											"pm.test(\"State is correct\", () => {\r",
+											"  let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+											"  pm.expect(jsonDataResponsePaymentState).to.eql(\"AUTHORISATION_REQUIRED\");\r",
+											"});\r",
+											"pm.test(\"Creditor agent is correct\", () => {\r",
+											"  let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent;\r",
+											"  let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent;\r",
+											"  pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
+											"});\r",
+											"pm.test(\"Debtor address is correct\", () => {\r",
+											"  let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
+											"  let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
+											"  pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.adrLine1);\r",
+											"  pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
+											"  pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
+											"});\r",
+											"pm.test(\"Debtor account is correct\", () => {\r",
+											"  let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
+											"  let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo;   \r",
+											"  pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+											"});\r",
+											"pm.test(\"Creditor account is correct\", () => {\r",
+											"  let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
+											"  let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
+											"  pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+											"});\r",
+											"pm.test(\"Charge bearer is correct\", () => {\r",
+											"  let requestBodyChargeBearer = JSON.parse(request.data).chargeBearer;\r",
+											"  let responseBodyChargeBearer = JSON.parse(responseBody).chargeBearer;       \r",
+											"  pm.expect(responseBodyChargeBearer).to.eql(requestBodyChargeBearer);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ed4149e4-3b82-4013-8999-2fa27812ab16",
+										"exec": [
+											"// Session navigate from PrS using eval()",
+											"eval(globals.sessionNavigate)(request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, application/hal+json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{token}}",
+										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"SALA2\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": \"1304182224-0000002\",\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"EUR\"\n            },\n            \"value\": 119.89\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"Standard payment 2105-2\",\n            \"structured\":  \"VRG VIRT Lohnverrechnung\"\n        },\n        \"instructionIdentification\": \"CLVL-1-17082815400103-1\",\n    \t\"requestedExecutionDate\": {{PrS:payDate}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"MDB-R191-Test\",\n            \"address\": {\n            \t\"adrLine1\": \"Kreissparkasse fdsdfs\",\n            \t\"adrLine2\": \"AM WOLLHAUS 14\",\n            \t\"buildingNm\": \"string\",\n            \t\"postalCode\": 2234,\n            \t\"townName\": \"Maxtown\",\n            \t\"country\": \"CH\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"string\",\n    \t\t\"name2\": \"string\",\n    \t\t\"street\": \"string\",\n    \t\t\"city\": \"string\",\n    \t\t\"country\": \"HU\"\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": \"Schachenallee 31\",\n            \t\"postalCode\": \"5004\",\n            \t\"townName\": \"Aarau\"\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    },\n      \"chargeBearer\": \"SHAR\"\n}"
+								},
+								"url": {
+									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentID}}",
+									"host": [
+										"{{environment}}"
+									],
+									"path": [
+										"banking-api",
+										"payment",
+										"swift",
+										"{{tenant}}",
+										"v2",
+										"credittransfer",
+										"{{newPaymentID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete SWIFT payment",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "96ee9651-4e6e-4a83-a257-55d56e136859",
+										"exec": [
+											"// check if payment is deleted\r",
+											"pm.test(\"Payment is deleted\", () => pm.response.to.have.status(204));\r",
+											"\r",
+											"// Log important stuff\r",
+											"if (pm.response.to.have.status(204)){\r",
+											"    console.log(\"Deleted payment ID:\" + pm.globals.get(\"newPaymentID\"));\r",
+											"    pm.globals.unset(\"newPaymentID\");\r",
+											"}\r",
+											"else {\r",
+											"    console.log(\"Failed to delete payment with ID:\" + pm.globals.get(\"newPaymentID\"));\r",
+											"    pm.globals.set(\"newPaymentID\", \"ERROR!\");\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "9275cecb-a9b0-4985-983c-83f92609315b",
+										"exec": [
+											"// Session navigate from PrS using eval()",
+											"eval(globals.sessionNavigate)(request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, application/hal+json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{token}}",
+										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"storeOnly\": false,\r\n  \"locked\": false,\r\n  \"categoryPurposeCode\": \"string\",\r\n  \"paymentInformation\": {\r\n    \"instructionIdentification\": \"string\",\r\n    \"endToEndId\": \"string\",\r\n    \"debtor\": {\r\n      \"name\": \"Freddy Hinz\",\r\n      \"adrLine1\": \"Schachenallee 31\",\r\n      \"adrLine2\": \"string\",\r\n      \"buildingNm\": \"string\",\r\n      \"postalCode\": 5004,\r\n      \"townName\": \"Aarau\",\r\n      \"country\": \"CH\"\r\n    },\r\n    \"debtorAccount\": {\r\n      \"accountNo\": \"CH4512312001000030903\",\r\n      \"bankCode\": \"CLXNCHZZMDB\"\r\n    },\r\n    \"creditor\": {\r\n      \"name\": \"Max Creditor\",\r\n      \"adrLine1\": \"Kreissparkasse fdsdfs\",\r\n      \"adrLine2\": \"AM WOLLHAUS 14\",\r\n      \"buildingNm\": \"string\",\r\n      \"postalCode\": 2234,\r\n      \"townName\": \"Maxtown\",\r\n      \"country\": \"CH\"\r\n    },\r\n\"creditorAccount\": {\r\n\t  \"accountNo\": \"CH4908465123456789012\",\r\n\t  \"bankCode\": \"BSILCH22XXX\"\r\n\t},\r\n    \"instructedAmount\": {\r\n      \"currency\": {\r\n        \"code\": \"CHF\"\r\n      },\r\n      \"value\": 9299292.22\r\n    },\r\n    \"requestedExecutionDate\": \"2019-08-26\",\r\n    \"instructionPriority\": \"NORMAL\",\r\n    \"remittanceInformation\": {\r\n      \"unstructured\": \"Amazon payment 12345\",\r\n      \"structured\": \"string\"\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentID}}",
+									"host": [
+										"{{environment}}"
+									],
+									"path": [
+										"banking-api",
+										"payment",
+										"swift",
+										"{{tenant}}",
+										"v2",
+										"credittransfer",
+										"{{newPaymentID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"_postman_isSubFolder": true
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d8d839c9-f4ee-473b-b407-3289bb16795f",
+						"type": "text/javascript",
+						"exec": [
+							"var moment = require('moment');",
+							"let payDate = moment().add(\"days\",1).format(\"YYYY-MM-DD\"); //next day in specified format",
+							"//console.log(payDate);",
+							"//payDate = moment().add(\"days\",1).toISOString();",
+							"//console.log(payDate);",
+							"pm.globals.set('PrS:payDate', JSON.stringify(payDate));",
+							"",
+							"// Define test data, setup configuration per environment",
+							"var env = pm.environment.get(\"envName\");",
+							"if (env === \"MDB-R191-TEST\") {",
+							"//    var contractNumber = \"{{contractNumber}}\";",
+							"//    var debtorAccountNo = \"{{debtorAccountNo}}\";",
+							"//    var debtorAccountName = \"{{debtorAccountName}}\";",
+							"//    var creditorAccountNo = \"{{creditorAccountNo}}\";",
+							"    } else if (env === \"MDB-R191-LAT\") {",
+							"} else {",
+							"    throw new Error(\"Wrong environment selected, requests are skipped!\")",
+							"}",
+							"//pm.globals.set('PrS:contractNumber', JSON.stringify(contractNumber));",
+							"//pm.globals.set('PrS:debtorAccountNo', JSON.stringify(debtorAccountNo));",
+							"//pm.globals.set('PrS:debtorAccountName', JSON.stringify(debtorAccountName));",
+							"//pm.globals.set('PrS:creditorAccountNo', JSON.stringify(creditorAccountNo));",
+							"//console.log(category);",
+							"//console.log(tags);",
+							"",
+							"// Save the object as a variable.",
+							"// JSON.stringify will serialize the object so that Postman can save it",
+							"",
+							"//pm.globals.set('PrS:tags', JSON.stringify(tags));",
+							"//pm.environment.set(\"testGroup\",\"Patient Zero\") //set environment variable if/when needed",
+							"",
+							"// Save common tests in a global variable",
+							"postman.setGlobalVariable(\"commonTests\", () => {",
+							"    pm.test(\"Content-Type header is present\", function () {",
+							"        pm.response.to.have.header('Content-Type', 'application/json;charset=UTF-8');",
+							"    });",
+							"    pm.test(\"Response must be valid and have a body\", function () {",
+							"        pm.response.to.not.be.error;",
+							"    //    pm.response.to.be.ok;",
+							"        pm.response.to.be.withBody;",
+							"        pm.response.to.be.json;",
+							"        pm.response.to.have.jsonBody();",
+							"        pm.response.to.not.have.jsonBody('error');",
+							"    });",
+							"    //pm.test(\"Response time is below 1000ms\", function () {",
+							"    //    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"    //});",
+							"});",
+							"",
+							"postman.setGlobalVariable(\"sessionInit\", (testSession, requestName, sessionName) => {",
+							"    //session init section",
+							"    console.log(requestName + \", initialization: \" + testSession + \", global var: \" + sessionName);",
+							"    console.log(requestName + \", executing: \" + testSession[0]);",
+							"",
+							"    // Select first test from session to be executed",
+							"    postman.setNextRequest(testSession[0]); ",
+							"    testSession.shift();",
+							"    if (testSession.length === 0) {",
+							"        console.log(requestName + \", test session is empty, unset \" + sessionName);",
+							"        pm.globals.unset(sessionName);",
+							"        console.log(requestName + \", terminate tests execution list\");",
+							"    } else {",
+							"        pm.globals.set(sessionName, testSession);",
+							"        console.log(requestName + \" for \" + sessionName + \", updated list of tests to be executed: \" + testSession);",
+							"    }",
+							"});",
+							"",
+							"postman.setGlobalVariable(\"sessionNavigate\", (requestName) => {",
+							"    console.log(request.name + \", entering ...\");",
+							"    if (pm.globals.get(\"requestsToRun\") === undefined){",
+							"        console.log(request.name + \", requestsToRun is undefined\");",
+							"        if (pm.globals.get(\"testSession\") === undefined){",
+							"            console.log(request.name + \", testSession is undefined\");",
+							"            console.log(\"The end\");",
+							"            postman.setNextRequest(null)",
+							"        } else {",
+							"        var testSession = pm.globals.get(\"testSession\");",
+							"        console.log(request.name + \", checking what to run: \" + testSession[0]);",
+							"        postman.setNextRequest(testSession[0]); // Run: GET SWIFT payment",
+							"        testSession.shift();",
+							"        if (testSession.length === 0) {",
+							"            pm.globals.unset(\"testSession\");",
+							"            console.log(request.name + \", terminate execution list\");",
+							"        } else {",
+							"            pm.globals.set(\"testSession\", testSession);",
+							"            console.log(request.name + \", updated list of tests to be executed: \" + testSession);",
+							"        }}",
+							"    } else {",
+							"    var requestsToRun = pm.globals.get(\"requestsToRun\");",
+							"    console.log(request.name + \", checking what to run: \" + requestsToRun[0]);",
+							"    postman.setNextRequest(requestsToRun[0]); ",
+							"    requestsToRun.shift();",
+							"    if (requestsToRun.length === 0) {",
+							"        pm.globals.unset(\"requestsToRun\");",
+							"        console.log(request.name + \", terminate requests execution list\");",
+							"    } else {",
+							"        pm.globals.set(\"requestsToRun\", requestsToRun);",
+							"        console.log(request.name + \", updated list of requests to be executed: \" + requestsToRun);",
+							"    }}",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d25d163-d0bc-4ae9-a4af-cb2e3339ce9b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"id": "d187323b-bf63-4cf4-9bd4-6829da48c0a9",
+			"key": "EPIC",
+			"value": "PRODUCT-6323",
+			"type": "string"
+		}
+	]
+}
