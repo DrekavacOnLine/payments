@@ -21,13 +21,28 @@
 										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
 										"exec": [
 											"//specify list of tests to be executed in exact order",
-											"var testSession = [",
-											"    \"SWIFT payment CRUD\",",
-											"    \"SWIFT payment CD\"",
-											"    ]; ",
+											"const testsScope = \"Full\";",
+											"//const testsScope = \"Core\";",
 											"",
+											"switch(testsScope) {",
+											"    case \"Full\":",
+											"        var testSession = [",
+											"            \"SWIFT payment CRUD\",",
+											"            \"SWIFT payment CD\"",
+											"            ]; ",
+											"        break;",
+											"    case \"Core\":",
+											"        var testSession = [",
+											"            \"SWIFT payment CD\"",
+											"            ]; ",
+											"        break;",
+											"    default:",
+											"        throw new Error(\"No tests selected for execution!\")",
+											"}        ",
+											"    ",
 											"// Session initiate from PrS using eval()",
-											"eval(globals.sessionInit)(testSession, request.name,\"testSession\");"
+											"eval(globals.sessionInit)(testSession, \"testSession\");",
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -37,9 +52,9 @@
 									"script": {
 										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
 										"exec": [
-											"// check if test is executed\r",
-											"pm.test(\"Test is executed\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
+											"pm.test(\"Test session is initiated\", function () {\r",
+											"    //pm.response.to.have.status(200);\r",
+											"    pm.response.to.be.success;\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -83,7 +98,7 @@
 											"                     \"Delete SWIFT payment\"]; ",
 											"",
 											"// Session initiate from PrS using eval()",
-											"eval(globals.sessionInit)(requestsToRun, request.name,\"requestsToRun\");"
+											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
 										],
 										"type": "text/javascript"
 									}
@@ -94,8 +109,9 @@
 										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
 										"exec": [
 											"// check if test is executed\r",
-											"pm.test(\"Test is executed\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
+											"pm.test(\"Test '\"+ request.name +\"' is initiated\", function () {\r",
+											"    //pm.response.to.have.status(200);\r",
+											"    pm.response.to.be.success;\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -130,7 +146,7 @@
 											"                     \"Delete SWIFT payment\"]; ",
 											"                     ",
 											"// Session initiate from PrS using eval()",
-											"eval(globals.sessionInit)(requestsToRun, request.name,\"requestsToRun\");"
+											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
 										],
 										"type": "text/javascript"
 									}
@@ -141,8 +157,9 @@
 										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
 										"exec": [
 											"// check if test is executed\r",
-											"pm.test(\"Test is executed\", function () {\r",
-											"    pm.response.to.have.status(200);\r",
+											"pm.test(\"Test '\"+ request.name +\"' is initiated\", function () {\r",
+											"    //pm.response.to.have.status(200);\r",
+											"    pm.response.to.be.success;\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -179,7 +196,6 @@
 									"script": {
 										"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 										"exec": [
-											"\r",
 											"// Execute standard tests from PrS using eval()\r",
 											"eval(globals.commonTests)();\r",
 											"\r",
@@ -247,7 +263,7 @@
 										"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 										"exec": [
 											"// Session navigate from PrS using eval()",
-											"eval(globals.sessionNavigate)(request.name);"
+											"eval(globals.sessionNavigate)();"
 										],
 										"type": "text/javascript"
 									}
@@ -273,7 +289,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"SALA\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": \"1304182224-0000002\",\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"EUR\"\n            },\n            \"value\": 119.99\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"Standard payment 2105-2\",\n            \"structured\":  \"VRG VIRT Lohnverrechnung\"\n        },\n        \"instructionIdentification\": \"CLVL-1-17082815400103-1\",\n    \t\"requestedExecutionDate\": {{PrS:payDate}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"MDB-R191-Test\",\n            \"address\": {\n            \t\"adrLine1\": \"Kreissparkasse fdsdfs\",\n            \t\"adrLine2\": \"AM WOLLHAUS 14\",\n            \t\"buildingNm\": \"string\",\n            \t\"postalCode\": 2234,\n            \t\"townName\": \"Maxtown\",\n            \t\"country\": \"CH\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"string\",\n    \t\t\"name2\": \"string\",\n    \t\t\"street\": \"string\",\n    \t\t\"city\": \"string\",\n    \t\t\"country\": \"HU\"\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": \"Schachenallee 31\",\n            \t\"postalCode\": \"5004\",\n            \t\"townName\": \"Aarau\"\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    }\n}"
+									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"SALA\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": \"1304182224-0000002\",\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"EUR\"\n            },\n            \"value\": 119.99\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"Standard payment 2105-2\",\n            \"structured\":  \"VRG VIRT Lohnverrechnung\"\n        },\n        \"instructionIdentification\": \"CLVL-1-17082815400103-1\",\n    \t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"MDB-R191-Test\",\n            \"address\": {\n            \t\"adrLine1\": \"Kreissparkasse fdsdfs\",\n            \t\"adrLine2\": \"AM WOLLHAUS 14\",\n            \t\"buildingNm\": \"string\",\n            \t\"postalCode\": 2234,\n            \t\"townName\": \"Maxtown\",\n            \t\"country\": \"CH\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"string\",\n    \t\t\"name2\": \"string\",\n    \t\t\"street\": \"string\",\n    \t\t\"city\": \"string\",\n    \t\t\"country\": \"HU\"\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": \"Schachenallee 31\",\n            \t\"postalCode\": \"5004\",\n            \t\"townName\": \"Aarau\"\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    }\n}"
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
@@ -307,9 +323,9 @@
 											"pm.test(\"Payment is updated\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
-											"pm.test(\"Payment status is READY_FOR_EXECUTION\", () => {\r",
+											"pm.test(\"Payment status is 'AUTHORISATION REQUIRED'\", () => {\r",
 											"    let jsonDataPaymentState = pm.response.json().paymentState;\r",
-											"    jsonDataPaymentState == \"READY_FOR_EXECUTION\";\r",
+											"    pm.expect(jsonDataPaymentState).to.eql(\"AUTHORISATION_REQUIRED\");\r",
 											"}); \r",
 											"\r",
 											"pm.test(\"Debtor is correct\", () => {\r",
@@ -317,6 +333,12 @@
 											"  let jsonDataDebtorAccount = pm.response.json().paymentInformation.debtorAccountNo;\r",
 											"  pm.expect(jsonDataDebtorName).to.eql(JSON.parse(data.debtorAccountName));\r",
 											"  pm.expect(jsonDataDebtorAccount).to.eql(JSON.parse(data.debtorAccountNo));\r",
+											"});\r",
+											"\r",
+											"// test if creaditor agent is valid\r",
+											"pm.test(\"Creditor agent is correct\", () => {\r",
+											"  let address = pm.response.json().paymentInformation.creditorAgent;\r",
+											"  eval(globals.assertValidCreditorAgent)(address);\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -328,7 +350,7 @@
 										"id": "7e8dccc6-4b69-4f2b-9bff-a4f3c44a3a36",
 										"exec": [
 											"// Session navigate from PrS using eval()",
-											"eval(globals.sessionNavigate)(request.name);"
+											"eval(globals.sessionNavigate)();"
 										],
 										"type": "text/javascript"
 									}
@@ -385,7 +407,7 @@
 									"script": {
 										"id": "96ee9651-4e6e-4a83-a257-55d56e136859",
 										"exec": [
-											"\r",
+											"// Execute standard tests from PrS using eval()\r",
 											"eval(globals.commonTests)();\r",
 											"// check if payment is updated\r",
 											"pm.test(\"Payment is updated\", function () {\r",
@@ -442,7 +464,7 @@
 										"id": "ed4149e4-3b82-4013-8999-2fa27812ab16",
 										"exec": [
 											"// Session navigate from PrS using eval()",
-											"eval(globals.sessionNavigate)(request.name);"
+											"eval(globals.sessionNavigate)();"
 										],
 										"type": "text/javascript"
 									}
@@ -468,7 +490,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"SALA2\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": \"1304182224-0000002\",\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"EUR\"\n            },\n            \"value\": 119.89\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"Standard payment 2105-2\",\n            \"structured\":  \"VRG VIRT Lohnverrechnung\"\n        },\n        \"instructionIdentification\": \"CLVL-1-17082815400103-1\",\n    \t\"requestedExecutionDate\": {{PrS:payDate}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"MDB-R191-Test\",\n            \"address\": {\n            \t\"adrLine1\": \"Kreissparkasse fdsdfs\",\n            \t\"adrLine2\": \"AM WOLLHAUS 14\",\n            \t\"buildingNm\": \"string\",\n            \t\"postalCode\": 2234,\n            \t\"townName\": \"Maxtown\",\n            \t\"country\": \"CH\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"string\",\n    \t\t\"name2\": \"string\",\n    \t\t\"street\": \"string\",\n    \t\t\"city\": \"string\",\n    \t\t\"country\": \"HU\"\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": \"Schachenallee 31\",\n            \t\"postalCode\": \"5004\",\n            \t\"townName\": \"Aarau\"\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    },\n      \"chargeBearer\": \"SHAR\"\n}"
+									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"SALA2\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": \"1304182224-0000002\",\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"EUR\"\n            },\n            \"value\": 119.89\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"Standard payment 2105-2\",\n            \"structured\":  \"VRG VIRT Lohnverrechnung\"\n        },\n        \"instructionIdentification\": \"CLVL-1-17082815400103-1\",\n    \t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"MDB-R191-Test\",\n            \"address\": {\n            \t\"adrLine1\": \"Kreissparkasse fdsdfs\",\n            \t\"adrLine2\": \"AM WOLLHAUS 14\",\n            \t\"buildingNm\": \"string\",\n            \t\"postalCode\": 2234,\n            \t\"townName\": \"Maxtown\",\n            \t\"country\": \"CH\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"string\",\n    \t\t\"name2\": \"string\",\n    \t\t\"street\": \"string\",\n    \t\t\"city\": \"string\",\n    \t\t\"country\": \"HU\"\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": \"Schachenallee 31\",\n            \t\"postalCode\": \"5004\",\n            \t\"townName\": \"Aarau\"\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    },\n      \"chargeBearer\": \"SHAR\"\n}"
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentID}}",
@@ -496,6 +518,9 @@
 									"script": {
 										"id": "96ee9651-4e6e-4a83-a257-55d56e136859",
 										"exec": [
+											"// Execute standard tests from PrS using eval()\r",
+											"eval(globals.commonTests)();\r",
+											"\r",
 											"// check if payment is deleted\r",
 											"pm.test(\"Payment is deleted\", () => pm.response.to.have.status(204));\r",
 											"\r",
@@ -518,7 +543,7 @@
 										"id": "9275cecb-a9b0-4985-983c-83f92609315b",
 										"exec": [
 											"// Session navigate from PrS using eval()",
-											"eval(globals.sessionNavigate)(request.name);"
+											"eval(globals.sessionNavigate)();"
 										],
 										"type": "text/javascript"
 									}
@@ -575,12 +600,27 @@
 						"id": "d8d839c9-f4ee-473b-b407-3289bb16795f",
 						"type": "text/javascript",
 						"exec": [
+							"/*",
+							"// All is moved to main collection",
+							"",
+							"",
 							"var moment = require('moment');",
-							"let payDate = moment().add(\"days\",1).format(\"YYYY-MM-DD\"); //next day in specified format",
+							"let nextDay = moment().add(\"days\",1).format(\"YYYY-MM-DD\"); //next day in specified format",
+							"switch (moment().add(\"days\",1).format(\"dddd\")){",
+							"    case \"Sunday\":",
+							"        var nextWorkingDay = moment().add(\"days\",2).format(\"YYYY-MM-DD\");",
+							"        break;",
+							"    case \"Saturday\":",
+							"        var nextWorkingDay = moment().add(\"days\",3).format(\"YYYY-MM-DD\");",
+							"        break;",
+							"    default:",
+							"        var nextWorkingDay = moment().add(\"days\",1).format(\"YYYY-MM-DD\");",
+							"}",
 							"//console.log(payDate);",
 							"//payDate = moment().add(\"days\",1).toISOString();",
 							"//console.log(payDate);",
-							"pm.globals.set('PrS:payDate', JSON.stringify(payDate));",
+							"pm.globals.set('PrS:nextDay', JSON.stringify(nextDay));",
+							"pm.globals.set('PrS:nextWorkingDay', JSON.stringify(nextWorkingDay));",
 							"",
 							"// Define test data, setup configuration per environment",
 							"var env = pm.environment.get(\"envName\");",
@@ -607,17 +647,33 @@
 							"//pm.environment.set(\"testGroup\",\"Patient Zero\") //set environment variable if/when needed",
 							"",
 							"// Save common tests in a global variable",
-							"postman.setGlobalVariable(\"commonTests\", () => {",
-							"    pm.test(\"Content-Type header is present\", function () {",
-							"        pm.response.to.have.header('Content-Type', 'application/json;charset=UTF-8');",
-							"    });",
-							"    pm.test(\"Response must be valid and have a body\", function () {",
-							"        pm.response.to.not.be.error;",
-							"    //    pm.response.to.be.ok;",
-							"        pm.response.to.be.withBody;",
-							"        pm.response.to.be.json;",
-							"        pm.response.to.have.jsonBody();",
-							"        pm.response.to.not.have.jsonBody('error');",
+							"postman.setGlobalVariable(\"commonTests\", (requestMethod) => {",
+							"    pm.test(\"Response must be valid, have a body and proper status code\", function () {",
+							"        if ([\"GET\",\"POST\",\"PUT\"].indexOf(requestMethod) > -1) {",
+							"            pm.response.to.not.be.error;",
+							"        //    pm.response.to.be.ok;",
+							"            pm.response.to.be.withBody;",
+							"            pm.response.to.be.json;",
+							"            pm.response.to.have.jsonBody();",
+							"            pm.response.to.not.have.jsonBody('error');",
+							"            pm.response.to.have.header('Content-Type', 'application/json;charset=UTF-8');",
+							"        } else {",
+							"            pm.response.to.not.be.withBody;",
+							"        }",
+							"        switch(requestMethod){",
+							"            case \"POST\":",
+							"                pm.response.to.have.status(201);",
+							"                break;",
+							"            case \"PUT\":",
+							"                pm.response.to.have.status(200);",
+							"                break;",
+							"            case \"GET\":",
+							"                pm.response.to.have.status(200);",
+							"                break;",
+							"            case \"DELETE\":",
+							"                pm.response.to.have.status(204);",
+							"                break;",
+							"        }        ",
 							"    });",
 							"    //pm.test(\"Response time is below 1000ms\", function () {",
 							"    //    pm.expect(pm.response.responseTime).to.be.below(1000);",
@@ -674,7 +730,10 @@
 							"        pm.globals.set(\"requestsToRun\", requestsToRun);",
 							"        console.log(request.name + \", updated list of requests to be executed: \" + requestsToRun);",
 							"    }}",
-							"});"
+							"});",
+							"",
+							"",
+							"*/"
 						]
 					}
 				},
@@ -691,9 +750,163 @@
 			]
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "cc52a1da-bedb-499b-9889-bd5c4a2f665c",
+				"type": "text/javascript",
+				"exec": [
+					"var moment = require('moment');",
+					"let nextDay = moment().add(\"days\",1).format(\"YYYY-MM-DD\"); //next day in specified format",
+					"switch (moment().add(\"days\",1).format(\"dddd\")){",
+					"    case \"Sunday\":",
+					"        var nextWorkingDay = moment().add(\"days\",2).format(\"YYYY-MM-DD\");",
+					"        break;",
+					"    case \"Saturday\":",
+					"        var nextWorkingDay = moment().add(\"days\",3).format(\"YYYY-MM-DD\");",
+					"        break;",
+					"    default:",
+					"        var nextWorkingDay = moment().add(\"days\",1).format(\"YYYY-MM-DD\");",
+					"}",
+					"pm.globals.set('PrS:nextDay', JSON.stringify(nextDay));",
+					"pm.globals.set('PrS:nextWorkingDay', JSON.stringify(nextWorkingDay));",
+					"",
+					"/*",
+					"// Define test data, setup configuration per environment",
+					"var env = pm.environment.get(\"envName\");",
+					"if (env === \"MDB-R191-TEST\") {",
+					"//    var contractNumber = \"{{contractNumber}}\";",
+					"//    var debtorAccountNo = \"{{debtorAccountNo}}\";",
+					"//    var debtorAccountName = \"{{debtorAccountName}}\";",
+					"//    var creditorAccountNo = \"{{creditorAccountNo}}\";",
+					"    } else if (env === \"MDB-R191-LAT\") {",
+					"} else {",
+					"    throw new Error(\"Wrong environment selected, requests are skipped!\")",
+					"}",
+					"//pm.globals.set('PrS:contractNumber', JSON.stringify(contractNumber));",
+					"//pm.globals.set('PrS:debtorAccountNo', JSON.stringify(debtorAccountNo));",
+					"//pm.globals.set('PrS:debtorAccountName', JSON.stringify(debtorAccountName));",
+					"//pm.globals.set('PrS:creditorAccountNo', JSON.stringify(creditorAccountNo));",
+					"*/",
+					"",
+					"// Save the object as a variable.",
+					"// JSON.stringify will serialize the object so that Postman can save it",
+					"",
+					"//pm.globals.set('PrS:tags', JSON.stringify(tags));",
+					"//pm.environment.set(\"testGroup\",\"Patient Zero\") //set environment variable if/when needed",
+					"",
+					"// Save common tests in a global variable",
+					"postman.setGlobalVariable(\"commonTests\", () => {",
+					"    pm.test(\"Response must be valid, have a body and proper status code\", function () {",
+					"        if ([\"GET\",\"POST\",\"PUT\"].indexOf(request.method) > -1) {",
+					"            pm.response.to.not.be.error;",
+					"        //    pm.response.to.be.ok;",
+					"            pm.response.to.be.withBody;",
+					"            pm.response.to.be.json;",
+					"            pm.response.to.have.jsonBody();",
+					"            pm.response.to.not.have.jsonBody('error');",
+					"            pm.response.to.have.header('Content-Type', 'application/json;charset=UTF-8');",
+					"        } else {",
+					"            pm.response.to.not.be.withBody;",
+					"        }",
+					"        switch(request.method){",
+					"            case \"POST\":",
+					"                pm.response.to.have.status(201);",
+					"                break;",
+					"            case \"PUT\":",
+					"                pm.response.to.have.status(200);",
+					"                break;",
+					"            case \"GET\":",
+					"                pm.response.to.have.status(200);",
+					"                break;",
+					"            case \"DELETE\":",
+					"                pm.response.to.have.status(204);",
+					"                break;",
+					"        }        ",
+					"    });",
+					"    //pm.test(\"Response time is below 1000ms\", function () {",
+					"    //    pm.expect(pm.response.responseTime).to.be.below(1000);",
+					"    //});",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"assertValidCreditorAgent\", () => {",
+					"    pm.expect(address).to.be.an('object').with.keys('name1', 'name2', 'street', 'city', 'country');",
+					"    pm.expect(address.name1).to.be.a('string').and.not.empty;",
+					"    pm.expect(address.name2).to.be.a('string').and.not.empty;",
+					"    pm.expect(address.street).to.be.a('string').and.not.empty;",
+					"    pm.expect(address.city).to.be.a('string').and.not.empty;",
+					"    pm.expect(address.country).to.be.a('string').with.lengthOf(2).and.match(/[A-Z]+/);",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"sessionInit\", (testSession, sessionName) => {",
+					"    //session init section",
+					"    console.log(request.name + \", initialization: \" + testSession + \", global var: \" + sessionName);",
+					"    console.log(request.name + \", executing: \" + testSession[0]);",
+					"",
+					"    // Select first test from session to be executed",
+					"    postman.setNextRequest(testSession[0]); ",
+					"    testSession.shift();",
+					"    if (testSession.length === 0) {",
+					"        console.log(request.name + \", test session is empty, unset \" + sessionName);",
+					"        pm.globals.unset(sessionName);",
+					"        console.log(request.name + \", terminate tests execution list\");",
+					"    } else {",
+					"        pm.globals.set(sessionName, testSession);",
+					"        console.log(request.name + \" for \" + sessionName + \", updated list of tests to be executed: \" + testSession);",
+					"    }",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"sessionNavigate\", () => {",
+					"    console.log(request.name + \", entering ...\");",
+					"    if (pm.globals.get(\"requestsToRun\") === undefined){",
+					"        console.log(request.name + \", requestsToRun is undefined\");",
+					"        if (pm.globals.get(\"testSession\") === undefined){",
+					"            console.log(request.name + \", testSession is undefined\");",
+					"            console.log(\"The end\");",
+					"            postman.setNextRequest(null)",
+					"        } else {",
+					"        var testSession = pm.globals.get(\"testSession\");",
+					"        console.log(request.name + \", checking what to run: \" + testSession[0]);",
+					"        postman.setNextRequest(testSession[0]); // Run: GET SWIFT payment",
+					"        testSession.shift();",
+					"        if (testSession.length === 0) {",
+					"            pm.globals.unset(\"testSession\");",
+					"            console.log(request.name + \", terminate execution list\");",
+					"        } else {",
+					"            pm.globals.set(\"testSession\", testSession);",
+					"            console.log(request.name + \", updated list of tests to be executed: \" + testSession);",
+					"        }}",
+					"    } else {",
+					"    var requestsToRun = pm.globals.get(\"requestsToRun\");",
+					"    console.log(request.name + \", checking what to run: \" + requestsToRun[0]);",
+					"    postman.setNextRequest(requestsToRun[0]); ",
+					"    requestsToRun.shift();",
+					"    if (requestsToRun.length === 0) {",
+					"        pm.globals.unset(\"requestsToRun\");",
+					"        console.log(request.name + \", terminate requests execution list\");",
+					"    } else {",
+					"        pm.globals.set(\"requestsToRun\", requestsToRun);",
+					"        console.log(request.name + \", updated list of requests to be executed: \" + requestsToRun);",
+					"    }}",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "7e7d41ba-50b0-48b0-bc52-53d4e572706a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
-			"id": "4541f829-d4f4-4511-992f-72f017e5c048",
+			"id": "b9460e34-1851-4f06-ae7e-a2bce2b21444",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
