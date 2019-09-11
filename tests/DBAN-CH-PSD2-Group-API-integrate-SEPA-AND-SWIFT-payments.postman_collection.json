@@ -194,7 +194,7 @@
 											"// Execute standard tests from PrS using eval()\r",
 											"eval(globals.commonTests)();\r",
 											"\r",
-											"pm.test(pm.globals.get + \" Payment is created\", function () {\r",
+											"pm.test(pm.globals.get(\"testRailTestCase\") + \" Payment is created\", function () {\r",
 											"    pm.test(\"Instructed amount is correct\", () => {\r",
 											"      let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
 											"      let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
@@ -909,6 +909,7 @@
 					"    requestsToRun.shift();",
 					"    if (requestsToRun.length === 0) {",
 					"        pm.globals.unset(\"requestsToRun\");",
+					"        pm.globals.set(\"testRailTestCase\",\"\");",
 					"        console.log(request.name + \", terminate requests execution list\");",
 					"    } else {",
 					"        pm.globals.set(\"requestsToRun\", requestsToRun);",
@@ -938,7 +939,7 @@
 	],
 	"variable": [
 		{
-			"id": "5cdf2d52-b4f2-4d9b-861d-70e4728de24c",
+			"id": "02911e09-f827-403e-8900-bcd37a7424c0",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
