@@ -24,8 +24,9 @@
 											"eval(globals.cleanup)();",
 											"",
 											"//specify list of tests to be executed in exact order",
-											"const testsScope = \"Full\";",
-											"//const testsScope = \"Core\";",
+											"//const testsScope = \"Full\"; [Full|Core]",
+											"let testsScope = data.testsScope;",
+											"console.log(testsScope); ",
 											"",
 											"switch(testsScope) {",
 											"    case \"Full\":",
@@ -55,10 +56,7 @@
 									"script": {
 										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
 										"exec": [
-											"pm.test(\"Test session is initiated\", function () {\r",
-											"    //pm.response.to.have.status(200);\r",
-											"    pm.response.to.be.success;\r",
-											"});"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -68,20 +66,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "https://postman-echo.com/get?foo1=bar1",
-									"protocol": "https",
+									"raw": "httpbin.org/uuid",
 									"host": [
-										"postman-echo",
-										"com"
+										"httpbin",
+										"org"
 									],
 									"path": [
-										"get"
-									],
-									"query": [
-										{
-											"key": "foo1",
-											"value": "bar1"
-										}
+										"uuid"
 									]
 								}
 							},
@@ -95,10 +86,16 @@
 									"script": {
 										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
 										"exec": [
-											"var requestsToRun = [\"Create SWIFT payment\",",
-											"                     \"Get SWIFT payment\", ",
-											"                     \"Update SWIFT payment\",",
-											"                     \"Delete SWIFT payment\"]; ",
+											"var requestsToRun = ",
+											"    [",
+											"        \"Create SWIFT payment\",",
+											"        \"Get SWIFT payment\", ",
+											"        \"Update SWIFT payment\",",
+											"        \"Delete SWIFT payment\"",
+											"    ]; ",
+											"",
+											"//specify related TestRail tests",
+											"pm.globals.set(\"testRailTestCase\",\"C36275411 C36240103 C36275416 C36240105\");",
 											"",
 											"// Session initiate from PrS using eval()",
 											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
@@ -111,11 +108,7 @@
 									"script": {
 										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
 										"exec": [
-											"// check if test is executed\r",
-											"pm.test(\"Test '\"+ request.name +\"' is initiated\", function () {\r",
-											"    //pm.response.to.have.status(200);\r",
-											"    pm.response.to.be.success;\r",
-											"});"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -145,8 +138,11 @@
 									"script": {
 										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
 										"exec": [
-											"var requestsToRun = [\"Create SWIFT payment\",",
-											"                     \"Delete SWIFT payment\"]; ",
+											"var requestsToRun = ",
+											"    [",
+											"        \"Create SWIFT payment\",",
+											"        \"Delete SWIFT payment\"",
+											"    ]; ",
 											"                     ",
 											"// Session initiate from PrS using eval()",
 											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
@@ -159,11 +155,7 @@
 									"script": {
 										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
 										"exec": [
-											"// check if test is executed\r",
-											"pm.test(\"Test '\"+ request.name +\"' is initiated\", function () {\r",
-											"    //pm.response.to.have.status(200);\r",
-											"    pm.response.to.be.success;\r",
-											"});"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -202,60 +194,62 @@
 											"// Execute standard tests from PrS using eval()\r",
 											"eval(globals.commonTests)();\r",
 											"\r",
-											"pm.test(\"Payment is created\", function () {\r",
-											"    pm.response.to.have.status(201);\r",
-											"});\r",
-											"pm.test(\"Instructed amount is correct\", () => {\r",
-											"  let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
-											"  let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
-											"  pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
-											"});\r",
-											"pm.test(\"Execution date is correct\", () => {\r",
-											"  let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
-											"  let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
-											"  pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate);\r",
-											"});\r",
-											"pm.test(\"State is correct\", () => {\r",
-											"  let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
-											"  pm.expect(jsonDataResponsePaymentState).to.eql(\"AUTHORISATION_REQUIRED\");\r",
-											"});\r",
-											"pm.test(\"Creditor agent is correct\", () => {\r",
-											"  let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent;\r",
-											"  let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent;\r",
-											"  pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
-											"});\r",
-											"pm.test(\"Debtor address is correct\", () => {\r",
-											"  let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
-											"  let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
-											"  pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.adrLine1);\r",
-											"  pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
-											"  pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
-											"});\r",
-											"pm.test(\"Debtor account is correct\", () => {\r",
-											"  let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
-											"  let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo;   \r",
-											"  pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
-											"});\r",
-											"pm.test(\"Creditor account is correct\", () => {\r",
-											"  let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
-											"  let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
-											"  pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
-											"});\r",
-											"pm.test(\"Charge bearer is correct\", () => {\r",
-											"  let jsonDataResponsePaymentState = pm.response.json().chargeBearer;\r",
-											"  pm.expect(jsonDataResponsePaymentState).to.eql(\"SHAR\");\r",
+											"pm.test(pm.globals.get + \" Payment is created\", function () {\r",
+											"    pm.test(\"Instructed amount is correct\", () => {\r",
+											"      let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
+											"      let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
+											"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+											"    });\r",
+											"    pm.test(\"Execution date is correct\", () => {\r",
+											"      let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
+											"      let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
+											"      pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate);\r",
+											"    });\r",
+											"    pm.test(\"State is correct\", () => {\r",
+											"      let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+											"      pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
+											"    });\r",
+											"    pm.test(\"Creditor agent is correct\", () => {\r",
+											"      let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent;\r",
+											"      let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent;\r",
+											"      pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
+											"    });\r",
+											"    pm.test(\"Debtor address is correct\", () => {\r",
+											"      let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
+											"      let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
+											"      pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.adrLine1);\r",
+											"      pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
+											"      pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
+											"    });\r",
+											"    pm.test(\"Debtor account is correct\", () => {\r",
+											"      let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
+											"      let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo;   \r",
+											"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+											"    });\r",
+											"    pm.test(\"Creditor account is correct\", () => {\r",
+											"      let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
+											"      let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
+											"      pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+											"    });\r",
+											"    pm.test(\"Charge bearer is correct\", () => {\r",
+											"      let jsonDataResponsePaymentState = pm.response.json().chargeBearer;\r",
+											"      pm.expect(jsonDataResponsePaymentState).to.eql(\"SHAR\");\r",
+											"    });\r",
+											"    \r",
+											"    // check if payment is created\r",
+											"    if (pm.response.to.have.status(201)){\r",
+											"        var responseData = JSON.parse(responseBody);\r",
+											"        pm.globals.set(\"newPaymentID\", responseData.paymentId);\r",
+											"        console.log(\"New payment ID: \" + pm.globals.get(\"newPaymentID\"));\r",
+											"    }\r",
+											"    else {\r",
+											"        console.log(\"Failed to create payment with ID:\" + pm.globals.get(\"newPaymentID\"));\r",
+											"        pm.globals.unset(\"newPaymentID\");\r",
+											"    }\r",
 											"});\r",
 											"\r",
-											"// check if payment is created\r",
-											"if (pm.response.to.have.status(201)){\r",
-											"    var responseData = JSON.parse(responseBody);\r",
-											"    pm.globals.set(\"newPaymentID\", responseData.paymentId);\r",
-											"    console.log(\"New payment ID: \" + pm.globals.get(\"newPaymentID\"));\r",
-											"}\r",
-											"else {\r",
-											"    console.log(\"Failed to create payment with ID:\" + pm.globals.get(\"newPaymentID\"));\r",
-											"    pm.globals.unset(\"newPaymentID\");\r",
-											"}"
+											"\r",
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -292,7 +286,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": \"{{$randomLoremSlug}}\",\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": {{currencyCode}}\n            },\n            \"value\": {{$randomPrice}}\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"{{$guid}}\",\n            \"structured\":  \"{{$randomUUID}}\"\n        },\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\n    \t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"{{$randomFullName}}\",\n            \"address\": {\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\n            \t\"buildingNm\": {{$randomInt}},\n            \t\"postalCode\": {{$randomInt}},\n            \t\"townName\": \"{{$randomCity}}\",\n            \t\"country\": \"{{$randomCountryCode}}\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"{{$randomFirstName}}\",\n    \t\t\"name2\": \"{{$randomLastName}}\",\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\n    \t\t\"city\": \"{{$randomCity}}\",\n    \t\t\"country\": {{creditorAgentCountry}}\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": {{debtorAdrLine}},\n            \t\"postalCode\": {{debtorPostalCode}},\n            \t\"townName\": {{debtorTownName}}\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    }\n}"
+									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": \"{{$randomLoremSlug}}\",\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"CHF\"\n            },\n            \"value\": 55\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"{{$guid}}\",\n            \"structured\":  \"{{$randomUUID}}\"\n        },\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\n    \t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"{{$randomFullName}}\",\n            \"address\": {\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\n            \t\"buildingNm\": {{$randomInt}},\n            \t\"postalCode\": {{$randomInt}},\n            \t\"townName\": \"{{$randomCity}}\",\n            \t\"country\": \"{{$randomCountryCode}}\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"{{$randomFirstName}}\",\n    \t\t\"name2\": \"{{$randomLastName}}\",\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\n    \t\t\"city\": \"{{$randomCity}}\",\n    \t\t\"country\": {{creditorAgentCountry}}\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": {{debtorAdrLine}},\n            \t\"postalCode\": {{debtorPostalCode}},\n            \t\"townName\": {{debtorTownName}}\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    }\n}"
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
@@ -317,7 +311,7 @@
 								{
 									"listen": "test",
 									"script": {
-										"id": "c6df6266-295d-4173-82f3-407111575864",
+										"id": "f5d00dc8-f552-48c0-9a1c-2510df583464",
 										"exec": [
 											"// Execute standard tests from PrS using eval()\r",
 											"eval(globals.commonTests)();\r",
@@ -326,9 +320,9 @@
 											"pm.test(\"Payment is updated\", function () {\r",
 											"    pm.response.to.have.status(200);\r",
 											"});\r",
-											"pm.test(\"Payment status is 'AUTHORISATION REQUIRED'\", () => {\r",
+											"pm.test(\"Payment status is 'READY_FOR_EXECUTION'\", () => {\r",
 											"    let jsonDataPaymentState = pm.response.json().paymentState;\r",
-											"    pm.expect(jsonDataPaymentState).to.eql(\"AUTHORISATION_REQUIRED\");\r",
+											"    pm.expect(jsonDataPaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
 											"}); \r",
 											"\r",
 											"pm.test(\"Debtor is correct\", () => {\r",
@@ -342,6 +336,11 @@
 											"pm.test(\"Creditor agent is correct\", () => {\r",
 											"  let address = pm.response.json().paymentInformation.creditorAgent;\r",
 											"  eval(globals.assertValidCreditorAgent)(address);\r",
+											"});\r",
+											"\r",
+											"// test if response contains string from data file\r",
+											"pm.test(\"Body matches string\", function () {\r",
+											"     pm.expect(pm.response.text()).to.include(data.debtorAccountName);\r",
 											"});"
 										],
 										"type": "text/javascript"
@@ -350,7 +349,7 @@
 								{
 									"listen": "prerequest",
 									"script": {
-										"id": "7e8dccc6-4b69-4f2b-9bff-a4f3c44a3a36",
+										"id": "22f2990b-adb1-4668-a6e9-92884e953577",
 										"exec": [
 											"// Session navigate from PrS using eval()",
 											"eval(globals.sessionNavigate)();"
@@ -382,7 +381,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"storeOnly\": true,\r\n\r\n  \"paymentInformation\": {\r\n    \"debtor\": {\r\n      \"name\": \"Freddy Hinz\",\r\n      \"adrLine1\": \"Schachenallee 31\",\r\n      \"adrLine2\": \"string\",\r\n      \"buildingNm\": \"string\",\r\n      \"postalCode\": 5004,\r\n      \"townName\": \"Aarau\",\r\n      \"country\": \"CH\"\r\n    },\r\n    \"debtorAccount\": {\r\n      \"accountNo\": \"CH4512312001000030903\",\r\n      \"bankCode\": \"CLXNCHZZMDB\"\r\n    },\r\n    \"creditor\": {\r\n      \"name\": \"Max Creditor\",\r\n      \"adrLine1\": \"Kreissparkasse fdsdfs\",\r\n      \"adrLine2\": \"AM WOLLHAUS 14\",\r\n      \"buildingNm\": \"string\",\r\n      \"postalCode\": 2234,\r\n      \"townName\": \"Maxtown\",\r\n      \"country\": \"CH\"\r\n    },\r\n\"creditorAccount\": {\r\n\t  \"accountNo\": \"CH4908465123456789012\",\r\n\t  \"bankCode\": \"BSILCH22XXX\"\r\n\t},\r\n    \"instructedAmount\": {\r\n      \"currency\": {\r\n        \"code\": \"EUR\"\r\n      },\r\n      \"value\": 9299292.22\r\n    },\r\n    \"requestedExecutionDate\": \"2019-08-26\",\r\n    \"instructionPriority\": \"NORMAL\",\r\n    \"remittanceInformation\": {\r\n      \"unstructured\": \"Amazon payment 12345\",\r\n      \"structured\": \"string\"\r\n    }\r\n  }\r\n}"
+									"raw": ""
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentID}}",
@@ -428,7 +427,7 @@
 											"});\r",
 											"pm.test(\"State is correct\", () => {\r",
 											"  let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
-											"  pm.expect(jsonDataResponsePaymentState).to.eql(\"AUTHORISATION_REQUIRED\");\r",
+											"  pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
 											"});\r",
 											"pm.test(\"Creditor agent is correct\", () => {\r",
 											"  let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent;\r",
@@ -474,6 +473,9 @@
 								}
 							],
 							"request": {
+								"auth": {
+									"type": "noauth"
+								},
 								"method": "PUT",
 								"header": [
 									{
@@ -493,7 +495,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"SALA2\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": \"1304182224-0000002\",\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"EUR\"\n            },\n            \"value\": 119.89\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"Standard payment 2105-2\",\n            \"structured\":  \"VRG VIRT Lohnverrechnung\"\n        },\n        \"instructionIdentification\": \"CLVL-1-17082815400103-1\",\n    \t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"MDB-R191-Test\",\n            \"address\": {\n            \t\"adrLine1\": \"Kreissparkasse fdsdfs\",\n            \t\"adrLine2\": \"AM WOLLHAUS 14\",\n            \t\"buildingNm\": \"string\",\n            \t\"postalCode\": 2234,\n            \t\"townName\": \"Maxtown\",\n            \t\"country\": \"CH\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"string\",\n    \t\t\"name2\": \"string\",\n    \t\t\"street\": \"string\",\n    \t\t\"city\": \"string\",\n    \t\t\"country\": \"HU\"\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": \"Schachenallee 31\",\n            \t\"postalCode\": \"5004\",\n            \t\"townName\": \"Aarau\"\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    },\n      \"chargeBearer\": \"SHAR\"\n}"
+									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": {{endToEndId}},\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"CHF\"\n            },\n            \"value\": 45\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"{{$guid}}\",\n            \"structured\":  \"{{$randomUUID}}\"\n        },\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\n    \t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"MDB-R191-Test\",\n            \"address\": {\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\n            \t\"buildingNm\": {{$randomInt}},\n            \t\"postalCode\": {{$randomInt}},\n            \t\"townName\": \"{{$randomCity}}\",\n            \t\"country\": \"{{$randomCountryCode}}\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"{{$randomFirstName}}\",\n    \t\t\"name2\": \"{{$randomLastName}}\",\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\n    \t\t\"city\": \"{{$randomCity}}\",\n    \t\t\"country\": {{creditorAgentCountry}}\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": {{debtorAdrLine}},\n            \t\"postalCode\": {{debtorPostalCode}},\n            \t\"townName\": {{debtorTownName}}\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    },\n      \"chargeBearer\": \"SHAR\"\n}"
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentID}}",
@@ -746,7 +748,11 @@
 						"id": "3d25d163-d0bc-4ae9-a4af-cb2e3339ce9b",
 						"type": "text/javascript",
 						"exec": [
-							""
+							"// check if test is executed",
+							"pm.test(\"'\" + request.name +\"' is initiated\", function () {",
+							"    //pm.response.to.have.status(200);",
+							"    pm.response.to.be.success;",
+							"});"
 						]
 					}
 				}
@@ -760,6 +766,15 @@
 				"id": "cc52a1da-bedb-499b-9889-bd5c4a2f665c",
 				"type": "text/javascript",
 				"exec": [
+					"//************************************************************************************************",
+					"//connect to TestRail ****************************************************************************",
+					"//************************************************************************************************",
+					"pm.globals.set(\"TESTRAIL_DOMAIN\",\"testrail.ebs.crealogix.net\");",
+					"pm.globals.set(\"TESTRAIL_USERNAME\",\"milan.karadeglic@crealogix.com\"); ",
+					"pm.globals.set(\"TESTRAIL_APIKEY\",\"Q4MlDw1e70Kxh1g1YPq9-Dg0abDWer.pSWcVWcxO4\");",
+					"pm.globals.set(\"TESTRAIL_PROJECTID\",8); ",
+					"pm.globals.set(\"TESTRAIL_TITLE\",\"Postman API Tests\");",
+					"",
 					"//************************************************************************************************",
 					"//global function to determine next day/next working day *****************************************",
 					"//************************************************************************************************",
@@ -923,7 +938,7 @@
 	],
 	"variable": [
 		{
-			"id": "bf7ac503-21dc-4ced-b568-544c5a58602e",
+			"id": "5cdf2d52-b4f2-4d9b-861d-70e4728de24c",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
