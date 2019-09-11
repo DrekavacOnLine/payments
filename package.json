@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Project for running payments tests",
   "scripts": {
-    "api-test-automation": "TESTRAIL_SUITEID=630 TESTRAIL_DOMAIN=testrail.ebs.crealogix.net TESTRAIL_USERNAME=milan.karadeglic@crealogix.com TESTRAIL_APIKEY=Q4MlDw1e70Kxh1g1YPq9-Dg0abDWer.pSWcVWcxO4 TESTRAIL_PROJECTID=8 TESTRAIL_TITLE='Postman API Tests' newman run tests/DBAN-CH-PSD2-Group-API-integrate-SEPA-AND-SWIFT-payments.postman_collection.json -e env/MDB-R191-TEST.postman_environment.json -d data/MDB-R191-TEST.postman_data.json --reporters cli,html,htmlextra,testrail --reporter-html-export report/index.html --reporter-htmlextra-export report/rpt_ex.html"
+    "api-test-automation": "TESTRAIL_SUITEID=630 TESTRAIL_DOMAIN=testrail.ebs.crealogix.net TESTRAIL_USERNAME=milan.karadeglic@crealogix.com TESTRAIL_APIKEY=Q4MlDw1e70Kxh1g1YPq9-Dg0abDWer.pSWcVWcxO4 TESTRAIL_PROJECTID=8 TESTRAIL_TITLE='Postman API Tests'\
+                            newman run tests/DBAN-CH-PSD2-Group-API-integrate-SEPA-AND-SWIFT-payments.postman_collection.json -e env/MDB-R191-TEST.postman_environment.json -d data/MDB-R191-TEST.postman_data.json --reporters cli,html,htmlextra,testrail --reporter-html-export report/index.html --reporter-htmlextra-export report/rpt_ex.html"
   },
   "author": "DAP",
   "dependencies": {
