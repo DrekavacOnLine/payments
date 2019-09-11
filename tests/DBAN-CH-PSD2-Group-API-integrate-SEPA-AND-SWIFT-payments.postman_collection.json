@@ -20,6 +20,9 @@
 									"script": {
 										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
 										"exec": [
+											"//reset global variables for controling execution flow",
+											"eval(globals.cleanup)();",
+											"",
 											"//specify list of tests to be executed in exact order",
 											"const testsScope = \"Full\";",
 											"//const testsScope = \"Core\";",
@@ -289,7 +292,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"SALA\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": \"1304182224-0000002\",\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"EUR\"\n            },\n            \"value\": 119.99\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"Standard payment 2105-2\",\n            \"structured\":  \"VRG VIRT Lohnverrechnung\"\n        },\n        \"instructionIdentification\": \"CLVL-1-17082815400103-1\",\n    \t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"MDB-R191-Test\",\n            \"address\": {\n            \t\"adrLine1\": \"Kreissparkasse fdsdfs\",\n            \t\"adrLine2\": \"AM WOLLHAUS 14\",\n            \t\"buildingNm\": \"string\",\n            \t\"postalCode\": 2234,\n            \t\"townName\": \"Maxtown\",\n            \t\"country\": \"CH\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"string\",\n    \t\t\"name2\": \"string\",\n    \t\t\"street\": \"string\",\n    \t\t\"city\": \"string\",\n    \t\t\"country\": \"HU\"\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": \"Schachenallee 31\",\n            \t\"postalCode\": \"5004\",\n            \t\"townName\": \"Aarau\"\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    }\n}"
+									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": \"{{$randomLoremSlug}}\",\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": {{currencyCode}}\n            },\n            \"value\": {{$randomPrice}}\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"{{$guid}}\",\n            \"structured\":  \"{{$randomUUID}}\"\n        },\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\n    \t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"{{$randomFullName}}\",\n            \"address\": {\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\n            \t\"buildingNm\": {{$randomInt}},\n            \t\"postalCode\": {{$randomInt}},\n            \t\"townName\": \"{{$randomCity}}\",\n            \t\"country\": \"{{$randomCountryCode}}\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"{{$randomFirstName}}\",\n    \t\t\"name2\": \"{{$randomLastName}}\",\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\n    \t\t\"city\": \"{{$randomCity}}\",\n    \t\t\"country\": {{creditorAgentCountry}}\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": {{debtorAdrLine}},\n            \t\"postalCode\": {{debtorPostalCode}},\n            \t\"townName\": {{debtorTownName}}\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    }\n}"
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
@@ -757,6 +760,9 @@
 				"id": "cc52a1da-bedb-499b-9889-bd5c4a2f665c",
 				"type": "text/javascript",
 				"exec": [
+					"//************************************************************************************************",
+					"//global function to determine next day/next working day *****************************************",
+					"//************************************************************************************************",
 					"var moment = require('moment');",
 					"let nextDay = moment().add(\"days\",1).format(\"YYYY-MM-DD\"); //next day in specified format",
 					"switch (moment().add(\"days\",1).format(\"dddd\")){",
@@ -796,12 +802,16 @@
 					"//pm.globals.set('PrS:tags', JSON.stringify(tags));",
 					"//pm.environment.set(\"testGroup\",\"Patient Zero\") //set environment variable if/when needed",
 					"",
+					"                //pm.response.to.be.ok;         - Status code must be 200",
+					"                //pm.response.to.be.error       - Checks 4XX or 5XX",
+					"                //pm.response.to.be.serverError - Checks 5XX",
+					"                //pm.response.to.be.clientError - Checks 4XX status code",
+					"",
 					"// Save common tests in a global variable",
 					"postman.setGlobalVariable(\"commonTests\", () => {",
-					"    pm.test(\"Response must be valid, have a body and proper status code\", function () {",
+					"    pm.test(\"Response must be valid with/with out a body and with proper status code\", function () {",
 					"        if ([\"GET\",\"POST\",\"PUT\"].indexOf(request.method) > -1) {",
 					"            pm.response.to.not.be.error;",
-					"        //    pm.response.to.be.ok;",
 					"            pm.response.to.be.withBody;",
 					"            pm.response.to.be.json;",
 					"            pm.response.to.have.jsonBody();",
@@ -889,6 +899,13 @@
 					"        pm.globals.set(\"requestsToRun\", requestsToRun);",
 					"        console.log(request.name + \", updated list of requests to be executed: \" + requestsToRun);",
 					"    }}",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"cleanup\", () => {",
+					"    const clean = [\"requestsToRun\", \"testSession\"];",
+					"    for(let i = 0; i < clean.length; ++i){",
+					"        pm.globals.unset(clean[i]);",
+					"    }",
 					"});"
 				]
 			}
@@ -906,7 +923,7 @@
 	],
 	"variable": [
 		{
-			"id": "9533268d-5361-4384-a3c5-657d87f1c812",
+			"id": "bf7ac503-21dc-4ced-b568-544c5a58602e",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
