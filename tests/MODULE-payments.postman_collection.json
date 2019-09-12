@@ -272,9 +272,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "noauth"
-								},
 								"method": "POST",
 								"header": [
 									{
@@ -372,9 +369,6 @@
 								"disableBodyPruning": true
 							},
 							"request": {
-								"auth": {
-									"type": "noauth"
-								},
 								"method": "GET",
 								"header": [
 									{
@@ -488,9 +482,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "noauth"
-								},
 								"method": "PUT",
 								"header": [
 									{
@@ -572,9 +563,6 @@
 								}
 							],
 							"request": {
-								"auth": {
-									"type": "noauth"
-								},
 								"method": "DELETE",
 								"header": [
 									{
@@ -833,7 +821,7 @@
 	],
 	"variable": [
 		{
-			"id": "82d891d6-01a9-4769-b026-502b6cbe2b25",
+			"id": "5e031a6e-2a9d-4077-899d-2daf52871bbd",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
