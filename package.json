@@ -1,15 +1,14 @@
 {
-  "name": "SampleCollectionAssertionsAndNewmanReport",
+  "name": "payments",
   "version": "1.0.0",
   "description": "Services",
   "main": "app.js",
   "scripts": {
     "api-test-automation": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {},
   "author": "",
-  "license": "ISC",
   "dependencies": {
-    "newman": "^3.9.3"
+    "newman": "^4.5.4",
+    "newman-reporter-html": "^1.0.3"
   }
 }
