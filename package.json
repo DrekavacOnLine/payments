@@ -6,7 +6,7 @@
   "scripts": {
     "api-test-automation": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "DEAP",
   "dependencies": {
     "newman": "^4.5.4",
     "newman-reporter-html": "^1.0.3"
