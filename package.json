@@ -4,7 +4,7 @@
   "description": "Services",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "api-test-automation": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {},
   "author": "",
