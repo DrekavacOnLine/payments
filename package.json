@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Project for running payments tests",
   "scripts": {
-    "testrail-integration": "TESTRAIL_SUITEID=630 TESTRAIL_DOMAIN=testrail.ebs.crealogix.net TESTRAIL_USERNAME=milan.karadeglic@crealogix.com TESTRAIL_APIKEY=Q4MlDw1e70Kxh1g1YPq9-Dg0abDWer.pSWcVWcxO4 TESTRAIL_PROJECTID=8 TESTRAIL_TITLE='Postman API Tests' newman run tests/MODULE-payments.postman_collection.json -e env/MDB-R191-TEST.postman_environment.json -d data/MODULE-payments.Full.postman_data.json --reporters cli,html,htmlextra,testrail --reporter-html-export report/index.html --reporter-htmlextra-export report/rpt_ex_full.html",
-    "api-test-automation-core": "newman run tests/MODULE-payments.postman_collection.json -e env/MDB-R191-TEST.postman_environment.json -d data/MODULE-payments.Core.postman_data.json --reporters cli,html,htmlextra --reporter-html-export report/index_core.html --reporter-htmlextra-export report/rpt_ex_core.html",
-    "api-test-automation-full": "newman run tests/MODULE-payments.postman_collection.json -e env/MDB-R191-TEST.postman_environment.json -d data/MODULE-payments.Full.postman_data.json --reporters cli,html,htmlextra --reporter-html-export report/index_full.html --reporter-htmlextra-export report/rpt_ex_full.html"	
+    "testrail-integration": "TESTRAIL_SUITEID=630 TESTRAIL_DOMAIN=testrail.ebs.crealogix.net TESTRAIL_USERNAME=milan.karadeglic@crealogix.com TESTRAIL_APIKEY=Q4MlDw1e70Kxh1g1YPq9-Dg0abDWer.pSWcVWcxO4 TESTRAIL_PROJECTID=8 TESTRAIL_TITLE='Postman API Tests' newman run tests/MODULE-payments.postman_collection.json -e env/MDB-R191-TEST.postman_environment.json -d data/MODULE-payments.Full.postman_data.json --reporters cli,html,htmlextra,testrail --reporter-html-export report/index.html --reporter-htmlextra-logs --reporter-htmlextra-export report/rpt_ex_full.html",
+    "api-test-automation-core": "newman run tests/MODULE-payments.postman_collection.json -e env/MDB-R191-TEST.postman_environment.json -d data/MODULE-payments.Core.postman_data.json --reporters cli,html,htmlextra --reporter-html-export report/index_core.html --reporter-htmlextra-logs --reporter-htmlextra-export report/rpt_ex_core.html",
+    "api-test-automation-full": "newman run tests/MODULE-payments.postman_collection.json -e env/MDB-R191-TEST.postman_environment.json -d data/MODULE-payments.Full.postman_data.json --reporters cli,html,htmlextra --reporter-html-export report/index_full.html --reporter-htmlextra-logs --reporter-htmlextra-export report/rpt_ex_full.html"	
   },
   "author": "DAP",
   "dependencies": {
