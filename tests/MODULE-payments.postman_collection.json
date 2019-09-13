@@ -780,6 +780,7 @@
 					"            console.log(request.name + \", testSession is undefined\");",
 					"            //here >> export list of tests executed",
 					"            var tests = pm.globals.get(\"testRailTestsInRun\");",
+					"            tests = tests.replace(/C/g, \"\");",
 					"            tests = tests.replace(/ /g, \", \");",
 					"            console.log(\"TestRail tests executed executed in this run: \" + tests);",
 					"            //here >> clear list of executed TestRail tests",
@@ -850,7 +851,7 @@
 	],
 	"variable": [
 		{
-			"id": "b480b555-796d-4c2e-8c3e-eda16810f558",
+			"id": "c166d522-1f77-4e4e-8371-676a3da9f1d0",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
