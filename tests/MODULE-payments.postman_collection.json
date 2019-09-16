@@ -40,10 +40,8 @@
 											"            \"SWIFT payment CD\"",
 											"            ]; ",
 											"        break;",
-											"    case \"Full+TestRail\":        ",
+											"    case \"TestRailClean\":        ",
 											"        var testSession = [",
-											"            \"SWIFT payment CRUD\",",
-											"            \"SWIFT payment CD\",",
 											"            \"_Test session close\"",
 											"            ]; ",
 											"        break;",
@@ -711,7 +709,7 @@
 									"script": {
 										"id": "22f2990b-adb1-4668-a6e9-92884e953577",
 										"exec": [
-											"setTimeout(function(){}, 10000);"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -1025,7 +1023,7 @@
 	],
 	"variable": [
 		{
-			"id": "b3569c46-bd63-433d-aff7-34657e2f9d20",
+			"id": "4298c919-f211-49b8-bdb2-bba47b6daa07",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
