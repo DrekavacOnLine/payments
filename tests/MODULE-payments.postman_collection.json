@@ -675,12 +675,12 @@
 										"id": "f5d00dc8-f552-48c0-9a1c-2510df583464",
 										"exec": [
 											"// Prepare list of TestRail tests for 'Clean TestRail Run' request",
-											"let tests = pm.globals.get(\"testRailTestsInRun\");",
+											"var tests = pm.globals.get(\"testRailTestsInRun\");",
 											"tests = tests.replace(/C/g, \"\");",
 											"tests = tests.replace(/ /g, \", \");",
 											"pm.globals.set(\"testRailTestsInRun\", tests); ",
 											"",
-											"let array = JSON.parse(\"[\" + tests + \"]\"); //convert string to array",
+											"var array = JSON.parse(\"[\" + tests + \"]\"); //convert string to array",
 											"for(let i = 0; i < 10; i++){",
 											"    let runId = JSON.parse(responseBody)[i].id;",
 											"    let runName = JSON.parse(responseBody)[i].name;",
@@ -1025,7 +1025,7 @@
 	],
 	"variable": [
 		{
-			"id": "6d97e9dc-5103-448f-90d5-1d221d588631",
+			"id": "e918e4d5-6148-47c1-ad8d-7d4948029ede",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
