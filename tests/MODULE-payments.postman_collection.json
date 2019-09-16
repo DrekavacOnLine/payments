@@ -683,8 +683,9 @@
 											"    let runId = JSON.parse(responseBody)[i].id;",
 											"    let runName = JSON.parse(responseBody)[i].name;",
 											"    let runSuiteId = JSON.parse(responseBody)[i].suite_id;",
-											"        if (runName === \"Postman API Tests\") { //determine proper run",
+											"    if (runName === \"Postman API Tests\") { //determine proper run",
 											"        //console.log(runId);   ",
+											"        console.log(\"TestRail run '\" + runId + \"' updating for tests: \" + execTests);",
 											"        pm.sendRequest({",
 											"            url: \"https://testrail.ebs.crealogix.net/index.php?/api/v2/update_run/\" + runId,",
 											"            method: \"POST\",",
@@ -1023,7 +1024,7 @@
 	],
 	"variable": [
 		{
-			"id": "4298c919-f211-49b8-bdb2-bba47b6daa07",
+			"id": "60523425-8fcb-426e-b085-847ce79b22bb",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
