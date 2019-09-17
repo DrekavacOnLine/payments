@@ -676,8 +676,11 @@
 										"exec": [
 											"// Prepare list of TestRail tests for 'Clean TestRail Run' request",
 											"var execTests = pm.environment.get(\"testRailTestsInRun\");",
+											"console.log(\"TestRail, tests executed in last run: \" + execTests);",
 											"execTests = execTests.replace(/C/g, \"\");",
+											"console.log(\"TestRail, first cleanup: \" + execTests);",
 											"execTests = execTests.replace(/ /g, \", \");",
+											"console.log(\"TestRail, second cleanup: \" + execTests);",
 											"pm.environment.set(\"testRailTestsInRun\", execTests); ",
 											"",
 											"var array = JSON.parse(\"[\" + execTests + \"]\"); //convert string to array",
@@ -1024,7 +1027,7 @@
 	],
 	"variable": [
 		{
-			"id": "a9166571-151d-4739-bb07-afd775086992",
+			"id": "23ad63e5-4ab9-4f79-b3b9-3dd19214eff3",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
