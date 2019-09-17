@@ -22,6 +22,8 @@
 										"exec": [
 											"//reset global variables for controling execution flow",
 											"eval(globals.cleanup)();",
+											"//clear list of executed TestRail tests",
+											"pm.globals.set(\"testRailTestsInRun\",\"\");   ",
 											"",
 											"//specify list of tests to be executed in exact order",
 											"//const testsScope = \"Full\"; [Full|Core|Full+TestRail]",
@@ -956,8 +958,6 @@
 					"            tests = tests.replace(/ /g, \", \");",
 					"            tests = tests.replace(/,,/g, \",\");",
 					"            console.log(\"TestRail tests executed executed in this run: \" + tests);",
-					"            //here >> clear list of executed TestRail tests",
-					"            pm.globals.set(\"testRailTestsInRun\",\"\");               ",
 					"            console.log(\"The end\");",
 					"            postman.setNextRequest(null);",
 					"        } else {",
@@ -1024,10 +1024,11 @@
 	],
 	"variable": [
 		{
-			"id": "60523425-8fcb-426e-b085-847ce79b22bb",
+			"id": "e8381a88-2367-4206-b617-682cc1ed460f",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
