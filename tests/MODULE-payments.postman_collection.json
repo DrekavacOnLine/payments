@@ -792,11 +792,12 @@
 										"exec": [
 											"// Prepare list of TestRail tests for 'Clean TestRail Run' request",
 											"var execTests = pm.globals.get(\"testRailTestsInRun\");",
-											"console.log(\"TestRail, tests executed in last run: \" + execTests);",
+											"//console.log(\"TestRail, tests executed in last run: \" + execTests);",
 											"execTests = execTests.replace(/C/g, \"\");",
-											"console.log(\"TestRail, first cleanup: \" + execTests);",
+											"//console.log(\"TestRail, first cleanup: \" + execTests);",
 											"execTests = execTests.replace(/ /g, \", \");",
-											"console.log(\"TestRail, second cleanup: \" + execTests);",
+											"//console.log(\"TestRail, second cleanup: \" + execTests);",
+											"execTests = execTests.replace(/,,/g, \",\");",
 											"pm.globals.set(\"testRailTestsInRun\", execTests); ",
 											"",
 											"var array = JSON.parse(\"[\" + execTests + \"]\"); //convert string to array",
@@ -831,7 +832,8 @@
 									"script": {
 										"id": "22f2990b-adb1-4668-a6e9-92884e953577",
 										"exec": [
-											""
+											"console.log(\"Title :\" + pm.globals.get(\"TESTRAIL_TITLE\"));",
+											"console.log(\"Tests :\" + pm.globals.get(\"testRailTestsInRun\"));"
 										],
 										"type": "text/javascript"
 									}
@@ -1143,7 +1145,7 @@
 	],
 	"variable": [
 		{
-			"id": "f6e62866-916d-4e1e-bd8f-da15e8816146",
+			"id": "215b4071-d591-485e-b8e5-ad1878e20bb6",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
