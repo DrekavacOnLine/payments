@@ -1,0 +1,234 @@
+{
+	"id": "d0a38059-1118-41b4-83b2-5d64ac8a0536",
+	"values": [
+		{
+			"key": "utcnow",
+			"value": "2018-12-28T14:28:53.224Z",
+			"enabled": true
+		},
+		{
+			"key": "x-site-code",
+			"value": "1",
+			"enabled": true
+		},
+		{
+			"key": "scope_full_dban",
+			"value": "https://api.crealogix.com/contracts/contract.advisor.readonly https://api.crealogix.com/contracts/contract.person.readonly https://api.crealogix.com/contracts/contract.metadata.readonly https://api.crealogix.com/payments/payment.initiate https://api.crealogix.com/assets/account.transaction.readonly https://api.crealogix.com/assets/account.metadata.readonly https://api.crealogix.com/assets/account.balance.readonly https://api.crealogix.com/assets/account.permission.readonly https://api.crealogix.com/dban",
+			"enabled": true
+		},
+		{
+			"key": "scope_full",
+			"value": "https://api.crealogix.com/contracts/contract.advisor.readonly https://api.crealogix.com/contracts/contract.person.readonly https://api.crealogix.com/contracts/contract.metadata.readonly https://api.crealogix.com/payments/payment.initiate https://api.crealogix.com/assets/account.transaction.readonly https://api.crealogix.com/assets/account.metadata.readonly https://api.crealogix.com/assets/account.balance.readonly https://api.crealogix.com/assets/account.permission.readonly",
+			"enabled": true
+		},
+		{
+			"key": "newPIS",
+			"value": "PIS:09d5301a-e4b4-4f1c-b427-401c4ac74e72",
+			"enabled": true
+		},
+		{
+			"key": "newAccTranID",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "PrS:category",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "PrS:tags",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "loadHelpers",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "commonTests",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "PrS:contractNumber",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "PrS:creditorAccountNo",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "PrS:debtorAccountName",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "PrS:debtorAccountNo",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "PrS:payDate",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "sessionInit",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "sessionNavigate",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "testInit",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "_Test session",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "SWIFT payment CRUD",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "PrS:nextDay",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "PrS:nextWorkingDay",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "assertValidCreditorAgent",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": null,
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "cleanup",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "remainingRequests",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "TESTRAIL_DOMAIN",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "TESTRAIL_USERNAME",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "TESTRAIL_APIKEY",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "TESTRAIL_PROJECTID",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "TESTRAIL_TITLE",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "_f5_debug",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "_f5_enable_polled_mode",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "_f5_poll_apiurl",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "_f5_poll_bypass_timeout",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "_f5_poll_curr",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "_f5_poll_iterator",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "_f5_poll_max_tries",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "_f5_poll_useinternal",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "_f5_poll_wait",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "_f5_workflow_functions",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "testsExecuted",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "testRailTestCases",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "testRailTestsInRun",
+			"value": "36275411,36240103,36275416,36240105,36275411,36240105",
+			"enabled": true
+		},
+		{
+			"key": "_tr_Get SWIFT paymen",
+			"value": "",
+			"enabled": true
+		}
+	],
+	"name": "My Workspace Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2019-09-17T15:34:33.350Z",
+	"_postman_exported_using": "Postman/7.7.2"
+}

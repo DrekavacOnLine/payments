@@ -832,8 +832,7 @@
 									"script": {
 										"id": "22f2990b-adb1-4668-a6e9-92884e953577",
 										"exec": [
-											"console.log(\"Title :\" + pm.globals.get(\"TESTRAIL_TITLE\"));",
-											"console.log(\"Tests :\" + pm.globals.get(\"testRailTestsInRun\"));"
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -1145,7 +1144,7 @@
 	],
 	"variable": [
 		{
-			"id": "215b4071-d591-485e-b8e5-ad1878e20bb6",
+			"id": "b31b7895-ab85-48db-aaf8-27b22a2f60be",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
