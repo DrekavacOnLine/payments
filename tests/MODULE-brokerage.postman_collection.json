@@ -30,8 +30,8 @@
 									"switch(testsScope) {",
 									"    case \"Full\":",
 									"        var testSession = [",
-									"            \"List securities\",",
-									"            \"Display security by securityNumber\"",
+									"            \"List securities (C43995762)\",",
+									"            \"Display security by securityNumber (C43995801)\"",
 									"            ]; ",
 									"        break;",
 									"    case \"Core\":",
@@ -2418,7 +2418,7 @@
 	],
 	"variable": [
 		{
-			"id": "4cf8be6e-93a2-4ae0-b957-30efdcd49edd",
+			"id": "4ad8e605-f08a-45d6-b6cd-6d8952be652f",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
