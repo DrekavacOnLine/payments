@@ -7,924 +7,1176 @@
 	},
 	"item": [
 		{
-			"name": "MDB-R191-TEST v3 - using data file",
+			"name": "Tests",
 			"item": [
 				{
-					"name": "Tests",
-					"item": [
+					"name": "_Test session",
+					"event": [
 						{
-							"name": "_Test session",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
-										"exec": [
-											"//reset global variables for controling execution flow",
-											"eval(globals.cleanup)();",
-											"//clear list of executed TestRail tests",
-											"pm.environment.set(\"testRailTestsInRun\",\"\");   ",
-											"",
-											"//specify list of tests to be executed in exact order",
-											"//const testsScope = \"Full\"; [Full|Core|Full+TestRail]",
-											"let testsScope = data.testsScope;",
-											"//console.log(testsScope); ",
-											"",
-											"switch(testsScope) {",
-											"    case \"Full\":",
-											"        var testSession = [",
-											"            \"SWIFT payment CRUD\",",
-											"            \"SWIFT payment CD\"",
-											"            ]; ",
-											"        break;",
-											"    case \"Core\":",
-											"        var testSession = [",
-											"            \"SWIFT payment CD\"",
-											"            ]; ",
-											"        break;",
-											"    case \"TestRailClean\":        ",
-											"        var testSession = [",
-											"            \"_Test session close\"",
-											"            ]; ",
-											"        break;",
-											"    default:",
-											"        throw new Error(\"No tests selected for execution!\")",
-											"}        ",
-											"    ",
-											"// Session initiate from PrS using eval()",
-											"eval(globals.sessionInit)(testSession, \"testSession\");",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "httpbin.org/uuid",
-									"host": [
-										"httpbin",
-										"org"
-									],
-									"path": [
-										"uuid"
-									]
-								}
-							},
-							"response": []
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"//reset global variables for controling execution flow",
+									"eval(globals.cleanup)();",
+									"//clear list of executed TestRail tests",
+									"pm.environment.set(\"testRailTestsInRun\",\"\");   ",
+									"",
+									"//specify list of tests to be executed in exact order",
+									"//const testsScope = \"Full\"; [Full|Core|Full+TestRail]",
+									"let testsScope = data.testsScope;",
+									"//console.log(testsScope); ",
+									"",
+									"switch(testsScope) {",
+									"    case \"Full\":",
+									"        var testSession = [",
+									"            \"_Generate access token\",",
+									"            \"SWIFT payment CRUD\",",
+									"            \"SWIFT payment CD\"",
+									"            ]; ",
+									"        break;",
+									"    case \"Core\":",
+									"        var testSession = [",
+									"            \"_Generate access token\",",
+									"            \"SWIFT payment CD\"",
+									"            ]; ",
+									"        break;",
+									"    case \"TestRailClean\":        ",
+									"        var testSession = [",
+									"            \"_Test session close\"",
+									"            ]; ",
+									"        break;",
+									"    default:",
+									"        throw new Error(\"No tests selected for execution!\")",
+									"}        ",
+									"    ",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(testSession, \"testSession\");",
+									""
+								],
+								"type": "text/javascript"
+							}
 						},
 						{
-							"name": "SWIFT payment CRUD",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
-										"exec": [
-											"var testRailTestCases = \"C36275411 C36240103 C36275416 C36240105\"",
-											"eval(globals.testsExecuted)(testRailTestCases);",
-											"",
-											"var requestsToRun = [",
-											"        \"Create SWIFT payment\",",
-											"        \"Get SWIFT payment\", ",
-											"        \"Update SWIFT payment\",",
-											"        \"Delete SWIFT payment\"",
-											"    ]; ",
-											"    pm.globals.set(\"_tr_Create SWIFT payment\",\"C36275411\");",
-											"    pm.globals.set(\"_tr_Get SWIFT payment\",\"C36240103\");",
-											"    pm.globals.set(\"_tr_Update SWIFT payment\",\"C36275416\");",
-											"    pm.globals.set(\"_tr_Delete SWIFT payment\",\"C36240105\");",
-											"",
-											"//specify related TestRail tests",
-											"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
-											"",
-											"// Session initiate from PrS using eval()",
-											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "httpbin.org/uuid",
-									"host": [
-										"httpbin",
-										"org"
-									],
-									"path": [
-										"uuid"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "SWIFT payment CD",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
-										"exec": [
-											"testRailTestCases = \"C36275411 C36240105\"",
-											"eval(globals.testsExecuted)(testRailTestCases);",
-											"",
-											"var requestsToRun = [",
-											"        \"Create SWIFT payment\",",
-											"        \"Delete SWIFT payment\"",
-											"    ]; ",
-											"    pm.globals.set(\"_tr_Create SWIFT payment\",\"C36275411\");",
-											"    pm.globals.set(\"_tr_Delete SWIFT payment\",\"C36240105\");",
-											"",
-											"//specify related TestRail tests",
-											"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
-											"",
-											"// Session initiate from PrS using eval()",
-											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "httpbin.org/uuid",
-									"host": [
-										"httpbin",
-										"org"
-									],
-									"path": [
-										"uuid"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "_Test session close",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
-										"exec": [
-											"var requestsToRun = ",
-											"    [",
-											"        \"Clean TestRail Run\"",
-											"    ]; ",
-											"",
-											"// Session initiate from PrS using eval()",
-											"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "httpbin.org/uuid",
-									"host": [
-										"httpbin",
-										"org"
-									],
-									"path": [
-										"uuid"
-									]
-								}
-							},
-							"response": []
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
-					"_postman_isSubFolder": true
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
 				},
 				{
-					"name": "Requests",
-					"item": [
+					"name": "_Generate access token",
+					"event": [
 						{
-							"name": "Create SWIFT payment",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
-										"exec": [
-											"// Execute standard tests from PrS using eval()\r",
-											"eval(globals.commonTests)();\r",
-											"\r",
-											"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
-											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is created and assertions are passed\", function () {\r",
-											"\r",
-											"    let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
-											"    let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
-											"    let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
-											"    let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
-											"    let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
-											"    let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent;\r",
-											"    let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent;\r",
-											"    let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
-											"    let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
-											"    let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
-											"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo;   \r",
-											"    let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
-											"    let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
-											"    let jsonDataResponseChargeBearer = pm.response.json().chargeBearer;\r",
-											"    \r",
-											"    pm.test(\"Instructed amount is correct\", () => {\r",
-											"      //let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
-											"      //let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
-											"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
-											"    });\r",
-											"\r",
-											"    pm.test(\"Execution date is correct\", () => {\r",
-											"      //let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
-											"      //let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
-											"      pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate);\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"State is correct\", () => {\r",
-											"      //let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
-											"      pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
-											"    });\r",
-											"\r",
-											"    pm.test(\"Creditor agent is correct\", () => {\r",
-											"      //let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent;\r",
-											"      //let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent;\r",
-											"      pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
-											"    });\r",
-											"\r",
-											"    pm.test(\"Debtor address is correct\", () => {\r",
-											"      //let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
-											"      //let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
-											"      pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.adrLine1);\r",
-											"      pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
-											"      pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"Debtor account is correct\", () => {\r",
-											"      //let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
-											"      //let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo;   \r",
-											"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"Creditor account is correct\", () => {\r",
-											"      //let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
-											"      //let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
-											"      pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"Charge bearer is correct\", () => {\r",
-											"      //let jsonDataResponseChargeBearer = pm.response.json().chargeBearer;\r",
-											"      pm.expect(jsonDataResponseChargeBearer).to.eql(\"SHAR\");\r",
-											"    });\r",
-											"    \r",
-											"    // check if payment is created\r",
-											"    if (pm.response.to.have.status(201)){\r",
-											"        var responseData = JSON.parse(responseBody);\r",
-											"        pm.globals.set(\"newPaymentID\", responseData.paymentId);\r",
-											"        console.log(\"New payment ID: \" + pm.globals.get(\"newPaymentID\"));\r",
-											"    }\r",
-											"    else {\r",
-											"        console.log(\"Failed to create payment with ID:\" + pm.globals.get(\"newPaymentID\"));\r",
-											"        pm.globals.unset(\"newPaymentID\");\r",
-											"    }\r",
-											"    \r",
-											"    //Determine if assertion passed at whole\r",
-											"    pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
-											"    && pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate) \r",
-											"    && pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\") \r",
-											"    && pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent) \r",
-											"    && pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.adrLine1) \r",
-											"    && pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode) \r",
-											"    && pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName) \r",
-											"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
-											"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
-											"    && pm.expect(jsonDataResponseChargeBearer).to.eql(\"SHAR\");\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "Accept",
-										"value": "application/json, application/hal+json"
-									},
-									{
-										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
-										"key": "Authorization",
-										"value": "Bearer {{token}}",
-										"type": "text"
-									}
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var requestsToRun = [",
+									"        \"GetAuthorizationCode\",",
+									"        \"GetAccessToken\"",
+									"    ]; ",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
 								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": \"{{$randomLoremSlug}}\",\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"CHF\"\n            },\n            \"value\": 0.5\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"{{$guid}}\",\n            \"structured\":  \"{{$randomUUID}}\"\n        },\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\n    \t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"{{$randomFullName}}\",\n            \"address\": {\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\n            \t\"buildingNm\": {{$randomInt}},\n            \t\"postalCode\": {{$randomInt}},\n            \t\"townName\": \"{{$randomCity}}\",\n            \t\"country\": \"{{$randomCountryCode}}\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"{{$randomFirstName}}\",\n    \t\t\"name2\": \"{{$randomLastName}}\",\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\n    \t\t\"city\": \"{{$randomCity}}\",\n    \t\t\"country\": {{creditorAgentCountry}}\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": {{debtorAdrLine}},\n            \t\"postalCode\": {{debtorPostalCode}},\n            \t\"townName\": {{debtorTownName}}\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    }\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
-									"host": [
-										"{{environment}}"
-									],
-									"path": [
-										"banking-api",
-										"payment",
-										"swift",
-										"{{tenant}}",
-										"v2",
-										"credittransfer"
-									]
-								}
-							},
-							"response": []
+								"type": "text/javascript"
+							}
 						},
 						{
-							"name": "Get SWIFT payment",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "f5d00dc8-f552-48c0-9a1c-2510df583464",
-										"exec": [
-											"// Execute standard tests from PrS using eval()\r",
-											"eval(globals.commonTests)();\r",
-											"\r",
-											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is retrieved and assertions are passed\", function () {\r",
-											"\r",
-											"    let jsonDataPaymentState = pm.response.json().paymentState;\r",
-											"    let jsonDataDebtorName = pm.response.json().paymentInformation.debtor.name;\r",
-											"    let jsonDataDebtorAccount = pm.response.json().paymentInformation.debtorAccountNo;\r",
-											"    let address = pm.response.json().paymentInformation.creditorAgent;\r",
-											"\r",
-											"    // check if payment is retrieved\r",
-											"    pm.test(\"Payment is retrieved\", function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"Payment status is 'READY_FOR_EXECUTION'\", () => {\r",
-											"      //let jsonDataPaymentState = pm.response.json().paymentState;\r",
-											"      pm.expect(jsonDataPaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
-											"    }); \r",
-											"    \r",
-											"    pm.test(\"Debtor is correct\", () => {\r",
-											"      //let jsonDataDebtorName = pm.response.json().paymentInformation.debtor.name;\r",
-											"      //let jsonDataDebtorAccount = pm.response.json().paymentInformation.debtorAccountNo;\r",
-											"      pm.expect(jsonDataDebtorName).to.eql(JSON.parse(data.debtorAccountName));\r",
-											"      pm.expect(jsonDataDebtorAccount).to.eql(JSON.parse(data.debtorAccountNo));\r",
-											"    });\r",
-											"    \r",
-											"    // test if creaditor agent is valid\r",
-											"    pm.test(\"Creditor agent is correct\", () => {\r",
-											"      //let address = pm.response.json().paymentInformation.creditorAgent;\r",
-											"      eval(globals.assertValidCreditorAgent)(address);\r",
-											"    });\r",
-											"    \r",
-											"    // test if response contains string from data file\r",
-											"    pm.test(\"Body matches string\", function () {\r",
-											"      pm.expect(pm.response.text()).to.include(data.debtorAccountName);\r",
-											"    });\r",
-											"\r",
-											"    pm.response.to.have.status(200)\r",
-											"    && pm.expect(jsonDataPaymentState).to.eql(\"READY_FOR_EXECUTION\")\r",
-											"    && pm.expect(jsonDataDebtorName).to.eql(JSON.parse(data.debtorAccountName))\r",
-											"    && pm.expect(jsonDataDebtorAccount).to.eql(JSON.parse(data.debtorAccountNo))\r",
-											"    && eval(globals.assertValidCreditorAgent)(address)\r",
-											"    && pm.expect(pm.response.text()).to.include(data.debtorAccountName);\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "22f2990b-adb1-4668-a6e9-92884e953577",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "content-type",
-										"value": "application/json; charset=UTF-8"
-									},
-									{
-										"key": "accept",
-										"value": "application/json, application/hal+json"
-									},
-									{
-										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
-										"key": "Authorization",
-										"value": "Bearer {{token}}",
-										"type": "text"
-									}
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
 								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentID}}",
-									"host": [
-										"{{environment}}"
-									],
-									"path": [
-										"banking-api",
-										"payment",
-										"swift",
-										"{{tenant}}",
-										"v2",
-										"credittransfer",
-										"{{newPaymentID}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update SWIFT payment",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "96ee9651-4e6e-4a83-a257-55d56e136859",
-										"exec": [
-											"// Execute standard tests from PrS using eval()\r",
-											"eval(globals.commonTests)();\r",
-											"\r",
-											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is updated and assertions are passed\", function () {\r",
-											"\r",
-											"    let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
-											"    let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
-											"    let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
-											"    let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
-											"    let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
-											"    let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent;\r",
-											"    let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent;\r",
-											"    let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
-											"    let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
-											"    let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
-											"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo;   \r",
-											"    let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
-											"    let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
-											"    let requestBodyChargeBearer = JSON.parse(request.data).chargeBearer;\r",
-											"    let responseBodyChargeBearer = JSON.parse(responseBody).chargeBearer;       \r",
-											"\r",
-											"\r",
-											"    // check if payment is updated\r",
-											"    pm.test(\"Payment is updated\", function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"Instructed amount is correct\", () => {\r",
-											"      //let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
-											"      //let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
-											"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"Execution date is correct\", () => {\r",
-											"      //let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
-											"      //let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
-											"      pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate);\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"State is correct\", () => {\r",
-											"      //let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
-											"      pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"Creditor agent is correct\", () => {\r",
-											"      //let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent;\r",
-											"      //let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent;\r",
-											"      pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"Debtor address is correct\", () => {\r",
-											"      //let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
-											"      //let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
-											"      pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.adrLine1);\r",
-											"      pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
-											"      pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"Debtor account is correct\", () => {\r",
-											"      //let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
-											"      //let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo;   \r",
-											"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"Creditor account is correct\", () => {\r",
-											"      //let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
-											"      //let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
-											"      pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"Charge bearer is correct\", () => {\r",
-											"      //let requestBodyChargeBearer = JSON.parse(request.data).chargeBearer;\r",
-											"      //let responseBodyChargeBearer = JSON.parse(responseBody).chargeBearer;       \r",
-											"      pm.expect(responseBodyChargeBearer).to.eql(requestBodyChargeBearer);\r",
-											"    });\r",
-											"    \r",
-											"    pm.response.to.have.status(200)\r",
-											"    && pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount)\r",
-											"    && pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate)\r",
-											"    && pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\")\r",
-											"    && pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent)\r",
-											"    && pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.adrLine1)\r",
-											"    && pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode)\r",
-											"    && pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName)\r",
-											"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
-											"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo)\r",
-											"    && pm.expect(responseBodyChargeBearer).to.eql(requestBodyChargeBearer);\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "ed4149e4-3b82-4013-8999-2fa27812ab16",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "content-type",
-										"value": "application/json; charset=UTF-8"
-									},
-									{
-										"key": "accept",
-										"value": "application/json, application/hal+json"
-									},
-									{
-										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{token}}",
-										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": {{endToEndId}},\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"CHF\"\n            },\n            \"value\": 45\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"{{$guid}}\",\n            \"structured\":  \"{{$randomUUID}}\"\n        },\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\n    \t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"MDB-R191-Test\",\n            \"address\": {\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\n            \t\"buildingNm\": {{$randomInt}},\n            \t\"postalCode\": {{$randomInt}},\n            \t\"townName\": \"{{$randomCity}}\",\n            \t\"country\": \"{{$randomCountryCode}}\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"{{$randomFirstName}}\",\n    \t\t\"name2\": \"{{$randomLastName}}\",\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\n    \t\t\"city\": \"{{$randomCity}}\",\n    \t\t\"country\": {{creditorAgentCountry}}\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": {{debtorAdrLine}},\n            \t\"postalCode\": {{debtorPostalCode}},\n            \t\"townName\": {{debtorTownName}}\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    },\n      \"chargeBearer\": \"SHAR\"\n}"
-								},
-								"url": {
-									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentID}}",
-									"host": [
-										"{{environment}}"
-									],
-									"path": [
-										"banking-api",
-										"payment",
-										"swift",
-										"{{tenant}}",
-										"v2",
-										"credittransfer",
-										"{{newPaymentID}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Delete SWIFT payment",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "b805315b-12ae-4f45-85f9-14230e6cb91e",
-										"exec": [
-											"// Execute standard tests from PrS using eval()\r",
-											"eval(globals.commonTests)();\r",
-											"\r",
-											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is deleted and not exists anymore\", function () {\r",
-											"    pm.response.to.have.status(204);\r",
-											"});\r",
-											"\r",
-											"// Log important stuff\r",
-											"if (pm.response.to.have.status(204)){\r",
-											"    console.log(\"Deleted payment ID:\" + pm.globals.get(\"newPaymentID\"));\r",
-											"    pm.globals.unset(\"newPaymentID\");\r",
-											"}\r",
-											"else {\r",
-											"    console.log(\"Failed to delete payment with ID:\" + pm.globals.get(\"newPaymentID\"));\r",
-											"    pm.globals.set(\"newPaymentID\", \"ERROR!\");\r",
-											"}\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "8b0efd50-c002-40d7-bf02-ad82c22ce7a7",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Content-Type",
-										"name": "Content-Type",
-										"value": "application/json",
-										"type": "text"
-									},
-									{
-										"key": "accept",
-										"value": "application/json, application/hal+json"
-									},
-									{
-										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{token}}",
-										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentID}}",
-									"host": [
-										"{{environment}}"
-									],
-									"path": [
-										"banking-api",
-										"payment",
-										"swift",
-										"{{tenant}}",
-										"v2",
-										"credittransfer",
-										"{{newPaymentID}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Clean TestRail Run",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "f5d00dc8-f552-48c0-9a1c-2510df583464",
-										"exec": [
-											"// Prepare list of TestRail tests for 'Clean TestRail Run' request",
-											"//var execTests = pm.globals.get(\"testRailTestsInRun\");",
-											"var execTests = data.executedTests;",
-											"console.log(\"TestRail, tests executed in last run: \" + execTests);",
-											"execTests = execTests.replace(/C/g, \"\");",
-											"//console.log(\"TestRail, first cleanup: \" + execTests);",
-											"execTests = execTests.replace(/ /g, \", \");",
-											"//console.log(\"TestRail, second cleanup: \" + execTests);",
-											"execTests = execTests.replace(/,,/g, \",\");",
-											"pm.globals.set(\"testRailTestsInRun\", execTests); ",
-											"",
-											"var array = JSON.parse(\"[\" + execTests + \"]\"); //convert string to array",
-											"for(let i = 0; i < 10; i++){",
-											"    let runId = JSON.parse(responseBody)[i].id;",
-											"    let runName = JSON.parse(responseBody)[i].name;",
-											"    let runSuiteId = JSON.parse(responseBody)[i].suite_id;",
-											"    if (runName === \"Postman API Tests\") { //determine proper run",
-											"        //console.log(runId);   ",
-											"        console.log(\"TestRail run '\" + runId + \"' updating for tests: \" + execTests);",
-											"        pm.sendRequest({",
-											"            url: \"https://testrail.ebs.crealogix.net/index.php?/api/v2/update_run/\" + runId,",
-											"            method: \"POST\",",
-											"            header: {",
-											"                \"Authorization\": \"Basic bWlsYW4ua2FyYWRlZ2xpY0BjcmVhbG9naXguY29tOlNTQ25hcG9saTEyMzQ1Njc4OQ==\",",
-											"                \"Content-Type\": \"application/json\"",
-											"            },",
-											"            body: {",
-											"                mode: 'raw',",
-											"                raw: JSON.stringify({ include_all: false, case_ids: array })",
-											"        \t}",
-											"        });",
-											"        break;",
-											"    }",
-											"}"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "22f2990b-adb1-4668-a6e9-92884e953577",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "basic",
-									"basic": [
-										{
-											"key": "password",
-											"value": "SSCnapoli123456789",
-											"type": "string"
-										},
-										{
-											"key": "username",
-											"value": "milan.karadeglic@crealogix.com",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "content-type",
-										"value": "application/json; charset=UTF-8"
-									},
-									{
-										"key": "accept",
-										"value": "application/json, application/hal+json"
-									},
-									{
-										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{token}}",
-										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "https://testrail.ebs.crealogix.net/index.php?/api/v2/get_runs/8",
-									"protocol": "https",
-									"host": [
-										"testrail",
-										"ebs",
-										"crealogix",
-										"net"
-									],
-									"path": [
-										"index.php"
-									],
-									"query": [
-										{
-											"key": "/api/v2/get_runs/8",
-											"value": null
-										}
-									]
-								}
-							},
-							"response": []
+								"type": "text/javascript"
+							}
 						}
 					],
-					"_postman_isSubFolder": true
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SWIFT payment CRUD",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = \"C36275411 C36240103 C36275416 C36240105\"",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"Create SWIFT payment\",",
+									"        \"Get SWIFT payment\", ",
+									"        \"Update SWIFT payment\",",
+									"        \"Delete SWIFT payment\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_Create SWIFT payment\",\"C36275411\");",
+									"    pm.globals.set(\"_tr_Get SWIFT payment\",\"C36240103\");",
+									"    pm.globals.set(\"_tr_Update SWIFT payment\",\"C36275416\");",
+									"    pm.globals.set(\"_tr_Delete SWIFT payment\",\"C36240105\");",
+									"",
+									"//specify related TestRail tests",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SWIFT payment CD",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"testRailTestCases = \"C36275411 C36240105\"",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"Create SWIFT payment\",",
+									"        \"Delete SWIFT payment\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_Create SWIFT payment\",\"C36275411\");",
+									"    pm.globals.set(\"_tr_Delete SWIFT payment\",\"C36240105\");",
+									"",
+									"//specify related TestRail tests",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "_Test session close",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var requestsToRun = ",
+									"    [",
+									"        \"Clean TestRail Run\"",
+									"    ]; ",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
 				}
-			],
-			"event": [
+			]
+		},
+		{
+			"name": "Requests",
+			"item": [
 				{
-					"listen": "prerequest",
-					"script": {
-						"id": "d8d839c9-f4ee-473b-b407-3289bb16795f",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
+					"name": "Create SWIFT payment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
+								"exec": [
+									"// Execute standard tests from PrS using eval()\r",
+									"eval(globals.commonTests)();\r",
+									"\r",
+									"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is created and assertions are passed\", function () {\r",
+									"\r",
+									"    //Instructed amount is correct\r",
+									"    let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
+									"    let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
+									"    //Execution date is correct\r",
+									"    let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
+									"    let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
+									"    //State is correct\r",
+									"    let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+									"    //Creditor agent is correct\r",
+									"    let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent;\r",
+									"    let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent;\r",
+									"    //Debtor address is correct\r",
+									"    let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
+									"    let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
+									"    //Debtor account is correct\r",
+									"    let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
+									"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo;   \r",
+									"    //Creditor account is correct\r",
+									"    let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
+									"    let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
+									"    //Charge bearer is correct    \r",
+									"    let jsonDataResponseChargeBearer = pm.response.json().chargeBearer;\r",
+									"    \r",
+									"    pm.test(\"Instructed amount is correct\", () => {\r",
+									"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Execution date is correct\", () => {\r",
+									"      pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"State is correct\", () => {\r",
+									"      pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Creditor agent is correct\", () => {\r",
+									"      pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Debtor address is correct\", () => {\r",
+									"      pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.adrLine1);\r",
+									"      pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
+									"      pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Debtor account is correct\", () => {\r",
+									"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Creditor account is correct\", () => {\r",
+									"      pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Charge bearer is correct\", () => {\r",
+									"      pm.expect(jsonDataResponseChargeBearer).to.eql(\"SHAR\");\r",
+									"    });\r",
+									"    \r",
+									"    // check if payment is created\r",
+									"    if (pm.response.to.have.status(201)){\r",
+									"        var responseData = JSON.parse(responseBody);\r",
+									"        pm.globals.set(\"newPaymentID\", responseData.paymentId);\r",
+									"        console.log(\"New payment ID: \" + pm.globals.get(\"newPaymentID\"));\r",
+									"    }\r",
+									"    else {\r",
+									"        console.log(\"Failed to create payment with ID:\" + pm.globals.get(\"newPaymentID\"));\r",
+									"        pm.globals.unset(\"newPaymentID\");\r",
+									"    }\r",
+									"    \r",
+									"    //Determine if assertion passed at whole\r",
+									"    pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+									"    && pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate) \r",
+									"    && pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\") \r",
+									"    && pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent) \r",
+									"    && pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.adrLine1) \r",
+									"    && pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode) \r",
+									"    && pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName) \r",
+									"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
+									"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
+									"    && pm.expect(jsonDataResponseChargeBearer).to.eql(\"SHAR\");\r",
+									"});\r",
+									"\r",
+									"// Session navigate from PrS using eval()\r",
+									"eval(globals.sessionNavigate)();\r",
+									"\r",
+									"// Reset reference to TR test cases\r",
+									"pm.globals.unset(\"_tr_\" + request.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json, application/hal+json"
+							},
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": \"{{$randomLoremSlug}}\",\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"CHF\"\n            },\n            \"value\": 0.5\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"{{$guid}}\",\n            \"structured\":  \"{{$randomUUID}}\"\n        },\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\n    \t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"{{$randomFullName}}\",\n            \"address\": {\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\n            \t\"buildingNm\": {{$randomInt}},\n            \t\"postalCode\": {{$randomInt}},\n            \t\"townName\": \"{{$randomCity}}\",\n            \t\"country\": \"{{$randomCountryCode}}\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"{{$randomFirstName}}\",\n    \t\t\"name2\": \"{{$randomLastName}}\",\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\n    \t\t\"city\": \"{{$randomCity}}\",\n    \t\t\"country\": {{creditorAgentCountry}}\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": {{debtorAdrLine}},\n            \t\"postalCode\": {{debtorPostalCode}},\n            \t\"townName\": {{debtorTownName}}\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"banking-api",
+								"payment",
+								"swift",
+								"{{tenant}}",
+								"v2",
+								"credittransfer"
+							]
+						}
+					},
+					"response": []
 				},
 				{
-					"listen": "test",
-					"script": {
-						"id": "3d25d163-d0bc-4ae9-a4af-cb2e3339ce9b",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
+					"name": "Get SWIFT payment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f5d00dc8-f552-48c0-9a1c-2510df583464",
+								"exec": [
+									"// Execute standard tests from PrS using eval()\r",
+									"eval(globals.commonTests)();\r",
+									"\r",
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is retrieved and assertions are passed\", function () {\r",
+									"\r",
+									"    //Payment status is correct\r",
+									"    let jsonDataPaymentState = pm.response.json().paymentState;\r",
+									"    //Debtor is correct\r",
+									"    let jsonDataDebtorName = pm.response.json().paymentInformation.debtor.name;\r",
+									"    let jsonDataDebtorAccount = pm.response.json().paymentInformation.debtorAccountNo;\r",
+									"    //Creditor agent is correct\r",
+									"    let address = pm.response.json().paymentInformation.creditorAgent;\r",
+									"\r",
+									"    pm.test(\"Payment is retrieved\", function () {\r",
+									"        pm.response.to.have.status(200);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Payment status is correct\", () => {\r",
+									"      pm.expect(jsonDataPaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
+									"    }); \r",
+									"    \r",
+									"    pm.test(\"Debtor is correct\", () => {\r",
+									"      pm.expect(jsonDataDebtorName).to.eql(JSON.parse(data.debtorAccountName));\r",
+									"      pm.expect(jsonDataDebtorAccount).to.eql(JSON.parse(data.debtorAccountNo));\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Creditor agent is correct\", () => {\r",
+									"      eval(globals.assertValidCreditorAgent)(address);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Body matches string\", function () {\r",
+									"      pm.expect(pm.response.text()).to.include(data.debtorAccountName);\r",
+									"    });\r",
+									"\r",
+									"    pm.response.to.have.status(200)\r",
+									"    && pm.expect(jsonDataPaymentState).to.eql(\"READY_FOR_EXECUTION\")\r",
+									"    && pm.expect(jsonDataDebtorName).to.eql(JSON.parse(data.debtorAccountName))\r",
+									"    && pm.expect(jsonDataDebtorAccount).to.eql(JSON.parse(data.debtorAccountNo))\r",
+									"    && eval(globals.assertValidCreditorAgent)(address)\r",
+									"    && pm.expect(pm.response.text()).to.include(data.debtorAccountName);\r",
+									"});\r",
+									"\r",
+									"// Session navigate from PrS using eval()\r",
+									"eval(globals.sessionNavigate)();\r",
+									"\r",
+									"// Reset reference to TR test cases\r",
+									"pm.globals.unset(\"_tr_\" + request.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "22f2990b-adb1-4668-a6e9-92884e953577",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json; charset=UTF-8"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, application/hal+json"
+							},
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentID}}",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"banking-api",
+								"payment",
+								"swift",
+								"{{tenant}}",
+								"v2",
+								"credittransfer",
+								"{{newPaymentID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update SWIFT payment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "96ee9651-4e6e-4a83-a257-55d56e136859",
+								"exec": [
+									"// Execute standard tests from PrS using eval()\r",
+									"eval(globals.commonTests)();\r",
+									"\r",
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is updated and assertions are passed\", function () {\r",
+									"\r",
+									"    //Instructed amount is correct\r",
+									"    let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
+									"    let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
+									"    //Execution date is correct    \r",
+									"    let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
+									"    let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
+									"    //State is correct\r",
+									"    let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+									"    //Creditor agent is correct    \r",
+									"    let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent;\r",
+									"    let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent;\r",
+									"    //Debtor address is correct    \r",
+									"    let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
+									"    let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
+									"    //Debtor account is correct    \r",
+									"    let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
+									"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo;   \r",
+									"    //Creditor account is correct    \r",
+									"    let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
+									"    let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
+									"    //Charge bearer is correct    \r",
+									"    let requestBodyChargeBearer = JSON.parse(request.data).chargeBearer;\r",
+									"    let responseBodyChargeBearer = JSON.parse(responseBody).chargeBearer;       \r",
+									"\r",
+									"\r",
+									"    pm.test(\"Payment is updated\", function () {\r",
+									"        pm.response.to.have.status(200);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Instructed amount is correct\", () => {\r",
+									"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Execution date is correct\", () => {\r",
+									"      pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"State is correct\", () => {\r",
+									"      pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Creditor agent is correct\", () => {\r",
+									"      pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Debtor address is correct\", () => {\r",
+									"      pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.adrLine1);\r",
+									"      pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
+									"      pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Debtor account is correct\", () => {\r",
+									"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Creditor account is correct\", () => {\r",
+									"      pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Charge bearer is correct\", () => {\r",
+									"      pm.expect(responseBodyChargeBearer).to.eql(requestBodyChargeBearer);\r",
+									"    });\r",
+									"    \r",
+									"    pm.response.to.have.status(200)\r",
+									"    && pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount)\r",
+									"    && pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate)\r",
+									"    && pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\")\r",
+									"    && pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent)\r",
+									"    && pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.adrLine1)\r",
+									"    && pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode)\r",
+									"    && pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName)\r",
+									"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
+									"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo)\r",
+									"    && pm.expect(responseBodyChargeBearer).to.eql(requestBodyChargeBearer);\r",
+									"});\r",
+									"\r",
+									"// Session navigate from PrS using eval()\r",
+									"eval(globals.sessionNavigate)();\r",
+									"\r",
+									"// Reset reference to TR test cases\r",
+									"pm.globals.unset(\"_tr_\" + request.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ed4149e4-3b82-4013-8999-2fa27812ab16",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json; charset=UTF-8"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, application/hal+json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}",
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"storeOnly\": false,\n\t\"locked\": false,       \n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\n    \"paymentInformation\": {\n\t\t\"endToEndId\": {{endToEndId}},\n\t\t\"instructedAmount\": {\n           \"currency\": {\n           \"code\": \"CHF\"\n            },\n            \"value\": 45\n    \t},\n        \"remittanceInformation\": {\n            \"unstructured\": \"{{$guid}}\",\n            \"structured\":  \"{{$randomUUID}}\"\n        },\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\n    \t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\n        \"instructionPriority\": \"NORMAL\",\n        \"creditor\": {\n            \"name\": \"MDB-R191-Test\",\n            \"address\": {\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\n            \t\"buildingNm\": {{$randomInt}},\n            \t\"postalCode\": {{$randomInt}},\n            \t\"townName\": \"{{$randomCity}}\",\n            \t\"country\": \"{{$randomCountryCode}}\"\n        \t}\n        },\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\n        \"creditorAgent\": {\n    \t\t\"name1\": \"{{$randomFirstName}}\",\n    \t\t\"name2\": \"{{$randomLastName}}\",\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\n    \t\t\"city\": \"{{$randomCity}}\",\n    \t\t\"country\": {{creditorAgentCountry}}\n    \t},\n        \"debtor\": {\n            \"name\": {{debtorAccountName}},\n            \"address\": {\n            \t\"adrLine1\": {{debtorAdrLine}},\n            \t\"postalCode\": {{debtorPostalCode}},\n            \t\"townName\": {{debtorTownName}}\n        \t}\n        },\n        \"debtorAccountNo\": {{debtorAccountNo}}\n    },\n      \"chargeBearer\": \"SHAR\"\n}"
+						},
+						"url": {
+							"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentID}}",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"banking-api",
+								"payment",
+								"swift",
+								"{{tenant}}",
+								"v2",
+								"credittransfer",
+								"{{newPaymentID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete SWIFT payment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b805315b-12ae-4f45-85f9-14230e6cb91e",
+								"exec": [
+									"// Execute standard tests from PrS using eval()\r",
+									"eval(globals.commonTests)();\r",
+									"\r",
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is deleted and not exists anymore\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"// Log important stuff\r",
+									"if (pm.response.to.have.status(204)){\r",
+									"    console.log(\"Deleted payment ID:\" + pm.globals.get(\"newPaymentID\"));\r",
+									"    pm.globals.unset(\"newPaymentID\");\r",
+									"}\r",
+									"else {\r",
+									"    console.log(\"Failed to delete payment with ID:\" + pm.globals.get(\"newPaymentID\"));\r",
+									"    pm.globals.set(\"newPaymentID\", \"ERROR!\");\r",
+									"}\r",
+									"\r",
+									"// Session navigate from PrS using eval()\r",
+									"eval(globals.sessionNavigate)();\r",
+									"\r",
+									"// Reset reference to TR test cases\r",
+									"pm.globals.unset(\"_tr_\" + request.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "8b0efd50-c002-40d7-bf02-ad82c22ce7a7",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, application/hal+json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}",
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentID}}",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"banking-api",
+								"payment",
+								"swift",
+								"{{tenant}}",
+								"v2",
+								"credittransfer",
+								"{{newPaymentID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clean TestRail Run",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f5d00dc8-f552-48c0-9a1c-2510df583464",
+								"exec": [
+									"// Prepare list of TestRail tests for 'Clean TestRail Run' request",
+									"//var execTests = pm.environment.get(\"testRailTestsInRun\");",
+									"var execTests = data.executedTests;",
+									"console.log(\"TestRail, tests executed in last run: \" + execTests);",
+									"execTests = execTests.replace(/C/g, \"\");",
+									"//console.log(\"TestRail, first cleanup: \" + execTests);",
+									"execTests = execTests.replace(/ /g, \", \");",
+									"//console.log(\"TestRail, second cleanup: \" + execTests);",
+									"execTests = execTests.replace(/,,/g, \",\");",
+									"pm.environment.set(\"testRailTestsInRun\", execTests); ",
+									"",
+									"var array = JSON.parse(\"[\" + execTests + \"]\"); //convert string to array",
+									"for(let i = 0; i < 10; i++){",
+									"    let runId = JSON.parse(responseBody)[i].id;",
+									"    let runName = JSON.parse(responseBody)[i].name;",
+									"    let runSuiteId = JSON.parse(responseBody)[i].suite_id;",
+									"    if (runName === \"Postman API Tests\") { //determine proper run",
+									"        //console.log(runId);   ",
+									"        console.log(\"TestRail run '\" + runId + \"' updating for tests: \" + execTests);",
+									"        pm.sendRequest({",
+									"            url: \"https://testrail.ebs.crealogix.net/index.php?/api/v2/update_run/\" + runId,",
+									"            method: \"POST\",",
+									"            header: {",
+									"                \"Authorization\": \"Basic bWlsYW4ua2FyYWRlZ2xpY0BjcmVhbG9naXguY29tOlNTQ25hcG9saTEyMzQ1Njc4OQ==\",",
+									"                \"Content-Type\": \"application/json\"",
+									"            },",
+									"            body: {",
+									"                mode: 'raw',",
+									"                raw: JSON.stringify({ include_all: false, case_ids: array })",
+									"        \t}",
+									"        });",
+									"        break;",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "22f2990b-adb1-4668-a6e9-92884e953577",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "SSCnapoli123456789",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "milan.karadeglic@crealogix.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json; charset=UTF-8"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, application/hal+json"
+							},
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://testrail.ebs.crealogix.net/index.php?/api/v2/get_runs/8",
+							"protocol": "https",
+							"host": [
+								"testrail",
+								"ebs",
+								"crealogix",
+								"net"
+							],
+							"path": [
+								"index.php"
+							],
+							"query": [
+								{
+									"key": "/api/v2/get_runs/8",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAuthorizationCode",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e5042c46-0d70-4033-8620-c9fe5964059e",
+								"exec": [
+									"var locationHeader = postman.getResponseHeader(\"Location\");",
+									"var code = getQueryParams(locationHeader)['code'];",
+									"pm.environment.set(\"authorization_code\", code);",
+									"",
+									"function getQueryParams(uri) {",
+									"  var vars = [];",
+									"",
+									"  // Get the start index of the query string",
+									"  var qsi = uri.indexOf('?');",
+									"  if (qsi == -1)",
+									"    return vars;",
+									"",
+									"  // Get the query string",
+									"  var qs = uri.slice(qsi + 1);",
+									"",
+									"  // Check if there is a subsection reference",
+									"  sri = qs.indexOf('#');",
+									"  if (sri >= 0)",
+									"    qs = qs.slice(0, sri);",
+									"",
+									"  // Build the associative array",
+									"  var hashes = qs.split('&');",
+									"  for (var i = 0; i < hashes.length; i++) {",
+									"    var sep = hashes[i].indexOf('=');",
+									"    if (sep <= 0)",
+									"      continue;",
+									"    var key = decodeURIComponent(hashes[i].slice(0, sep));",
+									"    var val = decodeURIComponent(hashes[i].slice(sep + 1));",
+									"    vars[key] = val;",
+									"  }",
+									"  const jar = pm.cookies.jar();",
+									"",
+									"  jar.clear(pm.request.url, function (error) {",
+									"  // error - <Error>",
+									"  });",
+									"",
+									"  return vars;",
+									"  ",
+									"}",
+									"",
+									"// Session navigate from PrS using eval()",
+									"eval(globals.sessionNavigate)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e81ac4d1-7b10-4601-a91f-2c8e6983d079",
+								"exec": [
+									"const contractNum = pm.environment.get(\"contract\"); //'1248081501';\r",
+									"\r",
+									"// Define the string\r",
+									"//var stringPrefix = 'test.user@crealogix.com:12312:Wh2V3uPfJvtedUnZ5OoY0VnhaBVVlL5aB4AyXyzl1000167712:en:';\r",
+									"var stringPrefix = '1248081501:12312:Wh2V3uPfJvtedUnZ5OoY0VnhaBVVlL5aB4AyXyzl1000167712:en:';\r",
+									"var stringSuffix = ':1234';\r",
+									"\r",
+									"// Encode the String\r",
+									"var encodedString = btoa(stringPrefix + contractNum + stringSuffix);\r",
+									"console.log(\"Generated X-CLX-Auth: \" + encodedString);\r",
+									"pm.globals.set(\"X-CLX-AuthV2\",encodedString);\r",
+									"console.log(\"Original X-CLX-Auth: \" + pm.globals.get(\"X-CLX-Auth\"));\r",
+									"\r",
+									"/*\r",
+									"// Decode the String\r",
+									"var decodedString = atob(encodedString);\r",
+									"console.log(decodedString); // Outputs: \"Hello World!\"\r",
+									"*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "CLX_LEGACY",
+								"value": "true",
+								"type": "text"
+							},
+							{
+								"key": "X-CLX-Auth",
+								"value": "{{X-CLX-AuthV2}}",
+								"type": "text"
+							},
+							{
+								"key": "X-CLX-Auth",
+								"value": "{{X-CLX-Auth}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{ASO}}/{{tenantId}}/oauth/authorize?response_type=code&client_id=postman&redirect_uri=https://www.getpostman.com/oauth2/callback&state=&scope=",
+							"host": [
+								"{{ASO}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"oauth",
+								"authorize"
+							],
+							"query": [
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "client_id",
+									"value": "postman"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://www.getpostman.com/oauth2/callback"
+								},
+								{
+									"key": "state",
+									"value": ""
+								},
+								{
+									"key": "scope",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccessToken",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e9d12e97-96ac-481a-9c03-6d11da90d5e5",
+								"exec": [
+									"if (responseBody) {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    if (jsonData) {\r",
+									"        postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);\r",
+									"//postman.setEnvironmentVariable(\"token\", jsonData.access_token);\r",
+									"postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);\r",
+									"\r",
+									"\r",
+									"const jar = pm.cookies.jar();\r",
+									"\r",
+									"jar.clear(pm.request.url, function (error) {\r",
+									"  // error - <Error>\r",
+									"});\r",
+									"\r",
+									"// Session navigate from PrS using eval()\r",
+									"eval(globals.sessionNavigate)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "86397e3d-1c3c-4fc7-9e47-32bb55289434",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "CLX_LEGACY",
+								"value": "true",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic cG9zdG1hbjpzZWNyZXQ=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ASO}}/{{tenantId}}/oauth/token?grant_type=authorization_code&redirect_uri=https://www.getpostman.com/oauth2/callback&code={{authorization_code}}",
+							"host": [
+								"{{ASO}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "https://www.getpostman.com/oauth2/callback"
+								},
+								{
+									"key": "code",
+									"value": "{{authorization_code}}"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
@@ -939,15 +1191,21 @@
 					"//************************************************************************************************",
 					"// variable initialization************************************************************************",
 					"//************************************************************************************************",
-					"var test = pm.globals.get(\"testRailTestsInRun\");",
+					"var test = pm.environment.get(\"testRailTestsInRun\");",
 					"if( !test) {",
-					"    pm.globals.set(\"testRailTestsInRun\",\"\");",
+					"    pm.environment.set(\"testRailTestsInRun\",\"\");",
 					"}",
 					"",
 					"//************************************************************************************************",
+					"// DEPRECATED !!!",
 					"// set access token ******************************************************************************",
 					"//************************************************************************************************",
-					"pm.environment.set(\"token\",data.accessToken);",
+					"//pm.environment.set(\"token\",data.accessToken);",
+					"",
+					"//************************************************************************************************",
+					"// set contract number ***************************************************************************",
+					"//************************************************************************************************",
+					"pm.environment.set(\"contract\",data.contractNumber);",
 					"",
 					"//************************************************************************************************",
 					"// connect to TestRail ***************************************************************************",
@@ -1074,7 +1332,7 @@
 					"        if (pm.globals.get(\"testSession\") === undefined){",
 					"            console.log(request.name + \", testSession is undefined\");",
 					"            //here >> export list of tests executed",
-					"            var tests = pm.globals.get(\"testRailTestsInRun\");",
+					"            var tests = pm.environment.get(\"testRailTestsInRun\");",
 					"            tests = tests.replace(/C/g, \"\");",
 					"            tests = tests.replace(/ /g, \", \");",
 					"            tests = tests.replace(/,,/g, \",\");",
@@ -1115,15 +1373,20 @@
 					"});",
 					"",
 					"postman.setGlobalVariable(\"testsExecuted\", (listOfExecutedTests) => {",
-					"    let tests =  pm.globals.get(\"testRailTestsInRun\");",
+					"    let tests =  pm.environment.get(\"testRailTestsInRun\");",
 					"    //console.log(\"TestRail tests stored in 'testRailTestsInRun': \" + tests);",
 					"    if (tests.length > 0) {",
 					"        tests = tests + \" \"",
 					"    }",
 					"    tests = tests + listOfExecutedTests;",
 					"    //console.log(\"TestRail tests to be stored to 'testRailTestsInRun': \" + tests);",
-					"    pm.globals.set(\"testRailTestsInRun\",tests);",
+					"    pm.environment.set(\"testRailTestsInRun\",tests);",
 					"    //console.log(\"TestRail tests executed so far: \" + tests);",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"extractTestCaseIDFromRequestName\", () => {",
+					"    let n = request.name.lastIndexOf(\"(\");",
+					"    return request.name.substr(n + 1, request.name.length - n - 2);",
 					"});"
 				]
 			}
@@ -1137,7 +1400,7 @@
 					"// check if test is executed",
 					"pm.test(\"'\" + request.name +\"' is initiated\", function () {",
 					"    //pm.response.to.have.status(200);",
-					"    pm.response.to.be.success;",
+					"    //pm.response.to.be.success ",
 					"});"
 				]
 			}
@@ -1145,7 +1408,7 @@
 	],
 	"variable": [
 		{
-			"id": "1f7c7b20-cd06-4b3b-9721-261c09871384",
+			"id": "fee60500-971a-4622-8f2b-dd879b1f2e45",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
