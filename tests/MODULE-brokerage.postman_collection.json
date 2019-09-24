@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "87560da6-b7f5-4c47-9387-0e85e0813ea3",
-		"name": "MODULE: Brokerage",
+		"_postman_id": "4bcf333f-9a63-4336-9594-878773a82995",
+		"name": "MODULE: Brokerage copy",
 		"description": "Brokerage API:\n\n- Brokerage order API\n- Brokerage security API\n\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -32,7 +32,9 @@
 									"        var testSession = [",
 									"            \"List securities (C43995762)\",",
 									"            \"Display security by securityNumber (C43995801)\",",
-									"            \"List trading places (C43995818)\"",
+									"            \"List trading places (C43995818)\",",
+									"            \"List listings (C43995811)\",",
+									"            \"Display listing by listing ID (C43995816)\"",
 									"            ]; ",
 									"        break;",
 									"    case \"Core\":",
@@ -60,6 +62,95 @@
 								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
 								"exec": [
 									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List listings (C43995811)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3bf0288b-49c7-4b83-9cb9-bd90f88d4853",
+								"exec": [
+									"//var testRailTestCases = \"C43995811\"",
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"Get listings\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_Get listings\",testRailTestCases);",
+									"",
+									"//specify related TestRail tests",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Display listing by listing ID (C43995816)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b9bc4495-a6f0-46ac-8545-7470d7df11ce",
+								"exec": [
+									"//testRailTestCases = \"C43995816\"",
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"Get listings\",",
+									"        \"Get listing by listing ID\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_Get listings\",\"[precondition]\");",
+									"    pm.globals.set(\"_tr_Get listing by listing ID\", testRailTestCases);",
+									"",
+									"//specify related TestRail tests",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
 								],
 								"type": "text/javascript"
 							}
@@ -290,7 +381,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
 			"name": "Requests",
@@ -388,6 +480,193 @@
 								"{{tenant}}",
 								"v1",
 								"securities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get listings",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "590da4a5-4cbe-4116-bedc-ae2fda9b4dec",
+								"exec": [
+									"eval(globals.commonTests)();",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Listings are returns and all assertions passed\", function (){",
+									"",
+									"var listingsSchema = pm.environment.get(\"listingsSchema\");",
+									"pm.test(\"Status 200 OK is displayed\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"    ",
+									"pm.test(\"Response schema is correct\", () => {",
+									"        //tv4.validate(jsonData, securitiesSchema, false, true);",
+									"    pm.expect(tv4.validate(jsonData, listingsSchema)).to.be.true;",
+									"}); ",
+									"    ",
+									"pm.response.to.have.status(200)",
+									"&& pm.expect(tv4.validate(jsonData, listingsSchema)).to.be.true;    ",
+									"/*pm.test(\"Validate schema\", () => {",
+									"    jsonData._embedded.listings.forEach(function(obj){",
+									"       pm.expect(obj).to.have.property(\"id\");",
+									"       pm.expect(obj).to.have.property(\"fixAt\");",
+									"       pm.expect(obj).to.have.property(\"rate\");",
+									"       pm.expect(obj).to.have.property(\"roundLot\");",
+									"       pm.expect(obj).to.have.property(\"ticker\");",
+									"   });   ",
+									"});*/",
+									"",
+									"});",
+									"",
+									"/*pm.test(\"get listing ID\", () => {",
+									"    var ticker=\"ROG-T5\";",
+									"    jsonData._embedded.listings.forEach(function(obj){",
+									"       if(obj.ticker===ticker){",
+									"            pm.globals.set('listing_ID', obj.id);",
+									"       }",
+									"   });   ",
+									"});*/",
+									"",
+									"if (pm.response.code === 200) {",
+									"    pm.environment.set(\"tmp_listing_ID\",jsonData._embedded.listings[0].id);",
+									"} else {",
+									"    pm.environment.unset(\"tmp_listing_ID\");",
+									"}",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "bearer",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text"
+							},
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{environment}}/brokerage/securities/{{tenant}}/v1/listings",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"brokerage",
+								"securities",
+								"{{tenant}}",
+								"v1",
+								"listings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get listing by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "17b7e3b9-73f9-424c-bf53-aa31004f3747",
+								"exec": [
+									"eval(globals.commonTests)();",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Listings are returns and all assertions passed\", function (){",
+									" pm.test(\"Main elements are present\", () => {",
+									"  pm.expect(jsonData).to.have.property(\"id\");",
+									"  pm.expect(jsonData).to.have.property(\"ticker\");",
+									"  pm.expect(jsonData).to.have.property(\"rate\");",
+									"  pm.expect(jsonData).to.have.property(\"fixAt\");",
+									"  pm.expect(jsonData).to.have.property(\"roundLot\");",
+									" });",
+									"",
+									" pm.test(\"ID is correct\", () => {",
+									"  pm.expect(jsonData.id).to.be.eql(pm.environment.get(\"tmp_listing_ID\"));",
+									" });",
+									" ",
+									"  pm.expect(jsonData).to.have.property(\"id\")&&",
+									"  pm.expect(jsonData).to.have.property(\"ticker\")&&",
+									"  pm.expect(jsonData).to.have.property(\"rate\")&&",
+									"  pm.expect(jsonData).to.have.property(\"fixAt\")&&",
+									"  pm.expect(jsonData).to.have.property(\"roundLot\")&&",
+									"  pm.expect(jsonData.id).to.be.eql(pm.environment.get(\"tmp_listing_ID\"));",
+									" ",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, application/hal+json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{environment}}/brokerage/securities/{{tenant}}/v1/listings/{{tmp_listing_ID}}",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"brokerage",
+								"securities",
+								"{{tenant}}",
+								"v1",
+								"listings",
+								"{{tmp_listing_ID}}"
 							]
 						}
 					},
@@ -713,7 +992,8 @@
 					},
 					"response": []
 				}
-			]
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -1898,6 +2178,146 @@
 					"pm.environment.set(\"tradingPlaceSchema\", tradingPlaceSchema);",
 					"",
 					"//************************************************************************************************",
+					"// Schema for 'listings' *************************************************************************",
+					"// created via https://jsonschema.net/ ***********************************************************",
+					"//************************************************************************************************",
+					"",
+					"const listingsSchema=",
+					"{",
+					"  \"definitions\": {},",
+					"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+					"  \"$id\": \"http://example.com/root.json\",",
+					"  \"type\": [",
+					"    \"object\",",
+					"    \"null\"",
+					"  ],",
+					"  \"required\": [",
+					"    \"page\",",
+					"    \"_embedded\"",
+					"  ],",
+					"  \"properties\": {",
+					"    \"page\": {",
+					"      \"$id\": \"#/properties/page\",",
+					"      \"type\": [",
+					"        \"object\",",
+					"        \"null\"",
+					"      ],",
+					"      \"required\": [",
+					"        \"number\",",
+					"        \"size\",",
+					"        \"totalElements\",",
+					"        \"totalPages\"",
+					"      ],",
+					"      \"properties\": {",
+					"        \"number\": {",
+					"          \"$id\": \"#/properties/page/properties/number\",",
+					"          \"type\": [",
+					"            \"number\",",
+					"            \"null\"",
+					"          ]",
+					"        },",
+					"        \"size\": {",
+					"          \"$id\": \"#/properties/page/properties/size\",",
+					"          \"type\": [",
+					"            \"number\",",
+					"            \"null\"",
+					"          ]",
+					"        },",
+					"        \"totalElements\": {",
+					"          \"$id\": \"#/properties/page/properties/totalElements\",",
+					"          \"type\": [",
+					"            \"number\",",
+					"            \"null\"",
+					"          ]",
+					"        },",
+					"        \"totalPages\": {",
+					"          \"$id\": \"#/properties/page/properties/totalPages\",",
+					"          \"type\": [",
+					"            \"number\",",
+					"            \"null\"",
+					"          ]",
+					"        }",
+					"      }",
+					"    },",
+					"    \"_embedded\": {",
+					"      \"$id\": \"#/properties/_embedded\",",
+					"      \"type\": [",
+					"        \"object\",",
+					"        \"null\"",
+					"      ],",
+					"      \"required\": [",
+					"        \"listings\"",
+					"      ],",
+					"      \"properties\": {",
+					"        \"listings\": {",
+					"          \"$id\": \"#/properties/_embedded/properties/listings\",",
+					"          \"type\": [",
+					"            \"array\",",
+					"            \"null\"",
+					"          ],",
+					"          \"items\": {",
+					"            \"$id\": \"#/properties/_embedded/properties/listings/items\",",
+					"            \"type\": [",
+					"              \"object\",",
+					"              \"null\"",
+					"            ],",
+					"            \"required\": [",
+					"              \"id\",",
+					"              \"ticker\",",
+					"              \"rate\",",
+					"              \"fixAt\",",
+					"              \"roundLot\"",
+					"            ],",
+					"            \"properties\": {",
+					"              \"id\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/listings/items/properties/id\",",
+					"                \"type\": [",
+					"                  \"string\",",
+					"                  \"null\"",
+					"                ],",
+					"                \"pattern\": \"^(.*)$\"",
+					"              },",
+					"              \"ticker\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/listings/items/properties/ticker\",",
+					"                \"type\": [",
+					"                  \"string\",",
+					"                  \"null\"",
+					"                ],",
+					"                \"pattern\": \"^(.*)$\"",
+					"              },",
+					"              \"rate\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/listings/items/properties/rate\",",
+					"                \"type\": [",
+					"                  \"number\",",
+					"                  \"null\"",
+					"                ]",
+					"              },",
+					"              \"fixAt\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/listings/items/properties/fixAt\",",
+					"                \"type\": [",
+					"                  \"string\",",
+					"                  \"null\"",
+					"                ],",
+					"                \"pattern\": \"^(.*)$\"",
+					"              },",
+					"              \"roundLot\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/listings/items/properties/roundLot\",",
+					"                \"type\": [",
+					"                  \"number\",",
+					"                  \"null\"",
+					"                ]",
+					"              }",
+					"            }",
+					"          }",
+					"        }",
+					"      }",
+					"    }",
+					"  }",
+					"};",
+					"",
+					"pm.environment.set(\"listingsSchema\", listingsSchema);",
+					"",
+					"//************************************************************************************************",
 					"//global function to determine next day/next working day *****************************************",
 					"//************************************************************************************************",
 					"var moment = require('moment');",
@@ -2089,10 +2509,11 @@
 	],
 	"variable": [
 		{
-			"id": "219572ec-1c91-4e7f-a1c0-6411307feb74",
+			"id": "4bf0e200-39eb-4e7e-be7a-c70707f7c31d",
 			"key": "EPIC",
 			"value": "PRODUCT-10195",
 			"type": "string"
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
