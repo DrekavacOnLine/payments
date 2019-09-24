@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4bcf333f-9a63-4336-9594-878773a82995",
+		"_postman_id": "76f6351c-2b98-4380-ae04-63c44a86211e",
 		"name": "MODULE: Brokerage",
 		"description": "Brokerage API:\n\n- Brokerage order API\n- Brokerage security API\n\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -33,6 +33,7 @@
 									"            \"List securities (C43995762)\",",
 									"            \"Display security by securityNumber (C43995801)\",",
 									"            \"List trading places (C43995818)\",",
+									"            \"Display trading place by tradingPlaceId (C43995821)\",",
 									"            \"List listings (C43995811)\",",
 									"            \"Display listing by listing ID (C43995816)\"",
 									"            ]; ",
@@ -52,6 +53,115 @@
 									"// Session initiate from PrS using eval()",
 									"eval(globals.sessionInit)(testSession, \"testSession\");",
 									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List securities (C43995762)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"//var testRailTestCases = \"C43995762\"",
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"Get securities\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_Get securities\",testRailTestCases);",
+									"",
+									"//specify related TestRail tests",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Display security by securityNumber (C43995801)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"//testRailTestCases = \"C43995801\"",
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"Get securities\",",
+									"        \"Get security by securityNumber\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_Get securities\",\"[precondition]\");",
+									"    pm.globals.set(\"_tr_Get security by securityNumber\", testRailTestCases);",
+									"",
+									"//specify related TestRail tests",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
 								],
 								"type": "text/javascript"
 							}
@@ -173,60 +283,6 @@
 					"response": []
 				},
 				{
-					"name": "List securities (C43995762)",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
-								"exec": [
-									"//var testRailTestCases = \"C43995762\"",
-									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
-									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
-									"eval(globals.testsExecuted)(testRailTestCases);",
-									"",
-									"var requestsToRun = [",
-									"        \"Get securities\"",
-									"    ]; ",
-									"    pm.globals.set(\"_tr_Get securities\",testRailTestCases);",
-									"",
-									"//specify related TestRail tests",
-									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
-									"",
-									"// Session initiate from PrS using eval()",
-									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "httpbin.org/uuid",
-							"host": [
-								"httpbin",
-								"org"
-							],
-							"path": [
-								"uuid"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "List trading places (C43995818)",
 					"event": [
 						{
@@ -281,23 +337,23 @@
 					"response": []
 				},
 				{
-					"name": "Display security by securityNumber (C43995801)",
+					"name": "Display trading place by tradingPlaceId (C43995821)",
 					"event": [
 						{
 							"listen": "prerequest",
 							"script": {
 								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
 								"exec": [
-									"//testRailTestCases = \"C43995801\"",
+									"//testRailTestCases = \"C43995821\"",
 									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
 									"eval(globals.testsExecuted)(testRailTestCases);",
 									"",
 									"var requestsToRun = [",
-									"        \"Get securities\",",
-									"        \"Get security by securityNumber\"",
+									"        \"Get trading places\",",
+									"        \"Get trading place by tradingPlaceId\"",
 									"    ]; ",
-									"    pm.globals.set(\"_tr_Get securities\",\"[precondition]\");",
-									"    pm.globals.set(\"_tr_Get security by securityNumber\", testRailTestCases);",
+									"    pm.globals.set(\"_tr_Get trading places\",\"[precondition]\");",
+									"    pm.globals.set(\"_tr_Get trading place by tradingPlaceId\", testRailTestCases);",
 									"",
 									"//specify related TestRail tests",
 									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
@@ -381,8 +437,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		},
 		{
 			"name": "Requests",
@@ -486,6 +541,110 @@
 					"response": []
 				},
 				{
+					"name": "Get security by securityNumber",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
+								"exec": [
+									"// Execute standard tests from PrS using eval()\r",
+									"eval(globals.commonTests)();\r",
+									"\r",
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Security is retrieved by securityNumber and response schema is validated\", function () {\r",
+									"\r",
+									"    var securitySchema = pm.environment.get(\"securitySchema\");\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    var jsonDataEmbed = JSON.parse(responseBody)._embedded;\r",
+									"    \r",
+									"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+									"        pm.response.to.have.status(200);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Response schema is correct\", () => {\r",
+									"        pm.expect(tv4.validate(jsonData, securitySchema)).to.be.true;\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Single security matched with securityNumber is in response\", function () {\r",
+									"        //TODO: check securityNumber too\r",
+									"        pm.expect(jsonDataEmbed.securities.length).to.be.eql(1) &&\r",
+									"        pm.expect(jsonDataEmbed.securities[0].securityNumber).to.be.eql(pm.environment.get(\"_tmp_securityNumber\"));\r",
+									"    });\r",
+									"\r",
+									"    pm.response.to.have.status(200)\r",
+									"    && pm.expect(tv4.validate(jsonData, securitySchema)).to.be.true\r",
+									"    && pm.expect(jsonDataEmbed.securities.length).to.be.eql(1)\r",
+									"    && pm.expect(jsonDataEmbed.securities[0].securityNumber).to.be.eql(pm.environment.get(\"_tmp_securityNumber\"));\r",
+									"});\r",
+									"\r",
+									"// Session navigate from PrS using eval()\r",
+									"eval(globals.sessionNavigate)();\r",
+									"\r",
+									"// Reset reference to TR test cases\r",
+									"pm.globals.unset(\"_tr_\" + request.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2ae3901f-9d1d-4fd6-bd4a-262c16bea9b3",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json; charset=UTF-8"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, application/hal+json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}",
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{environment}}/brokerage/securities/{{tenant}}/v1/securities?securityNumber={{_tmp_securityNumber}}",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"brokerage",
+								"securities",
+								"{{tenant}}",
+								"v1",
+								"securities"
+							],
+							"query": [
+								{
+									"key": "securityNumber",
+									"value": "{{_tmp_securityNumber}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get listings",
 					"event": [
 						{
@@ -537,9 +696,11 @@
 									"    pm.environment.unset(\"tmp_listing_ID\");",
 									"}",
 									"",
+									"// Session navigate from PrS using eval()",
+									"eval(globals.sessionNavigate)();",
 									"",
-									"",
-									""
+									"// Reset reference to TR test cases",
+									"pm.globals.unset(\"_tr_\" + request.name);"
 								],
 								"type": "text/javascript"
 							}
@@ -547,24 +708,7 @@
 					],
 					"request": {
 						"auth": {
-							"type": "oauth2",
-							"oauth2": [
-								{
-									"key": "accessToken",
-									"value": "",
-									"type": "string"
-								},
-								{
-									"key": "tokenType",
-									"value": "bearer",
-									"type": "string"
-								},
-								{
-									"key": "addTokenTo",
-									"value": "header",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [
@@ -597,7 +741,7 @@
 					"response": []
 				},
 				{
-					"name": "Get listing by ID",
+					"name": "Get listing by listing ID",
 					"event": [
 						{
 							"listen": "test",
@@ -629,7 +773,11 @@
 									" ",
 									"});",
 									"",
-									""
+									"// Session navigate from PrS using eval()",
+									"eval(globals.sessionNavigate)();",
+									"",
+									"// Reset reference to TR test cases",
+									"pm.globals.unset(\"_tr_\" + request.name);"
 								],
 								"type": "text/javascript"
 							}
@@ -770,7 +918,7 @@
 					"response": []
 				},
 				{
-					"name": "Get security by securityNumber",
+					"name": "Get trading place by tradingPlaceId",
 					"event": [
 						{
 							"listen": "test",
@@ -780,30 +928,22 @@
 									"// Execute standard tests from PrS using eval()\r",
 									"eval(globals.commonTests)();\r",
 									"\r",
-									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Security is retrieved by securityNumber and response schema is validated\", function () {\r",
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Trading place is retrieved by tradingPlaceId and response schema is validated\", function () {\r",
 									"\r",
-									"    var securitySchema = pm.environment.get(\"securitySchema\");\r",
+									"    var tradingPlaceSchema = pm.environment.get(\"tradingPlaceSchema\");\r",
 									"    var jsonData = JSON.parse(responseBody);\r",
-									"    var jsonDataEmbed = JSON.parse(responseBody)._embedded;\r",
 									"    \r",
 									"    pm.test(\"Status 200 OK is displayed\", function () {\r",
 									"        pm.response.to.have.status(200);\r",
 									"    });\r",
 									"    \r",
 									"    pm.test(\"Response schema is correct\", () => {\r",
-									"        pm.expect(tv4.validate(jsonData, securitySchema)).to.be.true;\r",
-									"    });\r",
-									"    \r",
-									"    pm.test(\"Single security matched with securityNumber is in response\", function () {\r",
-									"        //TODO: check securityNumber too\r",
-									"        pm.expect(jsonDataEmbed.securities.length).to.be.eql(1) &&\r",
-									"        pm.expect(jsonDataEmbed.securities[0].securityNumber).to.be.eql(pm.environment.get(\"_tmp_securityNumber\"));\r",
+									"        pm.expect(tv4.validate(jsonData, tradingPlaceSchema)).to.be.true;\r",
 									"    });\r",
 									"\r",
 									"    pm.response.to.have.status(200)\r",
-									"    && pm.expect(tv4.validate(jsonData, securitySchema)).to.be.true\r",
-									"    && pm.expect(jsonDataEmbed.securities.length).to.be.eql(1)\r",
-									"    && pm.expect(jsonDataEmbed.securities[0].securityNumber).to.be.eql(pm.environment.get(\"_tmp_securityNumber\"));\r",
+									"    && pm.expect(tv4.validate(jsonData, tradingPlaceSchema)).to.be.true\r",
+									"    && pm.expect(jsonData.id).to.be.eql(pm.environment.get(\"_tmp_tradingPlaceId\"));\r",
 									"});\r",
 									"\r",
 									"// Session navigate from PrS using eval()\r",
@@ -852,7 +992,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{environment}}/brokerage/securities/{{tenant}}/v1/securities?securityNumber={{_tmp_securityNumber}}",
+							"raw": "{{environment}}/brokerage/securities/{{tenant}}/v1/tradingplaces/{{_tmp_tradingPlaceId}}",
 							"host": [
 								"{{environment}}"
 							],
@@ -861,13 +1001,8 @@
 								"securities",
 								"{{tenant}}",
 								"v1",
-								"securities"
-							],
-							"query": [
-								{
-									"key": "securityNumber",
-									"value": "{{_tmp_securityNumber}}"
-								}
+								"tradingplaces",
+								"{{_tmp_tradingPlaceId}}"
 							]
 						}
 					},
@@ -992,8 +1127,7 @@
 					},
 					"response": []
 				}
-			],
-			"protocolProfileBehavior": {}
+			]
 		}
 	],
 	"event": [
@@ -1776,10 +1910,185 @@
 					"  \"type\": \"object\",",
 					"  \"title\": \"The Root Schema\",",
 					"  \"required\": [",
-					"    \"page\",",
-					"    \"_embedded\"",
+					"    \"_embedded\",",
+					"    \"page\"",
 					"  ],",
 					"  \"properties\": {",
+					"    \"_embedded\": {",
+					"      \"$id\": \"#/properties/_embedded\",",
+					"      \"type\": \"object\",",
+					"      \"title\": \"The _embedded Schema\",",
+					"      \"required\": [",
+					"        \"tradingPlaces\"",
+					"      ],",
+					"      \"properties\": {",
+					"        \"tradingPlaces\": {",
+					"          \"$id\": \"#/properties/_embedded/properties/tradingPlaces\",",
+					"          \"type\": \"array\",",
+					"          \"title\": \"The Tradingplaces Schema\",",
+					"          \"items\": {",
+					"            \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items\",",
+					"            \"type\": \"object\",",
+					"            \"title\": \"The Items Schema\",",
+					"            \"required\": [",
+					"              \"closingTime\",",
+					"              \"code\",",
+					"              \"country\",",
+					"              \"executionDeadLine\",",
+					"              \"descriptions\",",
+					"              \"id\",",
+					"              \"lunchTimeEnd\",",
+					"              \"lunchTimeStart\",",
+					"              \"onlineTradeAllowed\",",
+					"              \"openingTime\",",
+					"              \"tradingAllowed\"",
+					"            ],",
+					"            \"properties\": {",
+					"              \"closingTime\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/closingTime\",",
+					"                \"type\": \"null\",",
+					"                \"title\": \"The Closingtime Schema\",",
+					"                \"default\": null,",
+					"                \"examples\": [",
+					"                  null",
+					"                ]",
+					"              },",
+					"              \"code\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/code\",",
+					"                \"type\": \"string\",",
+					"                \"title\": \"The Code Schema\",",
+					"                \"default\": \"\",",
+					"                \"examples\": [",
+					"                  \"SIX\"",
+					"                ],",
+					"                \"pattern\": \"^(.*)$\"",
+					"              },",
+					"              \"country\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/country\",",
+					"                \"type\": \"string\",",
+					"                \"title\": \"The Country Schema\",",
+					"                \"default\": \"\",",
+					"                \"examples\": [",
+					"                  \"CH\"",
+					"                ],",
+					"                \"pattern\": \"^(.*)$\"",
+					"              },",
+					"              \"executionDeadLine\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/executionDeadLine\",",
+					"                \"type\": \"null\",",
+					"                \"title\": \"The Executiondeadline Schema\",",
+					"                \"default\": null,",
+					"                \"examples\": [",
+					"                  null",
+					"                ]",
+					"              },",
+					"              \"descriptions\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/descriptions\",",
+					"                \"type\": \"array\",",
+					"                \"title\": \"The Descriptions Schema\",",
+					"                \"items\": {",
+					"                  \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/descriptions/items\",",
+					"                  \"type\": \"object\",",
+					"                  \"title\": \"The Items Schema\",",
+					"                  \"required\": [",
+					"                    \"fullDescription\",",
+					"                    \"shortDescription\",",
+					"                    \"language\"",
+					"                  ],",
+					"                  \"properties\": {",
+					"                    \"fullDescription\": {",
+					"                      \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/descriptions/items/properties/fullDescription\",",
+					"                      \"type\": \"string\",",
+					"                      \"title\": \"The Fulldescription Schema\",",
+					"                      \"default\": \"\",",
+					"                      \"examples\": [",
+					"                        \"This is the full description of the trading place.\"",
+					"                      ],",
+					"                      \"pattern\": \"^(.*)$\"",
+					"                    },",
+					"                    \"shortDescription\": {",
+					"                      \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/descriptions/items/properties/shortDescription\",",
+					"                      \"type\": \"string\",",
+					"                      \"title\": \"The Shortdescription Schema\",",
+					"                      \"default\": \"\",",
+					"                      \"examples\": [",
+					"                        \"short description\"",
+					"                      ],",
+					"                      \"pattern\": \"^(.*)$\"",
+					"                    },",
+					"                    \"language\": {",
+					"                      \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/descriptions/items/properties/language\",",
+					"                      \"type\": \"string\",",
+					"                      \"title\": \"The Language Schema\",",
+					"                      \"default\": \"\",",
+					"                      \"examples\": [",
+					"                        \"DE\"",
+					"                      ],",
+					"                      \"pattern\": \"^(.*)$\"",
+					"                    }",
+					"                  }",
+					"                }",
+					"              },",
+					"              \"id\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/id\",",
+					"                \"type\": \"string\",",
+					"                \"title\": \"The Id Schema\",",
+					"                \"default\": \"\",",
+					"                \"examples\": [",
+					"                  \"__ID__ad64369c7b0b13eb2acbb8f8c1f9824196e0647168432e2cb7148585282f7c96235cc2\"",
+					"                ],",
+					"                \"pattern\": \"^(.*)$\"",
+					"              },",
+					"              \"lunchTimeEnd\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/lunchTimeEnd\",",
+					"                \"type\": \"null\",",
+					"                \"title\": \"The Lunchtimeend Schema\",",
+					"                \"default\": null,",
+					"                \"examples\": [",
+					"                  null",
+					"                ]",
+					"              },",
+					"              \"lunchTimeStart\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/lunchTimeStart\",",
+					"                \"type\": \"null\",",
+					"                \"title\": \"The Lunchtimestart Schema\",",
+					"                \"default\": null,",
+					"                \"examples\": [",
+					"                  null",
+					"                ]",
+					"              },",
+					"              \"onlineTradeAllowed\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/onlineTradeAllowed\",",
+					"                \"type\": \"boolean\",",
+					"                \"title\": \"The Onlinetradeallowed Schema\",",
+					"                \"default\": false,",
+					"                \"examples\": [",
+					"                  true",
+					"                ]",
+					"              },",
+					"              \"openingTime\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/openingTime\",",
+					"                \"type\": \"null\",",
+					"                \"title\": \"The Openingtime Schema\",",
+					"                \"default\": null,",
+					"                \"examples\": [",
+					"                  null",
+					"                ]",
+					"              },",
+					"              \"tradingAllowed\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/tradingAllowed\",",
+					"                \"type\": \"boolean\",",
+					"                \"title\": \"The Tradingallowed Schema\",",
+					"                \"default\": false,",
+					"                \"examples\": [",
+					"                  true",
+					"                ]",
+					"              }",
+					"            }",
+					"          }",
+					"        }",
+					"      }",
+					"    },",
 					"    \"page\": {",
 					"      \"$id\": \"#/properties/page\",",
 					"      \"type\": \"object\",",
@@ -1806,7 +2115,7 @@
 					"          \"title\": \"The Size Schema\",",
 					"          \"default\": 0,",
 					"          \"examples\": [",
-					"            10",
+					"            0",
 					"          ]",
 					"        },",
 					"        \"totalElements\": {",
@@ -1815,7 +2124,7 @@
 					"          \"title\": \"The Totalelements Schema\",",
 					"          \"default\": 0,",
 					"          \"examples\": [",
-					"            1422",
+					"            0",
 					"          ]",
 					"        },",
 					"        \"totalPages\": {",
@@ -1824,183 +2133,8 @@
 					"          \"title\": \"The Totalpages Schema\",",
 					"          \"default\": 0,",
 					"          \"examples\": [",
-					"            143",
+					"            0",
 					"          ]",
-					"        }",
-					"      }",
-					"    },",
-					"    \"_embedded\": {",
-					"      \"$id\": \"#/properties/_embedded\",",
-					"      \"type\": \"object\",",
-					"      \"title\": \"The _embedded Schema\",",
-					"      \"required\": [",
-					"        \"tradingPlaces\"",
-					"      ],",
-					"      \"properties\": {",
-					"        \"tradingPlaces\": {",
-					"          \"$id\": \"#/properties/_embedded/properties/tradingPlaces\",",
-					"          \"type\": \"array\",",
-					"          \"title\": \"The Tradingplaces Schema\",",
-					"          \"items\": {",
-					"            \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items\",",
-					"            \"type\": \"object\",",
-					"            \"title\": \"The Items Schema\",",
-					"            \"required\": [",
-					"              \"id\",",
-					"              \"code\",",
-					"              \"country\",",
-					"              \"descriptions\",",
-					"              \"openingTime\",",
-					"              \"closingTime\",",
-					"              \"lunchTimeStart\",",
-					"              \"lunchTimeEnd\",",
-					"              \"executionDeadLine\",",
-					"              \"onlineTradeAllowed\",",
-					"              \"tradingAllowed\"",
-					"            ],",
-					"            \"properties\": {",
-					"              \"id\": {",
-					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/id\",",
-					"                \"type\": \"string\",",
-					"                \"title\": \"The Id Schema\",",
-					"                \"default\": \"\",",
-					"                \"examples\": [",
-					"                  \"__ID__01239346c88fc7a84c66151b23cddb661cf205afbbf02120f1a8d010724b8167deee4f\"",
-					"                ],",
-					"                \"pattern\": \"^(.*)$\"",
-					"              },",
-					"              \"code\": {",
-					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/code\",",
-					"                \"type\": \"string\",",
-					"                \"title\": \"The Code Schema\",",
-					"                \"default\": \"\",",
-					"                \"examples\": [",
-					"                  \"DES\"",
-					"                ],",
-					"                \"pattern\": \"^(.*)$\"",
-					"              },",
-					"              \"country\": {",
-					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/country\",",
-					"                \"type\": \"string\",",
-					"                \"title\": \"The Country Schema\",",
-					"                \"default\": \"\",",
-					"                \"examples\": [",
-					"                  \"GB\"",
-					"                ],",
-					"                \"pattern\": \"^(.*)$\"",
-					"              },",
-					"              \"descriptions\": {",
-					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/descriptions\",",
-					"                \"type\": \"array\",",
-					"                \"title\": \"The Descriptions Schema\",",
-					"                \"items\": {",
-					"                  \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/descriptions/items\",",
-					"                  \"type\": \"object\",",
-					"                  \"title\": \"The Items Schema\",",
-					"                  \"required\": [",
-					"                    \"shortDescription\",",
-					"                    \"fullDescription\",",
-					"                    \"language\"",
-					"                  ],",
-					"                  \"properties\": {",
-					"                    \"shortDescription\": {",
-					"                      \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/descriptions/items/properties/shortDescription\",",
-					"                      \"type\": \"string\",",
-					"                      \"title\": \"The Shortdescription Schema\",",
-					"                      \"default\": \"\",",
-					"                      \"examples\": [",
-					"                        \"DES\"",
-					"                      ],",
-					"                      \"pattern\": \"^(.*)$\"",
-					"                    },",
-					"                    \"fullDescription\": {",
-					"                      \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/descriptions/items/properties/fullDescription\",",
-					"                      \"type\": \"string\",",
-					"                      \"title\": \"The Fulldescription Schema\",",
-					"                      \"default\": \"\",",
-					"                      \"examples\": [",
-					"                        \"KBC FINANCIAL PRODUCTS\"",
-					"                      ],",
-					"                      \"pattern\": \"^(.*)$\"",
-					"                    },",
-					"                    \"language\": {",
-					"                      \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/descriptions/items/properties/language\",",
-					"                      \"type\": \"string\",",
-					"                      \"title\": \"The Language Schema\",",
-					"                      \"default\": \"\",",
-					"                      \"examples\": [",
-					"                        \"EN\"",
-					"                      ],",
-					"                      \"pattern\": \"^(.*)$\"",
-					"                    }",
-					"                  }",
-					"                }",
-					"              },",
-					"              \"openingTime\": {",
-					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/openingTime\",",
-					"                \"type\": \"null\",",
-					"                \"title\": \"The Openingtime Schema\",",
-					"                \"default\": null,",
-					"                \"examples\": [",
-					"                  null",
-					"                ]",
-					"              },",
-					"              \"closingTime\": {",
-					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/closingTime\",",
-					"                \"type\": \"null\",",
-					"                \"title\": \"The Closingtime Schema\",",
-					"                \"default\": null,",
-					"                \"examples\": [",
-					"                  null",
-					"                ]",
-					"              },",
-					"              \"lunchTimeStart\": {",
-					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/lunchTimeStart\",",
-					"                \"type\": \"null\",",
-					"                \"title\": \"The Lunchtimestart Schema\",",
-					"                \"default\": null,",
-					"                \"examples\": [",
-					"                  null",
-					"                ]",
-					"              },",
-					"              \"lunchTimeEnd\": {",
-					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/lunchTimeEnd\",",
-					"                \"type\": \"null\",",
-					"                \"title\": \"The Lunchtimeend Schema\",",
-					"                \"default\": null,",
-					"                \"examples\": [",
-					"                  null",
-					"                ]",
-					"              },",
-					"              \"executionDeadLine\": {",
-					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/executionDeadLine\",",
-					"                \"type\": \"null\",",
-					"                \"title\": \"The Executiondeadline Schema\",",
-					"                \"default\": null,",
-					"                \"examples\": [",
-					"                  null",
-					"                ]",
-					"              },",
-					"              \"onlineTradeAllowed\": {",
-					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/onlineTradeAllowed\",",
-					"                \"type\": \"boolean\",",
-					"                \"title\": \"The Onlinetradeallowed Schema\",",
-					"                \"default\": false,",
-					"                \"examples\": [",
-					"                  false",
-					"                ]",
-					"              },",
-					"              \"tradingAllowed\": {",
-					"                \"$id\": \"#/properties/_embedded/properties/tradingPlaces/items/properties/tradingAllowed\",",
-					"                \"type\": \"boolean\",",
-					"                \"title\": \"The Tradingallowed Schema\",",
-					"                \"default\": false,",
-					"                \"examples\": [",
-					"                  false",
-					"                ]",
-					"              }",
-					"            }",
-					"          }",
 					"        }",
 					"      }",
 					"    }",
@@ -2020,28 +2154,27 @@
 					"  \"type\": \"object\",",
 					"  \"title\": \"The Root Schema\",",
 					"  \"required\": [",
-					"    \"id\",",
+					"    \"closingTime\",",
 					"    \"code\",",
 					"    \"country\",",
-					"    \"descriptions\",",
-					"    \"openingTime\",",
-					"    \"closingTime\",",
-					"    \"lunchTimeStart\",",
-					"    \"lunchTimeEnd\",",
 					"    \"executionDeadLine\",",
+					"    \"descriptions\",",
+					"    \"id\",",
+					"    \"lunchTimeEnd\",",
+					"    \"lunchTimeStart\",",
 					"    \"onlineTradeAllowed\",",
+					"    \"openingTime\",",
 					"    \"tradingAllowed\"",
 					"  ],",
 					"  \"properties\": {",
-					"    \"id\": {",
-					"      \"$id\": \"#/properties/id\",",
-					"      \"type\": \"string\",",
-					"      \"title\": \"The Id Schema\",",
-					"      \"default\": \"\",",
+					"    \"closingTime\": {",
+					"      \"$id\": \"#/properties/closingTime\",",
+					"      \"type\": \"null\",",
+					"      \"title\": \"The Closingtime Schema\",",
+					"      \"default\": null,",
 					"      \"examples\": [",
-					"        \"__ID__c6a9c5a3747cd29510a849e0fec1b778dc888a702e65aa307afaeffaab640a6d81fbe3\"",
-					"      ],",
-					"      \"pattern\": \"^(.*)$\"",
+					"        null",
+					"      ]",
 					"    },",
 					"    \"code\": {",
 					"      \"$id\": \"#/properties/code\",",
@@ -2049,7 +2182,7 @@
 					"      \"title\": \"The Code Schema\",",
 					"      \"default\": \"\",",
 					"      \"examples\": [",
-					"        \"DES\"",
+					"        \"SIX\"",
 					"      ],",
 					"      \"pattern\": \"^(.*)$\"",
 					"    },",
@@ -2059,9 +2192,18 @@
 					"      \"title\": \"The Country Schema\",",
 					"      \"default\": \"\",",
 					"      \"examples\": [",
-					"        \"GB\"",
+					"        \"CH\"",
 					"      ],",
 					"      \"pattern\": \"^(.*)$\"",
+					"    },",
+					"    \"executionDeadLine\": {",
+					"      \"$id\": \"#/properties/executionDeadLine\",",
+					"      \"type\": \"null\",",
+					"      \"title\": \"The Executiondeadline Schema\",",
+					"      \"default\": null,",
+					"      \"examples\": [",
+					"        null",
+					"      ]",
 					"    },",
 					"    \"descriptions\": {",
 					"      \"$id\": \"#/properties/descriptions\",",
@@ -2072,28 +2214,28 @@
 					"        \"type\": \"object\",",
 					"        \"title\": \"The Items Schema\",",
 					"        \"required\": [",
-					"          \"shortDescription\",",
 					"          \"fullDescription\",",
+					"          \"shortDescription\",",
 					"          \"language\"",
 					"        ],",
 					"        \"properties\": {",
-					"          \"shortDescription\": {",
-					"            \"$id\": \"#/properties/descriptions/items/properties/shortDescription\",",
-					"            \"type\": \"string\",",
-					"            \"title\": \"The Shortdescription Schema\",",
-					"            \"default\": \"\",",
-					"            \"examples\": [",
-					"              \"DES\"",
-					"            ],",
-					"            \"pattern\": \"^(.*)$\"",
-					"          },",
 					"          \"fullDescription\": {",
 					"            \"$id\": \"#/properties/descriptions/items/properties/fullDescription\",",
 					"            \"type\": \"string\",",
 					"            \"title\": \"The Fulldescription Schema\",",
 					"            \"default\": \"\",",
 					"            \"examples\": [",
-					"              \"KBC FINANCIAL PRODUCTS\"",
+					"              \"This is the full description of the trading place.\"",
+					"            ],",
+					"            \"pattern\": \"^(.*)$\"",
+					"          },",
+					"          \"shortDescription\": {",
+					"            \"$id\": \"#/properties/descriptions/items/properties/shortDescription\",",
+					"            \"type\": \"string\",",
+					"            \"title\": \"The Shortdescription Schema\",",
+					"            \"default\": \"\",",
+					"            \"examples\": [",
+					"              \"short description\"",
 					"            ],",
 					"            \"pattern\": \"^(.*)$\"",
 					"          },",
@@ -2103,26 +2245,27 @@
 					"            \"title\": \"The Language Schema\",",
 					"            \"default\": \"\",",
 					"            \"examples\": [",
-					"              \"EN\"",
+					"              \"DE\"",
 					"            ],",
 					"            \"pattern\": \"^(.*)$\"",
 					"          }",
 					"        }",
 					"      }",
 					"    },",
-					"    \"openingTime\": {",
-					"      \"$id\": \"#/properties/openingTime\",",
-					"      \"type\": \"null\",",
-					"      \"title\": \"The Openingtime Schema\",",
-					"      \"default\": null,",
+					"    \"id\": {",
+					"      \"$id\": \"#/properties/id\",",
+					"      \"type\": \"string\",",
+					"      \"title\": \"The Id Schema\",",
+					"      \"default\": \"\",",
 					"      \"examples\": [",
-					"        null",
-					"      ]",
+					"        \"__ID__ad64369c7b0b13eb2acbb8f8c1f9824196e0647168432e2cb7148585282f7c96235cc2\"",
+					"      ],",
+					"      \"pattern\": \"^(.*)$\"",
 					"    },",
-					"    \"closingTime\": {",
-					"      \"$id\": \"#/properties/closingTime\",",
+					"    \"lunchTimeEnd\": {",
+					"      \"$id\": \"#/properties/lunchTimeEnd\",",
 					"      \"type\": \"null\",",
-					"      \"title\": \"The Closingtime Schema\",",
+					"      \"title\": \"The Lunchtimeend Schema\",",
 					"      \"default\": null,",
 					"      \"examples\": [",
 					"        null",
@@ -2137,31 +2280,22 @@
 					"        null",
 					"      ]",
 					"    },",
-					"    \"lunchTimeEnd\": {",
-					"      \"$id\": \"#/properties/lunchTimeEnd\",",
-					"      \"type\": \"null\",",
-					"      \"title\": \"The Lunchtimeend Schema\",",
-					"      \"default\": null,",
-					"      \"examples\": [",
-					"        null",
-					"      ]",
-					"    },",
-					"    \"executionDeadLine\": {",
-					"      \"$id\": \"#/properties/executionDeadLine\",",
-					"      \"type\": \"null\",",
-					"      \"title\": \"The Executiondeadline Schema\",",
-					"      \"default\": null,",
-					"      \"examples\": [",
-					"        null",
-					"      ]",
-					"    },",
 					"    \"onlineTradeAllowed\": {",
 					"      \"$id\": \"#/properties/onlineTradeAllowed\",",
 					"      \"type\": \"boolean\",",
 					"      \"title\": \"The Onlinetradeallowed Schema\",",
 					"      \"default\": false,",
 					"      \"examples\": [",
-					"        false",
+					"        true",
+					"      ]",
+					"    },",
+					"    \"openingTime\": {",
+					"      \"$id\": \"#/properties/openingTime\",",
+					"      \"type\": \"null\",",
+					"      \"title\": \"The Openingtime Schema\",",
+					"      \"default\": null,",
+					"      \"examples\": [",
+					"        null",
 					"      ]",
 					"    },",
 					"    \"tradingAllowed\": {",
@@ -2170,7 +2304,7 @@
 					"      \"title\": \"The Tradingallowed Schema\",",
 					"      \"default\": false,",
 					"      \"examples\": [",
-					"        false",
+					"        true",
 					"      ]",
 					"    }",
 					"  }",
@@ -2366,7 +2500,7 @@
 					"",
 					"// Save common tests in a global variable",
 					"postman.setGlobalVariable(\"commonTests\", () => {",
-					"    pm.test(\"Response must be valid with/with out a body and with proper status code\", function () {",
+					"    pm.test(\"Response must be valid with/without a body and with proper status code\", function () {",
 					"        if ([\"GET\",\"POST\",\"PUT\"].indexOf(request.method) > -1) {",
 					"            pm.response.to.not.be.error;",
 					"            pm.response.to.be.withBody;",
@@ -2488,7 +2622,12 @@
 					"postman.setGlobalVariable(\"extractTestCaseIDFromRequestName\", () => {",
 					"    let n = request.name.lastIndexOf(\"(\");",
 					"    return request.name.substr(n + 1, request.name.length - n - 2);",
-					"});"
+					"});",
+					"",
+					"",
+					"",
+					"",
+					" "
 				]
 			}
 		},
@@ -2509,11 +2648,10 @@
 	],
 	"variable": [
 		{
-			"id": "4bf0e200-39eb-4e7e-be7a-c70707f7c31d",
+			"id": "9e224ed7-3dfd-4475-bec9-a57e15c32731",
 			"key": "EPIC",
 			"value": "PRODUCT-10195",
 			"type": "string"
 		}
-	],
-	"protocolProfileBehavior": {}
+	]
 }
