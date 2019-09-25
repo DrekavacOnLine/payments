@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "1eb38819-2b2f-4c0d-8354-b05c8c652ff6",
+		"_postman_id": "9e26d875-63ff-44cf-adf9-1020aaa55574",
 		"name": "MODULE: Brokerage",
 		"description": "Brokerage API:\n\n- Brokerage order API\n- Brokerage security API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -644,7 +644,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{env_brokerage}}/brokerage/securities/{{tenantId_brokerage}}/v1/securities?securityNumber={{_tmp_securityNumber}}&accept=application/json, application/hal+json",
+							"raw": "{{env_brokerage}}/brokerage/securities/{{tenantId_brokerage}}/v1/securities?securityNumber={{_tmp_securityNumber}}",
 							"host": [
 								"{{env_brokerage}}"
 							],
@@ -659,10 +659,6 @@
 								{
 									"key": "securityNumber",
 									"value": "{{_tmp_securityNumber}}"
-								},
-								{
-									"key": "accept",
-									"value": "application/json, application/hal+json"
 								}
 							]
 						}
