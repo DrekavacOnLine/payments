@@ -226,10 +226,10 @@
 											"",
 											"if(topics.length <= 0) {",
 											"    console.log(`There are no topics configured for user: ${userId}, tenant: ${tenantId}`);",
-											"    pm.test.skip(\"Response schema is correct\", () => {",
+											"    pm.test.skip(\"No test data to validate if response schema is correct\", () => {",
 											"        return;",
 											"    });         ",
-											"    pm.test.skip(pm.globals.get(\"_tr_\" + request.name) + \" List of topics is retrieved and response schema is validated\", function () {",
+											"    pm.test.skip(pm.globals.get(\"_tr_\" + request.name) + \" No test data to validate if list of topics is retrieved and response schema is validated\", function () {",
 											"        return;",
 											"    });         ",
 											"} else {",
@@ -22117,14 +22117,14 @@
 	],
 	"variable": [
 		{
-			"id": "b917d809-f993-4f0d-ab29-05df6c2f916d",
+			"id": "2a075d94-e7cb-4872-91eb-cce55f846ac5",
 			"key": "appPath",
 			"value": "/messaging/securemail/{{tenantId}}/v1",
 			"type": "string",
 			"disabled": true
 		},
 		{
-			"id": "c3a4c0e1-b65c-4a42-bb79-5d69c366f189",
+			"id": "56602aca-5bdd-4c15-b6ea-dfd8d9ca2381",
 			"key": "tokenValue",
 			"value": "",
 			"type": "string"
