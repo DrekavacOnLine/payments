@@ -38,13 +38,14 @@
 									"            \"Get all folders (C41673955)\",",
 									"            \"Create folder (C41673956)\",",
 									"            \"Delete folder (C41673960)\",",
+									"            \"Move secure mail to custom user folder (C41736191)\",",
 									"            \"Get configuration of a specific tenant (C43995783)\"",
 									"            ]; ",
 									"        break;",
 									"    case \"Core\":",
 									"        var testSession = [",
 									"            \"_Generate access token (C41673950)\",",
-									"            \"Delete folder (C41673960)\"",
+									"            \"Move secure mail to custom user folder (C41736191)\"",
 									"            ]; ",
 									"        break;",
 									"    case \"TestRailClean\":        ",
@@ -268,8 +269,68 @@
 									"        \"createSecureMail\",",
 									"        \"getSecureMailById\"",
 									"    ]; ",
-									"    pm.globals.set(\"_tr_createSecureMail\",\"[precondition]\");",
+									"    pm.globals.set(\"_tr_createSecureMail\",\"[preCondition]\");",
 									"    pm.globals.set(\"_tr_getSecureMailById\",testRailTestCases);",
+									"",
+									"//specify related TestRail tests",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10340"
+					},
+					"response": []
+				},
+				{
+					"name": "Move secure mail to custom user folder (C41736191)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"createFolder\",",
+									"        \"createSecureMail\",",
+									"        \"secureMailMoveToFolder\",",
+									"        \"deleteSecureMail\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_createFolder\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_createSecureMail\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_secureMailMoveToFolder\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_deleteSecureMail\",\"[postCondition]\");",
 									"",
 									"//specify related TestRail tests",
 									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
@@ -324,7 +385,7 @@
 									"        \"createSecureMail\",",
 									"        \"deleteSecureMail\"",
 									"    ]; ",
-									"    pm.globals.set(\"_tr_createSecureMail\",\"[precondition]\");",
+									"    pm.globals.set(\"_tr_createSecureMail\",\"[preCondition]\");",
 									"    pm.globals.set(\"_tr_deleteSecureMail\",testRailTestCases);",
 									"",
 									"//specify related TestRail tests",
@@ -436,7 +497,7 @@
 									"        \"deleteFolder\"",
 									"    ]; ",
 									"    pm.globals.set(\"_tr_createFolder\",testRailTestCases);",
-									"    pm.globals.set(\"_tr_deleteFolder\",\"[postcondition]\");",
+									"    pm.globals.set(\"_tr_deleteFolder\",\"[postCondition]\");",
 									"",
 									"//specify related TestRail tests",
 									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
@@ -482,7 +543,7 @@
 									"        \"createFolder\",",
 									"        \"deleteFolder\"",
 									"    ]; ",
-									"    pm.globals.set(\"_tr_createFolder\",\"[precondition]\");",
+									"    pm.globals.set(\"_tr_createFolder\",\"[preCondition]\");",
 									"    pm.globals.set(\"_tr_deleteFolder\",testRailTestCases);",
 									"",
 									"//specify related TestRail tests",
@@ -2342,10 +2403,7 @@
 											"    pm.environment.set(\"senderName\", senderName);",
 											"});",
 											"",
-											"// Session navigate from PrS using eval()",
 											"eval(globals.sessionNavigate)();",
-											"",
-											"// Reset reference to TR test cases",
 											"pm.globals.unset(\"_tr_\" + request.name);"
 										],
 										"type": "text/javascript"
@@ -4227,7 +4285,7 @@
 							]
 						},
 						{
-							"name": "moveToFolder - <<folderId>> - <<secureMailId1>> (C41736191)",
+							"name": "secureMailMoveToFolder",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -4238,10 +4296,10 @@
 											"pm.expect(existingFolderId).to.be.a('string', \"The folderId is required to move the mail\");",
 											"pm.expect(existingFolderId).to.have.lengthOf.at.least(10);",
 											"",
-											"const secureMailId1 = pm.environment.get(\"secureMailId1\");",
-											"pm.expect(secureMailId1).to.be.a('string', \"The secureMailId is required to move the mail\");",
+											"const secureMailId = pm.environment.get(\"secureMailId1\");",
+											"pm.expect(secureMailId).to.be.a('string', \"The secureMailId is required to move the mail\");",
 											"",
-											"console.log(`Moving secure mail message [${secureMailId1}] to ${existingFolderId}`);"
+											"console.log(`Moving secure mail message [${secureMailId}] to ${existingFolderId}`);"
 										],
 										"type": "text/javascript"
 									}
@@ -4251,17 +4309,22 @@
 									"script": {
 										"id": "2e2d6ad5-38d2-410c-870c-ee51a239acd5",
 										"exec": [
+											"eval(globals.commonTests)();",
 											"",
-											"pm.test(\"The new message should be in the new folder\", function () { ",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" The new message should be moved to the new folder\", function () { ",
 											"    pm.response.to.have.jsonBody()",
+											"    pm.response.to.have.status(200);",
+											"    ",
 											"    const message = pm.response.json();",
 											"    const messageFolderId = message.folderId;",
 											"",
 											"    const folderId = pm.environment.get(\"folderId\");",
 											"    pm.expect(messageFolderId).to.equal(folderId);",
-											"    console.log(`The secure mail was moved to Id [${folderId}]`);",
+											"    console.log(`The secure mail was moved to folder with Id [${folderId}]`);",
 											"});",
-											""
+											"",
+											"eval(globals.sessionNavigate)();",
+											"pm.globals.unset(\"_tr_\" + request.name);"
 										],
 										"type": "text/javascript"
 									}
@@ -4299,11 +4362,15 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{env_securemail}}/securemails/{{secureMailId1}}?folderId={{folderId}}",
+									"raw": "{{env_securemail}}/messaging/securemail/{{tenantId_security}}/v1/securemails/{{secureMailId1}}?folderId={{folderId}}",
 									"host": [
 										"{{env_securemail}}"
 									],
 									"path": [
+										"messaging",
+										"securemail",
+										"{{tenantId_security}}",
+										"v1",
 										"securemails",
 										"{{secureMailId1}}"
 									],
@@ -4315,7 +4382,7 @@
 										}
 									]
 								},
-								"description": "The secureMail is moved to the folder specified.\nAs result returns the moved secureMail."
+								"description": "PRODUCT-10329"
 							},
 							"response": [
 								{
