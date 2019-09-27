@@ -37,13 +37,14 @@
 									"            \"Delete secure mail (C42843218)\",",
 									"            \"Get all folders (C41673955)\",",
 									"            \"Create folder (C41673956)\",",
+									"            \"Delete folder (C41673960)\",",
 									"            \"Get configuration of a specific tenant (C43995783)\"",
 									"            ]; ",
 									"        break;",
 									"    case \"Core\":",
 									"        var testSession = [",
 									"            \"_Generate access token (C41673950)\",",
-									"            \"Get secure mail by id (C43916301)\"",
+									"            \"Delete folder (C41673960)\"",
 									"            ]; ",
 									"        break;",
 									"    case \"TestRailClean\":        ",
@@ -463,6 +464,53 @@
 					"response": []
 				},
 				{
+					"name": "Delete folder (C41673960)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3bf0288b-49c7-4b83-9cb9-bd90f88d4853",
+								"exec": [
+									"//var testRailTestCases = \"C41673956\"",
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"createFolder\",",
+									"        \"deleteFolder\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_createFolder\",\"[precondition]\");",
+									"    pm.globals.set(\"_tr_deleteFolder\",testRailTestCases);",
+									"",
+									"//specify related TestRail tests",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10324"
+					},
+					"response": []
+				},
+				{
 					"name": "Rename folder (C41673959)",
 					"event": [
 						{
@@ -588,9 +636,9 @@
 											"",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Folder is created and all assertions passed\", function () { ",
 											"",
-											"    pm.response.to.have.status(201)",
+											"    pm.response.to.have.status(201);",
 											"    ",
-											"    var messagesStatus=jsonData.messages[0];",
+											"    var messagesStatus = jsonData.messages[0];",
 											"",
 											"    var schemaValidationPassed = eval(globals.schemaValidator)(\"createFolderSchema\",jsonData);",
 											"    pm.test(\"Response schema is correct\", function() {",
@@ -636,10 +684,7 @@
 											"    pm.environment.unset(\"folderId\");",
 											"}",
 											"",
-											"// Session navigate from PrS using eval()",
 											"eval(globals.sessionNavigate)();",
-											"",
-											"// Reset reference to TR test cases",
 											"pm.globals.unset(\"_tr_\" + request.name);"
 										],
 										"type": "text/javascript"
@@ -1475,6 +1520,397 @@
 							]
 						},
 						{
+							"name": "deleteFolder",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "3fae5649-135b-42de-95ba-f4747318a3e5",
+										"exec": [
+											"const existingFolderId = pm.environment.get(\"folderId\");",
+											"pm.expect(existingFolderId).to.be.a('string', \"The folderId is required to delete the folder\");",
+											"pm.expect(existingFolderId).to.have.lengthOf.at.least(7);",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "0b0e2925-bcb4-4906-978d-e9ed7afad26f",
+										"exec": [
+											"//eval(globals.commonTests)();",
+											"",
+											"// Check that the folder was really deleted",
+											"",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" The folder should have been deleted, removed from list of existing folders\", function () { ",
+											"    ",
+											"    pm.response.to.have.status(200)",
+											"    ",
+											"    pm.response.to.have.jsonBody()",
+											"    const folders = pm.response.json();",
+											"    pm.expect(folders).to.be.an('array');",
+											"    pm.expect(folders).to.have.lengthOf.at.least(5);",
+											"",
+											"    // Check if a folder with NEW folder name DOES NOT exist",
+											"    const newFolderName = pm.environment.get(\"folderName\");",
+											"    pm.expect(folders.map(folder => folder.name)).to.not.include(newFolderName);",
+											"",
+											"    // Cleaup the variable names",
+											"    const folderId = pm.environment.get(\"folderId\");",
+											"    pm.environment.unset(\"folderId\");",
+											"",
+											"    console.log(`The folder with Name [${newFolderName}] Id [${folderId}] was deleted`);",
+											"});",
+											"",
+											"eval(globals.sessionNavigate)();",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Distinct 3rd party identifer as obtained from preta.eu-registration",
+										"key": "tppId",
+										"value": "\"<string>\"",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8",
+										"type": "text"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, application/hal+json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{env_securemail}}/messaging/securemail/{{tenantId_security}}/v1/folders/{{folderId}}",
+									"host": [
+										"{{env_securemail}}"
+									],
+									"path": [
+										"messaging",
+										"securemail",
+										"{{tenantId_security}}",
+										"v1",
+										"folders",
+										"{{folderId}}"
+									]
+								},
+								"description": "The user has the possibility to create a new custom folder"
+							},
+							"response": [
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
+													"type": "text/plain"
+												},
+												"key": "tppId",
+												"value": "\"<string>\""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/folders?folderName=<string>",
+											"path": [
+												"api.crealogix.com",
+												"messaging",
+												"securemails",
+												"<string>",
+												"v1",
+												"folders"
+											],
+											"query": [
+												{
+													"key": "folderName",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"_data\": \"<object>\"\n}"
+								},
+								{
+									"name": "Unexpected error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
+													"type": "text/plain"
+												},
+												"key": "tppId",
+												"value": "\"<string>\""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/folders?folderName=<string>",
+											"path": [
+												"api.crealogix.com",
+												"messaging",
+												"securemails",
+												"<string>",
+												"v1",
+												"folders"
+											],
+											"query": [
+												{
+													"key": "folderName",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"_data\": \"<object>\"\n}"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
+													"type": "text/plain"
+												},
+												"key": "tppId",
+												"value": "\"<string>\""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/folders?folderName=<string>",
+											"path": [
+												"api.crealogix.com",
+												"messaging",
+												"securemails",
+												"<string>",
+												"v1",
+												"folders"
+											],
+											"query": [
+												{
+													"key": "folderName",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"_data\": \"<object>\"\n}"
+								},
+								{
+									"name": "Business logic error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
+													"type": "text/plain"
+												},
+												"key": "tppId",
+												"value": "\"<string>\""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/folders?folderName=<string>",
+											"path": [
+												"api.crealogix.com",
+												"messaging",
+												"securemails",
+												"<string>",
+												"v1",
+												"folders"
+											],
+											"query": [
+												{
+													"key": "folderName",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+									"code": 422,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"_data\": \"<object>\"\n}"
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
+													"type": "text/plain"
+												},
+												"key": "tppId",
+												"value": "\"<string>\""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/folders?folderName=<string>",
+											"path": [
+												"api.crealogix.com",
+												"messaging",
+												"securemails",
+												"<string>",
+												"v1",
+												"folders"
+											],
+											"query": [
+												{
+													"key": "folderName",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"_data\": \"<object>\"\n}"
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"description": {
+													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
+													"type": "text/plain"
+												},
+												"key": "tppId",
+												"value": "\"<string>\""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/folders?folderName=<string>",
+											"path": [
+												"api.crealogix.com",
+												"messaging",
+												"securemails",
+												"<string>",
+												"v1",
+												"folders"
+											],
+											"query": [
+												{
+													"key": "folderName",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"_data\": \"<object>\"\n}"
+								}
+							]
+						},
+						{
 							"name": "getFolder - <FolderName> (C41673957)",
 							"event": [
 								{
@@ -1818,392 +2254,6 @@
 									],
 									"cookie": [],
 									"body": "[\n {\n  \"id\": \"<string>\",\n  \"name\": \"<string>\"\n },\n {\n  \"id\": \"<string>\",\n  \"name\": \"<string>\"\n }\n]"
-								}
-							]
-						},
-						{
-							"name": "deleteFolder - <<folderId>> (C41673960)",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "3fae5649-135b-42de-95ba-f4747318a3e5",
-										"exec": [
-											"const existingFolderId = pm.environment.get(\"folderId\");",
-											"pm.expect(existingFolderId).to.be.a('string', \"The folderId is required to delete the folder\");",
-											"pm.expect(existingFolderId).to.have.lengthOf.at.least(7);",
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"id": "0b0e2925-bcb4-4906-978d-e9ed7afad26f",
-										"exec": [
-											"",
-											"// Check that the folder was really deleted",
-											"",
-											"pm.test(\"The folder should have been deleted, Id not exist\", function () { ",
-											"    pm.response.to.have.jsonBody()",
-											"    const folders = pm.response.json();",
-											"    pm.expect(folders).to.be.an('array');",
-											"    pm.expect(folders).to.have.lengthOf.at.least(5);",
-											"",
-											"    // Check if a folder with NEW folder name DOES NOT exist",
-											"    const newFolderName = pm.environment.get(\"folderName\");",
-											"    pm.expect(folders.map(folder => folder.name)).to.not.include(newFolderName);",
-											"",
-											"    const folderId = pm.environment.get(\"folderId\");",
-											"",
-											"    console.log(`The folder with Name [${newFolderName}] Id [${folderId}] was deleted`);",
-											"});",
-											"",
-											"// Cleaup the variable names",
-											"pm.environment.unset(\"newFolderId\");",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "DELETE",
-								"header": [
-									{
-										"description": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-										"key": "tppId",
-										"value": "\"<string>\"",
-										"disabled": true
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{token}}",
-										"type": "text"
-									},
-									{
-										"key": "content-type",
-										"value": "application/json; charset=UTF-8",
-										"type": "text"
-									},
-									{
-										"key": "accept",
-										"value": "application/json, application/hal+json",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{env_securemail}}/messaging/securemail/{{tenantId_security}}/v1/folders/{{folderId}}",
-									"host": [
-										"{{env_securemail}}"
-									],
-									"path": [
-										"messaging",
-										"securemail",
-										"{{tenantId_security}}",
-										"v1",
-										"folders",
-										"{{folderId}}"
-									]
-								},
-								"description": "The user has the possibility to create a new custom folder"
-							},
-							"response": [
-								{
-									"name": "Bad request",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/folders?folderName=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"folders"
-											],
-											"query": [
-												{
-													"key": "folderName",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Bad Request",
-									"code": 400,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"_data\": \"<object>\"\n}"
-								},
-								{
-									"name": "Unexpected error",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/folders?folderName=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"folders"
-											],
-											"query": [
-												{
-													"key": "folderName",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"_data\": \"<object>\"\n}"
-								},
-								{
-									"name": "Not Found",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/folders?folderName=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"folders"
-											],
-											"query": [
-												{
-													"key": "folderName",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"_data\": \"<object>\"\n}"
-								},
-								{
-									"name": "Business logic error",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/folders?folderName=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"folders"
-											],
-											"query": [
-												{
-													"key": "folderName",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-									"code": 422,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"_data\": \"<object>\"\n}"
-								},
-								{
-									"name": "OK",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/folders?folderName=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"folders"
-											],
-											"query": [
-												{
-													"key": "folderName",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"_data\": \"<object>\"\n}"
-								},
-								{
-									"name": "Forbidden",
-									"originalRequest": {
-										"method": "POST",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": ""
-										},
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/folders?folderName=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"folders"
-											],
-											"query": [
-												{
-													"key": "folderName",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Forbidden",
-									"code": 403,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/json"
-										}
-									],
-									"cookie": [],
-									"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"_data\": \"<object>\"\n}"
 								}
 							]
 						}
@@ -20630,7 +20680,7 @@
 									"",
 									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Configuration for tenant is correct\", function () {",
 									"",
-									"    pm.response.to.have.status(200)",
+									"    pm.response.to.have.status(200);",
 									"    ",
 									"    const response = pm.response.json();",
 									"    const configuration = response._configuration;",
