@@ -138,7 +138,7 @@
 								"uuid"
 							]
 						},
-						"description": "Generate test token"
+						"description": "PRODUCT-10392"
 					},
 					"response": []
 				},
@@ -192,7 +192,7 @@
 								"uuid"
 							]
 						},
-						"description": "Get all message topics in the response."
+						"description": "PRODUCT-10393"
 					},
 					"response": []
 				},
@@ -246,7 +246,7 @@
 								"uuid"
 							]
 						},
-						"description": "Create secure mail based on Subject and Body specified via Pre-request Script"
+						"description": "PRODUCT-10416"
 					},
 					"response": []
 				},
@@ -302,7 +302,7 @@
 								"uuid"
 							]
 						},
-						"description": "Delete previously created secure mail"
+						"description": "PRODUCT-10331"
 					},
 					"response": []
 				},
@@ -346,7 +346,8 @@
 							"path": [
 								"uuid"
 							]
-						}
+						},
+						"description": "PRODUCT-10324"
 					},
 					"response": []
 				},
@@ -400,7 +401,7 @@
 								"uuid"
 							]
 						},
-						"description": "Delete previously created secure mail"
+						"description": "PRODUCT-10394"
 					},
 					"response": []
 				},
@@ -454,7 +455,7 @@
 								"uuid"
 							]
 						},
-						"description": "Get all message folders in the response."
+						"description": "PRODUCT-10323"
 					},
 					"response": []
 				}
