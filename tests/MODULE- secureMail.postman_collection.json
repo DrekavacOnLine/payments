@@ -509,14 +509,14 @@
 											"    });",
 											"    ",
 											"    ",
-											"      pm.expect(schemaValidationPassed).to.be.eql(true)",
-											"      pm.expect(messagesStatus.category).to.be.eql(\"SUCCESS\")&&",
-											"      pm.expect(messagesStatus.code).to.be.eql(\"201 CREATED\")&&",
-											"      pm.expect(folders).to.be.an('array')&&",
-											"      pm.expect(folders).to.have.lengthOf.at.least(5)&&",
-											"      pm.expect(folders.map(folder => folder.name)).to.include.members([\"INBOX\",\"ARCHIVE\",\"SENT\",\"DRAFT\",\"DELETED\"])&&",
-											"      pm.expect(folders.map(folder => folder.name)).to.include(folderName)&&",
-											"      pm.expect(folders.filter(folder => folder.name == folderName)[0].type).to.be.eql(\"CUSTOM\");",
+											"    pm.expect(schemaValidationPassed).to.be.eql(true)",
+											"    pm.expect(messagesStatus.category).to.be.eql(\"SUCCESS\")&&",
+											"    pm.expect(messagesStatus.code).to.be.eql(\"201 CREATED\")&&",
+											"    pm.expect(folders).to.be.an('array')&&",
+											"    pm.expect(folders).to.have.lengthOf.at.least(5)&&",
+											"    pm.expect(folders.map(folder => folder.name)).to.include.members([\"INBOX\",\"ARCHIVE\",\"SENT\",\"DRAFT\",\"DELETED\"])&&",
+											"    pm.expect(folders.map(folder => folder.name)).to.include(folderName)&&",
+											"    pm.expect(folders.filter(folder => folder.name == folderName)[0].type).to.be.eql(\"CUSTOM\");",
 											"});",
 											"",
 											"if (pm.response.code === 201) {",
@@ -581,11 +581,15 @@
 									"raw": "{\n\"folderName\": \"{{folderName}}\"\n}"
 								},
 								"url": {
-									"raw": "{{env_securemail}}/folders",
+									"raw": "{{env_securemail}}/messaging/securemail/{{tenantId_security}}/v1/folders",
 									"host": [
 										"{{env_securemail}}"
 									],
 									"path": [
+										"messaging",
+										"securemail",
+										"{{tenantId_security}}",
+										"v1",
 										"folders"
 									]
 								}
