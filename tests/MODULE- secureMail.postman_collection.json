@@ -3228,7 +3228,8 @@
 											"// Generate some sample data for the message subject and body",
 											"pm.environment.set(\"messageSubject1\", \"David test - \" + Date.now());",
 											"pm.environment.set(\"messageBody1\", \"MESSAGE BODY - \" + Date.now());",
-											""
+											"let priority = parseInt(Math.random() * 2) ?  \"HIGH\" : \"LOW\";",
+											"pm.environment.set(\"mailPriority\",priority);"
 										],
 										"type": "text/javascript"
 									}
@@ -3313,7 +3314,7 @@
 										},
 										{
 											"key": "priority",
-											"value": "HIGH"
+											"value": "{{mailPriority}}"
 										},
 										{
 											"key": "advisorId",
@@ -7739,11 +7740,15 @@
 									]
 								},
 								"url": {
-									"raw": "{{env_securemail}}{{path_msg_secmail}}/securemails",
+									"raw": "{{env_securemail}}/messaging/securemail/{{tenantId_security}}/v1/securemails",
 									"host": [
-										"{{env_securemail}}{{path_msg_secmail}}"
+										"{{env_securemail}}"
 									],
 									"path": [
+										"messaging",
+										"securemail",
+										"{{tenantId_security}}",
+										"v1",
 										"securemails"
 									]
 								},
