@@ -38,7 +38,10 @@
 									"            \"Get secure mail by subject (C43916305)\",",
 									"            \"Get secure mail by body (C43995774)\",",
 									"            \"Get secure mail by group (C43995775)\",",
-									"            \"Get secure mail sorted by alreadySeen parameter (Read) and with 2 messages per page (C44701679)\",",
+									"            \"Get secure mail sorted by alreadySeen showing two messages per page (C44701679)\",",
+									"            \"Get secure mail sorted by senderName parameter with specific pageNumber (C44701682)\",",
+									"            \"Get secure mail sorted by Subject parameter (C44701683)\",",
+									"            \"Get secure mail sorted by subject, alreadySeen and senderName parameters (C44701690)\",",
 									"            \"Delete secure mail (C42843218)\",",
 									"            \"Create folder (C41673956)\",",
 									"            \"Get folder (C41673957)\",",
@@ -57,13 +60,14 @@
 									"            \"Empty Folder Name Validation (C44879396)\",",
 									"            \"Max Folder Name Length Validation (C44879395)\",",
 									"            \"Rename Folder Empty Folder Name Validation (C44879397)\",",
+									"            \"Rename Folder Max Folder Name Length Validation (C44879398)\",",
 									"            \"Delete all 'CUSTOM' folders\" //keep it as last test to",
 									"            ]; ",
 									"        break;",
 									"    case \"Core\":",
 									"        var testSession = [",
 									"            \"_Generate access token (C41673950)\",",
-									"            \"Get secure mail sorted by alreadySeen parameter (Read) and with 2 messages per page (C44701679)\",",
+									"            \"Get secure mail sorted by subject, alreadySeen and senderName parameters (C44701690)\",",
 									"            \"Delete all 'CUSTOM' folders\"",
 									"            ]; ",
 									"        break;",
@@ -515,7 +519,7 @@
 								"uuid"
 							]
 						},
-						"description": "PRODUCT-10340"
+						"description": "PRODUCT-10337"
 					},
 					"response": []
 				},
@@ -581,7 +585,7 @@
 					"response": []
 				},
 				{
-					"name": "Get secure mail sorted by alreadySeen parameter (Read) and with 2 messages per page (C44701679)",
+					"name": "Get secure mail sorted by alreadySeen showing two messages per page (C44701679)",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -638,6 +642,189 @@
 							]
 						},
 						"description": "PRODUCT-10344"
+					},
+					"response": []
+				},
+				{
+					"name": "Get secure mail sorted by senderName parameter with specific pageNumber (C44701682)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"",
+									"//specify number of messages to create",
+									"pm.environment.set(\"mailsToCreate\", 1);",
+									"",
+									"var requestsToRun = [",
+									"        \"createSecureMail\",",
+									"        \"getSecureMailSortingBySenderName&PageNumber\",",
+									"        \"deleteSecureMail\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_createSecureMail\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getSecureMailSortingBySenderName&PageNumber\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_deleteSecureMail\",\"[cleanUp]\");",
+									"",
+									"//specify related TestRail tests",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10343"
+					},
+					"response": []
+				},
+				{
+					"name": "Get secure mail sorted by Subject parameter (C44701683)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"",
+									"//specify number of messages to create",
+									"pm.environment.set(\"mailsToCreate\", 1);",
+									"",
+									"var requestsToRun = [",
+									"        \"createSecureMail\",",
+									"        \"getSecureMailSortingBySubject\",",
+									"        \"deleteSecureMail\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_createSecureMail\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getSecureMailSortingBySubject\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_deleteSecureMail\",\"[cleanUp]\");",
+									"",
+									"//specify related TestRail tests",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10345"
+					},
+					"response": []
+				},
+				{
+					"name": "Get secure mail sorted by subject, alreadySeen and senderName parameters (C44701690)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"",
+									"//specify number of messages to create",
+									"pm.environment.set(\"mailsToCreate\", 1);",
+									"",
+									"var requestsToRun = [",
+									"        \"createSecureMail\",",
+									"        \"getSecureMailSortingBySubjectAlreadySeenSenderName\",",
+									"        \"deleteSecureMail\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_createSecureMail\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getSecureMailSortingBySubjectAlreadySeenSenderName\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_deleteSecureMail\",\"[cleanUp]\");",
+									"",
+									"//specify related TestRail tests",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10346"
 					},
 					"response": []
 				},
@@ -1551,10 +1738,12 @@
 									"",
 									"var requestsToRun = [",
 									"        \"createFolder\",",
-									"        \"renameFolderEmptyFolderNameValidation\"",
+									"        \"renameFolderEmptyFolderNameValidation\",",
+									"        \"deleteFolder\"",
 									"    ]; ",
 									"    pm.globals.set(\"_tr_createFolder\",\"[preCondition]\");",
 									"    pm.globals.set(\"_tr_renameFolderEmptyFolderNameValidation\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_deleteFolder\",\"[cleanUp]\");",
 									"",
 									"//specify related TestRail tests",
 									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
@@ -1598,10 +1787,12 @@
 									"",
 									"var requestsToRun = [",
 									"        \"createFolder\",",
-									"        \"renameFolderMaxFolderNameLengthValidation\"",
+									"        \"renameFolderMaxFolderNameLengthValidation\",",
+									"        \"deleteFolder\"",
 									"    ]; ",
 									"    pm.globals.set(\"_tr_createFolder\",\"[preCondition]\");",
 									"    pm.globals.set(\"_tr_renameFolderMaxFolderNameLengthValidation\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_deleteFolder\",\"[cleanUp]\");",
 									"",
 									"//specify related TestRail tests",
 									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
@@ -4313,6 +4504,7 @@
 											"",
 											"const folderId = pm.environment.get(\"folderId\");",
 											"const secureMailId1 =pm.environment.get(\"secureMailId1\");",
+											"const priority = pm.environment.get(\"mailPriority\");",
 											"// Get the one and only message    ",
 											"const message = pm.response.json();",
 											"let jsonData = JSON.parse(responseBody); ",
@@ -4327,7 +4519,7 @@
 											"    ",
 											"    //Check to make sure that the secureMail was the one we moved there",
 											"    pm.expect(message).to.be.an('object');",
-											"    pm.expect(message).to.have.property('priority', \"HIGH\");",
+											"    pm.expect(message).to.have.property('priority', priority);",
 											"    pm.expect(message).to.have.property('direction', \"TOBANK\");",
 											"    pm.expect(pm.environment.get(\"secureMailId1\")).to.equal(message.id);",
 											"    pm.expect(pm.environment.get(\"folderId\")).to.equal(message.folderId);",
@@ -11040,7 +11232,8 @@
 									"script": {
 										"id": "bd79cd6a-b856-462e-b87c-3677a2c4daf9",
 										"exec": [
-											""
+											"let alreadySeenSortOrder = parseInt(Math.random() * 2) ?  \"asc\" : \"desc\";",
+											"pm.environment.set(\"alreadySeenSortOrder\",alreadySeenSortOrder);"
 										],
 										"type": "text/javascript"
 									}
@@ -11051,11 +11244,13 @@
 										"id": "716b8a32-574c-4b9b-938f-448ad339b622",
 										"exec": [
 											"eval(globals.commonTests)();",
+											"var _ = require('lodash');",
 											"",
 											"let jsonData = JSON.parse(responseBody);",
 											"const jsonResponse = pm.response.json();",
 											"const alreadySeen = jsonResponse.embedded[0].alreadySeen;",
 											"const pageNumber = (jsonResponse.page.size).toString();",
+											"let alreadySeenSortOrder = pm.environment.get(\"alreadySeenSortOrder\");",
 											"    ",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Sorting and page size is correct, all assertations passed\", function () {",
 											"    pm.response.to.have.status(200);",
@@ -11065,16 +11260,23 @@
 											"        pm.expect(schemaValidationPassed).to.be.eql(true);",
 											"    });",
 											"    ",
-											"    pm.test(\"Returned secure mails are properly sorted\", function(){",
-											"        pm.expect(alreadySeen).to.eql(\"READ\");",
-											"    });",
+											"    //pm.test(\"Returned secure mails are properly sorted\", function(){",
+											"    //    pm.expect(alreadySeen).to.eql(\"READ\");",
+											"    //});",
+											"    var expectedSortedOrder = _.orderBy(jsonData.embedded, ['alreadySeen'],[alreadySeenSortOrder]);",
+											"    pm.test(\"Messages are in sorted order \", () => {",
+											"       // Using the orderBy function from lodash ",
+											"       // Read docs: https://lodash.com/docs/4.17.10#orderBy",
+											"        pm.expect(jsonData.embedded).to.eql(expectedSortedOrder);    ",
+											"    });     ",
+											"    ",
 											"    pm.test(\"Size of response matches to specified value\", function(){",
 											"        pm.expect(pageNumber).to.eql(pm.environment.get(\"size\"));",
 											"    });",
 											"    ",
 											"    pm.response.to.have.status(200) &&",
 											"    pm.expect(schemaValidationPassed).to.be.eql(true) &&",
-											"    pm.expect(alreadySeen).to.eql(\"READ\") &&",
+											"    pm.expect(jsonData.embedded).to.eql(expectedSortedOrder) &&",
 											"    pm.expect(pageNumber).to.eql(pm.environment.get(\"size\"));",
 											"});",
 											"",
@@ -11113,7 +11315,7 @@
 									}
 								],
 								"url": {
-									"raw": "{{env_securemail}}/messaging/securemail/{{tenantId_security}}/v1/securemails?size={{size}}&sortBy=alreadySeen:asc",
+									"raw": "{{env_securemail}}/messaging/securemail/{{tenantId_security}}/v1/securemails?size={{size}}&sortBy=alreadySeen:{{alreadySeenSortOrder}}",
 									"host": [
 										"{{env_securemail}}"
 									],
@@ -11131,7 +11333,7 @@
 										},
 										{
 											"key": "sortBy",
-											"value": "alreadySeen:asc"
+											"value": "alreadySeen:{{alreadySeenSortOrder}}"
 										}
 									]
 								}
@@ -11716,7 +11918,7 @@
 							]
 						},
 						{
-							"name": "getSecureMailBy - sortingBy - AlreadySeen DESC",
+							"name": "getSecureMailSortingBySenderName&PageNumber",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -11733,669 +11935,46 @@
 									"script": {
 										"id": "716b8a32-574c-4b9b-938f-448ad339b622",
 										"exec": [
-											"pm.test(\"Sorting is correct\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    const jsonResponse = pm.response.json();",
-											"    const alreadySeen = jsonResponse.embedded[0].alreadySeen;",
-											"    ",
-											"    pm.expect(alreadySeen).to.eql(\"UNREAD\");",
+											"eval(globals.commonTests)();",
+											"var _ = require('lodash');",
 											"",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"auth": {
-									"type": "oauth2",
-									"oauth2": [
-										{
-											"key": "accessToken",
-											"value": "{{tokenValue}}",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [
-									{
-										"description": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-										"key": "tppId",
-										"value": "\"<string>\"",
-										"disabled": true
-									},
-									{
-										"key": "Accept",
-										"type": "text",
-										"value": "application/hal+json"
-									}
-								],
-								"url": {
-									"raw": "{{env_securemail}}{{path_msg_secmail}}/securemails?sortBy=alreadySeen:desc",
-									"host": [
-										"{{env_securemail}}{{path_msg_secmail}}"
-									],
-									"path": [
-										"securemails"
-									],
-									"query": [
-										{
-											"key": "sortBy",
-											"value": "alreadySeen:desc"
-										}
-									]
-								}
-							},
-							"response": [
-								{
-									"name": "Unexpected error",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails?topicId=<string>&direction=ALL&folderId=<string>&advisorId=<string>&customerId=<string>&startDate=<dateTime>&endDate=<dateTime>&group=ALL&lang=<string>&page=<long>&refObjNo=<string>&priority=ALL&size=10&subject=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"securemails"
-											],
-											"query": [
-												{
-													"key": "topicId",
-													"value": "<string>"
-												},
-												{
-													"key": "direction",
-													"value": "ALL"
-												},
-												{
-													"key": "folderId",
-													"value": "<string>"
-												},
-												{
-													"key": "advisorId",
-													"value": "<string>"
-												},
-												{
-													"key": "customerId",
-													"value": "<string>"
-												},
-												{
-													"key": "startDate",
-													"value": "<dateTime>"
-												},
-												{
-													"key": "endDate",
-													"value": "<dateTime>"
-												},
-												{
-													"key": "group",
-													"value": "ALL"
-												},
-												{
-													"key": "lang",
-													"value": "<string>"
-												},
-												{
-													"key": "page",
-													"value": "<long>"
-												},
-												{
-													"key": "refObjNo",
-													"value": "<string>"
-												},
-												{
-													"key": "priority",
-													"value": "ALL"
-												},
-												{
-													"key": "size",
-													"value": "10"
-												},
-												{
-													"key": "subject",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/hal+json"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Business logic error",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails?topicId=<string>&direction=ALL&folderId=<string>&advisorId=<string>&customerId=<string>&startDate=<dateTime>&endDate=<dateTime>&group=ALL&lang=<string>&page=<long>&refObjNo=<string>&priority=ALL&size=10&subject=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"securemails"
-											],
-											"query": [
-												{
-													"key": "topicId",
-													"value": "<string>"
-												},
-												{
-													"key": "direction",
-													"value": "ALL"
-												},
-												{
-													"key": "folderId",
-													"value": "<string>"
-												},
-												{
-													"key": "advisorId",
-													"value": "<string>"
-												},
-												{
-													"key": "customerId",
-													"value": "<string>"
-												},
-												{
-													"key": "startDate",
-													"value": "<dateTime>"
-												},
-												{
-													"key": "endDate",
-													"value": "<dateTime>"
-												},
-												{
-													"key": "group",
-													"value": "ALL"
-												},
-												{
-													"key": "lang",
-													"value": "<string>"
-												},
-												{
-													"key": "page",
-													"value": "<long>"
-												},
-												{
-													"key": "refObjNo",
-													"value": "<string>"
-												},
-												{
-													"key": "priority",
-													"value": "ALL"
-												},
-												{
-													"key": "size",
-													"value": "10"
-												},
-												{
-													"key": "subject",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-									"code": 422,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/hal+json"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Bad request",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails?topicId=<string>&direction=ALL&folderId=<string>&advisorId=<string>&customerId=<string>&startDate=<dateTime>&endDate=<dateTime>&group=ALL&lang=<string>&page=<long>&refObjNo=<string>&priority=ALL&size=10&subject=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"securemails"
-											],
-											"query": [
-												{
-													"key": "topicId",
-													"value": "<string>"
-												},
-												{
-													"key": "direction",
-													"value": "ALL"
-												},
-												{
-													"key": "folderId",
-													"value": "<string>"
-												},
-												{
-													"key": "advisorId",
-													"value": "<string>"
-												},
-												{
-													"key": "customerId",
-													"value": "<string>"
-												},
-												{
-													"key": "startDate",
-													"value": "<dateTime>"
-												},
-												{
-													"key": "endDate",
-													"value": "<dateTime>"
-												},
-												{
-													"key": "group",
-													"value": "ALL"
-												},
-												{
-													"key": "lang",
-													"value": "<string>"
-												},
-												{
-													"key": "page",
-													"value": "<long>"
-												},
-												{
-													"key": "refObjNo",
-													"value": "<string>"
-												},
-												{
-													"key": "priority",
-													"value": "ALL"
-												},
-												{
-													"key": "size",
-													"value": "10"
-												},
-												{
-													"key": "subject",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Bad Request",
-									"code": 400,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/hal+json"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "OK",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails?topicId=<string>&direction=ALL&folderId=<string>&advisorId=<string>&customerId=<string>&startDate=<dateTime>&endDate=<dateTime>&group=ALL&lang=<string>&page=<long>&refObjNo=<string>&priority=ALL&size=10&subject=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"securemails"
-											],
-											"query": [
-												{
-													"key": "topicId",
-													"value": "<string>"
-												},
-												{
-													"key": "direction",
-													"value": "ALL"
-												},
-												{
-													"key": "folderId",
-													"value": "<string>"
-												},
-												{
-													"key": "advisorId",
-													"value": "<string>"
-												},
-												{
-													"key": "customerId",
-													"value": "<string>"
-												},
-												{
-													"key": "startDate",
-													"value": "<dateTime>"
-												},
-												{
-													"key": "endDate",
-													"value": "<dateTime>"
-												},
-												{
-													"key": "group",
-													"value": "ALL"
-												},
-												{
-													"key": "lang",
-													"value": "<string>"
-												},
-												{
-													"key": "page",
-													"value": "<long>"
-												},
-												{
-													"key": "refObjNo",
-													"value": "<string>"
-												},
-												{
-													"key": "priority",
-													"value": "ALL"
-												},
-												{
-													"key": "size",
-													"value": "10"
-												},
-												{
-													"key": "subject",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/hal+json"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Forbidden",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails?topicId=<string>&direction=ALL&folderId=<string>&advisorId=<string>&customerId=<string>&startDate=<dateTime>&endDate=<dateTime>&group=ALL&lang=<string>&page=<long>&refObjNo=<string>&priority=ALL&size=10&subject=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"securemails"
-											],
-											"query": [
-												{
-													"key": "topicId",
-													"value": "<string>"
-												},
-												{
-													"key": "direction",
-													"value": "ALL"
-												},
-												{
-													"key": "folderId",
-													"value": "<string>"
-												},
-												{
-													"key": "advisorId",
-													"value": "<string>"
-												},
-												{
-													"key": "customerId",
-													"value": "<string>"
-												},
-												{
-													"key": "startDate",
-													"value": "<dateTime>"
-												},
-												{
-													"key": "endDate",
-													"value": "<dateTime>"
-												},
-												{
-													"key": "group",
-													"value": "ALL"
-												},
-												{
-													"key": "lang",
-													"value": "<string>"
-												},
-												{
-													"key": "page",
-													"value": "<long>"
-												},
-												{
-													"key": "refObjNo",
-													"value": "<string>"
-												},
-												{
-													"key": "priority",
-													"value": "ALL"
-												},
-												{
-													"key": "size",
-													"value": "10"
-												},
-												{
-													"key": "subject",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Forbidden",
-									"code": 403,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/hal+json"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Not Found",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails?topicId=<string>&direction=ALL&folderId=<string>&advisorId=<string>&customerId=<string>&startDate=<dateTime>&endDate=<dateTime>&group=ALL&lang=<string>&page=<long>&refObjNo=<string>&priority=ALL&size=10&subject=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"securemails"
-											],
-											"query": [
-												{
-													"key": "topicId",
-													"value": "<string>"
-												},
-												{
-													"key": "direction",
-													"value": "ALL"
-												},
-												{
-													"key": "folderId",
-													"value": "<string>"
-												},
-												{
-													"key": "advisorId",
-													"value": "<string>"
-												},
-												{
-													"key": "customerId",
-													"value": "<string>"
-												},
-												{
-													"key": "startDate",
-													"value": "<dateTime>"
-												},
-												{
-													"key": "endDate",
-													"value": "<dateTime>"
-												},
-												{
-													"key": "group",
-													"value": "ALL"
-												},
-												{
-													"key": "lang",
-													"value": "<string>"
-												},
-												{
-													"key": "page",
-													"value": "<long>"
-												},
-												{
-													"key": "refObjNo",
-													"value": "<string>"
-												},
-												{
-													"key": "priority",
-													"value": "ALL"
-												},
-												{
-													"key": "size",
-													"value": "10"
-												},
-												{
-													"key": "subject",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/hal+json"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						},
-						{
-							"name": "getSecureMailBy - sortingBy - senderName and pageNumber (C44701682)",
-							"event": [
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "bd79cd6a-b856-462e-b87c-3677a2c4daf9",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "test",
-									"script": {
-										"id": "716b8a32-574c-4b9b-938f-448ad339b622",
-										"exec": [
-											"pm.test(\"Sorting and page size is correct\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    const jsonResponse = pm.response.json();",
-											"    const alreadySeen = jsonResponse.embedded[0].alreadySeen;",
-											"    const pageSize = (jsonResponse.page.size).toString();",
-											"    const pageNumber = (jsonResponse.page.number).toString();",
-											"    const senderName = jsonResponse.embedded[0].senderName;",
+											"let jsonData = JSON.parse(responseBody);",
+											"const jsonResponse = pm.response.json();",
+											"const alreadySeen = jsonResponse.embedded[0].alreadySeen;",
+											"const pageSize = (jsonResponse.page.size).toString();",
+											"const pageNumber = (jsonResponse.page.number).toString();",
+											"const senderName = jsonResponse.embedded[0].senderName;",
 											"    ",
-											"    pm.expect(senderName).to.eql(pm.environment.get(\"senderName\"));",
-											"    pm.expect(pageSize).to.eql(pm.environment.get(\"size\"));",
-											"    pm.expect(pageNumber).to.eql(pm.environment.get(\"pageNumber\"));",
-											"});"
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Sorting and page size is correct\", function () {",
+											"    pm.response.to.have.status(200);",
+											"",
+											"    var schemaValidationPassed = eval(globals.schemaValidator)(\"getSecureMailSortBySchema\",jsonData);",
+											"    pm.test(\"Response schema is correct\", function() {",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);",
+											"    });",
+											"    //pm.expect(senderName).to.eql(pm.environment.get(\"senderName\"));",
+											"    pm.test(\"Size of response matches to specified value\", function(){",
+											"        pm.expect(pageSize).to.eql(pm.environment.get(\"size\"));",
+											"    });",
+											"    pm.test(\"Page number of response matches to specified value\", function(){",
+											"        pm.expect(pageNumber).to.eql(pm.environment.get(\"pageNumber\"));",
+											"    });    ",
+											"    ",
+											"    var expectedSortedOrder = _.orderBy(jsonData.embedded, ['senderName'],['asc']);",
+											"    pm.test('Sender names are in sorted order', () => {",
+											"       // Using the orderBy function from lodash ",
+											"       // Read docs: https://lodash.com/docs/4.17.10#orderBy",
+											"        pm.expect(jsonData.embedded).to.eql(expectedSortedOrder);    ",
+											"    });    ",
+											"    ",
+											"    pm.response.to.have.status(200) &&",
+											"    pm.expect(pageSize).to.eql(pm.environment.get(\"size\")) &&",
+											"    pm.expect(pageNumber).to.eql(pm.environment.get(\"pageNumber\")) &&",
+											"    pm.expect(jsonData.embedded).to.eql(expectedSortedOrder) &&",
+											"    pm.expect(schemaValidationPassed).to.be.eql(true);",
+											"});",
+											"",
+											"eval(globals.sessionNavigate)();"
 										],
 										"type": "text/javascript"
 									}
@@ -12403,14 +11982,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
-										{
-											"key": "accessToken",
-											"value": "{{tokenValue}}",
-											"type": "string"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -12421,17 +11993,31 @@
 										"disabled": true
 									},
 									{
-										"key": "Accept",
+										"key": "Authorization",
 										"type": "text",
-										"value": "application/hal+json"
+										"value": "Bearer {{token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
 									}
 								],
 								"url": {
-									"raw": "{{env_securemail}}{{path_msg_secmail}}/securemails?page={{pageNumber}}&size={{size}}&sortBy=senderName:asc",
+									"raw": "{{env_securemail}}/messaging/securemail/{{tenantId_security}}/v1/securemails?page={{pageNumber}}&size={{size}}&sortBy=senderName:asc",
 									"host": [
-										"{{env_securemail}}{{path_msg_secmail}}"
+										"{{env_securemail}}"
 									],
 									"path": [
+										"messaging",
+										"securemail",
+										"{{tenantId_security}}",
+										"v1",
 										"securemails"
 									],
 									"query": [
@@ -13030,14 +12616,15 @@
 							]
 						},
 						{
-							"name": "getSecureMailBy - sortingBy - subject DESC (C44701683)",
+							"name": "getSecureMailSortingBySubject",
 							"event": [
 								{
 									"listen": "prerequest",
 									"script": {
 										"id": "bd79cd6a-b856-462e-b87c-3677a2c4daf9",
 										"exec": [
-											""
+											"let subjectSortOrder = parseInt(Math.random() * 2) ?  \"asc\" : \"desc\";",
+											"pm.environment.set(\"subjectSortOrder\",subjectSortOrder);"
 										],
 										"type": "text/javascript"
 									}
@@ -13047,14 +12634,35 @@
 									"script": {
 										"id": "716b8a32-574c-4b9b-938f-448ad339b622",
 										"exec": [
+											"eval(globals.commonTests)();",
+											"var _ = require('lodash');",
+											"",
+											"let jsonData = JSON.parse(responseBody);",
+											"const jsonResponse = pm.response.json();",
+											"const messageSubject = jsonResponse.embedded[0].subject;",
+											"let subjectSortOrder = pm.environment.get(\"subjectSortOrder\");",
+											"    ",
 											"pm.test(\"Sorting is correct\", function () {",
 											"    pm.response.to.have.status(200);",
-											"    const jsonResponse = pm.response.json();",
-											"    const messageSubject = jsonResponse.embedded[0].subject;",
-											"    ",
-											"    pm.expect(messageSubject).to.eql(pm.environment.get(\"messageSubject1\"));",
 											"",
-											"});"
+											"    var schemaValidationPassed = eval(globals.schemaValidator)(\"getSecureMailSortBySchema\",jsonData);",
+											"    pm.test(\"Response schema is correct\", function() {",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);",
+											"    });    ",
+											"",
+											"    var expectedSortedOrder = _.orderBy(jsonData.embedded, ['subject'],[subjectSortOrder]);",
+											"    pm.test('Message subjects are in sorted order', () => {",
+											"       // Using the orderBy function from lodash ",
+											"       // Read docs: https://lodash.com/docs/4.17.10#orderBy",
+											"        pm.expect(jsonData.embedded).to.eql(expectedSortedOrder);    ",
+											"    });    ",
+											"    ",
+											"    pm.response.to.have.status(200) &&",
+											"    pm.expect(schemaValidationPassed).to.be.eql(true) &&",
+											"    pm.expect(jsonData.embedded).to.eql(expectedSortedOrder);",
+											"});",
+											"",
+											"eval(globals.sessionNavigate)();"
 										],
 										"type": "text/javascript"
 									}
@@ -13062,14 +12670,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
-										{
-											"key": "accessToken",
-											"value": "{{tokenValue}}",
-											"type": "string"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -13080,23 +12681,37 @@
 										"disabled": true
 									},
 									{
-										"key": "Accept",
-										"type": "text",
-										"value": "application/hal+json"
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8",
+										"type": "text"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, application/hal+json",
+										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{env_securemail}}{{path_msg_secmail}}/securemails?sortBy=subject:desc",
+									"raw": "{{env_securemail}}/messaging/securemail/{{tenantId_security}}/v1/securemails?sortBy=subject:{{subjectSortOrder}}",
 									"host": [
-										"{{env_securemail}}{{path_msg_secmail}}"
+										"{{env_securemail}}"
 									],
 									"path": [
+										"messaging",
+										"securemail",
+										"{{tenantId_security}}",
+										"v1",
 										"securemails"
 									],
 									"query": [
 										{
 											"key": "sortBy",
-											"value": "subject:desc"
+											"value": "subject:{{subjectSortOrder}}"
 										}
 									]
 								}
@@ -13681,14 +13296,19 @@
 							]
 						},
 						{
-							"name": "getSecureMailBy - sortingBy - subject DESC, alreadySeen ASC, senderName ASC (C44701690)",
+							"name": "getSecureMailSortingBySubjectAlreadySeenSenderName",
 							"event": [
 								{
 									"listen": "prerequest",
 									"script": {
 										"id": "bd79cd6a-b856-462e-b87c-3677a2c4daf9",
 										"exec": [
-											""
+											"let subjectSortOrder = parseInt(Math.random() * 2) ?  \"asc\" : \"desc\";",
+											"pm.environment.set(\"subjectSortOrder\",subjectSortOrder);",
+											"let alreadySeenSortOrder = parseInt(Math.random() * 2) ?  \"asc\" : \"desc\";",
+											"pm.environment.set(\"alreadySeenSortOrder\",alreadySeenSortOrder);",
+											"let senderNameSortOrder = parseInt(Math.random() * 2) ?  \"asc\" : \"desc\";",
+											"pm.environment.set(\"senderNameSortOrder\",senderNameSortOrder);"
 										],
 										"type": "text/javascript"
 									}
@@ -13698,18 +13318,39 @@
 									"script": {
 										"id": "716b8a32-574c-4b9b-938f-448ad339b622",
 										"exec": [
-											"pm.test(\"Sorting is correct\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    const jsonResponse = pm.response.json();",
-											"    const messageSubject = jsonResponse.embedded[0].subject;",
-											"    const alreadySeen = jsonResponse.embedded[0].alreadySeen;",
-											"    const senderName = jsonResponse.embedded[0].senderName;",
-											"    ",
-											"    pm.expect(messageSubject).to.eql(pm.environment.get(\"messageSubject1\"));",
-											"    pm.expect(alreadySeen).to.eql(\"READ\");",
-											"    pm.expect(senderName).to.eql(pm.environment.get(\"senderName\"));",
+											"eval(globals.commonTests)();",
+											"var _ = require('lodash');",
 											"",
-											"});"
+											"let jsonData = JSON.parse(responseBody);",
+											"const jsonResponse = pm.response.json();",
+											"const messageSubject = jsonResponse.embedded[0].subject;",
+											"const alreadySeen = jsonResponse.embedded[0].alreadySeen;",
+											"const senderName = jsonResponse.embedded[0].senderName;",
+											"let subjectSortOrder = pm.environment.get(\"subjectSortOrder\");",
+											"let alreadySeenSortOrder = pm.environment.get(\"alreadySeenSortOrder\");",
+											"let senderNameSortOrder = pm.environment.get(\"senderNameSortOrder\");",
+											"    ",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Multy-sorting is correct\", function () {",
+											"    pm.response.to.have.status(200);",
+											"",
+											"    var schemaValidationPassed = eval(globals.schemaValidator)(\"getSecureMailSortBySchema\",jsonData);",
+											"    pm.test(\"Response schema is correct\", function() {",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);",
+											"    });",
+											"",
+											"    var expectedSortedOrder = _.orderBy(jsonData.embedded, ['subject','alreadySeen','senderName'],[subjectSortOrder,alreadySeenSortOrder,senderNameSortOrder]);",
+											"    pm.test(\"Messages are in sorted order \", () => {",
+											"       // Using the orderBy function from lodash ",
+											"       // Read docs: https://lodash.com/docs/4.17.10#orderBy",
+											"        pm.expect(jsonData.embedded).to.eql(expectedSortedOrder);       ",
+											"    });  ",
+											"    ",
+											"    pm.response.to.have.status(200) &&",
+											"    pm.expect(schemaValidationPassed).to.be.eql(true) &&",
+											"    pm.expect(jsonData.embedded).to.eql(expectedSortedOrder);",
+											"});",
+											"",
+											"eval(globals.sessionNavigate)();"
 										],
 										"type": "text/javascript"
 									}
@@ -13717,14 +13358,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
-										{
-											"key": "accessToken",
-											"value": "{{tokenValue}}",
-											"type": "string"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -13735,31 +13369,45 @@
 										"disabled": true
 									},
 									{
-										"key": "Accept",
-										"type": "text",
-										"value": "application/hal+json"
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8",
+										"type": "text"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, application/hal+json",
+										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{env_securemail}}{{path_msg_secmail}}/securemails?sortBy=subject:desc&sortBy=alreadySeen:asc&sortBy=senderName:asc",
+									"raw": "{{env_securemail}}/messaging/securemail/{{tenantId_security}}/v1/securemails?sortBy=subject:{{subjectSortOrder}}&sortBy=alreadySeen:{{alreadySeenSortOrder}}&sortBy=senderName:{{senderNameSortOrder}}",
 									"host": [
-										"{{env_securemail}}{{path_msg_secmail}}"
+										"{{env_securemail}}"
 									],
 									"path": [
+										"messaging",
+										"securemail",
+										"{{tenantId_security}}",
+										"v1",
 										"securemails"
 									],
 									"query": [
 										{
 											"key": "sortBy",
-											"value": "subject:desc"
+											"value": "subject:{{subjectSortOrder}}"
 										},
 										{
 											"key": "sortBy",
-											"value": "alreadySeen:asc"
+											"value": "alreadySeen:{{alreadySeenSortOrder}}"
 										},
 										{
 											"key": "sortBy",
-											"value": "senderName:asc"
+											"value": "senderName:{{senderNameSortOrder}}"
 										}
 									]
 								}
