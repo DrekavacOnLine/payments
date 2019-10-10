@@ -43,6 +43,8 @@
 									"            \"Get secure mail sorted by senderName parameter with specific pageNumber (C44701682)\",",
 									"            \"Get secure mail sorted by Subject parameter (C44701683)\",",
 									"            \"Get secure mail sorted by subject, alreadySeen and senderName parameters (C44701690)\",",
+									"            \"Verify secure mail attachment by mailId and attachmentId (C41853588)\",",
+									"            \"Verify secure mail attachment by mailId (C41853589)\",",
 									"            \"Delete secure mail (C42843218)\",",
 									"            \"Create folder (C41673956)\",",
 									"            \"Get folder (C41673957)\",",
@@ -69,9 +71,7 @@
 									"    case \"Core\":",
 									"        var testSession = [",
 									"            \"_Generate access token (C41673950)\",",
-									"            \"File Size Validation when attachment exceeds limit set in tenant configuration (C45338808)\",",
-									"            \"Get secure mail sorted by alreadySeen showing two messages per page (C44701679 C46978023)\",",
-									"            \"File Validation when attachment extension is blacklisted (C46823377)\",",
+									"            \"Verify secure mail attachment by mailId (C41853589)\",",
 									"            \"Delete all 'CUSTOM' folders\"",
 									"            ]; ",
 									"        break;",
@@ -884,6 +884,122 @@
 					"response": []
 				},
 				{
+					"name": "Verify secure mail attachment by mailId and attachmentId (C41853588)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"//specify number of messages to create",
+									"pm.environment.set(\"mailsToCreate\", 1);",
+									"",
+									"var requestsToRun = [",
+									"        \"createSecureMailWithAttachmentPDF\",",
+									"        \"getAttachmentByIdAndSecureMailId\",",
+									"        \"deleteSecureMail\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_createSecureMailWithAttachmentPDF\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getAttachmentByIdAndSecureMailId\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_deleteSecureMail\",\"[cleanUp]\");",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10347"
+					},
+					"response": []
+				},
+				{
+					"name": "Verify secure mail attachment by mailId (C41853589)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"//specify number of messages to create",
+									"pm.environment.set(\"mailsToCreate\", 1);",
+									"",
+									"var requestsToRun = [",
+									"        \"createSecureMailWithAttachmentPDF\",",
+									"        \"getAttachmentBySecureMailId\",",
+									"        \"deleteSecureMail\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_createSecureMailWithAttachmentPDF\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getAttachmentBySecureMailId\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_deleteSecureMail\",\"[cleanUp]\");",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10347"
+					},
+					"response": []
+				},
+				{
 					"name": "Delete secure mail (C42843218)",
 					"event": [
 						{
@@ -1317,11 +1433,11 @@
 									"pm.environment.set(\"mailsToCreate\", 1);",
 									"",
 									"var requestsToRun = [",
-									"        \"createSecureMailWithAttachment\",",
+									"        \"createSecureMailWithAttachmentPDF\",",
 									"        \"deleteSecureMail\"",
 									"    ]; ",
-									"    pm.globals.set(\"_tr_createSecureMailWithAttachment\",testRailTestCases);",
-									"    pm.globals.set(\"_tr_deleteSecureMail\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_createSecureMailWithAttachmentPDF\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_deleteSecureMail\",\"[cleanUp]\");",
 									"",
 									"//specify related TestRail tests",
 									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
@@ -1937,6 +2053,53 @@
 								"uuid"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "_Test session close",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var requestsToRun = ",
+									"    [",
+									"        \"Clean TestRail Run\"",
+									"    ]; ",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10392"
 					},
 					"response": []
 				}
@@ -6375,7 +6538,7 @@
 							]
 						},
 						{
-							"name": "createSecureMailWithAttachment",
+							"name": "createSecureMailWithAttachmentPDF",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -6386,6 +6549,8 @@
 											"// Generate some sample data for the message subject and body",
 											"pm.environment.set(\"messageSubject1\", \"Test attachment - \" + Date.now());",
 											"pm.environment.set(\"messageBody1\", \"Attachment MDB - \" + Date.now());",
+											"pm.environment.set(\"messageAttachmentContentType\", \"application/pdf\");",
+											"pm.environment.set(\"messageAttachmentName\", \"Test attachment.pdf\");",
 											""
 										],
 										"type": "text/javascript"
@@ -15502,373 +15667,33 @@
 					"name": "Attachment Tests",
 					"item": [
 						{
-							"name": "getAttachmentsBySecureMailId (C41853589)",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "5a55b3b1-8f42-4fd9-a8c3-093d14af4262",
-										"exec": [
-											"eval(globals.commonTests)();",
-											"",
-											"pm.test(\"Status code is 200\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});",
-											"",
-											"",
-											"eval(globals.sessionNavigate)();"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/zip",
-										"type": "text"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{token}}",
-										"type": "text"
-									},
-									{
-										"key": "content-type",
-										"value": "application/json; charset=UTF-8",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "file",
-											"type": "file",
-											"src": "/C:/Users/bomi2809/Desktop/Attachment.zip",
-											"disabled": true
-										}
-									]
-								},
-								"url": {
-									"raw": "{{env_securemail}}/securemails/{{secureMailId1}}/attachments",
-									"host": [
-										"{{env_securemail}}"
-									],
-									"path": [
-										"securemails",
-										"{{secureMailId1}}",
-										"attachments"
-									]
-								},
-								"description": "Returns a specific secure mail attachment. If the fileIndex parameter is provided, then a single file is returned. The first file into the attachment has the index 1. If the index points to a non existing file an HTTP 404 File Not Found is returned."
-							},
-							"response": [
-								{
-									"name": "Unexpected error",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails/<string>/attachments?lang=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"securemails",
-												"<string>",
-												"attachments"
-											],
-											"query": [
-												{
-													"key": "lang",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Internal Server Error",
-									"code": 500,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/zip"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Business logic error",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails/<string>/attachments?lang=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"securemails",
-												"<string>",
-												"attachments"
-											],
-											"query": [
-												{
-													"key": "lang",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-									"code": 422,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/zip"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Forbidden",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails/<string>/attachments?lang=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"securemails",
-												"<string>",
-												"attachments"
-											],
-											"query": [
-												{
-													"key": "lang",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Forbidden",
-									"code": 403,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/zip"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "OK",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails/<string>/attachments?lang=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"securemails",
-												"<string>",
-												"attachments"
-											],
-											"query": [
-												{
-													"key": "lang",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "OK",
-									"code": 200,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/zip"
-										}
-									],
-									"cookie": [],
-									"body": "<binary>"
-								},
-								{
-									"name": "Not Found",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails/<string>/attachments?lang=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"securemails",
-												"<string>",
-												"attachments"
-											],
-											"query": [
-												{
-													"key": "lang",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Not Found",
-									"code": 404,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/zip"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								},
-								{
-									"name": "Bad request",
-									"originalRequest": {
-										"method": "GET",
-										"header": [
-											{
-												"description": {
-													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
-													"type": "text/plain"
-												},
-												"key": "tppId",
-												"value": "\"<string>\""
-											}
-										],
-										"url": {
-											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails/<string>/attachments?lang=<string>",
-											"path": [
-												"api.crealogix.com",
-												"messaging",
-												"securemails",
-												"<string>",
-												"v1",
-												"securemails",
-												"<string>",
-												"attachments"
-											],
-											"query": [
-												{
-													"key": "lang",
-													"value": "<string>"
-												}
-											]
-										}
-									},
-									"status": "Bad Request",
-									"code": 400,
-									"_postman_previewlanguage": "Text",
-									"header": [
-										{
-											"key": "Content-Type",
-											"value": "application/zip"
-										}
-									],
-									"cookie": [],
-									"body": ""
-								}
-							]
-						},
-						{
-							"name": "getAttachmentByIdAndSecureMailId (C41853588)",
+							"name": "getAttachmentByIdAndSecureMailId",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"id": "967aff8c-4dbd-4bd1-9e71-94578fbfe7c2",
 										"exec": [
-											"pm.test(\"Message has correct attachment\", function () {",
-											"    pm.response.to.have.status(200);",
-											"    const jsonResponse = pm.response.json();",
-											"    const mailDetails = jsonResponse;",
-											"    const files = mailDetails.files;",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Message got by its' ID and attachment ID has correct attachment\", function () {",
+											"",
+											"    let messageAttachmentContentType = pm.environment.get(\"messageAttachmentContentType\");",
+											"    let messageAttachmentFileName = pm.environment.get(\"messageAttachmentFileName\");",
 											"    ",
-											"    pm.expect(files).to.eql(pm.environment.get(\"attachmentId\"));",
-											"    pm.expect(pm.response.text()).to.include(\"Attachment MDB\");",
+											"    pm.test(\"Content-Type matches to attachment type\", function () {",
+											"        pm.response.to.have.header(\"Content-Type\", messageAttachmentContentType);",
+											"    });",
+											"",
+											"    pm.test(\"Content-Disposition matches to attachment file name\", function () {",
+											"        pm.response.to.have.header(\"Content-Disposition\", \"attachment; filename=\\\"\" +   messageAttachmentFileName + \"\\\"\");",
+											"    });",
 											"    ",
+											"    pm.response.to.have.status(200) &&",
+											"    pm.response.to.have.header(\"Content-Type\", messageAttachmentContentType) &&",
+											"    pm.response.to.have.header(\"Content-Disposition\", \"attachment; filename=\\\"\" +   messageAttachmentFileName + \"\\\"\");",
 											"});",
-											""
+											"",
+											"eval(globals.sessionNavigate)();",
+											"pm.globals.unset(\"_tr_\" + request.name);"
 										],
 										"type": "text/javascript"
 									}
@@ -15876,14 +15701,7 @@
 							],
 							"request": {
 								"auth": {
-									"type": "oauth2",
-									"oauth2": [
-										{
-											"key": "accessToken",
-											"value": "{{tokenValue}}",
-											"type": "string"
-										}
-									]
+									"type": "noauth"
 								},
 								"method": "GET",
 								"header": [
@@ -15894,17 +15712,31 @@
 										"disabled": true
 									},
 									{
-										"key": "Accept",
-										"value": "application/pdf",
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8",
+										"type": "text"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, application/hal+json",
 										"type": "text"
 									}
 								],
 								"url": {
-									"raw": "{{env_securemail}}{{path_msg_secmail}}/securemails/{{secureMailId1}}/attachments/{{attachmentId}}",
+									"raw": "{{env_securemail}}/messaging/securemail/{{tenantId_security}}/v1/securemails/{{secureMailId1}}/attachments/{{attachmentId}}",
 									"host": [
-										"{{env_securemail}}{{path_msg_secmail}}"
+										"{{env_securemail}}"
 									],
 									"path": [
+										"messaging",
+										"securemail",
+										"{{tenantId_security}}",
+										"v1",
 										"securemails",
 										"{{secureMailId1}}",
 										"attachments",
@@ -16191,6 +16023,358 @@
 									"body": ""
 								}
 							]
+						},
+						{
+							"name": "getAttachmentBySecureMailId",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5a55b3b1-8f42-4fd9-a8c3-093d14af4262",
+										"exec": [
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Message got by its' ID has correct attachment\", function () {",
+											"    let messageAttachmentFileName = pm.environment.get(\"messageAttachmentFileName\");",
+											"",
+											"    pm.test(\"Content-Type is 'application/zip'\", function () {",
+											"        pm.response.to.have.header(\"Content-Type\", \"application/zip\");",
+											"    });",
+											"    ",
+											"    pm.response.to.have.status(200) &&",
+											"    pm.response.to.have.header(\"Content-Type\", \"application/zip\") &&",
+											"    pm.expect(pm.response.text()).to.include(messageAttachmentFileName);",
+											"});",
+											"",
+											"eval(globals.sessionNavigate)();",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/zip",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{env_securemail}}/messaging/securemail/{{tenantId_security}}/v1/securemails/{{secureMailId1}}/attachments",
+									"host": [
+										"{{env_securemail}}"
+									],
+									"path": [
+										"messaging",
+										"securemail",
+										"{{tenantId_security}}",
+										"v1",
+										"securemails",
+										"{{secureMailId1}}",
+										"attachments"
+									]
+								},
+								"description": "Returns a specific secure mail attachment. If the fileIndex parameter is provided, then a single file is returned. The first file into the attachment has the index 1. If the index points to a non existing file an HTTP 404 File Not Found is returned."
+							},
+							"response": [
+								{
+									"name": "Unexpected error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": {
+													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
+													"type": "text/plain"
+												},
+												"key": "tppId",
+												"value": "\"<string>\""
+											}
+										],
+										"url": {
+											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails/<string>/attachments?lang=<string>",
+											"path": [
+												"api.crealogix.com",
+												"messaging",
+												"securemails",
+												"<string>",
+												"v1",
+												"securemails",
+												"<string>",
+												"attachments"
+											],
+											"query": [
+												{
+													"key": "lang",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/zip"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Business logic error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": {
+													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
+													"type": "text/plain"
+												},
+												"key": "tppId",
+												"value": "\"<string>\""
+											}
+										],
+										"url": {
+											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails/<string>/attachments?lang=<string>",
+											"path": [
+												"api.crealogix.com",
+												"messaging",
+												"securemails",
+												"<string>",
+												"v1",
+												"securemails",
+												"<string>",
+												"attachments"
+											],
+											"query": [
+												{
+													"key": "lang",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+									"code": 422,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/zip"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Forbidden",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": {
+													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
+													"type": "text/plain"
+												},
+												"key": "tppId",
+												"value": "\"<string>\""
+											}
+										],
+										"url": {
+											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails/<string>/attachments?lang=<string>",
+											"path": [
+												"api.crealogix.com",
+												"messaging",
+												"securemails",
+												"<string>",
+												"v1",
+												"securemails",
+												"<string>",
+												"attachments"
+											],
+											"query": [
+												{
+													"key": "lang",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Forbidden",
+									"code": 403,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/zip"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": {
+													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
+													"type": "text/plain"
+												},
+												"key": "tppId",
+												"value": "\"<string>\""
+											}
+										],
+										"url": {
+											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails/<string>/attachments?lang=<string>",
+											"path": [
+												"api.crealogix.com",
+												"messaging",
+												"securemails",
+												"<string>",
+												"v1",
+												"securemails",
+												"<string>",
+												"attachments"
+											],
+											"query": [
+												{
+													"key": "lang",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/zip"
+										}
+									],
+									"cookie": [],
+									"body": "<binary>"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": {
+													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
+													"type": "text/plain"
+												},
+												"key": "tppId",
+												"value": "\"<string>\""
+											}
+										],
+										"url": {
+											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails/<string>/attachments?lang=<string>",
+											"path": [
+												"api.crealogix.com",
+												"messaging",
+												"securemails",
+												"<string>",
+												"v1",
+												"securemails",
+												"<string>",
+												"attachments"
+											],
+											"query": [
+												{
+													"key": "lang",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/zip"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"description": {
+													"content": "Distinct 3rd party identifer as obtained from preta.eu-registration",
+													"type": "text/plain"
+												},
+												"key": "tppId",
+												"value": "\"<string>\""
+											}
+										],
+										"url": {
+											"raw": "/api.crealogix.com/messaging/securemails/<string>/v1/securemails/<string>/attachments?lang=<string>",
+											"path": [
+												"api.crealogix.com",
+												"messaging",
+												"securemails",
+												"<string>",
+												"v1",
+												"securemails",
+												"<string>",
+												"attachments"
+											],
+											"query": [
+												{
+													"key": "lang",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "Text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/zip"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
 						}
 					],
 					"event": [
@@ -16201,9 +16385,9 @@
 								"type": "text/javascript",
 								"exec": [
 									"",
-									"const tokenValue = pm.environment.get(\"tokenValue\");",
-									"pm.expect(tokenValue).to.be.a('string', \"The tokenValue is required to be set before all requests\");",
-									"pm.expect(tokenValue).to.have.lengthOf.at.least(100, \"The tokenValue has not been set\");",
+									"const tokenValue = pm.environment.get(\"token\");",
+									"pm.expect(tokenValue).to.be.a('string', \"The access token is required to be set before all requests\");",
+									"pm.expect(tokenValue).to.have.lengthOf.at.least(100, \"The access token has not been set\");",
 									""
 								]
 							}
@@ -20136,7 +20320,7 @@
 									"    let runId = JSON.parse(responseBody)[i].id;",
 									"    let runName = JSON.parse(responseBody)[i].name;",
 									"    let runSuiteId = JSON.parse(responseBody)[i].suite_id;",
-									"    if (runName === \"Postman API Tests\") { //determine proper run",
+									"    if (runName === \"MODULE-SecureMail\") { //determine proper run",
 									"        //console.log(runId);   ",
 									"        console.log(\"TestRail run '\" + runId + \"' updating for tests: \" + execTests);",
 									"        pm.sendRequest({",
