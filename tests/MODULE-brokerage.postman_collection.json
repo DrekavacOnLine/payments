@@ -35,6 +35,7 @@
 									"            \"List securities by ISIN (C43995802)\",",
 									"            \"List securities by title (C43995804)\",",
 									"            \"(WiP) List securities having limited permissions (C43995837)\",",
+									"            \"(WiP) Display security having limited permissions (C43995843)\",",
 									"            \"Display security by ID (C43995806)\",",
 									"            \"Display security by securityNumber (C43995801)\",",
 									"            \"Display security using bad url (C43995832)\",",
@@ -43,6 +44,7 @@
 									"            \"List listings by tradingPlaceId (C43995815)\",",
 									"            \"List listings using bad url (C43995844)\",",
 									"            \"List listings using broken url (C43995845)\",",
+									"            \"(WiP) List listings having limited permissions (C43995846)\",",
 									"            \"Display listing by listing ID (C43995816)\",",
 									"            \"List trading places (C43995818)\",",
 									"            \"Display trading place by tradingPlaceId (C43995821)\",",
@@ -50,14 +52,13 @@
 									"            \"Display security type by ID (C43995831)\",",
 									"            \"Display security by security type ID (C43995787)\",",
 									"            \"Display listings by security ID (C43995813)\",",
-									"            \"Display securities using bad version (C43995842)\",",
-									"            \"(WiP) Display security having limited permissions (C43995843)\"",
+									"            \"Display securities using bad version (C43995842)\"",
 									"            ]; ",
 									"        break;",
 									"    case \"Core\":",
 									"        var testSession = [",
 									"            \"_Generate access token (C41673950)\",",
-									"            \"List listings using broken url (C43995845)\"",
+									"            \"(WiP) List listings having limited permissions (C43995846)\"",
 									"            ]; ",
 									"        break;",
 									"    case \"TestRailClean\":        ",
@@ -777,6 +778,61 @@
 							]
 						},
 						"description": "PRODUCT-10219"
+					},
+					"response": []
+				},
+				{
+					"name": "(WiP) List listings having limited permissions (C43995846)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"//testRailTestCases = \"C43995821\"",
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getAuthTestTokenNoAssetsPermissions\",",
+									"        \"getListingsErrorForbidden\",",
+									"        \"getAuthTestToken\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getAuthTestTokenNoAssetsPermissions\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getListingsErrorForbidden\", testRailTestCases);",
+									"    pm.globals.set(\"_tr_getAuthTestToken\",\"[postCondition]\");",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10220"
 					},
 					"response": []
 				},
@@ -2691,93 +2747,6 @@
 							"response": []
 						},
 						{
-							"name": "getListingsErrorNotFound",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
-										"exec": [
-											"//eval(globals.commonTests)();\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List listings fails if url is completely broken\", function () {\r",
-											"\r",
-											"    let jsonData = JSON.parse(responseBody);\r",
-											"\r",
-											"    pm.test(\"Status 404 Not Found is displayed\", function () {\r",
-											"        pm.response.to.have.status(404);\r",
-											"    });\r",
-											"\r",
-											"    pm.test(\"Response contains proper error type and code\", function () {\r",
-											"        pm.expect(jsonData.status).to.be.eql(404) &&\r",
-											"        pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
-											"    });\r",
-											"\r",
-											"    pm.response.to.have.status(404) &&\r",
-											"    pm.expect(jsonData.status).to.be.eql(404) &&\r",
-											"    pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
-											"});\r",
-											"\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "d873ed76-b449-4069-8385-ae5f6ad05400",
-										"exec": [
-											"const c = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\r",
-											"pm.environment.set(\"_tmp_randomString\", Array.from({length:6}, _ => c[Math.floor(Math.random()*c.length)]).join(''))"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "content-type",
-										"value": "application/json; charset=UTF-8"
-									},
-									{
-										"key": "accept",
-										"value": "application/json, application/hal+json"
-									},
-									{
-										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
-										"key": "Authorization",
-										"value": "Bearer {{token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{env_brokerage}}/brokerage/securities/{{tenantId_brokerage}}/v1/listings{{_tmp_randomString}}",
-									"host": [
-										"{{env_brokerage}}"
-									],
-									"path": [
-										"brokerage",
-										"securities",
-										"{{tenantId_brokerage}}",
-										"v1",
-										"listings{{_tmp_randomString}}"
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "getListingsByTradingPlaceId",
 							"event": [
 								{
@@ -2868,6 +2837,93 @@
 							"response": []
 						},
 						{
+							"name": "getListingsErrorNotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
+										"exec": [
+											"//eval(globals.commonTests)();\r",
+											"eval(globals.sessionNavigate)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List listings fails if url is completely broken\", function () {\r",
+											"\r",
+											"    let jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"    pm.test(\"Status 404 Not Found is displayed\", function () {\r",
+											"        pm.response.to.have.status(404);\r",
+											"    });\r",
+											"\r",
+											"    pm.test(\"Response contains proper error type and code\", function () {\r",
+											"        pm.expect(jsonData.status).to.be.eql(404) &&\r",
+											"        pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
+											"    });\r",
+											"\r",
+											"    pm.response.to.have.status(404) &&\r",
+											"    pm.expect(jsonData.status).to.be.eql(404) &&\r",
+											"    pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
+											"});\r",
+											"\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d873ed76-b449-4069-8385-ae5f6ad05400",
+										"exec": [
+											"const c = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\r",
+											"pm.environment.set(\"_tmp_randomString\", Array.from({length:6}, _ => c[Math.floor(Math.random()*c.length)]).join(''))"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, application/hal+json"
+									},
+									{
+										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/securities/{{tenantId_brokerage}}/v1/listings{{_tmp_randomString}}",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"securities",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"listings{{_tmp_randomString}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "getListingsErrorBadRequest",
 							"event": [
 								{
@@ -2942,6 +2998,92 @@
 										"v1",
 										"listings",
 										"{{_tmp_randomString}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getListingsErrorForbidden",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
+										"exec": [
+											"//eval(globals.commonTests)();\r",
+											"eval(globals.sessionNavigate)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List listings fail if access token is generated without needed scope\", function () {\r",
+											"\r",
+											"    let jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"    pm.test(\"Status 403 Forbidden is displayed\", function () {\r",
+											"        pm.response.to.have.status(403);\r",
+											"    });\r",
+											"\r",
+											"    pm.test(\"Response contains proper error type and code\", function () {\r",
+											"        pm.expect(jsonData.status).to.be.eql(403) &&\r",
+											"        pm.expect(jsonData.error).to.be.eql(\"Forbidden\");\r",
+											"    });\r",
+											"\r",
+											"    pm.response.to.have.status(403) &&\r",
+											"    pm.expect(jsonData.status).to.be.eql(403) &&\r",
+											"    pm.expect(jsonData.error).to.be.eql(\"Forbidden\");\r",
+											"});\r",
+											"\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d873ed76-b449-4069-8385-ae5f6ad05400",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, application/hal+json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{token}}",
+										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/securities/{{tenantId_brokerage}}/v1/listings",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"securities",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"listings"
 									]
 								}
 							},
