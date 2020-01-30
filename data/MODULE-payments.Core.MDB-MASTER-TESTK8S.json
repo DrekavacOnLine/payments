@@ -1,0 +1,24 @@
+[
+    {
+		"testsScope": "Core",
+        "envName": "MDB-MASTER-TESTK8S",
+		"contractNumber": "\"1000061501\"",
+        "paymentType": "\"ACCOUNT_TRANSFER\"",
+        "beneficiaryAccountNo": "\"CH4812312001000061501\"",
+        "debtorAccountNo": "\"CH4812312001000061501\"",
+        "debtorAccountName": "\"Freddy Hinz\"",
+        "debtorAdrLine": "\"Schachenallee 31\"",
+        "debtorPostalCode": "\"5004\"",
+        "debtorTownName": "\"Aarau\"",
+        "creditorAccountNo": "\"CH6512312001268411501\"",
+		"creditorAccountNoUK": "\"12345678\"",
+		"creditorAccountNoSwisDomestic": "\"CH6512312001268411501\"",		
+        "creditorAccountNoBalanceAdjustment": "\"CH7412312001000061518\"",
+        "creditorAgentCountry": "\"CH\"",
+        "currencyCode": "\"CHF\"",
+        "endToEndId": "\"1304182224-0000002\"",
+		"postalAccountNo": "\"80-281-6\"",
+		"orangeAccountNo": "\"01-200015-9\"",
+		"accountAlias": "\"Test1320369\""
+    }
+]

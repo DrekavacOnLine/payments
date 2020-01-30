@@ -10,99 +10,146 @@
 			"name": "Tests",
 			"item": [
 				{
-					"name": "_Test session",
-					"event": [
+					"name": "#INIT",
+					"item": [
 						{
-							"listen": "prerequest",
-							"script": {
-								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
-								"exec": [
-									"//reset global variables for controling execution flow",
-									"eval(globals.cleanup)();",
-									"//clear list of executed TestRail tests",
-									"pm.environment.set(\"testRailTestsInRun\",\"\");   ",
-									"",
-									"//specify list of tests to be executed in exact order",
-									"//const testsScope = \"Full\"; [Full|Core|Full+TestRail]",
-									"let testsScope = data.testsScope;",
-									"//console.log(testsScope); ",
-									"",
-									"switch(testsScope) {",
-									"    case \"Full\":",
-									"        var testSession = [",
-									"            \"_Generate access token (C41673950)\",",
-									"            \"List securities (C43995762)\",",
-									"            \"List securities by ISIN (C43995802)\",",
-									"            \"List securities by title (C43995804)\",",
-									"            \"(WiP) List securities having limited permissions (C43995837)\",",
-									"            \"(WiP) Display security having limited permissions (C43995843)\",",
-									"            \"Display security by ID (C43995806)\",",
-									"            \"Display security by securityNumber (C43995801)\",",
-									"            \"Display security using bad url (C43995832)\",",
-									"            \"Display security using broken url (C43995836)\",",
-									"            \"List listings (C43995811)\",",
-									"            \"List listings by tradingPlaceId (C43995815)\",",
-									"            \"List listings using bad url (C43995844)\",",
-									"            \"List listings using broken url (C43995845)\",",
-									"            \"(WiP) List listings having limited permissions (C43995846)\",",
-									"            \"Display listing by listing ID (C43995816)\",",
-									"            \"List trading places (C43995818)\",",
-									"            \"Display trading place by tradingPlaceId (C43995821)\",",
-									"            \"List security types (C43995825)\",",
-									"            \"Display security type by ID (C43995831)\",",
-									"            \"Display security by security type ID (C43995787)\",",
-									"            \"Display listings by security ID (C43995813)\",",
-									"            \"Display securities using bad version (C43995842)\"",
-									"            ]; ",
-									"        break;",
-									"    case \"Core\":",
-									"        var testSession = [",
-									"            \"_Generate access token (C41673950)\",",
-									"            \"(WiP) List listings having limited permissions (C43995846)\"",
-									"            ]; ",
-									"        break;",
-									"    case \"TestRailClean\":        ",
-									"        var testSession = [",
-									"            \"_Test session close\"",
-									"            ]; ",
-									"        break;",
-									"    default:",
-									"        throw new Error(\"No tests selected for execution!\")",
-									"}        ",
-									"    ",
-									"// Session initiate from PrS using eval()",
-									"eval(globals.sessionInit)(testSession, \"testSession\");",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
+							"name": "_Test session",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+										"exec": [
+											"//reset global variables for controling execution flow",
+											"eval(globals.cleanup)();",
+											"//clear list of executed TestRail tests",
+											"pm.environment.set(\"testRailTestsInRun\",\"\");   ",
+											"",
+											"var contractNumber = data.contractNumber;",
+											"if (contractNumber){ ",
+											"    pm.environment.set(\"contract\",JSON.parse(data.contractNumber));",
+											"    console.log(\"dataFile/contractNumber: \" + contractNumber);",
+											"}",
+											"",
+											"var tenantId_security = data.tenantId_security;",
+											"if (tenantId_security){ ",
+											"    pm.environment.set(\"tenantId_security\",data.tenantId_security);",
+											"    console.log(\"dataFile/tenantId_security: \" + tenantId_security);",
+											"}",
+											"",
+											"var tenantName_security = data.tenantName_security;",
+											"if (tenantName_security){ ",
+											"    pm.environment.set(\"tenantName_security\",data.tenantName_security);",
+											"    console.log(\"dataFile/tenantName_security: \" + tenantName_security);",
+											"}",
+											"",
+											"var userName_security = data.userName_security;",
+											"if (userName_security){ ",
+											"    pm.environment.set(\"userName_security\",data.userName_security);",
+											"    console.log(\"dataFile/userName_security: \" + userName_security);",
+											"}",
+											"",
+											"var contractNo_security = data.contractNo_security;",
+											"if (contractNo_security){ ",
+											"    pm.environment.set(\"contractNo_security\",data.contractNo_security);",
+											"    console.log(\"dataFile/contractNo_security: \" + contractNo_security);",
+											"}",
+											"",
+											"var bcNo_security = data.bcNo_security;",
+											"if (bcNo_security){ ",
+											"    pm.environment.set(\"bcNo_security\",data.bcNo_security);",
+											"    console.log(\"dataFile/bcNo_security: \" + bcNo_security);",
+											"}",
+											"",
+											"var userId_security = data.userId_security;",
+											"if (userId_security){ ",
+											"    pm.environment.set(\"userId_security\",data.userId_security);",
+											"    console.log(\"dataFile/userId_security: \" + userId_security);",
+											"}",
+											"",
+											"//specify list of tests to be executed in exact order",
+											"//const testsScope = \"Full\"; [Full|Core|Full+TestRail]",
+											"let testsScope = data.testsScope;",
+											"//console.log(testsScope); ",
+											"",
+											"switch(testsScope) {",
+											"    case \"Full\":",
+											"        var testSession = [",
+											"            \"_Generate access token (C41673950)\",",
+											"            \"List securities (C43995762)\",",
+											"            \"List securities by ISIN (C43995802)\",",
+											"            \"List securities by title (C43995804)\",",
+											"            \"(WiP) List securities having limited permissions (C43995837)\",",
+											"            \"(WiP) Display security having limited permissions (C43995843)\",",
+											"            \"Display security by ID (C43995806)\",",
+											"            \"Display security by securityNumber (C43995801)\",",
+											"            \"Display security using bad url (C43995832)\",",
+											"            \"Display security using broken url (C43995836)\",",
+											"            \"List listings (C43995811)\",",
+											"            \"List listings using bad url (C43995844)\",",
+											"            \"List listings using broken url (C43995845)\",",
+											"            \"(WiP) List listings having limited permissions (C43995846)\",",
+											"            \"Display listing by listing ID (C43995816)\",",
+											"            \"List trading places (C43995818)\",",
+											"            \"Display trading place by tradingPlaceId (C43995821)\",",
+											"            \"List security types (C43995825)\",",
+											"            \"Display security type by ID (C43995831)\",",
+											"            \"Display security by security type ID (C43995787)\",",
+											"            \"Display listings by security ID (C43995813)\",",
+											"            \"Display securities using bad version (C43995842)\"",
+											"            ]; ",
+											"        break;",
+											"    case \"Core\":",
+											"        var testSession = [",
+											"            \"List securities (C43995762)\"",
+											"            ]; ",
+											"        break;",
+											"    case \"TestRailClean\":        ",
+											"        var testSession = [",
+											"            \"_Test session close\"",
+											"            ]; ",
+											"        break;",
+											"    default:",
+											"        throw new Error(\"No tests selected for execution!\")",
+											"}        ",
+											"    ",
+											"// Session initiate from PrS using eval()",
+											"eval(globals.sessionInit)(testSession, \"testSession\");",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "OPTIONS",
+								"header": [],
+								"url": {
+									"raw": "httpbin.org/uuid",
+									"host": [
+										"httpbin",
+										"org"
+									],
+									"path": [
+										"uuid"
+									]
+								}
+							},
+							"response": []
 						}
 					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "httpbin.org/uuid",
-							"host": [
-								"httpbin",
-								"org"
-							],
-							"path": [
-								"uuid"
-							]
-						}
-					},
-					"response": []
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				},
 				{
 					"name": "List securities (C43995762)",
@@ -622,60 +669,6 @@
 							]
 						},
 						"description": "PRODUCT-10204"
-					},
-					"response": []
-				},
-				{
-					"name": "List listings by tradingPlaceId (C43995815)",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
-								"exec": [
-									"//testRailTestCases = \"C43995815\"",
-									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
-									"eval(globals.testsExecuted)(testRailTestCases);",
-									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
-									"",
-									"var requestsToRun = [",
-									"        \"getTradingPlaces\",",
-									"        \"getListingsByTradingPlaceId\"",
-									"    ]; ",
-									"    pm.globals.set(\"_tr_getTradingPlaces\",\"[preCondition]\");",
-									"    pm.globals.set(\"_tr_getListingsByTradingPlaceId\", testRailTestCases);",
-									"",
-									"// Session initiate from PrS using eval()",
-									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "httpbin.org/uuid",
-							"host": [
-								"httpbin",
-								"org"
-							],
-							"path": [
-								"uuid"
-							]
-						},
-						"description": "PRODUCT-10200, BUG: PRODUCT-10633"
 					},
 					"response": []
 				},
@@ -1459,13 +1452,13 @@
 											"    pm.environment.set(\"_tmp_securityId\",jsonData.securities[0].id);\r",
 											"    pm.environment.set(\"_tmp_securityNumber\",jsonData.securities[0].securityNumber);\r",
 											"    pm.environment.set(\"_tmp_isin\",jsonData.securities[0].isin);\r",
-											"    pm.environment.set(\"_tmp_shortDescription\",jsonData.securities[0].descriptions[0].shortDescription);\r",
-											"    console.log(jsonData.securities[0].descriptions[0].shortDescription);\r",
+											"    //pm.environment.set(\"_tmp_shortDescription\",jsonData.securities[0].descriptions[0].shortDescription);\r",
+											"    //console.log(jsonData.securities[0].descriptions[0].shortDescription);\r",
 											"} else {\r",
 											"    pm.environment.unset(\"_tmp_securityId\");\r",
 											"    pm.environment.unset(\"_tmp_securityNumber\");\r",
 											"    pm.environment.unset(\"_tmp_isin\");\r",
-											"    pm.environment.unset(\"_tmp_shortDescription\");\r",
+											"    //pm.environment.unset(\"_tmp_shortDescription\");\r",
 											"}\r",
 											"\r",
 											"\r",
@@ -1504,9 +1497,8 @@
 										"value": "application/json, application/hal+json"
 									},
 									{
-										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{access_token}}",
 										"type": "text"
 									}
 								],
@@ -2747,96 +2739,6 @@
 							"response": []
 						},
 						{
-							"name": "getListingsByTradingPlaceId",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
-										"exec": [
-											"eval(globals.commonTests)();\r",
-											"var jsonData = JSON.parse(responseBody);\r",
-											"\r",
-											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Listings are returned and all assertions passed\", function () {\r",
-											"\r",
-											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
-											"        pm.response.to.have.status(200);\r",
-											"    });\r",
-											"    \r",
-											"    pm.test(\"Response schema is correct\", () => {\r",
-											"        schemaValidationPassed = eval(globals.schemaValidator)(\"listingsSchema\",jsonData);\r",
-											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
-											"    });\r",
-											"\r",
-											"    pm.response.to.have.status(200)\r",
-											"    && pm.expect(schemaValidationPassed).to.be.eql(true)\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "2ae3901f-9d1d-4fd6-bd4a-262c16bea9b3",
-										"exec": [
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "content-type",
-										"value": "application/json; charset=UTF-8"
-									},
-									{
-										"key": "accept",
-										"value": "application/json, application/hal+json"
-									},
-									{
-										"key": "Authorization",
-										"type": "text",
-										"value": "Bearer {{token}}",
-										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": ""
-								},
-								"url": {
-									"raw": "{{env_brokerage}}/brokerage/securities/{{tenantId_brokerage}}/v1/listings?tradingPlaceId={{_tmp_tradingPlaceId}}",
-									"host": [
-										"{{env_brokerage}}"
-									],
-									"path": [
-										"brokerage",
-										"securities",
-										"{{tenantId_brokerage}}",
-										"v1",
-										"listings"
-									],
-									"query": [
-										{
-											"key": "tradingPlaceId",
-											"value": "{{_tmp_tradingPlaceId}}"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
 							"name": "getListingsErrorNotFound",
 							"event": [
 								{
@@ -3515,6 +3417,60 @@
 					"response": []
 				},
 				{
+					"name": "(WIP) List listings by tradingPlaceId (C43995815)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"//testRailTestCases = \"C43995815\"",
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getTradingPlaces\",",
+									"        \"getListingsByTradingPlaceId\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getTradingPlaces\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getListingsByTradingPlaceId\", testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10200, BUG: PRODUCT-10633"
+					},
+					"response": []
+				},
+				{
 					"name": "getSecuritiesByTradingPlaceId",
 					"event": [
 						{
@@ -3595,6 +3551,96 @@
 								"{{tenantId_brokerage}}",
 								"v1",
 								"securities"
+							],
+							"query": [
+								{
+									"key": "tradingPlaceId",
+									"value": "{{_tmp_tradingPlaceId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getListingsByTradingPlaceId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
+								"exec": [
+									"eval(globals.commonTests)();\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"\r",
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Listings are returned and all assertions passed\", function () {\r",
+									"\r",
+									"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+									"        pm.response.to.have.status(200);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Response schema is correct\", () => {\r",
+									"        schemaValidationPassed = eval(globals.schemaValidator)(\"listingsSchema\",jsonData);\r",
+									"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+									"    });\r",
+									"\r",
+									"    pm.response.to.have.status(200)\r",
+									"    && pm.expect(schemaValidationPassed).to.be.eql(true)\r",
+									"});\r",
+									"\r",
+									"eval(globals.sessionNavigate)();\r",
+									"pm.globals.unset(\"_tr_\" + request.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2ae3901f-9d1d-4fd6-bd4a-262c16bea9b3",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json; charset=UTF-8"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, application/hal+json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}",
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{env_brokerage}}/brokerage/securities/{{tenantId_brokerage}}/v1/listings?tradingPlaceId={{_tmp_tradingPlaceId}}",
+							"host": [
+								"{{env_brokerage}}"
+							],
+							"path": [
+								"brokerage",
+								"securities",
+								"{{tenantId_brokerage}}",
+								"v1",
+								"listings"
 							],
 							"query": [
 								{
@@ -3736,9 +3782,6 @@
 					"script": {
 						"id": "871a062d-fd8b-4583-a09e-84e18b781faa",
 						"exec": [
-							"// This is only required if there are multiple \"getToken\" requests and some need to be skipped",
-							"//postman.setNextRequest(\"getAllTopics (C41673954)\");",
-							"",
 							"console.log(\"Test Token url is: \" + pm.environment.get(\"env_security_testToken\"));",
 							"",
 							"// Set up pre-conditions with Chai Assertion library. https://www.chaijs.com/api/bdd/",
@@ -3763,7 +3806,7 @@
 							"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
 							"    pm.response.to.not.be.error;",
 							"    pm.response.to.be.withBody;",
-							"    pm.environment.set(\"token\", pm.response.text());",
+							"    pm.environment.set(\"access_token\", pm.response.text());",
 							"});",
 							"",
 							"",
@@ -3789,7 +3832,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_security}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+					"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_security}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
 				},
 				"url": {
 					"raw": "{{env_security_testToken}}",

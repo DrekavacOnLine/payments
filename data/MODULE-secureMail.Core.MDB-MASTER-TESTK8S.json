@@ -1,0 +1,13 @@
+[
+    {
+		"testsScope": "Core",
+        "envName": "MDB-MASTER-TESTK8S",
+		"contractNumber": "1000061501",
+        "tenantId_security": "19901",
+        "tenantName_security": "CLX EBS",
+        "userName_security": "1000061501",
+        "contractNo_security": "15054",
+        "bcNo_security": "12312",
+        "userId_security": "1000061501"
+    }
+]
