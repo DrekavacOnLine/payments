@@ -1,0 +1,23 @@
+[
+    {
+		"testsScope": "Core",
+        "envName": "SOBA-COBURG",
+		"contractNumber": "\"1273301501\"",
+        "paymentType": "\"ACCOUNT_TRANSFER\"",
+        "beneficiaryAccountNo": "\"CH5508334001273301501\"",
+        "debtorAccountNo": "\"CH5508334001273301501\"",
+        "debtorAccountName": "\"Freddy Hinz\"",
+        "debtorAdrLine": "\"Schachenallee 31\"",
+        "debtorPostalCode": "\"5004\"",
+        "debtorTownName": "\"Aarau\"",
+        "creditorAccountNo": "\"12345678\"",
+		"creditorAccountNoUK": "\"12345678\"",
+		"creditorAccountNoSwisDomestic": "\"CH5204835012345671000\"",
+		"creditorAccountNoBalanceAdjustment": "\"CH0208334001273300903\"",
+        "creditorAgentCountry": "\"CH\"",
+        "currencyCode": "\"CHF\"",
+        "endToEndId": "\"1304182224-0000002\"",
+		"postalAccountNo": "\"80-281-6\"",
+		"orangeAccountNo": "\"01-200015-9\""
+    }
+]

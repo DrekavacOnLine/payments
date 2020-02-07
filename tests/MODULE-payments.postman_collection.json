@@ -123,6 +123,11 @@
 											"    pm.environment.set(\"accountAlias\",\"1501 CHF\");",
 											"    console.log(\"dataFile/accountAlias: \" + \"1501 CHF\");",
 											"}",
+											"var bic = data.bic;",
+											"if (bic){ ",
+											"    pm.environment.set(\"bic\",data.bic);",
+											"    console.log(\"dataFile/bic: \" + bic);",
+											"}",
 											"",
 											"//console.log(testsScope); ",
 											"switch(testsScope) {",
@@ -187,7 +192,7 @@
 											"            \"Delete payment template (ToDo)\",",
 											"            \"Deliver payments in bulk (ToDo)\"",
 											"            ]; break;",
-											"    case \"Core_\":",
+											"    case \"Core\":",
 											"        var testSession = [",
 											"            \"Create SWIFT payment (C36275411)\",",
 											"            \"Deliver SWIFT payment (C36240103)\",",
@@ -240,9 +245,8 @@
 											"            \"Delete payment template (ToDo)\",",
 											"            \"Deliver payments in bulk (ToDo)\"",
 											"            ]; break;",
-											"    case \"Core\":",
+											"    case \"Quick\":",
 											"        var testSession = [",
-											"            \"Create SWIFT payment (C36275411)\"",
 											"            ]; break;",
 											"    case \"TestRailClean\":        ",
 											"        var testSession = [",
@@ -3062,18 +3066,19 @@
 											"    ]; ",
 											"    pm.globals.set(\"_tr_getPaymentsPaymentSearch?s1000\",testRailTestCases);",
 											"",
-											"var body = {",
-											"  \"pageRequest\": {",
-											"  \"page\": 0,",
-											"  \"size\": 100",
-											"  },",
-											"  \"paymentFilter\": {",
-											"\t\"paymentType\":\"SWIFT_INTERNATIONAL\"",
-											"  },",
-											"  \"orderBy\": {",
-											"    \"field\": \"CREATION_DATE\",",
-											"    \"sortOrder\": \"DESC\"",
-											"  }",
+											"var body = ",
+											"{",
+											"\t\"pageRequest\": {",
+											"\t\t\"page\": 0,",
+											"\t\t\"size\": 100",
+											"\t},",
+											"\t\"paymentFilter\": {",
+											"\t\t\"paymentType\":\"SWIFT_INTERNATIONAL\"",
+											"\t},",
+											"\t\"orderBy\": {",
+											"\t\t\"field\": \"CREATION_DATE\",",
+											"\t\t\"sortOrder\": \"DESC\"",
+											"\t}",
 											"};",
 											"pm.globals.set(\"body\", JSON.stringify(body));",
 											"",
@@ -3128,18 +3133,19 @@
 											"    pm.globals.set(\"_tr_getPaymentsPaymentSearch?s1000\",testRailTestCases);",
 											"",
 											"//pm.globals.set(\"body\", ('{\"paymentType\": \"ACCOUNT_TRANSFER\"}'));",
-											"var body = {",
-											"  \"pageRequest\": {",
-											"  \"page\": 0,",
-											"  \"size\": 100",
-											"  },",
-											"  \"paymentFilter\": {",
-											"\t\"paymentType\": \"ACCOUNT_TRANSFER\"",
-											"  },",
-											"  \"orderBy\": {",
-											"    \"field\": \"CREATION_DATE\",",
-											"    \"sortOrder\": \"DESC\"",
-											"  }",
+											"var body = ",
+											"{",
+											"    \"pageRequest\": {",
+											"        \"page\": 0,",
+											"        \"size\": 100",
+											"    },",
+											"    \"paymentFilter\": {",
+											"        \"paymentType\": \"ACCOUNT_TRANSFER\"",
+											"    },",
+											"    \"orderBy\": {",
+											"        \"field\": \"CREATION_DATE\",",
+											"        \"sortOrder\": \"DESC\"",
+											"    }",
 											"};",
 											"pm.globals.set(\"body\", JSON.stringify(body));",
 											"",
@@ -3194,18 +3200,18 @@
 											"    pm.globals.set(\"_tr_getPaymentsPaymentSearchAssertFilterPaymentStatuses?s100\",testRailTestCases);",
 											"",
 											"//pm.globals.set(\"body\", ('{\"paymentStatuses\": [\"READY_FOR_EXECUTION\", \"BOOKED\"]}'));",
-											"var body = {",
-											"  \"pageRequest\": {",
-											"  \"page\": 0,",
-											"  \"size\": 100",
-											"  },",
-											"  \"paymentFilter\": {",
-											"\t\"paymentStatuses\": [\"READY_FOR_EXECUTION\", \"BOOKED\"]",
-											"  },",
-											"  \"orderBy\": {",
-											"    \"field\": \"CREATION_DATE\",",
-											"    \"sortOrder\": \"DESC\"",
-											"  }",
+											"var body = ",
+											"{",
+											"    \"pageRequest\": {",
+											"        \"page\": 0,",
+											"        \"size\": 100",
+											"    },",
+											"    \"paymentFilter\": {",
+											"    \"paymentStatuses\": [\"SUBMITTED\", \"BOOKED\"]},",
+											"    \"orderBy\": {",
+											"        \"field\": \"CREATION_DATE\",",
+											"        \"sortOrder\": \"DESC\"",
+											"    }",
 											"};",
 											"pm.globals.set(\"body\", JSON.stringify(body));",
 											"",
@@ -3264,16 +3270,19 @@
 											"    pm.globals.set(\"_tr_getPaymentsPaymentSearch?s1000\",testRailTestCases);",
 											"",
 											"//pm.globals.set(\"body\",pm.globals.get(\"bodyPaymentSearchPaymentStatuses\"));",
-											"var body =  {",
-											"  \"pageRequest\": {",
-											"  \"page\": 0,",
-											"  \"size\": 100",
-											"  },",
-											"  \"paymentStatuses\": [\"READY_FOR_EXECUTION\", \"BOOKED\"],",
-											"  \"orderBy\": {",
-											"    \"field\": \"CREATION_DATE\",",
-											"    \"sortOrder\": \"DESC\"",
-											"  }",
+											"var body =  ",
+											"{",
+											"    \"pageRequest\": {",
+											"        \"page\": 0,",
+											"        \"size\": 100",
+											"    },",
+											"    \"orderBy\": {",
+											"        \"field\": \"CREATION_DATE\",",
+											"        \"sortOrder\": \"DESC\"",
+											"    },",
+											"\t\"paymentFilter\": {",
+											"        \"paymentStatuses\": [\"READY_FOR_EXECUTION\", \"BOOKED\"],",
+											"    }",
 											"};",
 											"pm.globals.set(\"body\", JSON.stringify(body));",
 											"",
@@ -3941,7 +3950,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\r\n    \"paymentInformation\": {\r\n\t\t\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\t\t\"instructedAmount\": {\r\n           \"currency\": {\r\n           \"code\": \"EUR\"\r\n            },\r\n            \"value\": 0.01\r\n    \t},\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": \"{{$guid}}\",\r\n            \"structured\":  \"structured remittance\"\r\n        },\r\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n    \t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": \"{{$randomFullName}}\",\r\n            \"address\": {\r\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n            \t\"buildingNm\": {{$randomInt}},\r\n            \t\"postalCode\": {{$randomInt}},\r\n            \t\"townName\": \"{{$randomCity}}\",\r\n            \t\"country\": \"{{$randomCountryCode}}\"\r\n        \t}\r\n        },\r\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\r\n        \"creditorAgent\": {\r\n    \t\t\"name1\": \"{{$randomFirstName}}\",\r\n    \t\t\"name2\": \"{{$randomLastName}}\",\r\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\r\n    \t\t\"city\": \"{{$randomCity}}\",\r\n    \t\t\"country\": {{creditorAgentCountry}},\r\n    \t\t\"bic\": \"ARUBAWAXXXX\"\r\n    \t},\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n            \t\"adrLine1\": {{debtorAdrLine}},\r\n            \t\"postalCode\": {{debtorPostalCode}},\r\n            \t\"townName\": {{debtorTownName}}\r\n        \t}\r\n        },\r\n        \"debtorAccountNo\": {{debtorAccountNo}},\r\n        \"debitNote\": \"Some expenses\"\r\n    }\r\n}",
+											"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\r\n    \"paymentInformation\": {\r\n\t\t\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\t\t\"instructedAmount\": {\r\n           \"currency\": {\r\n           \"code\": \"EUR\"\r\n            },\r\n            \"value\": 0.01\r\n    \t},\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": \"{{$guid}}\",\r\n            \"structured\":  \"structured remittance\"\r\n        },\r\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n    \t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": \"{{$randomFullName}}\",\r\n            \"address\": {\r\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n            \t\"buildingNm\": {{$randomInt}},\r\n            \t\"postalCode\": {{$randomInt}},\r\n            \t\"townName\": \"{{$randomCity}}\",\r\n            \t\"country\": \"{{$randomCountryCode}}\"\r\n        \t}\r\n        },\r\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\r\n        \"creditorAgent\": {\r\n    \t\t\"name1\": \"{{$randomFirstName}}\",\r\n    \t\t\"name2\": \"{{$randomLastName}}\",\r\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\r\n    \t\t\"city\": \"{{$randomCity}}\",\r\n    \t\t\"country\": {{creditorAgentCountry}},\r\n    \t\t\"bic\": {{bic}}\r\n    \t},\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n            \t\"adrLine1\": {{debtorAdrLine}},\r\n            \t\"postalCode\": {{debtorPostalCode}},\r\n            \t\"townName\": {{debtorTownName}}\r\n        \t}\r\n        },\r\n        \"debtorAccountNo\": {{debtorAccountNo}},\r\n        \"debitNote\": \"Some expenses\"\r\n    }\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -4220,7 +4229,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\r\n    \"paymentInformation\": {\r\n\t\t\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\t\t\"instructedAmount\": {\r\n           \"currency\": {\r\n           \"code\": \"EUR\"\r\n            },\r\n            \"value\": 0.01\r\n    \t},\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": \"{{$guid}}\",\r\n            \"structured\":  \"structured remittance\"\r\n        },\r\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n    \t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": \"{{$randomFullName}}\",\r\n            \"address\": {\r\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n            \t\"buildingNm\": {{$randomInt}},\r\n            \t\"postalCode\": {{$randomInt}},\r\n            \t\"townName\": \"{{$randomCity}}\",\r\n            \t\"country\": \"{{$randomCountryCode}}\"\r\n        \t}\r\n        },\r\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\r\n        \"creditorAgent\": {\r\n    \t\t\"name1\": \"{{$randomFirstName}}\",\r\n    \t\t\"name2\": \"{{$randomLastName}}\",\r\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\r\n    \t\t\"city\": \"{{$randomCity}}\",\r\n    \t\t\"country\": {{creditorAgentCountry}},\r\n    \t\t\"bic\": \"ARUBAWAXXXX\"\r\n    \t},\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n            \t\"adrLine1\": {{debtorAdrLine}},\r\n            \t\"postalCode\": {{debtorPostalCode}},\r\n            \t\"townName\": {{debtorTownName}}\r\n        \t}\r\n        },\r\n        \"debtorAccountNo\": {{debtorAccountNo}},\r\n        \"debitNote\": \"Some expenses\"\r\n    }\r\n}"
+											"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\r\n    \"paymentInformation\": {\r\n\t\t\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\t\t\"instructedAmount\": {\r\n           \"currency\": {\r\n           \"code\": \"EUR\"\r\n            },\r\n            \"value\": 0.01\r\n    \t},\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": \"{{$guid}}\",\r\n            \"structured\":  \"structured remittance\"\r\n        },\r\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n    \t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": \"{{$randomFullName}}\",\r\n            \"address\": {\r\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n            \t\"buildingNm\": {{$randomInt}},\r\n            \t\"postalCode\": {{$randomInt}},\r\n            \t\"townName\": \"{{$randomCity}}\",\r\n            \t\"country\": \"{{$randomCountryCode}}\"\r\n        \t}\r\n        },\r\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\r\n        \"creditorAgent\": {\r\n    \t\t\"name1\": \"{{$randomFirstName}}\",\r\n    \t\t\"name2\": \"{{$randomLastName}}\",\r\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\r\n    \t\t\"city\": \"{{$randomCity}}\",\r\n    \t\t\"country\": {{creditorAgentCountry}},\r\n    \t\t\"bic\": {{bic}}\r\n    \t},\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n            \t\"adrLine1\": {{debtorAdrLine}},\r\n            \t\"postalCode\": {{debtorPostalCode}},\r\n            \t\"townName\": {{debtorTownName}}\r\n        \t}\r\n        },\r\n        \"debtorAccountNo\": {{debtorAccountNo}},\r\n        \"debitNote\": \"Some expenses\"\r\n    }\r\n}"
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentSwiftID}}",
@@ -4368,7 +4377,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\r\n    \"paymentInformation\": {\r\n\t\t\"endToEndId\": {{endToEndId}},\r\n\t\t\"instructedAmount\": {\r\n           \"currency\": {\r\n           \"code\": \"EUR\"\r\n            },\r\n            \"value\": 4.5\r\n    \t},\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": \"{{$guid}}\",\r\n            \"structured\":  \"\"\r\n        },\r\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n    \t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": \"MDB-R191-Test\",\r\n            \"address\": {\r\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n            \t\"buildingNm\": {{$randomInt}},\r\n            \t\"postalCode\": {{$randomInt}},\r\n            \t\"townName\": \"{{$randomCity}}\",\r\n            \t\"country\": \"{{$randomCountryCode}}\"\r\n        \t}\r\n        },\r\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\r\n        \"creditorAgent\": {\r\n    \t\t\"name1\": \"{{$randomFirstName}}\",\r\n    \t\t\"name2\": \"{{$randomLastName}}\",\r\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\r\n    \t\t\"city\": \"{{$randomCity}}\",\r\n    \t\t\"country\": {{creditorAgentCountry}},\r\n    \t\t\"bic\": \"ARUBAWAXXXX\"\r\n    \t},\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n            \t\"adrLine1\": {{debtorAdrLine}},\r\n            \t\"postalCode\": {{debtorPostalCode}},\r\n            \t\"townName\": {{debtorTownName}}\r\n        \t}\r\n        },\r\n        \"debtorAccountNo\": {{debtorAccountNo}}\r\n    },\r\n    \"chargeBearer\": \"SHAR\"\r\n}"
+											"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"{{$randomDepartment}}\",\r\n    \"paymentInformation\": {\r\n\t\t\"endToEndId\": {{endToEndId}},\r\n\t\t\"instructedAmount\": {\r\n           \"currency\": {\r\n           \"code\": \"EUR\"\r\n            },\r\n            \"value\": 4.5\r\n    \t},\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": \"{{$guid}}\",\r\n            \"structured\":  \"\"\r\n        },\r\n        \"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n    \t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": \"MDB-R191-Test\",\r\n            \"address\": {\r\n            \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n            \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n            \t\"buildingNm\": {{$randomInt}},\r\n            \t\"postalCode\": {{$randomInt}},\r\n            \t\"townName\": \"{{$randomCity}}\",\r\n            \t\"country\": \"{{$randomCountryCode}}\"\r\n        \t}\r\n        },\r\n\t\t\"creditorAccountNo\": {{creditorAccountNo}},\r\n        \"creditorAgent\": {\r\n    \t\t\"name1\": \"{{$randomFirstName}}\",\r\n    \t\t\"name2\": \"{{$randomLastName}}\",\r\n    \t\t\"street\": \"{{$randomStreetAddress}}\",\r\n    \t\t\"city\": \"{{$randomCity}}\",\r\n    \t\t\"country\": {{creditorAgentCountry}},\r\n    \t\t\"bic\": {{bic}}\r\n    \t},\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n            \t\"adrLine1\": {{debtorAdrLine}},\r\n            \t\"postalCode\": {{debtorPostalCode}},\r\n            \t\"townName\": {{debtorTownName}}\r\n        \t}\r\n        },\r\n        \"debtorAccountNo\": {{debtorAccountNo}}\r\n    },\r\n    \"chargeBearer\": \"SHAR\"\r\n}"
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentSwiftID}}",
@@ -10210,7 +10219,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"pageRequest\": {\r\n  \"page\": 0,\r\n  \"size\": 5\r\n  },\r\n   \"paymentFilter\": {\r\n   \"paymentType\":\"SWIFT_INTERNATIONAL\"\r\n   },\r\n   \"orderBy\": {\r\n     \"field\": \"CREATION_DATE\",\r\n     \"sortOrder\": \"DESC\"\r\n  }\r\n \r\n}"
+									"raw": "{\r\n\t\"pageRequest\": {\r\n\t\t\"page\": 0,\r\n\t\t\"size\": 5\r\n\t},\r\n\t\"paymentFilter\": {\r\n\t\t\"paymentType\":\"SWIFT_INTERNATIONAL\"\r\n\t},\r\n\t\"orderBy\": {\r\n\t\t\"field\": \"CREATION_DATE\",\r\n\t\t\"sortOrder\": \"DESC\"\r\n\t}\r\n}"
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/{{tenant}}/v2/payment/search?page=0&size=20",
@@ -10315,7 +10324,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"pageRequest\": {\r\n  \"page\": 1,\r\n  \"size\": 5\r\n  },\r\n   \"paymentFilter\": {\r\n   \"paymentType\":\"SWIFT_INTERNATIONAL\"\r\n   },\r\n   \"orderBy\": {\r\n     \"field\": \"CREATION_DATE\",\r\n     \"sortOrder\": \"DESC\"\r\n  }\r\n \r\n}"
+									"raw": "{\r\n\t\"pageRequest\": {\r\n\t\t\"page\": 1,\r\n\t\t\"size\": 5\r\n\t},\r\n\t\"paymentFilter\": {\r\n\t\t\"paymentType\":\"SWIFT_INTERNATIONAL\"\r\n\t},\r\n\t\"orderBy\": {\r\n\t\t\"field\": \"CREATION_DATE\",\r\n\t\t\"sortOrder\": \"DESC\"\r\n\t}\r\n}"
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/{{tenant}}/v2/payment/search?page=1&size=20",
@@ -10433,7 +10442,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"pageRequest\": {\n  \"page\": 0,\n  \"size\": 100\n  },\n  \"paymentFilter\": {\n\t\"paymentType\":\"SWIFT_INTERNATIONAL\"\n  },\n  \"orderBy\": {\n    \"field\": \"CREATION_DATE\",\n    \"sortOrder\": \"DESC\"\n  }\n}"
+									"raw": "{{body}}"
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/{{tenant}}/v2/payment/search?size=1000",
@@ -11744,12 +11753,34 @@
 					"response": []
 				},
 				{
-					"name": "getAuthTestToken",
+					"name": "getAuthTestTokenK8S",
 					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9e77f489-363b-4a53-9c9f-58be8e9678c8",
+								"exec": [
+									"console.log(\"Test Token url is: \" + pm.environment.get(\"env_security_testToken\"));",
+									"",
+									"// Set up pre-conditions with Chai Assertion library. https://www.chaijs.com/api/bdd/",
+									"/*",
+									"pm.expect(pm.environment.get(\"env_securemail\")).to.be.a('string', \"The env_securemail is not defined\");",
+									"pm.expect(pm.environment.get(\"env_security_testToken\")).to.be.a('string', \"The testTokenUrl is not defined\");",
+									"pm.expect(pm.environment.get(\"tenantId_security\")).to.be.a('string', \"The tenantId is not defined\");",
+									"pm.expect(pm.environment.get(\"tenantName_security\")).to.be.a('string', \"The tenantName is not defined\");",
+									"pm.expect(pm.environment.get(\"userName_security\")).to.be.a('string', \"The userName is not defined\");",
+									"pm.expect(pm.environment.get(\"contractNo_security\")).to.be.a('string', \"The contractNo is not defined\");",
+									"pm.expect(pm.environment.get(\"bcNo_security\")).to.be.a('string', \"The bcNo is not defined\");",
+									"pm.expect(pm.environment.get(\"userId_security\")).to.be.a('string', \"The userId is not defined\");",
+									"*/"
+								],
+								"type": "text/javascript"
+							}
+						},
 						{
 							"listen": "test",
 							"script": {
-								"id": "9a273110-311c-4228-915e-cd6995d15219",
+								"id": "095f7911-c115-4798-9cc5-f06e06819ef3",
 								"exec": [
 									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
 									"    pm.response.to.not.be.error;",
@@ -11763,27 +11794,6 @@
 									"",
 									"// Reset reference to TR test cases",
 									"pm.globals.unset(\"_tr_\" + request.name);"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "6ee2d0e8-1a92-4a19-80b1-45d1262d6230",
-								"exec": [
-									"console.log(\"Test Token url is: \" + pm.environment.get(\"env_security_testToken\"));",
-									"",
-									"// Set up pre-conditions with Chai Assertion library. https://www.chaijs.com/api/bdd/",
-									"pm.expect(pm.environment.get(\"env_securemail\")).to.be.a('string', \"The env_securemail is not defined\");",
-									"pm.expect(pm.environment.get(\"env_security_testToken\")).to.be.a('string', \"The testTokenUrl is not defined\");",
-									"pm.expect(pm.environment.get(\"tenantId_security\")).to.be.a('string', \"The tenantId is not defined\");",
-									"pm.expect(pm.environment.get(\"tenantName_security\")).to.be.a('string', \"The tenantName is not defined\");",
-									"pm.expect(pm.environment.get(\"userName_security\")).to.be.a('string', \"The userName is not defined\");",
-									"pm.expect(pm.environment.get(\"contractNo_security\")).to.be.a('string', \"The contractNo is not defined\");",
-									"pm.expect(pm.environment.get(\"bcNo_security\")).to.be.a('string', \"The bcNo is not defined\");",
-									"pm.expect(pm.environment.get(\"userId_security\")).to.be.a('string', \"The userId is not defined\");",
-									""
 								],
 								"type": "text/javascript"
 							}
@@ -11804,7 +11814,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_security}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",    \r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/assets/account.accountname.write\",\r\n    \"https://api.crealogix.com/assets/account.accountimage.write\",\r\n    \"https://api.crealogix.com/assets/cuac.readonly\",\r\n    \"https://api.crealogix.com/assets/portfolio.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\",\r\n\t\"Hallo\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+							"raw": "{\r\n  \"tenant_id\": {{tenantId_soba}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_soba}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_soba}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_soba}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",    \r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/assets/account.accountname.write\",\r\n    \"https://api.crealogix.com/assets/account.accountimage.write\",\r\n    \"https://api.crealogix.com/assets/cuac.readonly\",\r\n    \"https://api.crealogix.com/assets/portfolio.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\"\r\n  ],\r\n  \"loginName\": \"{{userId_soba}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
 						},
 						"url": {
 							"raw": "{{env_security_testToken}}",
@@ -12332,7 +12342,7 @@
 	],
 	"variable": [
 		{
-			"id": "6f2b956e-3a14-4238-9af0-1cdc5b3d1867",
+			"id": "0c33b8d4-e658-4434-8db5-e4769e8354e4",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"

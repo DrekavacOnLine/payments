@@ -1,11 +1,11 @@
 [
     {
 		"testsScope": "Core",
-        "envName": "MDB-MASTER-TESTK8S",
-		"contractNumber": "\"1000061501\"",
+        "envName": "MDB-MASTER-LATK8S",
+		"contractNumber": "\"1000051501\"",
         "paymentType": "\"ACCOUNT_TRANSFER\"",
-        "beneficiaryAccountNo": "\"CH4812312001000061501\"",
-        "debtorAccountNo": "\"CH4812312001000061501\"",
+        "beneficiaryAccountNo": "\"CH9712312001000051501\"",
+        "debtorAccountNo": "\"CH9712312001000051501\"",
         "debtorAccountName": "\"Freddy Hinz\"",
         "debtorAdrLine": "\"Schachenallee 31\"",
         "debtorPostalCode": "\"5004\"",
