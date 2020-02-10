@@ -1,0 +1,13 @@
+[
+    {
+		"testsScope": "Core",
+        "envName": "SOBA-R200-TEST",
+		"contractNumber": "1273301501",
+        "tenantId_security": "2",
+        "tenantName_security": "CLX EBS",
+        "userName_security": "1273301501",
+        "contractNo_security": "15054",
+        "bcNo_security": "8334",
+        "userId_security": "1273301501"
+    }
+]

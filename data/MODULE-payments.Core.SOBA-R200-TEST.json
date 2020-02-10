@@ -1,7 +1,7 @@
 [
     {
 		"testsScope": "Core",
-        "envName": "SOBA-COBURG",
+        "envName": "SOBA-R200-TEST",
 		"contractNumber": "\"1273301501\"",
         "paymentType": "\"ACCOUNT_TRANSFER\"",
         "beneficiaryAccountNo": "\"CH5508334001273301501\"",
