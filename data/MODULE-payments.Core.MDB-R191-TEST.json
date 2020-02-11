@@ -7,10 +7,11 @@
         "beneficiaryAccountNo": "\"CH4812312001255171501\"",
         "debtorAccountNo": "\"CH6312312001248081501\"",
         "debtorAccountName": "\"Freddy Hinz\"",
-        "debtorAdrLine": "\"Schachenallee 31\"",
+        "debtorStreetName": "\"Schachenallee 31\"",
         "debtorPostalCode": "\"5004\"",
         "debtorTownName": "\"Aarau\"",
         "creditorAccountNo": "\"CH1012312001248080903\"",
+		"creditorAccountNo2": "\"CH2112312001000061502\"",
 		"creditorAccountNoUK": "\"12345678\"",
 		"creditorAccountNoSwisDomestic": "\"CH1012312001248080903\"",
 		"creditorAccountNoBalanceAdjustment": "\"CH1012312001248080903\"",		
@@ -19,5 +20,13 @@
         "endToEndId": "\"1304182224-0000002\"",
 		"postalAccountNo": "\"80-281-6\"",
 		"orangeAccountNo": "\"01-200015-9\""
+				
+		"_____PAYMENTS_TEAM_VARIABLES": "Starts here ___________________________________",
+		
+		"creditorAccountNoSWIFT": "\"GB75NWBK56000379360009\"",
+		"creditorAccountNoSEPA": "\"DE12500105170648489890\"",
+		"creditorAgentBicSWIFT": "\"NWBKGB2LXXX\"",
+		"creditorAgentBicSEPA": "\"INGDDEFFXXX\"",
+		"structuredRemittanceRF": "RF64186397856221845279566"
     }
 ]

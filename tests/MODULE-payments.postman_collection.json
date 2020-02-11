@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "044e64a6-94ba-4966-ba98-875bd836d9fa",
+		"_postman_id": "e86453e9-c4e7-460e-84b1-f1acedc8117c",
 		"name": "MODULE: Payments",
 		"description": "Integration of payment endpoints for SEPA and SWIFT payments against DBAN\r\n\r\nBased on clarification call from 24th of August 2018 efforts have been estimated to 140PD of development\r\n\r\n",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -55,10 +55,10 @@
 											"    pm.environment.set(\"debtorAccountName\",data.debtorAccountName);",
 											"    console.log(\"dataFile/debtorAccountName: \" + debtorAccountName);",
 											"}",
-											"var debtorAdrLine = data.debtorAdrLine;",
-											"if (debtorAdrLine){ ",
-											"    pm.environment.set(\"debtorAdrLine\",data.debtorAdrLine);",
-											"    console.log(\"dataFile/debtorAdrLine: \" + debtorAdrLine);",
+											"var debtorStreetName = data.debtorStreetName;",
+											"if (debtorStreetName){ ",
+											"    pm.environment.set(\"debtorStreetName\",data.debtorStreetName);",
+											"    console.log(\"dataFile/debtorStreetName: \" + debtorStreetName);",
 											"}",
 											"var debtorPostalCode = data.debtorPostalCode;",
 											"if (debtorPostalCode){ ",
@@ -69,6 +69,11 @@
 											"if (debtorTownName){ ",
 											"    pm.environment.set(\"debtorTownName\",data.debtorTownName);",
 											"    console.log(\"dataFile/debtorTownName: \" + debtorTownName);",
+											"}",
+											"var creditorAccountNo2 = data.creditorAccountNo2;",
+											"if (creditorAccountNo2){ ",
+											"    pm.environment.set(\"creditorAccountNo2\",data.creditorAccountNo2);",
+											"    console.log(\"dataFile/creditorAccountNo2: \" + creditorAccountNo2);",
 											"}",
 											"var creditorAccountNo = data.creditorAccountNo;",
 											"if (creditorAccountNo){ ",
@@ -115,6 +120,31 @@
 											"    pm.environment.set(\"orangeAccountNo\",data.orangeAccountNo);",
 											"    console.log(\"dataFile/orangeAccountNo: \" + orangeAccountNo);",
 											"}",
+											"var creditorAccountNoSWIFT = data.creditorAccountNoSWIFT;",
+											"if (creditorAccountNoSWIFT){ ",
+											"    pm.environment.set(\"creditorAccountNoSWIFT\",data.creditorAccountNoSWIFT);",
+											"    console.log(\"dataFile/creditorAccountNoSWIFT: \" + creditorAccountNoSWIFT);",
+											"}",
+											"var creditorAccountNoSEPA = data.creditorAccountNoSEPA;",
+											"if (creditorAccountNoSEPA){ ",
+											"    pm.environment.set(\"creditorAccountNoSEPA\",data.creditorAccountNoSEPA);",
+											"    console.log(\"dataFile/creditorAccountNoSEPA: \" + creditorAccountNoSEPA);",
+											"}",
+											"var creditorAgentBicSWIFT = data.creditorAgentBicSWIFT;",
+											"if (creditorAgentBicSWIFT){ ",
+											"    pm.environment.set(\"creditorAgentBicSWIFT\",data.creditorAgentBicSWIFT);",
+											"    console.log(\"dataFile/creditorAgentBicSWIFT: \" + creditorAgentBicSWIFT);",
+											"}",
+											"var creditorAgentBicSEPA = data.creditorAgentBicSEPA;",
+											"if (creditorAgentBicSEPA){ ",
+											"    pm.environment.set(\"creditorAgentBicSEPA\",data.creditorAgentBicSEPA);",
+											"    console.log(\"dataFile/creditorAgentBicSEPA: \" + creditorAgentBicSEPA);",
+											"}",
+											"var structuredRemittanceRF = data.structuredRemittanceRF;",
+											"if (structuredRemittanceRF){ ",
+											"    pm.environment.set(\"structuredRemittanceRF\",data.structuredRemittanceRF);",
+											"    console.log(\"dataFile/structuredRemittanceRF: \" + structuredRemittanceRF);",
+											"}",
 											"var accountAlias = data.accountAlias;",
 											"if (accountAlias){ ",
 											"    pm.environment.set(\"accountAlias\",data.accountAlias);",
@@ -133,6 +163,14 @@
 											"switch(testsScope) {",
 											"    case \"Full\":",
 											"        var testSession = [",
+											"            \"Create SEPA payment (C36240114)\",",
+											"            \"Deliver SEPA payment (C34775338)\",",
+											"            \"Update SEPA payment (C36275415)\",",
+											"            \"Delete SEPA payment (C36240104)\",",
+											"            \"Create SEPA (standing order) payment (C53860900)\",",
+											"            \"Deliver SEPA (standing order) payment (C53860904)\",",
+											"            \"Update SEPA (standing order) payment (C53860903)\",",
+											"            \"Delete SEPA (standing order) payment (C53860905)\",",
 											"            \"Create SWIFT payment (C36275411)\",",
 											"            \"Deliver SWIFT payment (C36240103)\",",
 											"            \"Update SWIFT payment (C36275416)\",",
@@ -149,6 +187,10 @@
 											"            \"Deliver Red payment (C51026511)\",",
 											"            \"Update Red payment (ToDo)\",",
 											"            \"Delete Red payment (ToDo)\",",
+											"            \"Create Red (standing order) payment (C52949280)\",",
+											"            \"Deliver Red (standing order) payment (C52992053)\",",
+											"            \"Update Red (standing order) payment (C52949281)\",",
+											"            \"Delete Red (standing order) payment (C52992055)\",",
 											"            \"Create Swiss domestic payment (C45840620)\",",
 											"            \"Deliver Swiss domestic payment (C45989797)\",",
 											"            \"Update Swiss domestic payment (C45840627)\",",
@@ -173,6 +215,10 @@
 											"            \"Deliver account transfer payment (C41939552)\",",
 											"            \"Update account transfer payment (C41939560)\",",
 											"            \"Delete account transfer payment (C41939557)\",",
+											"            \"Create account transfer (standing order) payment (C53388199)\",",
+											"            \"Deliver account transfer (standing order) payment (C53388200)\",",
+											"            \"Update account transfer (standing order) payment (C53388201)\",",
+											"            \"Delete account transfer (account transfer) payment (C53388202)\",",
 											"            \"Create UK payment (C51026517)\",",
 											"            \"Deliver UK payment (C51026519)\",",
 											"            \"Update UK payment (ToDo)\",",
@@ -194,6 +240,14 @@
 											"            ]; break;",
 											"    case \"Core\":",
 											"        var testSession = [",
+											"            \"Create SEPA payment (C36240114)\",",
+											"            \"Deliver SEPA payment (C34775338)\",",
+											"            \"Update SEPA payment (C36275415)\",",
+											"            \"Delete SEPA payment (C36240104)\",",
+											"            \"Create SEPA (standing order) payment (C53860900)\",",
+											"            \"Deliver SEPA (standing order) payment (C53860904)\",",
+											"            \"Update SEPA (standing order) payment (C53860903)\",",
+											"            \"Delete SEPA (standing order) payment (C53860905)\",",
 											"            \"Create SWIFT payment (C36275411)\",",
 											"            \"Deliver SWIFT payment (C36240103)\",",
 											"            \"Update SWIFT payment (C36275416)\",",
@@ -210,6 +264,10 @@
 											"            \"Deliver Red payment (C51026511)\",",
 											"            \"Update Red payment (ToDo)\",",
 											"            \"Delete Red payment (ToDo)\",",
+											"            \"Create Red (standing order) payment (C52949280)\",",
+											"            \"Deliver Red (standing order) payment (C52992053)\",",
+											"            \"Update Red (standing order) payment (C52949281)\",",
+											"            \"Delete Red (standing order) payment (C52992055)\",",
 											"            \"Create Swiss domestic payment (C45840620)\",",
 											"            \"Deliver Swiss domestic payment (C45989797)\",",
 											"            \"Update Swiss domestic payment (C45840627)\",",
@@ -234,6 +292,10 @@
 											"            \"Deliver account transfer payment (C41939552)\",",
 											"            \"Update account transfer payment (C41939560)\",",
 											"            \"Delete account transfer payment (C41939557)\",",
+											"            \"Create account transfer (standing order) payment (C53388199)\",",
+											"            \"Deliver account transfer (standing order) payment (C53388200)\",",
+											"            \"Update account transfer (standing order) payment (C53388201)\",",
+											"            \"Delete account transfer (account transfer) payment (C53388202)\",",
 											"            \"Search Payment Returns Unique Pages (C49445322)\",",
 											"            \"Search Payment calculates payments count regardles page and size parameters value (C49577618)\",",
 											"            \"Search Payment number of returned payments matches to “totalElements” property value (ToDo)\",",
@@ -247,6 +309,26 @@
 											"            ]; break;",
 											"    case \"Quick\":",
 											"        var testSession = [",
+											"            \"Create SEPA payment (C36240114)\",",
+											"            \"Deliver SEPA payment (C34775338)\",",
+											"            \"Update SEPA payment (C36275415)\",",
+											"            \"Delete SEPA payment (C36240104)\",",
+											"            \"Create SEPA (standing order) payment (C53860900)\",",
+											"            \"Deliver SEPA (standing order) payment (C53860904)\",",
+											"            \"Update SEPA (standing order) payment (C53860903)\",",
+											"            \"Delete SEPA (standing order) payment (C53860905)\",",
+											"            \"Create Red (standing order) payment (C52949280)\",",
+											"            \"Deliver Red (standing order) payment (C52992053)\",",
+											"            \"Update Red (standing order) payment (C52949281)\",",
+											"            \"Delete Red (standing order) payment (C52992055)\",",
+											"            \"Create account transfer payment (C41939554)\",",
+											"            \"Deliver account transfer payment (C41939552)\",",
+											"            \"Update account transfer payment (C41939560)\",",
+											"            \"Delete account transfer payment (C41939557)\",",
+											"            \"Create account transfer (standing order) payment (C53388199)\",",
+											"            \"Deliver account transfer (standing order) payment (C53388200)\",",
+											"            \"Update account transfer (standing order) payment (C53388201)\",",
+											"            \"Delete account transfer (account transfer) payment (C53388202)\"",
 											"            ]; break;",
 											"    case \"TestRailClean\":        ",
 											"        var testSession = [",
@@ -388,6 +470,436 @@
 				{
 					"name": "Payments: Payment type",
 					"item": [
+						{
+							"name": "SEPA",
+							"item": [
+								{
+									"name": "Standing order",
+									"item": [
+										{
+											"name": "Create SEPA (standing order) payment (C53860900)",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+														"exec": [
+															"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+															"eval(globals.testsExecuted)(testRailTestCases);",
+															"",
+															"var requestsToRun = [",
+															"        \"createPaymentSepaSO\",",
+															"        \"deletePaymentSepaSO\"",
+															"    ]; ",
+															"    pm.globals.set(\"_tr_createPaymentSepaSO\",testRailTestCases);",
+															"    pm.globals.set(\"_tr_deletePaymentSepaSO\",\"<cleanUp>\");",
+															"",
+															"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+															"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "HEAD",
+												"header": [],
+												"url": {
+													"raw": "httpbin.org/uuid",
+													"host": [
+														"httpbin",
+														"org"
+													],
+													"path": [
+														"uuid"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Deliver SEPA (standing order) payment (C53860904)",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+														"exec": [
+															"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+															"eval(globals.testsExecuted)(testRailTestCases);",
+															"",
+															"var requestsToRun = [",
+															"        \"createPaymentSepaSO\",",
+															"        \"getPaymentSepaSO\",",
+															"        \"deletePaymentSepaSO\"",
+															"    ]; ",
+															"    pm.globals.set(\"_tr_createPaymentSepaSO\",\"<preCondition>\");",
+															"    pm.globals.set(\"_tr_getPaymentSepaSO\",testRailTestCases);",
+															"    pm.globals.set(\"_tr_deletePaymentSepaSO\",\"<cleanUp>\");",
+															"",
+															"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+															"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "HEAD",
+												"header": [],
+												"url": {
+													"raw": "httpbin.org/uuid",
+													"host": [
+														"httpbin",
+														"org"
+													],
+													"path": [
+														"uuid"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update SEPA (standing order) payment (C53860903)",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+														"exec": [
+															"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+															"eval(globals.testsExecuted)(testRailTestCases);",
+															"",
+															"var requestsToRun = [",
+															"        \"createPaymentSepaSO\",",
+															"        \"updatePaymentSepaSO\",",
+															"        \"deletePaymentSepaSO\"",
+															"    ]; ",
+															"    pm.globals.set(\"_tr_createPaymentSepaSO\",\"<preCondition>\");",
+															"    pm.globals.set(\"_tr_updatePaymentSepaSO\",testRailTestCases);",
+															"    pm.globals.set(\"_tr_deletePaymentSepaSO\",\"<cleanUp>\");",
+															"",
+															"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+															"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "HEAD",
+												"header": [],
+												"url": {
+													"raw": "httpbin.org/uuid",
+													"host": [
+														"httpbin",
+														"org"
+													],
+													"path": [
+														"uuid"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Delete SEPA (standing order) payment (C53860905)",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+														"exec": [
+															"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+															"eval(globals.testsExecuted)(testRailTestCases);",
+															"",
+															"var requestsToRun = [",
+															"        \"createPaymentSepaSO\",",
+															"        \"deletePaymentSepaSO\"",
+															"    ]; ",
+															"    pm.globals.set(\"_tr_createPaymentSepaSO\",\"<preCondition>\");",
+															"    pm.globals.set(\"_tr_deletePaymentSepaSO\",testRailTestCases);",
+															"",
+															"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+															"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "HEAD",
+												"header": [],
+												"url": {
+													"raw": "httpbin.org/uuid",
+													"host": [
+														"httpbin",
+														"org"
+													],
+													"path": [
+														"uuid"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"protocolProfileBehavior": {},
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "Create SEPA payment (C36240114)",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+												"exec": [
+													"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+													"eval(globals.testsExecuted)(testRailTestCases);",
+													"",
+													"var requestsToRun = [",
+													"        \"createPaymentSepa\",",
+													"        \"deletePaymentSepa\"",
+													"    ]; ",
+													"    pm.globals.set(\"_tr_createPaymentSepa\",testRailTestCases);",
+													"    pm.globals.set(\"_tr_deletePaymentSepa\",\"<cleanUp>\");",
+													"",
+													"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+													"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "HEAD",
+										"header": [],
+										"url": {
+											"raw": "httpbin.org/uuid",
+											"host": [
+												"httpbin",
+												"org"
+											],
+											"path": [
+												"uuid"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Deliver SEPA payment (C34775338)",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+												"exec": [
+													"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+													"eval(globals.testsExecuted)(testRailTestCases);",
+													"",
+													"var requestsToRun = [",
+													"        \"createPaymentSepa\",",
+													"        \"getPaymentSepa\",",
+													"        \"deletePaymentSepa\"",
+													"    ]; ",
+													"    pm.globals.set(\"_tr_createPaymentSepa\",\"<preCondition>\");",
+													"    pm.globals.set(\"_tr_getPaymentSepa\",testRailTestCases);",
+													"    pm.globals.set(\"_tr_deletePaymentSepa\",\"<cleanUp>\");",
+													"",
+													"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+													"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "HEAD",
+										"header": [],
+										"url": {
+											"raw": "httpbin.org/uuid",
+											"host": [
+												"httpbin",
+												"org"
+											],
+											"path": [
+												"uuid"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update SEPA payment (C36275415)",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+												"exec": [
+													"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+													"eval(globals.testsExecuted)(testRailTestCases);",
+													"",
+													"var requestsToRun = [",
+													"        \"createPaymentSepa\",",
+													"        \"updatePaymentSepa\",",
+													"        \"deletePaymentSepa\"",
+													"    ]; ",
+													"    pm.globals.set(\"_tr_createPaymentSepa\",\"<preCondition>\");",
+													"    pm.globals.set(\"_tr_updatePaymentSepa\",testRailTestCases);",
+													"    pm.globals.set(\"_tr_deletePaymentSepa\",\"<cleanUp>\");",
+													"",
+													"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+													"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "HEAD",
+										"header": [],
+										"url": {
+											"raw": "httpbin.org/uuid",
+											"host": [
+												"httpbin",
+												"org"
+											],
+											"path": [
+												"uuid"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete SEPA payment (C36240104)",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+												"exec": [
+													"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+													"eval(globals.testsExecuted)(testRailTestCases);",
+													"",
+													"var requestsToRun = [",
+													"        \"createPaymentSepa\",",
+													"        \"deletePaymentSepa\"",
+													"    ]; ",
+													"    pm.globals.set(\"_tr_createPaymentSepa\",\"<preCondition>\");",
+													"    pm.globals.set(\"_tr_deletePaymentSepa\",testRailTestCases);",
+													"",
+													"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+													"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "HEAD",
+										"header": [],
+										"url": {
+											"raw": "httpbin.org/uuid",
+											"host": [
+												"httpbin",
+												"org"
+											],
+											"path": [
+												"uuid"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
 						{
 							"name": "SWIFT",
 							"item": [
@@ -1042,6 +1554,225 @@
 								{
 									"name": "Red",
 									"item": [
+										{
+											"name": "Standing order",
+											"item": [
+												{
+													"name": "Create Red (standing order) payment (C52949280)",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+																"exec": [
+																	"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+																	"eval(globals.testsExecuted)(testRailTestCases);",
+																	"",
+																	"var requestsToRun = [",
+																	"        \"createPaymentRedSO\",",
+																	"        \"deletePaymentRedSO\"",
+																	"    ]; ",
+																	"    pm.globals.set(\"_tr_createPaymentRedSO\",testRailTestCases);",
+																	"    pm.globals.set(\"_tr_deletePaymentRedSO\",\"<cleanUp>\");",
+																	"",
+																	"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+																	"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "test",
+															"script": {
+																"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "HEAD",
+														"header": [],
+														"url": {
+															"raw": "httpbin.org/uuid",
+															"host": [
+																"httpbin",
+																"org"
+															],
+															"path": [
+																"uuid"
+															]
+														},
+														"description": "PRODUCT-8395"
+													},
+													"response": []
+												},
+												{
+													"name": "Deliver Red (standing order) payment (C52992053)",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+																"exec": [
+																	"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+																	"eval(globals.testsExecuted)(testRailTestCases);",
+																	"",
+																	"var requestsToRun = [",
+																	"        \"createPaymentRedSO\",",
+																	"        \"getPaymentRedSO\",",
+																	"        \"deletePaymentRedSO\"",
+																	"    ]; ",
+																	"    pm.globals.set(\"_tr_createPaymentRedSO\",\"<preCondition>\");",
+																	"    pm.globals.set(\"_tr_getPaymentRedSO\",testRailTestCases);",
+																	"    pm.globals.set(\"_tr_deletePaymentRedSO\",\"<cleanUp>\");",
+																	"",
+																	"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+																	"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "test",
+															"script": {
+																"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "HEAD",
+														"header": [],
+														"url": {
+															"raw": "httpbin.org/uuid",
+															"host": [
+																"httpbin",
+																"org"
+															],
+															"path": [
+																"uuid"
+															]
+														},
+														"description": "PRODUCT-8401"
+													},
+													"response": []
+												},
+												{
+													"name": "Update Red (standing order) payment (C52949281)",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+																"exec": [
+																	"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+																	"eval(globals.testsExecuted)(testRailTestCases);",
+																	"",
+																	"var requestsToRun = [",
+																	"        \"createPaymentRedSO\",",
+																	"        \"updatePaymentRedSO\",",
+																	"        \"deletePaymentRedSO\"",
+																	"    ]; ",
+																	"    pm.globals.set(\"_tr_createPaymentRedSO\",\"<preCondition>\");",
+																	"    pm.globals.set(\"_tr_updatePaymentRedSO\",testRailTestCases);",
+																	"    pm.globals.set(\"_tr_deletePaymentRedSO\",\"<cleanUp>\");",
+																	"",
+																	"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+																	"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "test",
+															"script": {
+																"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "HEAD",
+														"header": [],
+														"url": {
+															"raw": "httpbin.org/uuid",
+															"host": [
+																"httpbin",
+																"org"
+															],
+															"path": [
+																"uuid"
+															]
+														},
+														"description": "PRODUCT-8395"
+													},
+													"response": []
+												},
+												{
+													"name": "Delete Red (standing order) payment (C52992055)",
+													"event": [
+														{
+															"listen": "prerequest",
+															"script": {
+																"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+																"exec": [
+																	"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+																	"eval(globals.testsExecuted)(testRailTestCases);",
+																	"",
+																	"var requestsToRun = [",
+																	"        \"createPaymentRedSO\",",
+																	"        \"deletePaymentRedSO\"",
+																	"    ]; ",
+																	"    pm.globals.set(\"_tr_createPaymentRedSO\",\"<preCondition>\");",
+																	"    pm.globals.set(\"_tr_deletePaymentRedSO\",testRailTestCases);",
+																	"",
+																	"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+																	"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "test",
+															"script": {
+																"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "HEAD",
+														"header": [],
+														"url": {
+															"raw": "httpbin.org/uuid",
+															"host": [
+																"httpbin",
+																"org"
+															],
+															"path": [
+																"uuid"
+															]
+														},
+														"description": "PRODUCT-8401"
+													},
+													"response": []
+												}
+											],
+											"protocolProfileBehavior": {},
+											"_postman_isSubFolder": true
+										},
 										{
 											"name": "Create Red payment (C51026510)",
 											"event": [
@@ -2780,6 +3511,243 @@
 							"name": "Account transfer",
 							"item": [
 								{
+									"name": "Standing order",
+									"item": [
+										{
+											"name": "Create account transfer (standing order) payment (C53388199)",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+														"exec": [
+															"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+															"eval(globals.testsExecuted)(testRailTestCases);",
+															"",
+															"var requestsToRun = [",
+															"        \"createPaymentAccountTransferSO\",",
+															"        \"deletePaymentAccountTransferSO\"",
+															"    ]; ",
+															"    pm.globals.set(\"_tr_createPaymentAccountTransferSO\",testRailTestCases);",
+															"    pm.globals.set(\"_tr_deletePaymentAccountTransferSO\",\"<cleanUp>\");",
+															"",
+															"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+															"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "HEAD",
+												"header": [],
+												"url": {
+													"raw": "httpbin.org/uuid",
+													"host": [
+														"httpbin",
+														"org"
+													],
+													"path": [
+														"uuid"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Deliver account transfer (standing order) payment (C53388200)",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+														"exec": [
+															"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+															"eval(globals.testsExecuted)(testRailTestCases);",
+															"",
+															"var requestsToRun = [",
+															"        \"createPaymentAccountTransferSO\",",
+															"        \"getPaymentAccountTransferSO\",",
+															"        \"deletePaymentAccountTransferSO\"",
+															"    ]; ",
+															"    pm.globals.set(\"_tr_createPaymentAccountTransferSO\",\"<preCondition>\");",
+															"    pm.globals.set(\"_tr_getPaymentAccountTransferSO\",testRailTestCases);",
+															"    pm.globals.set(\"_tr_deletePaymentAccountTransferSO\",\"<cleanUp>\");",
+															"",
+															"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+															"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "HEAD",
+												"header": [],
+												"url": {
+													"raw": "httpbin.org/uuid",
+													"host": [
+														"httpbin",
+														"org"
+													],
+													"path": [
+														"uuid"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Update account transfer (standing order) payment (C53388201)",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+														"exec": [
+															"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+															"eval(globals.testsExecuted)(testRailTestCases);",
+															"",
+															"var requestsToRun = [",
+															"        \"createPaymentAccountTransferSO\",",
+															"        \"updatePaymentAccountTransferSO\",",
+															"        \"deletePaymentAccountTransferSO\"",
+															"    ]; ",
+															"    pm.globals.set(\"_tr_createPaymentAccountTransferSO\",\"<preCondition>\");",
+															"    pm.globals.set(\"_tr_updatePaymentAccountTransferSO\",testRailTestCases);",
+															"    pm.globals.set(\"_tr_deletePaymentAccountTransferSO\",\"<cleanUp>\");",
+															"",
+															"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+															"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "HEAD",
+												"header": [],
+												"url": {
+													"raw": "httpbin.org/uuid",
+													"host": [
+														"httpbin",
+														"org"
+													],
+													"path": [
+														"uuid"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Delete account transfer (account transfer) payment (C53388202)",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+														"exec": [
+															"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+															"eval(globals.testsExecuted)(testRailTestCases);",
+															"",
+															"var requestsToRun = [",
+															"        \"createPaymentAccountTransferSO\",",
+															"        \"deletePaymentAccountTransferSO\"",
+															"    ]; ",
+															"    pm.globals.set(\"_tr_createPaymentAccountTransferSO\",\"<preCondition>\");",
+															"    pm.globals.set(\"_tr_deletePaymentAccountTransferSO\",testRailTestCases);",
+															"",
+															"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+															"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "HEAD",
+												"header": [],
+												"url": {
+													"raw": "httpbin.org/uuid",
+													"host": [
+														"httpbin",
+														"org"
+													],
+													"path": [
+														"uuid"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "94d39878-b23f-4283-976e-719d2030bb01",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "89db9f6d-1199-46ea-a7fc-54b1390103dc",
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									],
+									"protocolProfileBehavior": {},
+									"_postman_isSubFolder": true
+								},
+								{
 									"name": "Create account transfer payment (C41939554)",
 									"event": [
 										{
@@ -3819,6 +4787,1181 @@
 				{
 					"name": "Payments: Payment type",
 					"item": [
+						{
+							"name": "SEPA",
+							"item": [
+								{
+									"name": "Standing order",
+									"item": [
+										{
+											"name": "createPaymentSepaSO",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
+														"exec": [
+															"// Execute standard tests from PrS using eval()\r",
+															"eval(globals.commonTests)();\r",
+															"\r",
+															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" SEPA (standing order) payment is created and assertions are passed\", function () {\r",
+															"\r",
+															"  //Instructed amount is correct\r",
+															"let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
+															"let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
+															"//State is correct\r",
+															"let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+															"//Creditor agent is correct\r",
+															"let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent.bic;\r",
+															"let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent.bic;\r",
+															"//Debtor address is correct\r",
+															"let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
+															"let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
+															"//Debtor account is correct\r",
+															"let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
+															"let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo; \r",
+															"//Creditor account is correct\r",
+															"let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
+															"let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
+															"//Structured remittance information is correct\r",
+															"let requestBodyStructuredRemittance = JSON.parse(request.data).paymentInformation.remittanceInformation.structured;\r",
+															"let responseBodyStructuredRemittance = JSON.parse(responseBody).paymentInformation.remittanceInformation.structured; \r",
+															"//Standing order info is correct\r",
+															"let requestBodyStandingOrder = JSON.parse(request.data).standingOrder;\r",
+															"let responseBodyStandingOrder = JSON.parse(responseBody).standingOrder; \r",
+															"\r",
+															"pm.test(\"Instructed amount is correct\", () => {\r",
+															"  pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"State is correct\", () => {\r",
+															"  pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Creditor agent is correct\", () => {\r",
+															"  pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Debtor address is correct\", () => {\r",
+															"  pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName);\r",
+															"  pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
+															"  pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Debtor account is correct\", () => {\r",
+															"  pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Creditor account is correct\", () => {\r",
+															"  pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Structured remittance information is correct\", () => {\r",
+															"  pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Standing order info is correct\", () => {\r",
+															"  pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+															"});\r",
+															"\r",
+															"    // check if payment is created\r",
+															"    if (pm.response.to.have.status(201)){\r",
+															"        var responseData = JSON.parse(responseBody);\r",
+															"        pm.globals.set(\"newPaymentSepaID\", responseData.paymentId);\r",
+															"        pm.globals.set(\"newPaymentSepaStOrInfo\", responseData.standingOrder);\r",
+															"        console.log(\"New SEPA (standing order) payment ID: \" + pm.globals.get(\"newPaymentSepaID\"));\r",
+															"    }\r",
+															"    else {\r",
+															"        console.log(\"Failed to create SEPA (standing order) payment\");\r",
+															"    };\r",
+															"\r",
+															"//Determine if assertion passed at whole\r",
+															"pm.response.to.have.status(201)\r",
+															"&& pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+															"&& pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\") \r",
+															"&& pm.expect(responseBodyCreditorAgent.bic).to.eql(requestBodyCreditorAgent.bic) \r",
+															"&& pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName) \r",
+															"&& pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode) \r",
+															"&& pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName) \r",
+															"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
+															"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
+															"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance)\r",
+															"&& pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder)\r",
+															"});\r",
+															"\r",
+															"// Store the used parameters (test relevant)\r",
+															"pm.environment.set(\"instructedAmount\", (JSON.parse(request.data).paymentInformation.instructedAmount));\r",
+															"let response = pm.response.json().paymentInformation.standingOrder,\r",
+															"    savedData = JSON.stringify(response);\r",
+															"pm.environment.set(\"standingOrder\", savedData);\r",
+															"\r",
+															"// Session navigate from PrS using eval()\r",
+															"eval(globals.sessionNavigate)();\r",
+															"\r",
+															"// Reset reference to TR test cases\r",
+															"pm.globals.unset(\"_tr_\" + request.name);"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"name": "Content-Type",
+														"type": "text",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json, application/hal+json"
+													},
+													{
+														"key": "Authorization",
+														"type": "text",
+														"value": "Bearer {{access_token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 9.99\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": \"{{structuredRemittanceRf}}\"\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}},\r\n\"standingOrder\": {\r\n\"firstOn\": {{PrS:futureWorkingDay}},\r\n\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\"beforeHoliday\": true,\r\n\"interval\": \"WEEKLY\",\r\n\"active\": true,\r\n\"ultimo\": false\t\t\r\n}\r\n}\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer",
+													"host": [
+														"{{environment}}"
+													],
+													"path": [
+														"banking-api",
+														"payment",
+														"sepa",
+														"{{tenant}}",
+														"v2",
+														"credittransfer"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "getPaymentSepaSO",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
+														"exec": [
+															"// Execute standard tests from PrS using eval()\r",
+															"eval(globals.commonTests)();\r",
+															"\r",
+															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" SEPA (standing order) payment is retrieved and assertions are passed\", function () {\r",
+															"\r",
+															"  //Instructed amount is correct\r",
+															"let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
+															"let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
+															"//State is correct\r",
+															"let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+															"//Creditor agent is correct\r",
+															"let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent.bic;\r",
+															"let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent.bic;\r",
+															"//Debtor address is correct\r",
+															"let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
+															"let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
+															"//Debtor account is correct\r",
+															"let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
+															"let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo; \r",
+															"//Creditor account is correct\r",
+															"let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
+															"let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
+															"//Structured remittance information is correct\r",
+															"let requestBodyStructuredRemittance = JSON.parse(request.data).paymentInformation.remittanceInformation.structured;\r",
+															"let responseBodyStructuredRemittance = JSON.parse(responseBody).paymentInformation.remittanceInformation.structured; \r",
+															"//Standing order info is correct\r",
+															"let responseBodyStandingOrder = JSON.parse(responseBody).paymentInformation.standingOrder; \r",
+															"\r",
+															"pm.test(\"Payment (standing order) is retrieved\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"\r",
+															"pm.test(\"Instructed amount is correct\", () => {\r",
+															"  pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"State is correct\", () => {\r",
+															"  pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Creditor agent is correct\", () => {\r",
+															"  pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Debtor address is correct\", () => {\r",
+															"  pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName);\r",
+															"  pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
+															"  pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Debtor account is correct\", () => {\r",
+															"  pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Creditor account is correct\", () => {\r",
+															"  pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Structured remittance information is correct\", () => {\r",
+															"  pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Standing order info is correct\", () => {\r",
+															"  pm.expect(responseBodyStandingOrder).to.eql(JSON.parse(pm.environment.get(\"standingOrder\")));\r",
+															"});\r",
+															"\r",
+															"//Determine if assertion passed at whole\r",
+															"pm.response.to.have.status(200)\r",
+															"&& pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+															"&& pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\") \r",
+															"&& pm.expect(responseBodyCreditorAgent.bic).to.eql(requestBodyCreditorAgent.bic) \r",
+															"&& pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName) \r",
+															"&& pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode) \r",
+															"&& pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName) \r",
+															"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
+															"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
+															"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance)\r",
+															"&& pm.expect(responseBodyStandingOrder).to.eql(JSON.parse(pm.environment.get(\"standingOrder\")))\r",
+															"});\r",
+															"\r",
+															"// Session navigate from PrS using eval()\r",
+															"eval(globals.sessionNavigate)();\r",
+															"\r",
+															"// Reset reference to TR test cases\r",
+															"pm.globals.unset(\"_tr_\" + request.name);"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Content-Type",
+														"name": "Content-Type",
+														"type": "text",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json, application/hal+json"
+													},
+													{
+														"key": "Authorization",
+														"type": "text",
+														"value": "Bearer {{access_token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 9.99\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": \"{{structuredRemittanceRf}}\"\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n},\r\n\"standingOrder\": {\r\n\"firstOn\": {{PrS:futureWorkingDay}},\r\n\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\"beforeHoliday\": true,\r\n\"interval\": \"WEEKLY\",\r\n\"active\": true,\r\n\"ultimo\": false\t\t\r\n}\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
+													"host": [
+														"{{environment}}"
+													],
+													"path": [
+														"banking-api",
+														"payment",
+														"sepa",
+														"{{tenant}}",
+														"v2",
+														"credittransfer",
+														"{{newPaymentSepaID}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "updatePaymentSepaSO",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
+														"exec": [
+															"// Execute standard tests from PrS using eval()\r",
+															"eval(globals.commonTests)();\r",
+															"\r",
+															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" SEPA (standing order) payment is updated and assertions are passed\", function () {\r",
+															"\r",
+															"  //Instructed amount is correct\r",
+															"let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
+															"let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
+															"//State is correct\r",
+															"let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+															"//Creditor agent is correct\r",
+															"let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent.bic;\r",
+															"let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent.bic;\r",
+															"//Debtor address is correct\r",
+															"let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
+															"let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
+															"//Debtor account is correct\r",
+															"let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
+															"let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo; \r",
+															"//Creditor account is correct\r",
+															"let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
+															"let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;\r",
+															"//Structured remittance information is correct\r",
+															"let requestBodyStructuredRemittance = JSON.parse(request.data).paymentInformation.remittanceInformation.structured;\r",
+															"let responseBodyStructuredRemittance = JSON.parse(responseBody).paymentInformation.remittanceInformation.structured; \r",
+															"//Standing order info is correct\r",
+															"let requestBodyStandingOrder = JSON.parse(request.data).standingOrder;\r",
+															"let responseBodyStandingOrder = JSON.parse(responseBody).standingOrder; \r",
+															"\r",
+															"pm.test(\"Payment (standing order) is updated\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Instructed amount is correct\", () => {\r",
+															"  pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"State is correct\", () => {\r",
+															"  pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Creditor agent is correct\", () => {\r",
+															"  pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Debtor address is correct\", () => {\r",
+															"  pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName);\r",
+															"  pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
+															"  pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Debtor account is correct\", () => {\r",
+															"  pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Creditor account is correct\", () => {\r",
+															"  pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Structured remittance information is correct\", () => {\r",
+															"  pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Standing order info is correct\", () => {\r",
+															"  pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+															"});\r",
+															"\r",
+															"\r",
+															"//Determine if assertion passed at whole\r",
+															"pm.response.to.have.status(200)\r",
+															"&& pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+															"&& pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\") \r",
+															"&& pm.expect(responseBodyCreditorAgent.bic).to.eql(requestBodyCreditorAgent.bic) \r",
+															"&& pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName) \r",
+															"&& pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode) \r",
+															"&& pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName) \r",
+															"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
+															"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
+															"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance)\r",
+															"&& pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder)\r",
+															"});\r",
+															"\r",
+															"// Session navigate from PrS using eval()\r",
+															"eval(globals.sessionNavigate)();\r",
+															"\r",
+															"// Reset reference to TR test cases\r",
+															"pm.globals.unset(\"_tr_\" + request.name);"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"name": "Content-Type",
+														"type": "text",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json, application/hal+json"
+													},
+													{
+														"key": "Authorization",
+														"type": "text",
+														"value": "Bearer {{access_token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 10.99\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": \"{{structuredRemittanceRf}}\"\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}},\r\n\"standingOrder\": {\r\n\"firstOn\": {{PrS:futureWorkingDay}},\r\n\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\"beforeHoliday\": false,\r\n\"interval\": \"DAILY\",\r\n\"active\": true,\r\n\"ultimo\": false\t\t\r\n}\r\n}\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
+													"host": [
+														"{{environment}}"
+													],
+													"path": [
+														"banking-api",
+														"payment",
+														"sepa",
+														"{{tenant}}",
+														"v2",
+														"credittransfer",
+														"{{newPaymentSepaID}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "deletePaymentSepaSO",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "b805315b-12ae-4f45-85f9-14230e6cb91e",
+														"exec": [
+															"// Execute standard tests from PrS using eval()\r",
+															"//eval(globals.commonTests)();\r",
+															"\r",
+															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" SEPA (standing order) payment is deleted and not exists anymore\", function () {\r",
+															"    let responseBodyStatus = JSON.parse(responseBody)._status; \r",
+															"    let responseBodyMessages = JSON.parse(responseBody)._messages; \r",
+															"    pm.response.to.have.status(200) \r",
+															"    && pm.expect(responseBodyStatus).to.eql(true)\r",
+															"    && pm.expect(responseBodyMessages).to.be.an('array').that.is.empty;\r",
+															"});\r",
+															"\r",
+															"// Log important stuff\r",
+															"if (pm.response.to.have.status(200)){\r",
+															"    console.log(\"Deleted SEPA (standing order) payment ID:\" + pm.globals.get(\"newPaymentSepaID\"));\r",
+															"    pm.globals.set(\"deletedSepaPaymentID\",pm.globals.get(\"newPaymentSepaID\"));\r",
+															"    pm.globals.unset(\"newPaymentSepaID\");\r",
+															"    pm.globals.unset(\"newPaymentSepaStOrInfo\");\r",
+															"}\r",
+															"else {\r",
+															"    console.log(\"Failed to delete SEPA (standing order) payment with ID:\" + pm.globals.get(\"newPaymentSepaID\"));\r",
+															"}\r",
+															"\r",
+															"// Session navigate from PrS using eval()\r",
+															"eval(globals.sessionNavigate)();\r",
+															"\r",
+															"// Reset reference to TR test cases\r",
+															"pm.globals.unset(\"_tr_\" + request.name);"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "8b0efd50-c002-40d7-bf02-ad82c22ce7a7",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Content-Type",
+														"name": "Content-Type",
+														"type": "text",
+														"value": "application/json"
+													},
+													{
+														"key": "accept",
+														"value": "application/json, application/hal+json"
+													},
+													{
+														"key": "Authorization",
+														"type": "text",
+														"value": "Bearer {{token}}",
+														"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+														"disabled": true
+													},
+													{
+														"key": "Authorization",
+														"type": "text",
+														"value": "Bearer {{access_token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
+													"host": [
+														"{{environment}}"
+													],
+													"path": [
+														"banking-api",
+														"payment",
+														"sepa",
+														"{{tenant}}",
+														"v2",
+														"credittransfer",
+														"{{newPaymentSepaID}}"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"protocolProfileBehavior": {},
+									"_postman_isSubFolder": true
+								},
+								{
+									"name": "createPaymentSepa",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "9c72540c-8b6e-4022-beb7-ef4a180f1b6b",
+												"exec": [
+													"//************************************************************************************************",
+													"// set parameters ********************************************************************************",
+													"//************************************************************************************************",
+													"var creditorAgentBicSEPA = data.creditorAgentBicSEPA;",
+													"if (creditorAgentBicSEPA){ ",
+													"    pm.environment.set(\"creditorAgentBicSEPA\",data.creditorAgentBicSEPA);",
+													"    console.log(\"dataFile/creditorAgentBicSEPA: \" + creditorAgentBicSEPA);",
+													"}",
+													"",
+													"var creditorAccountNoSEPA = data.creditorAccountNoSEPA;",
+													"if (creditorAccountNoSEPA){ ",
+													"    pm.environment.set(\"creditorAccountNoSEPA\",data.creditorAccountNoSEPA);",
+													"    console.log(\"dataFile/creditorAccountNoSEPA: \" + creditorAccountNoSEPA);",
+													"}",
+													"",
+													"var structuredRemittanceRF = data.structuredRemittanceRF;",
+													"if (structuredRemittanceRF){ ",
+													"    pm.environment.set(\"structuredRemittanceRF\",data.structuredRemittanceRF);",
+													"    console.log(\"dataFile/structuredRemittanceRF: \" + structuredRemittanceRF);",
+													"}"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "05a88f70-ba02-48cd-9fae-2c7979c3c899",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
+													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is created and assertions are passed\", function () {\r",
+													"\r",
+													"//Instructed amount is correct\r",
+													"let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
+													"let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
+													"//Execution date is correct\r",
+													"let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
+													"let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
+													"//State is correct\r",
+													"let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+													"//Creditor agent is correct\r",
+													"let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent.bic;\r",
+													"let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent.bic;\r",
+													"//Debtor address is correct\r",
+													"let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
+													"let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
+													"//Debtor account is correct\r",
+													"let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
+													"let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo; \r",
+													"//Creditor account is correct\r",
+													"let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
+													"let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
+													"//Structured remittance information is correct\r",
+													"let requestBodyStructuredRemittance = JSON.parse(request.data).paymentInformation.remittanceInformation.structured;\r",
+													"let responseBodyStructuredRemittance = JSON.parse(responseBody).paymentInformation.remittanceInformation.structured; \r",
+													"\r",
+													"pm.test(\"Instructed amount is correct\", () => {\r",
+													"  pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Execution date is correct\", () => {\r",
+													"  pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"State is correct\", () => {\r",
+													"  pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Creditor agent is correct\", () => {\r",
+													"  pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Debtor address is correct\", () => {\r",
+													"  pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName);\r",
+													"  pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
+													"  pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Debtor account is correct\", () => {\r",
+													"  pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Creditor account is correct\", () => {\r",
+													"  pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Structured remittance information is correct\", () => {\r",
+													"  pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance);\r",
+													"});\r",
+													"\r",
+													"// check if payment is created\r",
+													"if (pm.response.to.have.status(201)){\r",
+													"    var responseData = JSON.parse(responseBody);\r",
+													"    pm.globals.set(\"newPaymentSepaID\", responseData.paymentId);\r",
+													"    console.log(\"New payment ID: \" + pm.globals.get(\"newPaymentSepaID\"));\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to create payment with ID:\" + pm.globals.get(\"newPaymentSepaID\"));\r",
+													"    pm.globals.unset(\"newPaymentSepaID\");\r",
+													"}\r",
+													"\r",
+													"//Determine if assertion passed at whole\r",
+													"pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+													"&& pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate) \r",
+													"&& pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\") \r",
+													"&& pm.expect(responseBodyCreditorAgent.bic).to.eql(requestBodyCreditorAgent.bic) \r",
+													"&& pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName) \r",
+													"&& pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode) \r",
+													"&& pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName) \r",
+													"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
+													"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
+													"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance)\r",
+													"});\r",
+													"\r",
+													"// Store the used parameters (test relevant)\r",
+													"pm.environment.set(\"instructedAmount\", (JSON.parse(request.data).paymentInformation.instructedAmount));\r",
+													"pm.environment.set(\"requestedExecutionDate\", (JSON.parse(request.data).paymentInformation.requestedExecutionDate));\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();\r",
+													"\r",
+													"// Reset reference to TR test cases\r",
+													"pm.globals.unset(\"_tr_\" + request.name);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 312.00\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": \"{{structuredRemittanceRf}}\"\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"streetName\": \"{{$randomStreetName}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n}\r\n}"
+										},
+										"url": {
+											"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer",
+											"host": [
+												"{{environment}}"
+											],
+											"path": [
+												"banking-api",
+												"payment",
+												"sepa",
+												"{{tenant}}",
+												"v2",
+												"credittransfer"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "getPaymentSepa",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "9c72540c-8b6e-4022-beb7-ef4a180f1b6b",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"id": "05a88f70-ba02-48cd-9fae-2c7979c3c899",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
+													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is retrieved and assertions are passed\", function () {\r",
+													"\r",
+													"//Instructed amount is correct\r",
+													"let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
+													"//Execution date is correct\r",
+													"let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
+													"let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
+													"//State is correct\r",
+													"let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+													"//Creditor agent is correct\r",
+													"let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent.bic;\r",
+													"//Debtor address is correct\r",
+													"let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
+													"let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
+													"//Debtor account is correct\r",
+													"let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
+													"let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo; \r",
+													"//Creditor account is correct\r",
+													"let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
+													"let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
+													"//Structured remittance information is correct\r",
+													"let requestBodyStructuredRemittance = JSON.parse(request.data).paymentInformation.remittanceInformation.structured;\r",
+													"let responseBodyStructuredRemittance = JSON.parse(responseBody).paymentInformation.remittanceInformation.structured; \r",
+													"\r",
+													"    pm.test(\"Payment is retrieved\", function () {\r",
+													"        pm.response.to.have.status(200);\r",
+													"    });\r",
+													"\r",
+													"pm.test(\"Instructed amount is correct\", () => {\r",
+													"  pm.expect(responseBodyInstructedAmount).to.eql(pm.environment.get(\"instructedAmount\"));\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Execution date is correct\", () => {\r",
+													"  pm.expect(responseBodyExecutionDate).to.eql(pm.environment.get(\"requestedExecutionDate\"));\r",
+													"});\r",
+													"\r",
+													"pm.test(\"State is correct\", () => {\r",
+													"  pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Creditor agent is correct\", () => {\r",
+													"  pm.expect(responseBodyCreditorAgent).to.eql(JSON.parse(pm.environment.get(\"creditorAgentBicSEPA\")));\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Debtor address is correct\", () => {\r",
+													"  pm.expect(responseBodyDebtorAddress.streetName).to.eql(JSON.parse(pm.environment.get(\"debtorStreetName\")));\r",
+													"  pm.expect(responseBodyDebtorAddress.postalCode).to.eql(JSON.parse(pm.environment.get(\"debtorPostalCode\")));\r",
+													"  pm.expect(responseBodyDebtorAddress.townName).to.eql(JSON.parse(pm.environment.get(\"debtorTownName\")));\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Debtor account is correct\", () => {\r",
+													"  pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Creditor account is correct\", () => {\r",
+													"  pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Structured remittance information is correct\", () => {\r",
+													"  pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance);\r",
+													"});\r",
+													"\r",
+													"//Determine if assertion passed at whole\r",
+													"pm.response.to.have.status(200)\r",
+													"&& pm.expect(responseBodyInstructedAmount).to.eql(pm.environment.get(\"instructedAmount\"))\r",
+													"&& pm.expect(responseBodyExecutionDate).to.eql(pm.environment.get(\"requestedExecutionDate\"))\r",
+													"&& pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\") \r",
+													"&& pm.expect(responseBodyCreditorAgent).to.eql(JSON.parse(pm.environment.get(\"creditorAgentBicSEPA\")))\r",
+													"&& pm.expect(responseBodyDebtorAddress.streetName).to.eql(JSON.parse(pm.environment.get(\"debtorStreetName\")))\r",
+													"&& pm.expect(responseBodyDebtorAddress.postalCode).to.eql(JSON.parse(pm.environment.get(\"debtorPostalCode\")))\r",
+													"&& pm.expect(responseBodyDebtorAddress.townName).to.eql(JSON.parse(pm.environment.get(\"debtorTownName\")))\r",
+													"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
+													"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
+													"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance)\r",
+													"});\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();\r",
+													"\r",
+													"// Reset reference to TR test cases\r",
+													"pm.globals.unset(\"_tr_\" + request.name);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 112.00\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": \"{{structuredRemittanceRf}}\"\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n}\r\n}"
+										},
+										"url": {
+											"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
+											"host": [
+												"{{environment}}"
+											],
+											"path": [
+												"banking-api",
+												"payment",
+												"sepa",
+												"{{tenant}}",
+												"v2",
+												"credittransfer",
+												"{{newPaymentSepaID}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updatePaymentSepa",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "96ee9651-4e6e-4a83-a257-55d56e136859",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"eval(globals.commonTests)();\r",
+													"\r",
+													"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
+													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is updated and assertions are passed\", function () {\r",
+													"\r",
+													"//Instructed amount is correct\r",
+													"let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
+													"let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
+													"//Execution date is correct\r",
+													"let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
+													"let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
+													"//State is correct\r",
+													"let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+													"//Creditor agent is correct\r",
+													"let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent.bic;\r",
+													"let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent.bic;\r",
+													"//Debtor address is correct\r",
+													"let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
+													"let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
+													"//Debtor account is correct\r",
+													"let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
+													"let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo; \r",
+													"//Creditor account is correct\r",
+													"let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
+													"let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
+													"//Structured remittance information is correct\r",
+													"let requestBodyStructuredRemittance = JSON.parse(request.data).paymentInformation.remittanceInformation.structured;\r",
+													"let responseBodyStructuredRemittance = JSON.parse(responseBody).paymentInformation.remittanceInformation.structured; \r",
+													"\r",
+													"pm.test(\"Payment is updated\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Instructed amount is correct\", () => {\r",
+													"  pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Execution date is correct\", () => {\r",
+													"  pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"State is correct\", () => {\r",
+													"  pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\");\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Creditor agent is correct\", () => {\r",
+													"  pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Debtor address is correct\", () => {\r",
+													"  pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName);\r",
+													"  pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
+													"  pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Debtor account is correct\", () => {\r",
+													"  pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Creditor account is correct\", () => {\r",
+													"  pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Structured remittance information is correct\", () => {\r",
+													"  pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance);\r",
+													"});\r",
+													"\r",
+													"//Determine if assertion passed at whole\r",
+													"pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+													"&& pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate) \r",
+													"&& pm.expect(jsonDataResponsePaymentState).to.eql(\"READY_FOR_EXECUTION\") \r",
+													"&& pm.expect(responseBodyCreditorAgent.bic).to.eql(requestBodyCreditorAgent.bic) \r",
+													"&& pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName) \r",
+													"&& pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode) \r",
+													"&& pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName) \r",
+													"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
+													"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
+													"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance)\r",
+													"});\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();\r",
+													"\r",
+													"// Reset reference to TR test cases\r",
+													"pm.globals.unset(\"_tr_\" + request.name);"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "ed4149e4-3b82-4013-8999-2fa27812ab16",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "content-type",
+												"value": "application/json; charset=UTF-8"
+											},
+											{
+												"key": "accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{token}}",
+												"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+												"disabled": true
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 122.00\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": \"{{structuredRemittanceRf}}\"\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"streetName\": \"{{$randomStreetName}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n}\r\n}"
+										},
+										"url": {
+											"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
+											"host": [
+												"{{environment}}"
+											],
+											"path": [
+												"banking-api",
+												"payment",
+												"sepa",
+												"{{tenant}}",
+												"v2",
+												"credittransfer",
+												"{{newPaymentSepaID}}"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "deletePaymentSepa",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "b805315b-12ae-4f45-85f9-14230e6cb91e",
+												"exec": [
+													"// Execute standard tests from PrS using eval()\r",
+													"//eval(globals.commonTests)();\r",
+													"\r",
+													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" SEPA payment is deleted and not exists anymore\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"// Log important stuff\r",
+													"if (pm.response.to.have.status(200)){\r",
+													"    console.log(\"Deleted SEPA payment ID:\" + pm.globals.get(\"newPaymentSepaID\"));\r",
+													"    pm.globals.set(\"deletedPaymentSepaID\",pm.globals.get(\"newPaymentSepaID\"));\r",
+													"    pm.globals.unset(\"newPaymentSepaID\");\r",
+													"}\r",
+													"else {\r",
+													"    console.log(\"Failed to delete SEPA payment with ID: \" + pm.globals.get(\"newPaymentSepaID\"));\r",
+													"}\r",
+													"\r",
+													"// Session navigate from PrS using eval()\r",
+													"eval(globals.sessionNavigate)();\r",
+													"\r",
+													"// Reset reference to TR test cases\r",
+													"pm.globals.unset(\"_tr_\" + request.name);"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "8b0efd50-c002-40d7-bf02-ad82c22ce7a7",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"name": "Content-Type",
+												"type": "text",
+												"value": "application/json"
+											},
+											{
+												"key": "accept",
+												"value": "application/json, application/hal+json"
+											},
+											{
+												"key": "Authorization",
+												"type": "text",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
+											"host": [
+												"{{environment}}"
+											],
+											"path": [
+												"banking-api",
+												"payment",
+												"sepa",
+												"{{tenant}}",
+												"v2",
+												"credittransfer",
+												"{{newPaymentSepaID}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
 						{
 							"name": "SWIFT",
 							"item": [
@@ -5505,6 +7648,540 @@
 								{
 									"name": "Red",
 									"item": [
+										{
+											"name": "Standing order",
+											"item": [
+												{
+													"name": "createPaymentRedSO",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "4c32ae21-d88b-41bf-a851-d10b72bb04bc",
+																"exec": [
+																	"// Execute standard tests from PrS using eval()\r",
+																	"eval(globals.commonTests)();\r",
+																	"\r",
+																	"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Red payment (standing order) is created and assertions are passed\", function () {\r",
+																	"\r",
+																	"    //Instructed amount is correct\r",
+																	"    let requestBodyInstructedAmount = JSON.parse(request.data).instructedAmount;\r",
+																	"    let responseBodyInstructedAmount = JSON.parse(responseBody).instructedAmount;\r",
+																	"    //State is correct\r",
+																	"    let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+																	"    //Debtor account is correct\r",
+																	"    let requestBodyDebtorAccountNo = JSON.parse(request.data).debtorAccountNo;\r",
+																	"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).debtorAccountNo;   \r",
+																	"    //Postal account is correct\r",
+																	"    let requestBodyPostalAccountNo = JSON.parse(request.data).postalAccountNo;\r",
+																	"    let responseBodyPostalAccountNo = JSON.parse(responseBody).postalAccountNo; \r",
+																	"    //categoryPurposeCode is correct\r",
+																	"    let requestBodyCategoryPurposeCode = JSON.parse(request.data).categoryPurposeCode;\r",
+																	"    let responseBodyCategoryPurposeCode = JSON.parse(responseBody).categoryPurposeCode; \r",
+																	"    //Standing order info is correct\r",
+																	"   let requestBodyStandingOrder = JSON.parse(request.data).standingOrder;\r",
+																	"   let responseBodyStandingOrder = JSON.parse(responseBody).standingOrder;\r",
+																	"    //Remittance information is correct\r",
+																	"    let requestBodyRemittanceInformation = JSON.parse(request.data).RemittanceInformation;\r",
+																	"    let responseBodyRemittanceInformation = JSON.parse(responseBody).RemittanceInformation; \r",
+																	"    \r",
+																	"    pm.test(\"Instructed amount is correct\", () => {\r",
+																	"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+																	"    });\r",
+																	"\r",
+																	"    pm.test(\"Debtor account is correct\", () => {\r",
+																	"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+																	"    });\r",
+																	"    \r",
+																	"    pm.test(\"Postal account is correct\", () => {\r",
+																	"      pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo);\r",
+																	"    });\r",
+																	"\r",
+																	"    pm.test(\"Category purpose code is correct\", () => {\r",
+																	"      pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode);\r",
+																	"    });\r",
+																	"    \r",
+																	"    pm.test(\"Standing order info is correct\", () => {\r",
+																	"     pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+																	"   });\r",
+																	"\r",
+																	"    pm.test(\"Remittance information is correct\", () => {\r",
+																	"      pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation);\r",
+																	"    });\r",
+																	"    \r",
+																	"    // check if payment is created\r",
+																	"    if (pm.response.to.have.status(201)){\r",
+																	"        var responseData = JSON.parse(responseBody);\r",
+																	"         pm.globals.set(\"newPaymentRedID\", responseData.paymentId);\r",
+																	"        pm.globals.set(\"newPaymentRedStOrInfo\", responseData.standingOrder);\r",
+																	"        console.log(\"New Red payment (standing order) ID: \" + pm.globals.get(\"newPaymentRedID\"));\r",
+																	"    }\r",
+																	"    else {\r",
+																	"        console.log(\"Failed to create Red payment (standing order)\");\r",
+																	"    }\r",
+																	"    \r",
+																	"    //Determine if assertion passed at whole\r",
+																	"    pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+																	"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
+																	"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
+																	"    && pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode)\r",
+																	"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)\r",
+																	"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+																	"});\r",
+																	"\r",
+																	"// Session navigate from PrS using eval()\r",
+																	"eval(globals.sessionNavigate)();\r",
+																	"\r",
+																	"// Reset reference to TR test cases\r",
+																	"pm.globals.unset(\"_tr_\" + request.name);"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "prerequest",
+															"script": {
+																"id": "78b1074c-dd61-4c7a-8fcf-9fb2f734f087",
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"name": "Content-Type",
+																"type": "text",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json, application/hal+json"
+															},
+															{
+																"key": "Authorization",
+																"type": "text",
+																"value": "Bearer {{access_token}}"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": \"{{$randomInt}}\",\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"categoryPurposeCode\": \"SALA\",    \r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n    \"debitNote\": \"Debit reference\",    \r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red",
+															"host": [
+																"{{environment}}"
+															],
+															"path": [
+																"banking-api",
+																"payment",
+																"swissPayment",
+																"{{tenant}}",
+																"v1",
+																"credittransfer",
+																"red"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "getPaymentRedSO",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "5d2b38c3-314e-4d67-aae2-bf2350879ca8",
+																"exec": [
+																	"// Execute standard tests from PrS using eval()\r",
+																	"eval(globals.commonTests)();\r",
+																	"\r",
+																	"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Red payment (standing order) is retrieved and assertions are passed\", function () {\r",
+																	"\r",
+																	"    //Instructed amount is correct\r",
+																	"    let requestBodyInstructedAmount = JSON.parse(request.data).instructedAmount;\r",
+																	"    let responseBodyInstructedAmount = JSON.parse(responseBody).instructedAmount;\r",
+																	"    //State is correct\r",
+																	"    let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+																	"    //Debtor account is correct\r",
+																	"    let requestBodyDebtorAccountNo = JSON.parse(request.data).debtorAccountNo;\r",
+																	"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).debtorAccountNo;   \r",
+																	"    //Postal account is correct\r",
+																	"    let requestBodyPostalAccountNo = JSON.parse(request.data).postalAccountNo;\r",
+																	"    let responseBodyPostalAccountNo = JSON.parse(responseBody).postalAccountNo;   \r",
+																	"    //Category purpose code is correct\r",
+																	"    let requestBodyCategoryPurposeCode = JSON.parse(request.data).categoryPurposeCode;\r",
+																	"    let responseBodyCategoryPurposeCode = JSON.parse(responseBody).categoryPurposeCode;\r",
+																	"    //Standing order info is correct\r",
+																	"    let requestBodyStandingOrder = JSON.parse(request.data).standingOrder;\r",
+																	"    let responseBodyStandingOrder = JSON.parse(responseBody).standingOrder;\r",
+																	"    //Remittance information is correct\r",
+																	"    let requestBodyRemittanceInformation = JSON.parse(request.data).RemittanceInformation;\r",
+																	"    let responseBodyRemittanceInformation = JSON.parse(responseBody).RemittanceInformation; \r",
+																	"\r",
+																	"    pm.test(\"Standing order is retrieved\", function () {\r",
+																	"        pm.response.to.have.status(200);\r",
+																	"    });\r",
+																	"\r",
+																	"    pm.test(\"Instructed amount is correct\", () => {\r",
+																	"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+																	"    });\r",
+																	"\r",
+																	"    pm.test(\"Debtor account is correct\", () => {\r",
+																	"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+																	"    });\r",
+																	"    \r",
+																	"    pm.test(\"Postal account is correct\", () => {\r",
+																	"      pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo);\r",
+																	"    });\r",
+																	"\r",
+																	"    pm.test(\"Category purpose code account is correct\", () => {\r",
+																	"      pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode);\r",
+																	"    });\r",
+																	"    \r",
+																	"     pm.test(\"Standing order info is correct\", () => {\r",
+																	"     pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+																	"   });\r",
+																	"\r",
+																	"    pm.test(\"Remittance information is correct\", () => {\r",
+																	"      pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation);\r",
+																	"    });\r",
+																	"    \r",
+																	"    //Determine if assertion passed at whole\r",
+																	"    pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+																	"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
+																	"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
+																	"    && pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode)\r",
+																	"   && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)\r",
+																	"   && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+																	"});\r",
+																	"\r",
+																	"// Session navigate from PrS using eval()\r",
+																	"eval(globals.sessionNavigate)();\r",
+																	"\r",
+																	"// Reset reference to TR test cases\r",
+																	"pm.globals.unset(\"_tr_\" + request.name);"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "prerequest",
+															"script": {
+																"id": "5ccbf179-8950-4f25-b942-2b31afab22f4",
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"protocolProfileBehavior": {
+														"disableBodyPruning": true
+													},
+													"request": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Content-Type",
+																"name": "Content-Type",
+																"type": "text",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json, application/hal+json"
+															},
+															{
+																"key": "Authorization",
+																"type": "text",
+																"value": "Bearer {{access_token}}"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": {{$randomInt}},\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red/{{newPaymentRedID}}",
+															"host": [
+																"{{environment}}"
+															],
+															"path": [
+																"banking-api",
+																"payment",
+																"swissPayment",
+																"{{tenant}}",
+																"v1",
+																"credittransfer",
+																"red",
+																"{{newPaymentRedID}}"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "updatePaymentRedSO",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
+																"exec": [
+																	"// Execute standard tests from PrS using eval()\r",
+																	"eval(globals.commonTests)();\r",
+																	"\r",
+																	"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Red payment (standing order) is updated and assertions are passed\", function () {\r",
+																	"\r",
+																	"    //Instructed amount is correct\r",
+																	"    let requestBodyInstructedAmount = JSON.parse(request.data).instructedAmount;\r",
+																	"    let responseBodyInstructedAmount = JSON.parse(responseBody).instructedAmount;\r",
+																	"    //State is correct\r",
+																	"    let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+																	"    //Debtor account is correct\r",
+																	"    let requestBodyDebtorAccountNo = JSON.parse(request.data).debtorAccountNo;\r",
+																	"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).debtorAccountNo;   \r",
+																	"    //Postal account is correct\r",
+																	"    let requestBodyPostalAccountNo = JSON.parse(request.data).postalAccountNo;\r",
+																	"    let responseBodyPostalAccountNo = JSON.parse(responseBody).postalAccountNo;   \r",
+																	"    //Category purpose code is correct\r",
+																	"    let requestBodyResponseCategoryPurposeCode = JSON.parse(request.data).categoryPurposeCode;\r",
+																	"    let responseBodyResponseCategoryPurposeCode = JSON.parse(responseBody).categoryPurposeCode; \r",
+																	"    //Standing order info is correct\r",
+																	"    let requestBodyStandingOrder = JSON.parse(request.data).standingOrder;\r",
+																	"    let responseBodyStandingOrder = JSON.parse(responseBody).standingOrder;\r",
+																	"    //Remittance information is correct\r",
+																	"    let requestBodyRemittanceInformation = JSON.parse(request.data).RemittanceInformation;\r",
+																	"    let responseBodyRemittanceInformation = JSON.parse(responseBody).RemittanceInformation; \r",
+																	"    \r",
+																	"    pm.test(\"Standing order is updated\", function () {\r",
+																	"    pm.response.to.have.status(200);\r",
+																	"    });\r",
+																	"    \r",
+																	"    pm.test(\"Instructed amount is correct\", () => {\r",
+																	"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+																	"    });\r",
+																	"\r",
+																	"    pm.test(\"Debtor account is correct\", () => {\r",
+																	"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+																	"    });\r",
+																	"    \r",
+																	"    pm.test(\"Postal account is correct\", () => {\r",
+																	"      pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo);\r",
+																	"    });\r",
+																	"\r",
+																	"    pm.test(\"Category purpose code account is correct\", () => {\r",
+																	"      pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode);\r",
+																	"    });\r",
+																	"    \r",
+																	"     pm.test(\"Remittance information is correct\", () => {\r",
+																	"      pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation);\r",
+																	"    });\r",
+																	"    \r",
+																	"    pm.test(\"Standing order info is correct\", () => {\r",
+																	"     pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+																	"   });\r",
+																	"    \r",
+																	"    //Determine if assertion passed at whole\r",
+																	"    pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+																	"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
+																	"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
+																	"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)\r",
+																	"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder)\r",
+																	"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode)\r",
+																	"});\r",
+																	"\r",
+																	"// Session navigate from PrS using eval()\r",
+																	"eval(globals.sessionNavigate)();\r",
+																	"\r",
+																	"// Reset reference to TR test cases\r",
+																	"pm.globals.unset(\"_tr_\" + request.name);"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "prerequest",
+															"script": {
+																"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Content-Type",
+																"name": "Content-Type",
+																"type": "text",
+																"value": "application/json"
+															},
+															{
+																"key": "Accept",
+																"value": "application/json, application/hal+json"
+															},
+															{
+																"key": "Authorization",
+																"type": "text",
+																"value": "Bearer {{access_token}}"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": {{$randomInt}},\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red/{{newPaymentRedID}}",
+															"host": [
+																"{{environment}}"
+															],
+															"path": [
+																"banking-api",
+																"payment",
+																"swissPayment",
+																"{{tenant}}",
+																"v1",
+																"credittransfer",
+																"red",
+																"{{newPaymentRedID}}"
+															]
+														}
+													},
+													"response": []
+												},
+												{
+													"name": "deletePaymentRedSO",
+													"event": [
+														{
+															"listen": "test",
+															"script": {
+																"id": "b805315b-12ae-4f45-85f9-14230e6cb91e",
+																"exec": [
+																	"// Execute standard tests from PrS using eval()\r",
+																	"//eval(globals.commonTests)();\r",
+																	"\r",
+																	"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Red (standing order) payment is deleted and not exists anymore\", function () {\r",
+																	"    let responseBodyStatus = JSON.parse(responseBody)._status; \r",
+																	"    let responseBodyMessages = JSON.parse(responseBody)._messages; \r",
+																	"    pm.response.to.have.status(200) \r",
+																	"    && pm.expect(responseBodyStatus).to.eql(true)\r",
+																	"    && pm.expect(responseBodyMessages).to.be.an('array').that.is.empty;\r",
+																	"});\r",
+																	"\r",
+																	"// Log important stuff\r",
+																	"if (pm.response.to.have.status(200)){\r",
+																	"    console.log(\"Deleted Red (standing order) payment ID:\" + pm.globals.get(\"newPaymentRedID\"));\r",
+																	"    pm.globals.set(\"deletedPaymentRedID\",pm.globals.get(\"newPaymentRedID\"));\r",
+																	"    pm.globals.unset(\"newPaymentRedID\");\r",
+																	"    pm.globals.unset(\"newPaymentRedStOrInfo\");\r",
+																	"}\r",
+																	"else {\r",
+																	"    console.log(\"Failed to delete Red (standing order) payment with ID:\" + pm.globals.get(\"newPaymentRedID\"));\r",
+																	"}\r",
+																	"\r",
+																	"// Session navigate from PrS using eval()\r",
+																	"eval(globals.sessionNavigate)();\r",
+																	"\r",
+																	"// Reset reference to TR test cases\r",
+																	"pm.globals.unset(\"_tr_\" + request.name);"
+																],
+																"type": "text/javascript"
+															}
+														},
+														{
+															"listen": "prerequest",
+															"script": {
+																"id": "8b0efd50-c002-40d7-bf02-ad82c22ce7a7",
+																"exec": [
+																	""
+																],
+																"type": "text/javascript"
+															}
+														}
+													],
+													"request": {
+														"method": "DELETE",
+														"header": [
+															{
+																"key": "Content-Type",
+																"name": "Content-Type",
+																"type": "text",
+																"value": "application/json"
+															},
+															{
+																"key": "accept",
+																"value": "application/json, application/hal+json"
+															},
+															{
+																"key": "Authorization",
+																"type": "text",
+																"value": "Bearer {{token}}",
+																"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+																"disabled": true
+															},
+															{
+																"key": "Authorization",
+																"type": "text",
+																"value": "Bearer {{access_token}}"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "",
+															"options": {
+																"raw": {
+																	"language": "json"
+																}
+															}
+														},
+														"url": {
+															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red/{{newPaymentRedID}}",
+															"host": [
+																"{{environment}}"
+															],
+															"path": [
+																"banking-api",
+																"payment",
+																"swissPayment",
+																"{{tenant}}",
+																"v1",
+																"credittransfer",
+																"red",
+																"{{newPaymentRedID}}"
+															]
+														}
+													},
+													"response": []
+												}
+											],
+											"protocolProfileBehavior": {},
+											"_postman_isSubFolder": true
+										},
 										{
 											"name": "createPaymentRed",
 											"event": [
@@ -9647,6 +12324,521 @@
 							"name": "Account transfer",
 							"item": [
 								{
+									"name": "Standing order",
+									"item": [
+										{
+											"name": "createPaymentAccountTransferSO",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
+														"exec": [
+															"// Execute standard tests from PrS using eval()\r",
+															"eval(globals.commonTests)();\r",
+															"\r",
+															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Account transfer (standing order) payment is created and assertions are passed\", function () {\r",
+															"\r",
+															"    //Instructed amount is correct\r",
+															"    let requestBodyInstructedAmount = JSON.parse(request.data).instructedAmount;\r",
+															"    let responseBodyInstructedAmount = JSON.parse(responseBody).instructedAmount;\r",
+															"    \r",
+															"    //Debtor account is correct\r",
+															"    let requestBodyDebtorAccountNo = JSON.parse(request.data).debtorAccountNo;\r",
+															"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).debtorAccountNo;   \r",
+															"\r",
+															"    //Creditor account is correct\r",
+															"    let requestBodyCreditorAccountNo2 = JSON.parse(request.data).creditorAccountNo2;\r",
+															"    let responseBodyCreditorAccountNo2 = JSON.parse(responseBody).creditorAccountNo2;  \r",
+															"    \r",
+															"    //Remittance information is correct\r",
+															"    let requestBodyRemittanceInformation = JSON.parse(request.data).remittanceInformation;\r",
+															"    let responseBodyRemittanceInformation = JSON.parse(responseBody).remittanceInformation;  \r",
+															"    \r",
+															"    //Standing order info is correct\r",
+															"    let requestBodyStandingOrder = JSON.parse(request.data).standingOrder;\r",
+															"    let responseBodyStandingOrder = JSON.parse(responseBody).standingOrder;\r",
+															"\r",
+															"    pm.test(\"Instructed amount is correct\", () => {\r",
+															"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+															"    });\r",
+															"\r",
+															"    pm.test(\"Debtor account is correct\", () => {\r",
+															"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+															"    });\r",
+															"\r",
+															"    pm.test(\"Creditor account is correct\", () => {\r",
+															"      pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2);\r",
+															"    });\r",
+															"\r",
+															"    pm.test(\"Remittance information is correct\", () => {\r",
+															"      pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation);\r",
+															"    });\r",
+															"    \r",
+															"    pm.test(\"Standing order info is correct\", () => {\r",
+															"    pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+															"     });\r",
+															"\r",
+															"    // check if payment is created\r",
+															"    if (pm.response.to.have.status(201)){\r",
+															"        var responseData = JSON.parse(responseBody);\r",
+															"        pm.globals.set(\"newPaymentAccountTransferID\", responseData.paymentId);\r",
+															"        pm.globals.set(\"newPaymentRedStOrInfo\", responseData.standingOrder);\r",
+															"        console.log(\"New account transfer (standing order) payment ID: \" + pm.globals.get(\"newPaymentAccountTransferID\"));\r",
+															"    }\r",
+															"    else {\r",
+															"        console.log(\"Failed to create account transfer (standing order) payment\");\r",
+															"    }\r",
+															"    \r",
+															"    //Determine if assertion passed at whole\r",
+															"    pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+															"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
+															"    && pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2)\r",
+															"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)\r",
+															"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+															"});\r",
+															"\r",
+															"// Session navigate from PrS using eval()\r",
+															"eval(globals.sessionNavigate)();\r",
+															"\r",
+															"// Reset reference to TR test cases\r",
+															"pm.globals.unset(\"_tr_\" + request.name);"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
+														"exec": [
+															"const c = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\r",
+															"const s = Array.from({length:20}, _ => c[Math.floor(Math.random()*c.length)]).join('')\r",
+															"pm.globals.set(\"paymentAccountTransferRemittanceInformationUnstructured\",s);\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"name": "Content-Type",
+														"type": "text",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json, application/hal+json"
+													},
+													{
+														"key": "Authorization",
+														"type": "text",
+														"value": "Bearer {{access_token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/accounttransfer",
+													"host": [
+														"{{environment}}"
+													],
+													"path": [
+														"banking-api",
+														"payment",
+														"accounttransfer",
+														"{{tenant}}",
+														"v2",
+														"credittransfer",
+														"accounttransfer"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "getPaymentAccountTransferSO",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
+														"exec": [
+															"// Execute standard tests from PrS using eval()\r",
+															"eval(globals.commonTests)();\r",
+															"\r",
+															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Account transfer (standing order) payment is retrieved and assertions are passed\", function () {\r",
+															"\r",
+															"    //Instructed amount is correct\r",
+															"    let requestBodyInstructedAmount = JSON.parse(request.data).instructedAmount;\r",
+															"    let responseBodyInstructedAmount = JSON.parse(responseBody).instructedAmount;\r",
+															"    \r",
+															"    //Debtor account is correct\r",
+															"    let requestBodyDebtorAccountNo = JSON.parse(request.data).debtorAccountNo;\r",
+															"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).debtorAccountNo;   \r",
+															"\r",
+															"    //Creditor account is correct\r",
+															"    let requestBodyCreditorAccountNo2 = JSON.parse(request.data).creditorAccountNo2;\r",
+															"    let responseBodyCreditorAccountNo2 = JSON.parse(responseBody).creditorAccountNo2;  \r",
+															"\r",
+															"    //Remittance information is correct\r",
+															"    let requestBodyRemittanceInformation = JSON.parse(request.data).remittanceInformation;\r",
+															"    let responseBodyRemittanceInformation = JSON.parse(responseBody).remittanceInformation;  \r",
+															"    \r",
+															"    //Standing order info is correct\r",
+															"   let requestBodyStandingOrder = JSON.parse(request.data).standingOrder;\r",
+															"   let responseBodyStandingOrder = JSON.parse(responseBody).standingOrder;\r",
+															"    \r",
+															"    pm.test(\"Instructed amount is correct\", () => {\r",
+															"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+															"    });\r",
+															"\r",
+															"    pm.test(\"Debtor account is correct\", () => {\r",
+															"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+															"    });\r",
+															"\r",
+															"    pm.test(\"Creditor account is correct\", () => {\r",
+															"      pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2);\r",
+															"    });\r",
+															"    \r",
+															"    pm.test(\"Remittance information is correct\", () => {\r",
+															"      pm.expect(responseBodyRemittanceInformation.unstructured).to.eql(requestBodyRemittanceInformation.unstructured);\r",
+															"    });\r",
+															"    \r",
+															"    pm.test(\"Standing order info is correct\", () => {\r",
+															"    pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+															"    });\r",
+															"\r",
+															"    //Determine if assertion passed at whole\r",
+															"    pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+															"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
+															"    && pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2)\r",
+															"    && pm.expect(responseBodyRemittanceInformation.unstructured).to.eql(requestBodyRemittanceInformation.unstructured)\r",
+															"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+															"});\r",
+															"\r",
+															"// Session navigate from PrS using eval()\r",
+															"eval(globals.sessionNavigate)();\r",
+															"\r",
+															"// Reset reference to TR test cases\r",
+															"pm.globals.unset(\"_tr_\" + request.name);"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Content-Type",
+														"name": "Content-Type",
+														"type": "text",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json, application/hal+json"
+													},
+													{
+														"key": "Authorization",
+														"type": "text",
+														"value": "Bearer {{access_token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/accounttransfer/{{newPaymentAccountTransferID}}",
+													"host": [
+														"{{environment}}"
+													],
+													"path": [
+														"banking-api",
+														"payment",
+														"accounttransfer",
+														"{{tenant}}",
+														"v2",
+														"credittransfer",
+														"accounttransfer",
+														"{{newPaymentAccountTransferID}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "updatePaymentAccountTransferSO",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
+														"exec": [
+															"// Execute standard tests from PrS using eval()\r",
+															"eval(globals.commonTests)();\r",
+															"\r",
+															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Account transfer (standing order) payment is created and assertions are passed\", function () {\r",
+															"    \r",
+															"    //Instructed amount is correct\r",
+															"    let requestBodyInstructedAmount = JSON.parse(request.data).instructedAmount;\r",
+															"    let responseBodyInstructedAmount = JSON.parse(responseBody).instructedAmount;\r",
+															"    \r",
+															"    //Debtor account is correct\r",
+															"    let requestBodyDebtorAccountNo = JSON.parse(request.data).debtorAccountNo;\r",
+															"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).debtorAccountNo;   \r",
+															"\r",
+															"    //Creditor account is correct\r",
+															"    let requestBodyCreditorAccountNo2 = JSON.parse(request.data).creditorAccountNo2;\r",
+															"    let responseBodyCreditorAccountNo2 = JSON.parse(responseBody).creditorAccountNo2;  \r",
+															"    \r",
+															"    //Remittance information is correct\r",
+															"    let requestBodyRemittanceInformation = JSON.parse(request.data).remittanceInformation;\r",
+															"    let responseBodyRemittanceInformation = JSON.parse(responseBody).remittanceInformation;  \r",
+															"    \r",
+															"    //Standing order info is correct\r",
+															"   let requestBodyStandingOrder = JSON.parse(request.data).standingOrder;\r",
+															"   let responseBodyStandingOrder = JSON.parse(responseBody).standingOrder;\r",
+															"\r",
+															"    pm.test(\"Instructed amount is correct\", () => {\r",
+															"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+															"    });\r",
+															"\r",
+															"    pm.test(\"Debtor account is correct\", () => {\r",
+															"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+															"    });\r",
+															"\r",
+															"    pm.test(\"Creditor account is correct\", () => {\r",
+															"      pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2);\r",
+															"    });\r",
+															"    \r",
+															"    pm.test(\"Remittance information is correct\", () => {\r",
+															"      pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation);\r",
+															"    });\r",
+															"    \r",
+															"    pm.test(\"Standing order info is correct\", () => {\r",
+															"    pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+															"    });\r",
+															"\r",
+															"    //Determine if assertion passed at whole\r",
+															"    pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+															"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
+															"    && pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2)\r",
+															"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)\r",
+															"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+															"});\r",
+															"\r",
+															"// Session navigate from PrS using eval()\r",
+															"eval(globals.sessionNavigate)();\r",
+															"\r",
+															"// Reset reference to TR test cases\r",
+															"pm.globals.unset(\"_tr_\" + request.name);"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
+														"exec": [
+															"const c = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\r",
+															"const s = Array.from({length:20}, _ => c[Math.floor(Math.random()*c.length)]).join('')\r",
+															"pm.globals.set(\"paymentAccountTransferRemittanceInformationUnstructured\",s);\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"name": "Content-Type",
+														"type": "text",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "application/json, application/hal+json"
+													},
+													{
+														"key": "Authorization",
+														"type": "text",
+														"value": "Bearer {{access_token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.43\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/accounttransfer/{{newPaymentAccountTransferID}}",
+													"host": [
+														"{{environment}}"
+													],
+													"path": [
+														"banking-api",
+														"payment",
+														"accounttransfer",
+														"{{tenant}}",
+														"v2",
+														"credittransfer",
+														"accounttransfer",
+														"{{newPaymentAccountTransferID}}"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "deletePaymentAccountTransferSO",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "b805315b-12ae-4f45-85f9-14230e6cb91e",
+														"exec": [
+															"// Execute standard tests from PrS using eval()\r",
+															"//eval(globals.commonTests)();\r",
+															"\r",
+															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Account transfer (standing order) is deleted and not exists anymore\", function () {\r",
+															"    let responseBodyStatus = JSON.parse(responseBody)._status; \r",
+															"    let responseBodyMessages = JSON.parse(responseBody)._messages; \r",
+															"    pm.response.to.have.status(200) \r",
+															"    && pm.expect(responseBodyStatus).to.eql(true)\r",
+															"    && pm.expect(responseBodyMessages).to.be.an('array').that.is.empty;\r",
+															"});\r",
+															"\r",
+															"// Log important stuff\r",
+															"if (pm.response.to.have.status(200)){\r",
+															"    console.log(\"Deleted account transfer (standing order) payment ID:\" + pm.globals.get(\"newPaymentAccountTransferID\"));\r",
+															"    pm.globals.set(\"deletedPaymentAccountTransferID\",pm.globals.get(\"newPaymentAccountTransferID\"));\r",
+															"    pm.globals.unset(\"newPaymentAccountTransferID\");\r",
+															"    pm.globals.unset(\"paymentAccountTransferRemittanceInformationUnstructured\");\r",
+															"    pm.globals.unset(\"newPaymentAccountTransferStOrInfo\");\r",
+															"}\r",
+															"else {\r",
+															"    console.log(\"Failed to delete account transfer (standing order) payment with ID:\" + pm.globals.get(\"newPaymentAccountTransferID\"));\r",
+															"}\r",
+															"\r",
+															"// Session navigate from PrS using eval()\r",
+															"eval(globals.sessionNavigate)();\r",
+															"\r",
+															"// Reset reference to TR test cases\r",
+															"pm.globals.unset(\"_tr_\" + request.name);"
+														],
+														"type": "text/javascript"
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"id": "8b0efd50-c002-40d7-bf02-ad82c22ce7a7",
+														"exec": [
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Content-Type",
+														"name": "Content-Type",
+														"type": "text",
+														"value": "application/json"
+													},
+													{
+														"key": "accept",
+														"value": "application/json, application/hal+json"
+													},
+													{
+														"key": "Authorization",
+														"type": "text",
+														"value": "Bearer {{token}}",
+														"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+														"disabled": true
+													},
+													{
+														"key": "Authorization",
+														"type": "text",
+														"value": "Bearer {{access_token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/accounttransfer/{{newPaymentAccountTransferID}}",
+													"host": [
+														"{{environment}}"
+													],
+													"path": [
+														"banking-api",
+														"payment",
+														"accounttransfer",
+														"{{tenant}}",
+														"v2",
+														"credittransfer",
+														"accounttransfer",
+														"{{newPaymentAccountTransferID}}"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"protocolProfileBehavior": {},
+									"_postman_isSubFolder": true
+								},
+								{
 									"name": "createPaymentAccountTransfer",
 									"event": [
 										{
@@ -9668,8 +12860,8 @@
 													"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).debtorAccountNo;   \r",
 													"\r",
 													"    //Creditor account is correct\r",
-													"    let requestBodyCreditorAccountNo = JSON.parse(request.data).creditorAccountNo;\r",
-													"    let responseBodyCreditorAccountNo = JSON.parse(responseBody).creditorAccountNo;  \r",
+													"    let requestBodyCreditorAccountNo2 = JSON.parse(request.data).creditorAccountNo2;\r",
+													"    let responseBodyCreditorAccountNo2 = JSON.parse(responseBody).creditorAccountNo2;  \r",
 													"    \r",
 													"    //Requested execution date is correct\r",
 													"    let requestBodyRequestedExecutionDate = JSON.parse(request.data).requestedExecutionDate;\r",
@@ -9688,7 +12880,7 @@
 													"    });\r",
 													"\r",
 													"    pm.test(\"Creditor account is correct\", () => {\r",
-													"      pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+													"      pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2);\r",
 													"    });\r",
 													"    \r",
 													"    pm.test(\"Execution date is correct\", () => {\r",
@@ -9712,7 +12904,7 @@
 													"    //Determine if assertion passed at whole\r",
 													"    pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
 													"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
-													"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo)\r",
+													"    && pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2)\r",
 													"    && pm.expect(responseBodyRequestedExecutionDate).to.eql(requestBodyRequestedExecutionDate)\r",
 													"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation);\r",
 													"});\r",
@@ -9761,7 +12953,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\"\r\n}",
+											"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -9808,12 +13000,16 @@
 													"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).debtorAccountNo;   \r",
 													"\r",
 													"    //Creditor account is correct\r",
-													"    let requestBodyCreditorAccountNo = JSON.parse(request.data).creditorAccountNo;\r",
-													"    let responseBodyCreditorAccountNo = JSON.parse(responseBody).creditorAccountNo;  \r",
+													"    let requestBodyCreditorAccountNo2 = JSON.parse(request.data).creditorAccountNo2;\r",
+													"    let responseBodyCreditorAccountNo2 = JSON.parse(responseBody).creditorAccountNo2;  \r",
 													"\r",
 													"    //Remittance information is correct\r",
 													"    let requestBodyRemittanceInformation = JSON.parse(request.data).remittanceInformation;\r",
 													"    let responseBodyRemittanceInformation = JSON.parse(responseBody).remittanceInformation;  \r",
+													"    \r",
+													"    pm.test(\"Account transfer payment is retrieved\", function () {\r",
+													"        pm.response.to.have.status(200);\r",
+													"    });\r",
 													"    \r",
 													"    pm.test(\"Instructed amount is correct\", () => {\r",
 													"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
@@ -9824,7 +13020,7 @@
 													"    });\r",
 													"\r",
 													"    pm.test(\"Creditor account is correct\", () => {\r",
-													"      pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+													"      pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2);\r",
 													"    });\r",
 													"    \r",
 													"    pm.test(\"Remittance information is correct\", () => {\r",
@@ -9834,7 +13030,7 @@
 													"    //Determine if assertion passed at whole\r",
 													"    pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
 													"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
-													"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo)\r",
+													"    && pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2)\r",
 													"    && pm.expect(responseBodyRemittanceInformation.unstructured).to.eql(requestBodyRemittanceInformation.unstructured);\r",
 													"});\r",
 													"\r",
@@ -9882,7 +13078,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\"\r\n}",
+											"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
@@ -9919,7 +13115,7 @@
 													"// Execute standard tests from PrS using eval()\r",
 													"eval(globals.commonTests)();\r",
 													"\r",
-													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Account transfer payment is created and assertions are passed\", function () {\r",
+													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Account transfer payment is updated and assertions are passed\", function () {\r",
 													"    \r",
 													"    //Instructed amount is correct\r",
 													"    let requestBodyInstructedAmount = JSON.parse(request.data).instructedAmount;\r",
@@ -9930,12 +13126,16 @@
 													"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).debtorAccountNo;   \r",
 													"\r",
 													"    //Creditor account is correct\r",
-													"    let requestBodyCreditorAccountNo = JSON.parse(request.data).creditorAccountNo;\r",
-													"    let responseBodyCreditorAccountNo = JSON.parse(responseBody).creditorAccountNo;  \r",
+													"    let requestBodyCreditorAccountNo2 = JSON.parse(request.data).creditorAccountNo2;\r",
+													"    let responseBodyCreditorAccountNo2 = JSON.parse(responseBody).creditorAccountNo2;  \r",
 													"    \r",
 													"    //Remittance information is correct\r",
 													"    let requestBodyRemittanceInformation = JSON.parse(request.data).remittanceInformation;\r",
 													"    let responseBodyRemittanceInformation = JSON.parse(responseBody).remittanceInformation;  \r",
+													"\r",
+													"    pm.test(\"Account transfer payment is updated\", function () {\r",
+													"        pm.response.to.have.status(200);\r",
+													"    });\r",
 													"\r",
 													"    pm.test(\"Instructed amount is correct\", () => {\r",
 													"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
@@ -9946,7 +13146,7 @@
 													"    });\r",
 													"\r",
 													"    pm.test(\"Creditor account is correct\", () => {\r",
-													"      pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+													"      pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2);\r",
 													"    });\r",
 													"    \r",
 													"    pm.test(\"Remittance information is correct\", () => {\r",
@@ -9956,7 +13156,7 @@
 													"    //Determine if assertion passed at whole\r",
 													"    pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
 													"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
-													"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo)\r",
+													"    && pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2)\r",
 													"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation);\r",
 													"});\r",
 													"\r",
@@ -10004,7 +13204,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.43\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\"\r\n}",
+											"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.43\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\"\r\n}",
 											"options": {
 												"raw": {
 													"language": "json"
