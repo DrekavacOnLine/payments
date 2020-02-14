@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "7a3be770-5f70-403c-880c-f083285ae1a8",
-		"name": "(30.1.2020) MODULE: Brokerage",
+		"_postman_id": "c57e4314-77bd-4a7f-96dd-ea28decfbe69",
+		"name": "MODULE: Brokerage",
 		"description": "Brokerage API:\n\n- Brokerage order API\n- Brokerage security API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -67,6 +67,25 @@
 											"    console.log(\"dataFile/userId_security: \" + userId_security);",
 											"}",
 											"",
+											"var order_action = data.order_action;",
+											"if (order_action){ ",
+											"    pm.environment.set(\"order_action\",data.order_action);",
+											"    console.log(\"dataFile/userId_security: \" + order_action);",
+											"}",
+											"",
+											"var limit_type = data.limit_type;",
+											"if (limit_type){ ",
+											"    pm.environment.set(\"limit_type\",data.limit_type);",
+											"    console.log(\"dataFile/userId_security: \" + limit_type);",
+											"}",
+											"",
+											"var order_status = data.order_status;",
+											"if (order_status){ ",
+											"    pm.environment.set(\"order_status\",data.order_status);",
+											"    console.log(\"dataFile/userId_security: \" + order_status);",
+											"}",
+											"",
+											"",
 											"//specify list of tests to be executed in exact order",
 											"//const testsScope = \"Full\"; [Full|Core|Full+TestRail]",
 											"let testsScope = data.testsScope;",
@@ -101,6 +120,7 @@
 											"        break;",
 											"    case \"Core\":",
 											"        var testSession = [",
+											"            \"_Generate access token (C41673950)\",",
 											"            \"List securities (C43995762)\",",
 											"            \"List securities by ISIN (C43995802)\",",
 											"            \"(WiP) List securities having limited permissions (C43995837)\",",
@@ -119,7 +139,22 @@
 											"            \"Display security type by ID (C43995831)\",",
 											"            \"Display security by security type ID (C43995787)\",",
 											"            \"List trading places (C43995818)\",",
-											"            \"Display trading place by tradingPlaceId (C43995821)\"",
+											"            \"Display trading place by tradingPlaceId (C43995821)\",",
+											"            \"List orders (C43995758)\",",
+											"            \"List orders by orderId (C43995800)\",",
+											"            \"List orders by accountId (C43995760)\",",
+											"            \"List orders by custodyAccountId (C43995761)\",",
+											"            \"List orders by custodyAccountPositionId (C43995763)\",",
+											"            \"List orders by orderAction, limitType and orderStatus (C43995819)\",",
+											"            \"List orders by orderAction (C43995764)\",",
+											"            \"List orders by limitType (C43995780)\",",
+											"            \"List orders by orderStatus (C43995782)\",",
+											"            \"List orders by securityId (C43995790)\",",
+											"            \"List orders by startDate (C43995792)\",",
+											"            \"Create new order (C43995799)\",",
+											"            \"List orders using bad url (C43995827)\",",
+											"            \"List orders by order id using bad url (C43995834)\",",
+											"            \"List orders using bad url (C43995822)\"",
 											"            ]; ",
 											"        break;",
 											"    case \"TestRailClean\":        ",
@@ -341,13 +376,13 @@
 									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
 									"",
 									"var requestsToRun = [",
-									"        \"getAuthTestTokenNoAssetsPermissions\",",
+									"        \"getAuthTestTokenK8SNoAssetsPermissions\",",
 									"        \"getSecuritiesErrorForbidden\",",
-									"        \"getAuthTestToken\"",
+									"        \"getAuthTestTokenK8S\"",
 									"    ]; ",
-									"    pm.globals.set(\"_tr_getAuthTestTokenNoAssetsPermissions\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getAuthTestTokenK8SNoAssetsPermissions\",\"[preCondition]\");",
 									"    pm.globals.set(\"_tr_getSecuritiesErrorForbidden\", testRailTestCases);",
-									"    pm.globals.set(\"_tr_getAuthTestToken\",\"[postCondition]\");",
+									"    pm.globals.set(\"_tr_getAuthTestTokenK8S\",\"[postCondition]\");",
 									"",
 									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
 								],
@@ -396,13 +431,15 @@
 									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
 									"",
 									"var requestsToRun = [",
-									"        \"getAuthTestTokenNoAssetsPermissions\",",
+									"        \"getSecurities\",",
+									"        \"getAuthTestTokenK8SNoAssetsPermissions\",",
 									"        \"getSecurityByIdErrorForbidden\",",
-									"        \"getAuthTestToken\"",
+									"        \"getAuthTestTokenK8S\"",
 									"    ]; ",
-									"    pm.globals.set(\"_tr_getAuthTestTokenNoAssetsPermissions\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getSecurities\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getAuthTestTokenK8SNoAssetsPermissions\",\"[preCondition]\");",
 									"    pm.globals.set(\"_tr_getSecurityByIdErrorForbidden\", testRailTestCases);",
-									"    pm.globals.set(\"_tr_getAuthTestToken\",\"[postCondition]\");",
+									"    pm.globals.set(\"_tr_getAuthTestTokenK8S\",\"[postCondition]\");",
 									"",
 									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
 								],
@@ -806,13 +843,13 @@
 									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
 									"",
 									"var requestsToRun = [",
-									"        \"getAuthTestTokenNoAssetsPermissions\",",
+									"        \"getAuthTestTokenK8SNoAssetsPermissions\",",
 									"        \"getListingsErrorForbidden\",",
-									"        \"getAuthTestToken\"",
+									"        \"getAuthTestTokenK8S\"",
 									"    ]; ",
-									"    pm.globals.set(\"_tr_getAuthTestTokenNoAssetsPermissions\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getAuthTestTokenK8SNoAssetsPermissions\",\"[preCondition]\");",
 									"    pm.globals.set(\"_tr_getListingsErrorForbidden\", testRailTestCases);",
-									"    pm.globals.set(\"_tr_getAuthTestToken\",\"[postCondition]\");",
+									"    pm.globals.set(\"_tr_getAuthTestTokenK8S\",\"[postCondition]\");",
 									"",
 									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
 								],
@@ -1259,6 +1296,780 @@
 					"response": []
 				},
 				{
+					"name": "List orders (C43995758)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "317327a9-172e-44da-b253-c190d726f14c",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrders\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrders\",testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List orders by orderId (C43995800)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "317327a9-172e-44da-b253-c190d726f14c",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrders\",",
+									"        \"getOrdersByOrderId\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrders\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getOrdersByOrderId\",testRailTestCases);",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List orders by accountId (C43995760)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrders\",",
+									"        \"getOrdersByAccountId\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrders\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getOrdersByAccountId\",testRailTestCases);",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10199"
+					},
+					"response": []
+				},
+				{
+					"name": "List orders by custodyAccountId (C43995761)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrders\",",
+									"        \"getOrdersByCustodyAccountId\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrders\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getOrdersByCustodyAccountId\",testRailTestCases);",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10199"
+					},
+					"response": []
+				},
+				{
+					"name": "List orders by custodyAccountPositionId (C43995763)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrders\",",
+									"        \"getOrdersByCustodyAccountPositionId\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrders\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getOrdersByCustodyAccountPositionId\",testRailTestCases);",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10199"
+					},
+					"response": []
+				},
+				{
+					"name": "List orders by orderAction, limitType and orderStatus (C43995819)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrdersByOrderActionByLimitTypeByOrderStatus\",",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrdersByOrderActionByLimitTypeByOrderStatus\",testRailTestCases);",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10199"
+					},
+					"response": []
+				},
+				{
+					"name": "List orders by orderAction (C43995764)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrdersByOrderActionBuy\",",
+									"        \"getOrdersByOrderActionSell\",",
+									"        \"getOrdersByOrderActionRedemption\",",
+									"        \"getOrdersByOrderActionSubscription\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrdersByOrderActionBuy\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_getOrdersByOrderActionSell\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_getOrdersByOrderActionRedemption\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_getOrdersByOrderActionSubscription\",testRailTestCases);",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10199"
+					},
+					"response": []
+				},
+				{
+					"name": "List orders by limitType (C43995780)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrdersByLimitTypeAtMarket\",",
+									"        \"getOrdersByLimitTypeLimited\",",
+									"        \"getOrdersByLimitTypeStopLoss\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrdersByLimitTypeAtMarket\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_getOrdersByLimitTypeLimited\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_getOrdersByLimitTypeStopLoss\",testRailTestCases);",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10199"
+					},
+					"response": []
+				},
+				{
+					"name": "List orders by orderStatus (C43995782)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrdersByOrderStatusEntered\",",
+									"        \"getOrdersByOrderStatusRejected\",",
+									"        \"getOrdersByOrderStatusAccepted\",",
+									"        \"getOrdersByOrderStatusExecuted\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrdersByOrderStatusEntered\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_getOrdersByOrderStatusRejected\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_getOrdersByOrderStatusAccepted\",testRailTestCases);",
+									"    pm.globals.set(\"_tr_getOrdersByOrderStatusExecuted\",testRailTestCases);",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10199"
+					},
+					"response": []
+				},
+				{
+					"name": "List orders by securityId (C43995790)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrders\",",
+									"        \"getOrdersBySecurityId\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrders\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getOrdersBySecurityId\",testRailTestCases);",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10199"
+					},
+					"response": []
+				},
+				{
+					"name": "List orders by startDate (C43995792)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrdersByStartDate\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrdersByStartDate\",testRailTestCases);",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10199"
+					},
+					"response": []
+				},
+				{
+					"name": "Create new order (C43995799)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getSecuritiesByISINNestle\",",
+									"        \"getListingBySecurityId\",",
+									"        \"getOrders\",",
+									"        \"postCreateNewOrder\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_postCreateNewOrder\",testRailTestCases);",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10199"
+					},
+					"response": []
+				},
+				{
+					"name": "List orders using bad url (C43995827)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrdersErrorNotFound\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrdersErrorNotFound\",testRailTestCases);",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10199"
+					},
+					"response": []
+				},
+				{
+					"name": "List orders by order id using bad url (C43995834)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrdersByOrderIdErrorNotFound\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrdersByOrderIdErrorNotFound\",testRailTestCases);",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10199"
+					},
+					"response": []
+				},
+				{
+					"name": "List orders using bad url (C43995822)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getOrdersErrorBadRequest\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getOrdersErrorBadRequest\",testRailTestCases);",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10199"
+					},
+					"response": []
+				},
+				{
 					"name": "_Generate access token (C41673950)",
 					"event": [
 						{
@@ -1273,7 +2084,7 @@
 									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
 									"",
 									"var requestsToRun = [",
-									"        \"getAuthTestToken\"",
+									"        \"getAuthTestTokenK8S\"",
 									"    ]; ",
 									"    pm.globals.set(\"_tr_getAuthTestToken\",testRailTestCases);",
 									"",
@@ -1356,42 +2167,61 @@
 					"name": "Order Tests",
 					"item": [
 						{
-							"name": "getOrders (WIP)",
+							"name": "getOrders",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
-										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"id": "1b6e57ce-adba-4bca-aa82-d1507198b5e1",
 										"exec": [
-											"eval(globals.commonTests)();",
-											"",
-											"let json =JSON.parse(responseBody);",
-											"let data = jsonData.data;",
-											"",
-											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Orders are present and all assertions passed\", function () { ",
-											"    ",
-											"    pm.response.to.have.status(200);",
-											"    ",
-											"    /*",
-											"    var schemaValidationPassed = eval(globals.schemaValidator)(\"getAllFoldersSchema\", jsonData);",
-											"    pm.test(\"Response schema is correct\", function() {",
-											"        pm.expect(schemaValidationPassed).to.be.eql(true);",
-											"    });",
-											"    ",
-											"    pm.test(\"Folders list must contain the folder searched for\", function () { ",
-											"        const folders = pm.response.json();",
-											"        pm.expect(folders).to.be.an('array');",
-											"        pm.expect(folders).to.not.be.empty;",
-											"        pm.expect(folders).to.have.lengthOf.at.least(1);",
-											"        pm.expect(folders.map(folder => folder.name)).to.include.members([folderName]);",
-											"        ",
-											"        console.log(`Folder is found`);",
-											"    });",
-											"    */",
-											"",
-											"});",
-											"",
-											"eval(globals.sessionNavigate)();",
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders is retrieved and response schema is validated\", function () {\r",
+											"\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"if (pm.response.code === 200) {\r",
+											"    var jsonData = JSON.parse(responseBody)._embedded;\r",
+											"    pm.environment.set(\"_tmp_accountId\",jsonData.orders[0].orderReferences.accountId);\r",
+											"    pm.environment.set(\"_tmp_custodyAccountId\",jsonData.orders[0].orderReferences.custodyAccountId);\r",
+											"    for (var i=0; i<jsonData.orders.length; i++){\r",
+											"        if (jsonData.orders[i].orderReferences.custodyAccountPositionId !== null){\r",
+											"            pm.environment.set(\"_tmp_custodyAccountPositionId\",jsonData.orders[i].orderReferences.custodyAccountPositionId);\r",
+											"            break;\r",
+											"        }\r",
+											"    }\r",
+											"    pm.environment.set(\"_tmp_securityId\",jsonData.orders[0].orderReferences.securityId);\r",
+											"    pm.environment.set(\"_tmp_orderId\",jsonData.orders[0].id);\r",
+											"    pm.environment.set(\"_tmp_postEnteredById\",jsonData.orders[0].orderReferences.enteredBy);\r",
+											"} else {\r",
+											"    pm.environment.unset(\"_tmp_accountId\");\r",
+											"    pm.environment.unset(\"_tmp_custodyAccountId\");\r",
+											"    pm.environment.unset(\"_tmp_custodyAccountPositionId\");\r",
+											"    pm.environment.unset(\"_tmp_securityId\");\r",
+											"    pm.environment.unset(\"_tmp_orderId\");\r",
+											"    pm.environment.unset(\"_tmp_postEnteredById\");\r",
+											"}\r",
+											"\r",
+											"\r",
+											"// Session navigate from PrS using eval()\r",
+											"eval(globals.sessionNavigate)();\r",
+											"\r",
+											"// Reset reference to TR test cases\r",
 											"pm.globals.unset(\"_tr_\" + request.name);"
 										],
 										"type": "text/javascript"
@@ -1403,15 +2233,1869 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{token}}",
+										"value": "Bearer {{access_token}}",
 										"type": "text"
 									},
 									{
 										"key": "content-type",
 										"value": "application/json; charset=UTF-8",
 										"type": "text"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, application/hal+json",
+										"type": "text"
 									}
 								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByOrderId",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderId is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let orderId = pm.environment.get(\"_tmp_orderId\");\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"orderDetailsSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified orderId\", () => {\r",
+											"        result = result && (jsonData.id === orderId);\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders/{{_tmp_orderId}}",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders",
+										"{{_tmp_orderId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByAccountId",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by AccountId is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let accountId = pm.environment.get(\"_tmp_accountId\");\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified AccountId\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderReferences.accountId === accountId);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8",
+										"type": "text"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, application/hal+json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?accountId={{_tmp_accountId}}",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "accountId",
+											"value": "{{_tmp_accountId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByCustodyAccountId",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by custodyAccountId is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let custodyAccountId = pm.environment.get(\"_tmp_custodyAccountId\");\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified CustodyAccountId\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderReferences.custodyAccountId === custodyAccountId);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?custodyAccountId={{_tmp_custodyAccountId}}",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "custodyAccountId",
+											"value": "{{_tmp_custodyAccountId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByCustodyAccountPositionId",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by custodyAccountPositionId is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let custodyAccountPositionId = pm.environment.get(\"_tmp_custodyAccountPositionId\");\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified CustodyAccountPositionId\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderReferences.custodyAccountPositionId === custodyAccountPositionId);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?custodyAccountPositionId={{_tmp_custodyAccountPositionId}}",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "custodyAccountPositionId",
+											"value": "{{_tmp_custodyAccountPositionId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByOrderActionByLimitTypeByOrderStatus",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1dc1dfe6-3c57-4bf5-a586-7169dc8cb883",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderAction, orderLimitType and orderStatus is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let orderAction = pm.environment.get(\"order_action\");\r",
+											"    let orderLimitType = pm.environment.get(\"limit_type\");\r",
+											"    let orderStatus = pm.environment.get(\"order_status\");\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.test(\"Returned orders match to specified orderAction\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderAction === orderAction);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.test(\"Returned orders match to specified limitType\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].limitType === orderLimitType);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.test(\"Returned orders match to specified orderStatus\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderStatus === orderStatus);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?orderAction={{order_action}}&orderLimitType={{limit_type}}&orderStatus={{order_status}}&page=0&size=10",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "orderAction",
+											"value": "{{order_action}}"
+										},
+										{
+											"key": "orderLimitType",
+											"value": "{{limit_type}}"
+										},
+										{
+											"key": "orderStatus",
+											"value": "{{order_status}}"
+										},
+										{
+											"key": "page",
+											"value": "0"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByOrderActionBuy",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderActionBuy is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let orderAction = \"BUY\";\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified orderActionBuy\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderAction === orderAction);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?orderAction=BUY",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "orderAction",
+											"value": "BUY"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByOrderActionSell",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderActionSell is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let orderAction = \"SELL\";\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified orderActionSell\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderAction === orderAction);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?orderAction=SELL",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "orderAction",
+											"value": "SELL"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByOrderActionRedemption",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderActionSell is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let orderAction = \"REDEMPTION\";\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified orderActionRedemption\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderAction === orderAction);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?orderAction=REDEMPTION",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "orderAction",
+											"value": "REDEMPTION"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByOrderActionSubscription",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderActionSell is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let orderAction = \"SUBSCRIPTION\";\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified orderActionSubscription\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderAction === orderAction);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?orderAction=SUBSCRIPTION",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "orderAction",
+											"value": "SUBSCRIPTION"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByLimitTypeAtMarket",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by limitType AT_MARKET is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let limitType = \"AT_MARKET\";\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified limitType AT_MARKET\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].limitType === limitType);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?orderLimitType=AT_MARKET",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "orderLimitType",
+											"value": "AT_MARKET"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByLimitTypeLimited",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by limitType LIMITED is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let limitType = \"LIMITED\";\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified limitType LIMITED\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].limitType === limitType);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?orderLimitType=LIMITED",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "orderLimitType",
+											"value": "LIMITED"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByLimitTypeStopLoss",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by limitType STOP_LOSS is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let limitType = \"STOP_LOSS\";\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified limitType STOP_LOSS\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].limitType === limitType);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?orderLimitType=STOP_LOSS",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "orderLimitType",
+											"value": "STOP_LOSS"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByOrderStatusEntered",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderStatus ENTERED is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let orderStatus = \"ENTERED\";\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified orderStatus ENTERED\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderStatus === orderStatus);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?orderStatus=ENTERED",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "orderStatus",
+											"value": "ENTERED"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByOrderStatusRejected",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderStatus REJECTED is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let orderStatus = \"REJECTED\";\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified orderStatus REJECTED\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderStatus === orderStatus);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?orderStatus=REJECTED",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "orderStatus",
+											"value": "REJECTED"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByOrderStatusAccepted",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderStatus ACCEPTED is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let orderStatus = \"ACCEPTED\";\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified orderStatus ACCEPTED\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderStatus === orderStatus);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?orderStatus=ACCEPTED",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "orderStatus",
+											"value": "ACCEPTED"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByOrderStatusExecuted",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderStatus EXECUTED is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let orderStatus = \"EXECUTED\";\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified orderStatus EXECUTED\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderStatus === orderStatus);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?orderStatus=EXECUTED",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "orderStatus",
+											"value": "EXECUTED"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersBySecurityId",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by securityId is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let securityId = pm.environment.get(\"_tmp_securityId\");\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified securityId\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            result = result && (jsonData._embedded.orders[x].orderReferences.securityId === securityId);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?securityId={{_tmp_securityId}}",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "securityId",
+											"value": "{{_tmp_securityId}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByStartDate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "856aa18b-4fbe-48fe-a84d-6a900006c4fd",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by startDate 2019-01-01 is retrieved and response schema is validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    var orderDate = new Date(\"2019-01-01\");\r",
+											"    var convertedOrderDate = orderDate.getTime();\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"ordersSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.test(\"Returned orders match to specified orderStatus startDate 2019-01-01 and after\", () => {\r",
+											"        for(var x = 0;x<jsonData._embedded.orders.length;x++) {\r",
+											"            var placedAtTime = new Date(jsonData._embedded.orders[x].orderTimeConstraints.placedAt);\r",
+											"            var convertedTime = placedAtTime.getTime();\r",
+											"            result = result && (convertedOrderDate < convertedTime);\r",
+											"        }\r",
+											"        pm.expect(result).to.be.eql(true);\r",
+											"    }); \r",
+											"    \r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
+											"    pm.expect(result).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders?startDate=2019-01-01",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders"
+									],
+									"query": [
+										{
+											"key": "startDate",
+											"value": "2019-01-01"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersErrorNotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "1b6e57ce-adba-4bca-aa82-d1507198b5e1",
+										"exec": [
+											"//eval(globals.commonTests)();\r",
+											"eval(globals.sessionNavigate)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Display orders fails if wrong version is provided in url\", function () {\r",
+											"\r",
+											"    let jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"    pm.test(\"Status 404 Not Found is displayed\", function () {\r",
+											"        pm.response.to.have.status(404);\r",
+											"    });\r",
+											"\r",
+											"    pm.test(\"Response contains proper error type and code\", function () {\r",
+											"        pm.expect(jsonData.status).to.be.eql(404) &&\r",
+											"        pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
+											"    });\r",
+											"\r",
+											"    pm.response.to.have.status(404) &&\r",
+											"    pm.expect(jsonData.status).to.be.eql(404) &&\r",
+											"    pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v2/orders",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v2",
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersByOrderIdErrorNotFound",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"//eval(globals.commonTests)();\r",
+											"eval(globals.sessionNavigate)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Display orders by order id fails if wrong version is provided in url\", function () {\r",
+											"\r",
+											"    let jsonData = JSON.parse(responseBody);\r",
+											"\r",
+											"    pm.test(\"Status 404 Not Found is displayed\", function () {\r",
+											"        pm.response.to.have.status(404);\r",
+											"    });\r",
+											"\r",
+											"    pm.test(\"Response contains proper error type and code\", function () {\r",
+											"        pm.expect(jsonData.status).to.be.eql(404) &&\r",
+											"        pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
+											"    });\r",
+											"\r",
+											"    pm.response.to.have.status(404) &&\r",
+											"    pm.expect(jsonData.status).to.be.eql(404) &&\r",
+											"    pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v2/orders/qwerty",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v2",
+										"orders",
+										"qwerty"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getOrdersErrorBadRequest",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
+										"exec": [
+											"//eval(globals.commonTests)();\r",
+											"eval(globals.sessionNavigate)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Display order fails if bad url is used\", function () {\r",
+											"\r",
+											"    pm.test(\"Status 400 Bad Request is displayed\", function () {\r",
+											"        pm.response.to.have.status(400);\r",
+											"    });\r",
+											"\r",
+											"    pm.test(\"Response is without body\", function () {\r",
+											"        pm.response.to.not.be.withBody;\r",
+											"    });\r",
+											"\r",
+											"    pm.response.to.have.status(400) &&\r",
+											"    pm.response.to.not.be.withBody;\r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "3b232f55-76cb-4e28-9a55-87e1717231b0",
+										"exec": [
+											"const c = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\r",
+											"pm.environment.set(\"_tmp_randomString\", Array.from({length:6}, _ => c[Math.floor(Math.random()*c.length)]).join(''))"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders/{{_tmp_randomString}}",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"orders",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"orders",
+										"{{_tmp_randomString}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postCreateNewOrder",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "f5bc5481-9a71-459f-a4b9-08e4b605cf9b",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \"New order has been created and order id is displayed\", function () {\r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"New order id is displayed\", function () {\r",
+											"        pm.response.to.have.property(\"id\");\r",
+											"    });\r",
+											"    \r",
+											"});\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									},
+									{
+										"key": "content-type",
+										"type": "text",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"type": "text",
+										"value": "application/json, application/hal+json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"accountId\":\"{{_tmp_accountId}}\",\n    \"custodyAccountId\":\"{{_tmp_custodyAccountId}}\",\n    \"securityId\":\"{{_tmp_securityId}}\",\n    \"securityListingId\":\"{{_tmp_postSecurityListingId}}\",\n    \"orderAction\":\"BUY\",\n    \"orderExecutionType\":\"MARKET\",\n    \"amount\":{\n    \"currencyIsoCode\":\"CHF\",\n    \"value\":1.00\n    },\n    \"validUntil\": {{PrS:nextWorkingDay}},\n    \"enteredBy\":\"{{_tmp_postEnteredById}}\",\n    \"placedBy\":\"{{_tmp_postEnteredById}}\"\n}\n"
+								},
 								"url": {
 									"raw": "{{env_brokerage}}/brokerage/orders/{{tenantId_brokerage}}/v1/orders",
 									"host": [
@@ -1643,6 +4327,106 @@
 										}
 									]
 								}
+							},
+							"response": []
+						},
+						{
+							"name": "getSecuritiesByISINNestle",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
+										"exec": [
+											"eval(globals.commonTests)();\r",
+											"\r",
+											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of securities by ISIN is retrieved and response schema i validated\", function () {\r",
+											"    var schemaValidationPassed = true;\r",
+											"    var jsonData = JSON.parse(responseBody);\r",
+											"    let isin = pm.environment.get(\"_tmp_isin\");\r",
+											"    let result = true; \r",
+											"    \r",
+											"    pm.test(\"Status 200 OK is displayed\", function () {\r",
+											"        pm.response.to.have.status(200);\r",
+											"    });\r",
+											"    \r",
+											"    pm.test(\"Response schema is correct\", () => {\r",
+											"        schemaValidationPassed = eval(globals.schemaValidator)(\"securitiesSchema\",jsonData);\r",
+											"        pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"    }); \r",
+											"\r",
+											"    pm.response.to.have.status(200)\r",
+											"    && pm.expect(schemaValidationPassed).to.be.eql(true);\r",
+											"});\r",
+											"\r",
+											"if (pm.response.code === 200) {\r",
+											"    var jsonData = JSON.parse(responseBody)._embedded;\r",
+											"    pm.environment.set(\"_tmp_securityId\",jsonData.securities[0].id);\r",
+											"} else {\r",
+											"    pm.environment.unset(\"_tmp_securityId\");\r",
+											"};\r",
+											"\r",
+											"eval(globals.sessionNavigate)();\r",
+											"pm.globals.unset(\"_tr_\" + request.name);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d873ed76-b449-4069-8385-ae5f6ad05400",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "content-type",
+										"value": "application/json; charset=UTF-8"
+									},
+									{
+										"key": "accept",
+										"value": "application/json, application/hal+json"
+									},
+									{
+										"key": "Authorization",
+										"type": "text",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{env_brokerage}}/brokerage/securities/{{tenantId_brokerage}}/v1/securities?isin=CH9938863350",
+									"host": [
+										"{{env_brokerage}}"
+									],
+									"path": [
+										"brokerage",
+										"securities",
+										"{{tenantId_brokerage}}",
+										"v1",
+										"securities"
+									],
+									"query": [
+										{
+											"key": "isin",
+											"value": "CH9938863350"
+										}
+									]
+								},
+								"description": "Pre-requisite for POST Create New Order\n"
 							},
 							"response": []
 						},
@@ -2449,8 +5233,7 @@
 									{
 										"key": "Authorization",
 										"type": "text",
-										"value": "Bearer {{token}}",
-										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+										"value": "Bearer {{access_token}}"
 									}
 								],
 								"body": {
@@ -2980,7 +5763,7 @@
 									{
 										"key": "Authorization",
 										"type": "text",
-										"value": "Bearer {{token}}"
+										"value": "Bearer {{access_token}}"
 									}
 								],
 								"body": {
@@ -3120,6 +5903,13 @@
 											"    pm.response.to.have.status(200);",
 											" ",
 											"});",
+											"",
+											"if (pm.response.code === 200) {",
+											"    var jsonData = JSON.parse(responseBody)._embedded;",
+											"    pm.environment.set(\"_tmp_postSecurityListingId\",jsonData.listings[0].id);",
+											"} else {",
+											"    pm.environment.unset(\"_tmp_postSecurityListingId\");",
+											"};",
 											"",
 											"// Session navigate from PrS using eval()",
 											"eval(globals.sessionNavigate)();",
@@ -3842,7 +6632,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"tenant_id\": {{tenantId_assets}},\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\n  \"tenant_name\": \"{{tenantName_security}}\",\n  \"user_name\": \"{{userId_assets}}\",\n  \"contractNo\": \"{{contractNo_security}}\",\n  \"languageCode\": \"en\",\n  \"bcNo\": \"{{bcNo_security}}\",\n  \"authorities\": [],\n  \"client_id\": \"postman\",\n  \"user_id\": {{userId_assets}},\n  \"scope\": [\n    \"https://api.crealogix.com/dban\",\n    \"read\",\n    \"write\",    \n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\n    \"https://api.crealogix.com/payments/payment.initiate\",\n    \"https://api.crealogix.com/assets/account.balance.readonly\",    \n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\n    \"https://api.crealogix.com/assets/account.accountname.write\",\n    \"https://api.crealogix.com/assets/account.accountimage.write\",\n    \"https://api.crealogix.com/assets/cuac.readonly\",\n    \"https://api.crealogix.com/assets/portfolio.readonly\",\n    \"https://api.crealogix.com/messages/securemail.write\",\n    \"https://api.crealogix.com/messages/securemail.read\",\n    \"https://api.crealogix.com/brokerage/security.readonly\",\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\n    \"https://api.crealogix.com/brokerage/order.readonly\",\n    \"https://api.crealogix.com/brokerage/order.write\"\n  ],\n  \"loginName\": \"{{userId_assets}}\",\n  \"exp\": 32479694642,\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\n  \"iat\": 1553855569\n}"
+					"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_security}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
 				},
 				"url": {
 					"raw": "{{env_security_testToken}}",
@@ -3850,6 +6640,80 @@
 						"{{env_security_testToken}}"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAuthTestTokenK8S",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9e77f489-363b-4a53-9c9f-58be8e9678c8",
+						"exec": [
+							"console.log(\"Test Token url is: \" + pm.environment.get(\"env_security_testToken\"));",
+							"",
+							"// Set up pre-conditions with Chai Assertion library. https://www.chaijs.com/api/bdd/",
+							"/*",
+							"pm.expect(pm.environment.get(\"env_securemail\")).to.be.a('string', \"The env_securemail is not defined\");",
+							"pm.expect(pm.environment.get(\"env_security_testToken\")).to.be.a('string', \"The testTokenUrl is not defined\");",
+							"pm.expect(pm.environment.get(\"tenantId_security\")).to.be.a('string', \"The tenantId is not defined\");",
+							"pm.expect(pm.environment.get(\"tenantName_security\")).to.be.a('string', \"The tenantName is not defined\");",
+							"pm.expect(pm.environment.get(\"userName_security\")).to.be.a('string', \"The userName is not defined\");",
+							"pm.expect(pm.environment.get(\"contractNo_security\")).to.be.a('string', \"The contractNo is not defined\");",
+							"pm.expect(pm.environment.get(\"bcNo_security\")).to.be.a('string', \"The bcNo is not defined\");",
+							"pm.expect(pm.environment.get(\"userId_security\")).to.be.a('string', \"The userId is not defined\");",
+							"*/"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "095f7911-c115-4798-9cc5-f06e06819ef3",
+						"exec": [
+							"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.be.withBody;",
+							"    pm.environment.set(\"access_token\", pm.response.text());",
+							"});",
+							"",
+							"",
+							"// Session navigate from PrS using eval()",
+							"eval(globals.sessionNavigate)();",
+							"",
+							"// Reset reference to TR test cases",
+							"pm.globals.unset(\"_tr_\" + request.name);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tenant_id\": {{tenantId_soba}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_soba}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_soba}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_soba}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",    \r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/assets/account.accountname.write\",\r\n    \"https://api.crealogix.com/assets/account.accountimage.write\",\r\n    \"https://api.crealogix.com/assets/cuac.readonly\",\r\n    \"https://api.crealogix.com/assets/portfolio.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\"\r\n  ],\r\n  \"loginName\": \"{{userId_soba}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+				},
+				"url": {
+					"raw": "{{env_security_testToken}}",
+					"host": [
+						"{{env_security_testToken}}"
+					]
+				},
+				"description": "Retrieve the test token"
 			},
 			"response": []
 		},
@@ -3915,6 +6779,78 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_security}},\r\n  \"scope\": [\r\n\t\"https://api.crealogix.com/payments/payment.initiate\",\r\n\t\"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n\t\"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n\t\"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n\t\"https://api.crealogix.com/messages/document.metadata.readonly\",\r\n\t\"https://api.crealogix.com/messages/document.content.readonly\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+				},
+				"url": {
+					"raw": "{{env_security_testToken}}",
+					"host": [
+						"{{env_security_testToken}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAuthTestTokenK8SNoAssetsPermissions",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "871a062d-fd8b-4583-a09e-84e18b781faa",
+						"exec": [
+							"// This is only required if there are multiple \"getToken\" requests and some need to be skipped",
+							"//postman.setNextRequest(\"getAllTopics (C41673954)\");",
+							"",
+							"console.log(\"Test Token url is: \" + pm.environment.get(\"env_security_testToken\"));",
+							"",
+							"// Set up pre-conditions with Chai Assertion library. https://www.chaijs.com/api/bdd/",
+							"pm.expect(pm.environment.get(\"env_securemail\")).to.be.a('string', \"The env_securemail is not defined\");",
+							"pm.expect(pm.environment.get(\"env_security_testToken\")).to.be.a('string', \"The testTokenUrl is not defined\");",
+							"pm.expect(pm.environment.get(\"tenantId_security\")).to.be.a('string', \"The tenantId is not defined\");",
+							"pm.expect(pm.environment.get(\"tenantName_security\")).to.be.a('string', \"The tenantName is not defined\");",
+							"pm.expect(pm.environment.get(\"userName_security\")).to.be.a('string', \"The userName is not defined\");",
+							"pm.expect(pm.environment.get(\"contractNo_security\")).to.be.a('string', \"The contractNo is not defined\");",
+							"pm.expect(pm.environment.get(\"bcNo_security\")).to.be.a('string', \"The bcNo is not defined\");",
+							"pm.expect(pm.environment.get(\"userId_security\")).to.be.a('string', \"The userId is not defined\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "2c7c456c-2745-40e5-a4ff-aba74cc52590",
+						"exec": [
+							"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.be.withBody;",
+							"    pm.environment.set(\"access_token\", pm.response.text());",
+							"});",
+							"",
+							"",
+							"// Session navigate from PrS using eval()",
+							"eval(globals.sessionNavigate)();",
+							"",
+							"// Reset reference to TR test cases",
+							"pm.globals.unset(\"_tr_\" + request.name);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tenant_id\": {{tenantId_soba}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_soba}},\r\n  \"scope\": [\r\n\t\"https://api.crealogix.com/payments/payment.initiate\",\r\n\t\"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n\t\"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n\t\"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n\t\"https://api.crealogix.com/messages/document.metadata.readonly\",\r\n\t\"https://api.crealogix.com/messages/document.content.readonly\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
 				},
 				"url": {
 					"raw": "{{env_security_testToken}}",
@@ -5851,6 +8787,701 @@
 					"pm.environment.set(\"securityByIdSchema\", securityByIdSchema);",
 					"",
 					"//************************************************************************************************",
+					"// Schema for 'orders' ***********************************************************************",
+					"// created via https://jsonschema.net/ ***********************************************************",
+					"//************************************************************************************************",
+					"const ordersSchema =",
+					"{",
+					"  \"definitions\": {},",
+					"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+					"  \"$id\": \"http://example.com/root.json\",",
+					"  \"type\": \"object\",",
+					"  \"title\": \"The Root Schema\",",
+					"  \"required\": [",
+					"    \"_embedded\",",
+					"    \"page\"",
+					"  ],",
+					"  \"properties\": {",
+					"    \"_embedded\": {",
+					"      \"$id\": \"#/properties/_embedded\",",
+					"      \"type\": \"object\",",
+					"      \"title\": \"The _embedded Schema\",",
+					"      \"required\": [",
+					"        \"orders\"",
+					"      ],",
+					"      \"properties\": {",
+					"        \"orders\": {",
+					"          \"$id\": \"#/properties/_embedded/properties/orders\",",
+					"          \"type\": \"array\",",
+					"          \"title\": \"The Orders Schema\",",
+					"          \"items\": {",
+					"            \"$id\": \"#/properties/_embedded/properties/orders/items\",",
+					"            \"type\": \"object\",",
+					"            \"title\": \"The Items Schema\",",
+					"            \"required\": [",
+					"              \"id\",",
+					"              \"amount\",",
+					"              \"amountExecuted\",",
+					"              \"commission\",",
+					"              \"fee\",",
+					"              \"currencyIsoCode\",",
+					"              \"limit\",",
+					"              \"limitType\",",
+					"              \"orderAction\",",
+					"              \"orderReferences\",",
+					"              \"orderStatus\",",
+					"              \"orderTimeConstraints\",",
+					"              \"shareRegisterCode\",",
+					"              \"ticker\",",
+					"              \"transactionKey\"",
+					"            ],",
+					"            \"properties\": {",
+					"              \"id\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/id\",",
+					"                \"type\": \"string\",",
+					"                \"title\": \"The Id Schema\",",
+					"                \"default\": \"\",",
+					"                \"examples\": [",
+					"                  \"__ID__485a74794562637739667a7a35353845f4b21782f6d00b99a2ad0cf9c4be10d807fb14\"",
+					"                ],",
+					"                \"pattern\": \"^(.*)$\"",
+					"              },",
+					"              \"amount\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/amount\",",
+					"                \"type\": \"integer\",",
+					"                \"title\": \"The Amount Schema\",",
+					"                \"default\": 0,",
+					"                \"examples\": [",
+					"                  200",
+					"                ]",
+					"              },",
+					"              \"amountExecuted\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/amountExecuted\",",
+					"                \"type\": \"integer\",",
+					"                \"title\": \"The Amountexecuted Schema\",",
+					"                \"default\": 0,",
+					"                \"examples\": [",
+					"                  0",
+					"                ]",
+					"              },",
+					"              \"commission\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/commission\",",
+					"                \"type\": \"null\",",
+					"                \"title\": \"The Commission Schema\",",
+					"                \"default\": null,",
+					"                \"examples\": [",
+					"                  null",
+					"                ]",
+					"              },",
+					"              \"fee\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/fee\",",
+					"                \"type\": \"null\",",
+					"                \"title\": \"The Fee Schema\",",
+					"                \"default\": null,",
+					"                \"examples\": [",
+					"                  null",
+					"                ]",
+					"              },",
+					"              \"currencyIsoCode\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/currencyIsoCode\",",
+					"                \"type\": \"string\",",
+					"                \"title\": \"The Currencyisocode Schema\",",
+					"                \"default\": \"\",",
+					"                \"examples\": [",
+					"                  \"USD\"",
+					"                ],",
+					"                \"pattern\": \"^(.*)$\"",
+					"              },",
+					"              \"limit\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/limit\",",
+					"                \"type\": \"number\",",
+					"                \"title\": \"The Limit Schema\",",
+					"                \"default\": 0.0,",
+					"                \"examples\": [",
+					"                  98.5",
+					"                ]",
+					"              },",
+					"              \"limitType\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/limitType\",",
+					"                \"type\": \"string\",",
+					"                \"title\": \"The Limittype Schema\",",
+					"                \"default\": \"\",",
+					"                \"examples\": [",
+					"                  \"LIMITED\"",
+					"                ],",
+					"                \"pattern\": \"^(.*)$\"",
+					"              },",
+					"              \"orderAction\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderAction\",",
+					"                \"type\": \"string\",",
+					"                \"title\": \"The Orderaction Schema\",",
+					"                \"default\": \"\",",
+					"                \"examples\": [",
+					"                  \"BUY\"",
+					"                ],",
+					"                \"pattern\": \"^(.*)$\"",
+					"              },",
+					"              \"orderReferences\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderReferences\",",
+					"                \"type\": \"object\",",
+					"                \"title\": \"The Orderreferences Schema\",",
+					"                \"required\": [",
+					"                  \"accountId\",",
+					"                  \"brokerId\",",
+					"                  \"cancelledById\",",
+					"                  \"custodyAccountId\",",
+					"                  \"custodyAccountPositionId\",",
+					"                  \"enteredBy\",",
+					"                  \"placedById\",",
+					"                  \"securityId\"",
+					"                ],",
+					"                \"properties\": {",
+					"                  \"accountId\": {",
+					"                    \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderReferences/properties/accountId\",",
+					"                    \"type\": \"string\",",
+					"                    \"title\": \"The Accountid Schema\",",
+					"                    \"default\": \"\",",
+					"                    \"examples\": [",
+					"                      \"__ID__485a74794562637739667a7a35353845f3b02320be64a54b21cc6673e4fa100c07d1\"",
+					"                    ],",
+					"                    \"pattern\": \"^(.*)$\"",
+					"                  },",
+					"                  \"brokerId\": {",
+					"                    \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderReferences/properties/brokerId\",",
+					"                    \"type\": \"null\",",
+					"                    \"title\": \"The Brokerid Schema\",",
+					"                    \"default\": null,",
+					"                    \"examples\": [",
+					"                      null",
+					"                    ]",
+					"                  },",
+					"                  \"cancelledById\": {",
+					"                    \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderReferences/properties/cancelledById\",",
+					"                    \"type\": \"null\",",
+					"                    \"title\": \"The Cancelledbyid Schema\",",
+					"                    \"default\": null,",
+					"                    \"examples\": [",
+					"                      null",
+					"                    ]",
+					"                  },",
+					"                  \"custodyAccountId\": {",
+					"                    \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderReferences/properties/custodyAccountId\",",
+					"                    \"type\": \"string\",",
+					"                    \"title\": \"The Custodyaccountid Schema\",",
+					"                    \"default\": \"\",",
+					"                    \"examples\": [",
+					"                      \"__ID__485a74794562637739667a7a35353845f0b4a8a6b0870cd11b4b6e7d00e6bcd55300\"",
+					"                    ],",
+					"                    \"pattern\": \"^(.*)$\"",
+					"                  },",
+					"                  \"custodyAccountPositionId\": {",
+					"                    \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderReferences/properties/custodyAccountPositionId\",",
+					"                    \"type\": \"null\",",
+					"                    \"title\": \"The Custodyaccountpositionid Schema\",",
+					"                    \"default\": null,",
+					"                    \"examples\": [",
+					"                      null",
+					"                    ]",
+					"                  },",
+					"                  \"enteredBy\": {",
+					"                    \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderReferences/properties/enteredBy\",",
+					"                    \"type\": \"null\",",
+					"                    \"title\": \"The Enteredby Schema\",",
+					"                    \"default\": null,",
+					"                    \"examples\": [",
+					"                      null",
+					"                    ]",
+					"                  },",
+					"                  \"placedById\": {",
+					"                    \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderReferences/properties/placedById\",",
+					"                    \"type\": \"null\",",
+					"                    \"title\": \"The Placedbyid Schema\",",
+					"                    \"default\": null,",
+					"                    \"examples\": [",
+					"                      null",
+					"                    ]",
+					"                  },",
+					"                  \"securityId\": {",
+					"                    \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderReferences/properties/securityId\",",
+					"                    \"type\": \"string\",",
+					"                    \"title\": \"The Securityid Schema\",",
+					"                    \"default\": \"\",",
+					"                    \"examples\": [",
+					"                      \"__ID__485a74794562637739667a7a35353845f57fb73f2c3a458dcce2660ae21f4ae9ca\"",
+					"                    ],",
+					"                    \"pattern\": \"^(.*)$\"",
+					"                  }",
+					"                }",
+					"              },",
+					"              \"orderStatus\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderStatus\",",
+					"                \"type\": \"string\",",
+					"                \"title\": \"The Orderstatus Schema\",",
+					"                \"default\": \"\",",
+					"                \"examples\": [",
+					"                  \"ENTERED\"",
+					"                ],",
+					"                \"pattern\": \"^(.*)$\"",
+					"              },",
+					"              \"orderTimeConstraints\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderTimeConstraints\",",
+					"                \"type\": \"object\",",
+					"                \"title\": \"The Ordertimeconstraints Schema\",",
+					"                \"required\": [",
+					"                  \"cancelledAt\",",
+					"                  \"executedAt\",",
+					"                  \"placedAt\",",
+					"                  \"validFrom\",",
+					"                  \"validUntil\"",
+					"                ],",
+					"                \"properties\": {",
+					"                  \"cancelledAt\": {",
+					"                    \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderTimeConstraints/properties/cancelledAt\",",
+					"                    \"type\": \"null\",",
+					"                    \"title\": \"The Cancelledat Schema\",",
+					"                    \"default\": null,",
+					"                    \"examples\": [",
+					"                      null",
+					"                    ]",
+					"                  },",
+					"                  \"executedAt\": {",
+					"                    \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderTimeConstraints/properties/executedAt\",",
+					"                    \"type\": \"null\",",
+					"                    \"title\": \"The Executedat Schema\",",
+					"                    \"default\": null,",
+					"                    \"examples\": [",
+					"                      null",
+					"                    ]",
+					"                  },",
+					"                  \"placedAt\": {",
+					"                    \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderTimeConstraints/properties/placedAt\",",
+					"                    \"type\": \"string\",",
+					"                    \"title\": \"The Placedat Schema\",",
+					"                    \"default\": \"\",",
+					"                    \"examples\": [",
+					"                      \"2019-09-25T23:00:00+01:00\"",
+					"                    ],",
+					"                    \"pattern\": \"^(.*)$\"",
+					"                  },",
+					"                  \"validFrom\": {",
+					"                    \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderTimeConstraints/properties/validFrom\",",
+					"                    \"type\": \"null\",",
+					"                    \"title\": \"The Validfrom Schema\",",
+					"                    \"default\": null,",
+					"                    \"examples\": [",
+					"                      null",
+					"                    ]",
+					"                  },",
+					"                  \"validUntil\": {",
+					"                    \"$id\": \"#/properties/_embedded/properties/orders/items/properties/orderTimeConstraints/properties/validUntil\",",
+					"                    \"type\": \"string\",",
+					"                    \"title\": \"The Validuntil Schema\",",
+					"                    \"default\": \"\",",
+					"                    \"examples\": [",
+					"                      \"2019-10-02T23:00:00+01:00\"",
+					"                    ],",
+					"                    \"pattern\": \"^(.*)$\"",
+					"                  }",
+					"                }",
+					"              },",
+					"              \"shareRegisterCode\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/shareRegisterCode\",",
+					"                \"type\": \"null\",",
+					"                \"title\": \"The Shareregistercode Schema\",",
+					"                \"default\": null,",
+					"                \"examples\": [",
+					"                  null",
+					"                ]",
+					"              },",
+					"              \"ticker\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/ticker\",",
+					"                \"type\": \"string\",",
+					"                \"title\": \"The Ticker Schema\",",
+					"                \"default\": \"\",",
+					"                \"examples\": [",
+					"                  \"MMM\"",
+					"                ],",
+					"                \"pattern\": \"^(.*)$\"",
+					"              },",
+					"              \"transactionKey\": {",
+					"                \"$id\": \"#/properties/_embedded/properties/orders/items/properties/transactionKey\",",
+					"                \"type\": \"string\",",
+					"                \"title\": \"The Transactionkey Schema\",",
+					"                \"default\": \"\",",
+					"                \"examples\": [",
+					"                  \"100006-5\"",
+					"                ],",
+					"                \"pattern\": \"^(.*)$\"",
+					"              }",
+					"            }",
+					"          }",
+					"        }",
+					"      }",
+					"    },",
+					"    \"page\": {",
+					"      \"$id\": \"#/properties/page\",",
+					"      \"type\": \"object\",",
+					"      \"title\": \"The Page Schema\",",
+					"      \"required\": [",
+					"        \"number\",",
+					"        \"size\",",
+					"        \"totalElements\",",
+					"        \"totalPages\"",
+					"      ],",
+					"      \"properties\": {",
+					"        \"number\": {",
+					"          \"$id\": \"#/properties/page/properties/number\",",
+					"          \"type\": \"integer\",",
+					"          \"title\": \"The Number Schema\",",
+					"          \"default\": 0,",
+					"          \"examples\": [",
+					"            0",
+					"          ]",
+					"        },",
+					"        \"size\": {",
+					"          \"$id\": \"#/properties/page/properties/size\",",
+					"          \"type\": \"integer\",",
+					"          \"title\": \"The Size Schema\",",
+					"          \"default\": 0,",
+					"          \"examples\": [",
+					"            10",
+					"          ]",
+					"        },",
+					"        \"totalElements\": {",
+					"          \"$id\": \"#/properties/page/properties/totalElements\",",
+					"          \"type\": \"integer\",",
+					"          \"title\": \"The Totalelements Schema\",",
+					"          \"default\": 0,",
+					"          \"examples\": [",
+					"            32",
+					"          ]",
+					"        },",
+					"        \"totalPages\": {",
+					"          \"$id\": \"#/properties/page/properties/totalPages\",",
+					"          \"type\": \"integer\",",
+					"          \"title\": \"The Totalpages Schema\",",
+					"          \"default\": 0,",
+					"          \"examples\": [",
+					"            4",
+					"          ]",
+					"        }",
+					"      }",
+					"    }",
+					"  }",
+					"}",
+					"pm.environment.set(\"ordersSchema\", ordersSchema);",
+					"",
+					"//************************************************************************************************",
+					"// Schema for 'order details' ********************************************************************",
+					"// created via https://jsonschema.net/ ***********************************************************",
+					"//************************************************************************************************",
+					"const orderDetailsSchema =",
+					"{",
+					"  \"definitions\": {},",
+					"  \"$schema\": \"http://json-schema.org/draft-07/schema#\",",
+					"  \"$id\": \"http://example.com/root.json\",",
+					"  \"type\": \"object\",",
+					"  \"title\": \"The Root Schema\",",
+					"  \"required\": [",
+					"    \"id\",",
+					"    \"amount\",",
+					"    \"amountExecuted\",",
+					"    \"commission\",",
+					"    \"fee\",",
+					"    \"currencyIsoCode\",",
+					"    \"limit\",",
+					"    \"limitType\",",
+					"    \"orderAction\",",
+					"    \"orderReferences\",",
+					"    \"orderStatus\",",
+					"    \"orderTimeConstraints\",",
+					"    \"shareRegisterCode\",",
+					"    \"ticker\",",
+					"    \"transactionKey\"",
+					"  ],",
+					"  \"properties\": {",
+					"    \"id\": {",
+					"      \"$id\": \"#/properties/id\",",
+					"      \"type\": \"string\",",
+					"      \"title\": \"The Id Schema\",",
+					"      \"default\": \"\",",
+					"      \"examples\": [",
+					"        \"__ID__36513232494a766e565853364c6834746e6fc4a6abe89cb2a2b97b01a4b2f869f9db51\"",
+					"      ],",
+					"      \"pattern\": \"^(.*)$\"",
+					"    },",
+					"    \"amount\": {",
+					"      \"$id\": \"#/properties/amount\",",
+					"      \"type\": \"integer\",",
+					"      \"title\": \"The Amount Schema\",",
+					"      \"default\": 0,",
+					"      \"examples\": [",
+					"        200",
+					"      ]",
+					"    },",
+					"    \"amountExecuted\": {",
+					"      \"$id\": \"#/properties/amountExecuted\",",
+					"      \"type\": \"integer\",",
+					"      \"title\": \"The Amountexecuted Schema\",",
+					"      \"default\": 0,",
+					"      \"examples\": [",
+					"        0",
+					"      ]",
+					"    },",
+					"    \"commission\": {",
+					"      \"$id\": \"#/properties/commission\",",
+					"      \"type\": \"null\",",
+					"      \"title\": \"The Commission Schema\",",
+					"      \"default\": null,",
+					"      \"examples\": [",
+					"        null",
+					"      ]",
+					"    },",
+					"    \"fee\": {",
+					"      \"$id\": \"#/properties/fee\",",
+					"      \"type\": \"null\",",
+					"      \"title\": \"The Fee Schema\",",
+					"      \"default\": null,",
+					"      \"examples\": [",
+					"        null",
+					"      ]",
+					"    },",
+					"    \"currencyIsoCode\": {",
+					"      \"$id\": \"#/properties/currencyIsoCode\",",
+					"      \"type\": \"string\",",
+					"      \"title\": \"The Currencyisocode Schema\",",
+					"      \"default\": \"\",",
+					"      \"examples\": [",
+					"        \"USD\"",
+					"      ],",
+					"      \"pattern\": \"^(.*)$\"",
+					"    },",
+					"    \"limit\": {",
+					"      \"$id\": \"#/properties/limit\",",
+					"      \"type\": \"number\",",
+					"      \"title\": \"The Limit Schema\",",
+					"      \"default\": 0.0,",
+					"      \"examples\": [",
+					"        98.5",
+					"      ]",
+					"    },",
+					"    \"limitType\": {",
+					"      \"$id\": \"#/properties/limitType\",",
+					"      \"type\": \"string\",",
+					"      \"title\": \"The Limittype Schema\",",
+					"      \"default\": \"\",",
+					"      \"examples\": [",
+					"        \"LIMITED\"",
+					"      ],",
+					"      \"pattern\": \"^(.*)$\"",
+					"    },",
+					"    \"orderAction\": {",
+					"      \"$id\": \"#/properties/orderAction\",",
+					"      \"type\": \"string\",",
+					"      \"title\": \"The Orderaction Schema\",",
+					"      \"default\": \"\",",
+					"      \"examples\": [",
+					"        \"BUY\"",
+					"      ],",
+					"      \"pattern\": \"^(.*)$\"",
+					"    },",
+					"    \"orderReferences\": {",
+					"      \"$id\": \"#/properties/orderReferences\",",
+					"      \"type\": \"object\",",
+					"      \"title\": \"The Orderreferences Schema\",",
+					"      \"required\": [",
+					"        \"accountId\",",
+					"        \"brokerId\",",
+					"        \"cancelledById\",",
+					"        \"custodyAccountId\",",
+					"        \"custodyAccountPositionId\",",
+					"        \"enteredBy\",",
+					"        \"placedById\",",
+					"        \"securityId\"",
+					"      ],",
+					"      \"properties\": {",
+					"        \"accountId\": {",
+					"          \"$id\": \"#/properties/orderReferences/properties/accountId\",",
+					"          \"type\": \"string\",",
+					"          \"title\": \"The Accountid Schema\",",
+					"          \"default\": \"\",",
+					"          \"examples\": [",
+					"            \"__ID__36513232494a766e565853364c6834746f60055b893a034def1a6efdfdc76ff187d7\"",
+					"          ],",
+					"          \"pattern\": \"^(.*)$\"",
+					"        },",
+					"        \"brokerId\": {",
+					"          \"$id\": \"#/properties/orderReferences/properties/brokerId\",",
+					"          \"type\": \"null\",",
+					"          \"title\": \"The Brokerid Schema\",",
+					"          \"default\": null,",
+					"          \"examples\": [",
+					"            null",
+					"          ]",
+					"        },",
+					"        \"cancelledById\": {",
+					"          \"$id\": \"#/properties/orderReferences/properties/cancelledById\",",
+					"          \"type\": \"null\",",
+					"          \"title\": \"The Cancelledbyid Schema\",",
+					"          \"default\": null,",
+					"          \"examples\": [",
+					"            null",
+					"          ]",
+					"        },",
+					"        \"custodyAccountId\": {",
+					"          \"$id\": \"#/properties/orderReferences/properties/custodyAccountId\",",
+					"          \"type\": \"string\",",
+					"          \"title\": \"The Custodyaccountid Schema\",",
+					"          \"default\": \"\",",
+					"          \"examples\": [",
+					"            \"__ID__36513232494a766e565853364c683474646be1a97a4a39ac31d522f9d5e32e1d40be\"",
+					"          ],",
+					"          \"pattern\": \"^(.*)$\"",
+					"        },",
+					"        \"custodyAccountPositionId\": {",
+					"          \"$id\": \"#/properties/orderReferences/properties/custodyAccountPositionId\",",
+					"          \"type\": \"null\",",
+					"          \"title\": \"The Custodyaccountpositionid Schema\",",
+					"          \"default\": null,",
+					"          \"examples\": [",
+					"            null",
+					"          ]",
+					"        },",
+					"        \"enteredBy\": {",
+					"          \"$id\": \"#/properties/orderReferences/properties/enteredBy\",",
+					"          \"type\": \"null\",",
+					"          \"title\": \"The Enteredby Schema\",",
+					"          \"default\": null,",
+					"          \"examples\": [",
+					"            null",
+					"          ]",
+					"        },",
+					"        \"placedById\": {",
+					"          \"$id\": \"#/properties/orderReferences/properties/placedById\",",
+					"          \"type\": \"null\",",
+					"          \"title\": \"The Placedbyid Schema\",",
+					"          \"default\": null,",
+					"          \"examples\": [",
+					"            null",
+					"          ]",
+					"        },",
+					"        \"securityId\": {",
+					"          \"$id\": \"#/properties/orderReferences/properties/securityId\",",
+					"          \"type\": \"string\",",
+					"          \"title\": \"The Securityid Schema\",",
+					"          \"default\": \"\",",
+					"          \"examples\": [",
+					"            \"__ID__36513232494a766e565853364c683474606e3c79260c77997560f92d86246e348774\"",
+					"          ],",
+					"          \"pattern\": \"^(.*)$\"",
+					"        }",
+					"      }",
+					"    },",
+					"    \"orderStatus\": {",
+					"      \"$id\": \"#/properties/orderStatus\",",
+					"      \"type\": \"string\",",
+					"      \"title\": \"The Orderstatus Schema\",",
+					"      \"default\": \"\",",
+					"      \"examples\": [",
+					"        \"ENTERED\"",
+					"      ],",
+					"      \"pattern\": \"^(.*)$\"",
+					"    },",
+					"    \"orderTimeConstraints\": {",
+					"      \"$id\": \"#/properties/orderTimeConstraints\",",
+					"      \"type\": \"object\",",
+					"      \"title\": \"The Ordertimeconstraints Schema\",",
+					"      \"required\": [",
+					"        \"cancelledAt\",",
+					"        \"executedAt\",",
+					"        \"placedAt\",",
+					"        \"validFrom\",",
+					"        \"validUntil\"",
+					"      ],",
+					"      \"properties\": {",
+					"        \"cancelledAt\": {",
+					"          \"$id\": \"#/properties/orderTimeConstraints/properties/cancelledAt\",",
+					"          \"type\": \"null\",",
+					"          \"title\": \"The Cancelledat Schema\",",
+					"          \"default\": null,",
+					"          \"examples\": [",
+					"            null",
+					"          ]",
+					"        },",
+					"        \"executedAt\": {",
+					"          \"$id\": \"#/properties/orderTimeConstraints/properties/executedAt\",",
+					"          \"type\": \"null\",",
+					"          \"title\": \"The Executedat Schema\",",
+					"          \"default\": null,",
+					"          \"examples\": [",
+					"            null",
+					"          ]",
+					"        },",
+					"        \"placedAt\": {",
+					"          \"$id\": \"#/properties/orderTimeConstraints/properties/placedAt\",",
+					"          \"type\": \"string\",",
+					"          \"title\": \"The Placedat Schema\",",
+					"          \"default\": \"\",",
+					"          \"examples\": [",
+					"            \"2019-09-25T23:00:00+01:00\"",
+					"          ],",
+					"          \"pattern\": \"^(.*)$\"",
+					"        },",
+					"        \"validFrom\": {",
+					"          \"$id\": \"#/properties/orderTimeConstraints/properties/validFrom\",",
+					"          \"type\": \"null\",",
+					"          \"title\": \"The Validfrom Schema\",",
+					"          \"default\": null,",
+					"          \"examples\": [",
+					"            null",
+					"          ]",
+					"        },",
+					"        \"validUntil\": {",
+					"          \"$id\": \"#/properties/orderTimeConstraints/properties/validUntil\",",
+					"          \"type\": \"string\",",
+					"          \"title\": \"The Validuntil Schema\",",
+					"          \"default\": \"\",",
+					"          \"examples\": [",
+					"            \"2019-10-02T23:00:00+01:00\"",
+					"          ],",
+					"          \"pattern\": \"^(.*)$\"",
+					"        }",
+					"      }",
+					"    },",
+					"    \"shareRegisterCode\": {",
+					"      \"$id\": \"#/properties/shareRegisterCode\",",
+					"      \"type\": \"null\",",
+					"      \"title\": \"The Shareregistercode Schema\",",
+					"      \"default\": null,",
+					"      \"examples\": [",
+					"        null",
+					"      ]",
+					"    },",
+					"    \"ticker\": {",
+					"      \"$id\": \"#/properties/ticker\",",
+					"      \"type\": \"string\",",
+					"      \"title\": \"The Ticker Schema\",",
+					"      \"default\": \"\",",
+					"      \"examples\": [",
+					"        \"MMM\"",
+					"      ],",
+					"      \"pattern\": \"^(.*)$\"",
+					"    },",
+					"    \"transactionKey\": {",
+					"      \"$id\": \"#/properties/transactionKey\",",
+					"      \"type\": \"string\",",
+					"      \"title\": \"The Transactionkey Schema\",",
+					"      \"default\": \"\",",
+					"      \"examples\": [",
+					"        \"100006-58\"",
+					"      ],",
+					"      \"pattern\": \"^(.*)$\"",
+					"    }",
+					"  }",
+					"};",
+					"pm.environment.set(\"orderDetailsSchema\", orderDetailsSchema);",
+					"",
+					"//************************************************************************************************",
 					"//global function to determine next day/next working day *****************************************",
 					"//************************************************************************************************",
 					"var moment = require('moment');",
@@ -5912,7 +9543,7 @@
 					"        }",
 					"        switch(request.method){",
 					"            case \"POST\":",
-					"                pm.response.to.have.status(201);",
+					"                pm.response.to.have.status(200);",
 					"                break;",
 					"            case \"PUT\":",
 					"                pm.response.to.have.status(200);",
@@ -6062,7 +9693,7 @@
 	],
 	"variable": [
 		{
-			"id": "f0f0af4f-b90d-4691-a243-b3f815d00b6b",
+			"id": "dc00bee7-aa09-4b45-9fdb-b237c8551bb9",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
