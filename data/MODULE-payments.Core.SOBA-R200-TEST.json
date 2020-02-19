@@ -7,10 +7,11 @@
         "beneficiaryAccountNo": "\"CH5508334001273301501\"",
         "debtorAccountNo": "\"CH5508334001273301501\"",
         "debtorAccountName": "\"Freddy Hinz\"",
-        "debtorAdrLine": "\"Schachenallee 31\"",
+        "debtorStreetName": "\"Schachenallee 31\"",
         "debtorPostalCode": "\"5004\"",
         "debtorTownName": "\"Aarau\"",
         "creditorAccountNo": "\"12345678\"",
+		"creditorAccountNo2": "\"CH0208334001273300903\"",
 		"creditorAccountNoUK": "\"12345678\"",
 		"creditorAccountNoSwisDomestic": "\"CH5204835012345671000\"",
 		"creditorAccountNoBalanceAdjustment": "\"CH0208334001273300903\"",
@@ -18,6 +19,21 @@
         "currencyCode": "\"CHF\"",
         "endToEndId": "\"1304182224-0000002\"",
 		"postalAccountNo": "\"80-281-6\"",
-		"orangeAccountNo": "\"01-200015-9\""
+		"orangeAccountNo": "\"01-200015-9\"",
+		
+		"_____PAYMENTS_TEAM_VARIABLES": "Starts here ___________________________________",
+		
+		"creditorAccountNoSWIFT": "\"GB75NWBK56000379360009\"",
+		"creditorAgentBicSWIFT": "\"NWBKGB2LXXX\"",
+		"creditorAgentBankCodeSWIFT": "\"500\"",
+		"creditorAccountNoSEPA": "\"DE12500105170648489890\"",
+		"creditorAgentBicSEPA": "\"INGDDEFFXXX\"",
+		"structuredRemittanceRF": "\"RF64186397856221845279566\"",
+		"creditorAccountNoSWIFTBankAcco": "\"3122298751\"",
+		"creditorAgentName1SWIFT": "\"HANDELSBANKEN\"",
+		"creditorAgentName2SWIFT": "\"BANK\"",
+		"creditorAgentStreetSWIFT": "\"Kungstradgardsgatan\"",
+		"creditorAgentCitySWIFT": "\"10670 STOCKHOLM\"",
+		"creditorAgentCountrySWIFT": "\"SE\""
     }
 ]

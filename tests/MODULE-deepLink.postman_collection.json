@@ -1904,7 +1904,7 @@
 								"exec": [
 									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
 									"    pm.response.to.not.be.error;",
-									"    pm.response.to.be.withBody;",
+									"    //pm.response.to.be.withBody;",
 									"    let token = pm.response.text();",
 									"    pm.environment.set(\"access_token\", token);",
 									"    pm.environment.set(\"dltoken\", token);",
@@ -2355,7 +2355,7 @@
 	],
 	"variable": [
 		{
-			"id": "b456dc5a-d509-4a58-abc2-98408f1f2997",
+			"id": "329cf5dd-389f-4c88-aff8-6e3e61f6d56d",
 			"key": "nowUtc",
 			"value": "",
 			"type": "string"
