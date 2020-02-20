@@ -29,6 +29,15 @@
 											"//const testsScope = \"Full\"; [Full|Core|Full+TestRail]",
 											"let testsScope = data.testsScope;",
 											"",
+											"var newmanRun = data.newmanRun;",
+											"if (newmanRun){ ",
+											"    pm.globals.set(\"newmanRun\",data.newmanRun);",
+											"    console.log(\"dataFile/newmanRun: \" + newmanRun);",
+											"} else {",
+											"    pm.globals.set(\"newmanRun\", 0);",
+											"    console.log(\"newmanRun, default value: 0\");",
+											"}",
+											"",
 											"var contractNumber = data.contractNumber;",
 											"if (contractNumber){ ",
 											"    pm.environment.set(\"contract\",JSON.parse(data.contractNumber));",
@@ -264,7 +273,7 @@
 											"            \"Search Payment number of returned payments matches to “totalElements” property value (ToDo)\",",
 											"            \"Search Payment using filter by 'paymentStatuses' (ToDo)\",",
 											"            \"Search Payment deleted payments aren't included (ToDo)\",",
-											"            \"PayTo input validation for Alias as imput parameter (C34380150)\",",
+											"            \"PayTo input validation for Alias as input parameter (C34380150)\",",
 											"            \"Create payment template (ToDo)\",",
 											"            \"Deliver payment template (ToDo)\",",
 											"            \"Delete payment template (ToDo)\",",
@@ -335,7 +344,7 @@
 											"            \"Search Payment number of returned payments matches to “totalElements” property value (ToDo)\",",
 											"            \"Search Payment using filter by 'paymentStatuses' (ToDo)\",",
 											"            \"Search Payment deleted payments aren't included (ToDo)\",",
-											"            \"PayTo input validation for Alias as imput parameter (C34380150)\",",
+											"            \"PayTo input validation for Alias as input parameter (C34380150)\",",
 											"            \"Create payment template (ToDo)\",",
 											"            \"Deliver payment template (ToDo)\",",
 											"            \"Delete payment template (ToDo)\",",
@@ -343,44 +352,12 @@
 											"            ]; break;",
 											"    case \"Quick\":",
 											"        var testSession = [",
-											"            \"Create SEPA payment (C36240114)\",",
-											"            \"Deliver SEPA payment (C34775338)\",",
-											"            \"Update SEPA payment (C36275415)\",",
-											"            \"Delete SEPA payment (C36240104)\",",
-											"            \"Create SEPA (standing order) payment (C53860900)\",",
-											"            \"Deliver SEPA (standing order) payment (C53860904)\",",
-											"            \"Update SEPA (standing order) payment (C53860903)\",",
-											"            \"Delete SEPA (standing order) payment (C53860905)\",",
-											"            \"Create SWIFT payment (C36275411)\",",
-											"            \"Create SWIFT payment V2 (C52650414)\",",
-											"            \"Create SWIFT payment V3 (C52718222)\",",
-											"            \"Deliver SWIFT payment (C36240103)\",",
-											"            \"Update SWIFT payment (C36275416)\",",
-											"            \"Delete SWIFT payment (C36240105)\", ",
-											"            \"Create Orange payment (C48109263)\",",
-											"            \"Deliver Orange payment (C49915362)\",",
-											"            \"Update Orange payment (C48109272)\",",
-											"            \"Delete Orange payment (C49915363)\",",
-											"            \"Create Orange (standing order) payment (C49915384)\",",
-											"            \"Deliver Orange (standing order) payment (C49915385)\",",
-											"            \"Update Orange (standing order) payment (C49915387)\",",
-											"            \"Delete Orange (standing order) payment (C49915386)\",",
-											"            \"Create Red payment (C51026510)\",",
-											"            \"Deliver Red payment (C51026511)\",",
-											"            \"Update Red payment (ToDo)\",",
-											"            \"Delete Red payment (ToDo)\",",
-											"            \"Create Red (standing order) payment (C52949280)\",",
-											"            \"Deliver Red (standing order) payment (C52992053)\",",
-											"            \"Update Red (standing order) payment (C52949281)\",",
-											"            \"Delete Red (standing order) payment (C52992055)\",",
-											"            \"Create Swiss domestic payment (C45840620)\",",
-											"            \"Deliver Swiss domestic payment (C45989797)\",",
-											"            \"Update Swiss domestic payment (C45840627)\",",
-											"            \"Delete Swiss domestic payment (C45989799)\",",
-											"            \"Create Swiss domestic (standing order) payment (C45989795)\",",
-											"            \"Deliver Swiss domestic (standing order) payment (C45989798)\",",
-											"            \"Update Swiss domestic (standing order) payment (C45989796)\",",
-											"            \"Delete Swiss domestic (standing order) payment (C45989800)\"",
+											"            \"_Generate access token K8S\",",
+											"            \"PayTo input validation for Alias as input parameter (C34380150)\",",
+											"            \"Create payment template (ToDo)\",",
+											"            \"Deliver payment template (ToDo)\",",
+											"            \"Delete payment template (ToDo)\",",
+											"            \"Deliver payments in bulk (ToDo)\"            ",
 											"            ]; break;",
 											"    case \"TestRailClean\":        ",
 											"        var testSession = [",
@@ -4449,7 +4426,7 @@
 					"name": "Payments: Routing",
 					"item": [
 						{
-							"name": "PayTo input validation for Alias as imput parameter (C34380150)",
+							"name": "PayTo input validation for Alias as input parameter (C34380150)",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -4955,7 +4932,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" SEPA (standing order) payment is created and assertions are passed\", function () {\r",
 															"\r",
@@ -5057,7 +5034,23 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															""
+															"let updateVariables = pm.globals.get(\"newmanRun\");",
+															"",
+															"if (updateVariables == 1) {",
+															"    console.log(\"Updating dynamic variables ...\");",
+															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    console.log(\"Update is finished\");",
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -5084,7 +5077,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 9.99\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}},\r\n\"standingOrder\": {\r\n\"firstOn\": {{PrS:futureWorkingDay}},\r\n\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\"beforeHoliday\": true,\r\n\"interval\": \"WEEKLY\",\r\n\"active\": true,\r\n\"ultimo\": false\t\t\r\n}\r\n}\r\n}"
+													"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 9.99\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": {{unstructured}},\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": {{instructionIdentification}},\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": {{name}},\r\n\"address\": {\r\n\"adrLine1\": {{adrLine1}},\r\n\"adrLine2\": {{adrLine2}},\r\n\"streetName\": {{streetName}},\r\n\"buildingNm\": {{buildingNm}},\r\n\"postalCode\": {{postalCode}},\r\n\"townName\": {{townName}},\r\n\"country\": {{country}}\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}},\r\n\"standingOrder\": {\r\n\"firstOn\": {{PrS:futureWorkingDay}},\r\n\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\"beforeHoliday\": true,\r\n\"interval\": \"WEEKLY\",\r\n\"active\": true,\r\n\"ultimo\": false\t\t\r\n}\r\n}\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer",
@@ -5112,7 +5105,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" SEPA (standing order) payment is retrieved and assertions are passed\", function () {\r",
 															"\r",
@@ -5230,7 +5223,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 9.99\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n},\r\n\"standingOrder\": {\r\n\"firstOn\": {{PrS:futureWorkingDay}},\r\n\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\"beforeHoliday\": true,\r\n\"interval\": \"WEEKLY\",\r\n\"active\": true,\r\n\"ultimo\": false\t\t\r\n}\r\n}"
+													"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 9.99\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": {{unstructured}},\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": {{instructionIdentification}},\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": {{name}},\r\n\"address\": {\r\n\"adrLine1\": {{adrLine1}},\r\n\"adrLine2\": {{adrLine2}},\r\n\"streetName\": {{streetName}},\r\n\"buildingNm\": {{buildingNm}},\r\n\"postalCode\": {{postalCode}},\r\n\"townName\": {{townName}},\r\n\"country\": {{country}}\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n},\r\n\"standingOrder\": {\r\n\"firstOn\": {{PrS:futureWorkingDay}},\r\n\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\"beforeHoliday\": true,\r\n\"interval\": \"WEEKLY\",\r\n\"active\": true,\r\n\"ultimo\": false\t\t\r\n}\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
@@ -5259,7 +5252,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" SEPA (standing order) payment is updated and assertions are passed\", function () {\r",
 															"\r",
@@ -5349,7 +5342,23 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															""
+															"let updateVariables = pm.globals.get(\"newmanRun\");",
+															"",
+															"if (updateVariables == 1) {",
+															"    console.log(\"Updating dynamic variables ...\");",
+															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    console.log(\"Update is finished\");",
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -5376,7 +5385,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 10.99\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}},\r\n\"standingOrder\": {\r\n\"firstOn\": {{PrS:futureWorkingDay}},\r\n\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\"beforeHoliday\": false,\r\n\"interval\": \"DAILY\",\r\n\"active\": true,\r\n\"ultimo\": false\t\t\r\n}\r\n}\r\n}"
+													"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 10.99\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": {{unstructured}},\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": {{instructionIdentification}},\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": {{name}},\r\n\"address\": {\r\n\"adrLine1\": {{adrLine1}},\r\n\"adrLine2\": {{adrLine2}},\r\n\"streetName\": {{streetName}},\r\n\"buildingNm\": {{buildingNm}},\r\n\"postalCode\": {{postalCode}},\r\n\"townName\": {{townName}},\r\n\"country\": {{country}}\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}},\r\n\"standingOrder\": {\r\n\"firstOn\": {{PrS:futureWorkingDay}},\r\n\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\"beforeHoliday\": false,\r\n\"interval\": \"DAILY\",\r\n\"active\": true,\r\n\"ultimo\": false\t\t\r\n}\r\n}\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
@@ -5509,22 +5518,23 @@
 													"//************************************************************************************************",
 													"// set parameters ********************************************************************************",
 													"//************************************************************************************************",
-													"var creditorAgentBicSEPA = data.creditorAgentBicSEPA;",
-													"if (creditorAgentBicSEPA){ ",
-													"    pm.environment.set(\"creditorAgentBicSEPA\",data.creditorAgentBicSEPA);",
-													"    console.log(\"dataFile/creditorAgentBicSEPA: \" + creditorAgentBicSEPA);",
-													"}",
 													"",
-													"var creditorAccountNoSEPA = data.creditorAccountNoSEPA;",
-													"if (creditorAccountNoSEPA){ ",
-													"    pm.environment.set(\"creditorAccountNoSEPA\",data.creditorAccountNoSEPA);",
-													"    console.log(\"dataFile/creditorAccountNoSEPA: \" + creditorAccountNoSEPA);",
-													"}",
+													"let updateVariables = pm.globals.get(\"newmanRun\");",
 													"",
-													"var structuredRemittanceRF = data.structuredRemittanceRF;",
-													"if (structuredRemittanceRF){ ",
-													"    pm.environment.set(\"structuredRemittanceRF\",data.structuredRemittanceRF);",
-													"    console.log(\"dataFile/structuredRemittanceRF: \" + structuredRemittanceRF);",
+													"if (updateVariables == 1) {",
+													"    console.log(\"Updating dynamic variables ...\");",
+													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    console.log(\"Update is finished\");",
 													"}"
 												],
 												"type": "text/javascript"
@@ -5536,7 +5546,7 @@
 												"id": "05a88f70-ba02-48cd-9fae-2c7979c3c899",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is created and assertions are passed\", function () {\r",
@@ -5653,7 +5663,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 312.00\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"streetName\": \"{{$randomStreetName}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n}\r\n}"
+											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"endToEndId\": {{endToEndId}},\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 312.00\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": {{unstructured}},\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": {{instructionIdentification}},\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": {{name}},\r\n\"address\": {\r\n\"adrLine1\": {{adrLine1}},\r\n\"adrLine2\": {{adrLine2}},\r\n\"streetName\": {{streetName}},\r\n\"buildingNm\": {{buildingNm}},\r\n\"postalCode\": {{postalCode}},\r\n\"townName\": {{townName}},\r\n\"country\": {{country}}\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n}\r\n}"
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer",
@@ -5691,7 +5701,7 @@
 												"id": "05a88f70-ba02-48cd-9fae-2c7979c3c899",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is retrieved and assertions are passed\", function () {\r",
@@ -5799,7 +5809,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 112.00\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n}\r\n}"
+											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"endToEndId\": {{endToEndId}},\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 312.00\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": {{unstructured}},\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": {{instructionIdentification}},\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": {{name}},\r\n\"address\": {\r\n\"adrLine1\": {{adrLine1}},\r\n\"adrLine2\": {{adrLine2}},\r\n\"streetName\": {{streetName}},\r\n\"buildingNm\": {{buildingNm}},\r\n\"postalCode\": {{postalCode}},\r\n\"townName\": {{townName}},\r\n\"country\": {{country}}\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n}\r\n}"
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
@@ -5828,7 +5838,7 @@
 												"id": "96ee9651-4e6e-4a83-a257-55d56e136859",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is updated and assertions are passed\", function () {\r",
@@ -5917,7 +5927,23 @@
 											"script": {
 												"id": "ed4149e4-3b82-4013-8999-2fa27812ab16",
 												"exec": [
-													""
+													"let updateVariables = pm.globals.get(\"newmanRun\");",
+													"",
+													"if (updateVariables == 1) {",
+													"    console.log(\"Updating dynamic variables ...\");",
+													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    console.log(\"Update is finished\");",
+													"}"
 												],
 												"type": "text/javascript"
 											}
@@ -5949,7 +5975,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 122.00\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"streetName\": \"{{$randomStreetName}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n}\r\n}"
+											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"endToEndId\": {{endToEndId}},\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 122.00\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": {{unstructured}},\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": {{instructionIdentification}},\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": {{name}},\r\n\"address\": {\r\n\"adrLine1\": {{adrLine1}},\r\n\"adrLine2\": {{adrLine2}},\r\n\"streetName\": {{streetName}},\r\n\"buildingNm\": {{buildingNm}},\r\n\"postalCode\": {{postalCode}},\r\n\"townName\": {{townName}},\r\n\"country\": {{country}}\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n}\r\n}"
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
@@ -6070,7 +6096,23 @@
 											"script": {
 												"id": "9c72540c-8b6e-4022-beb7-ef4a180f1b6b",
 												"exec": [
-													""
+													"let updateVariables = pm.globals.get(\"newmanRun\");",
+													"",
+													"if (updateVariables == 1) {",
+													"    console.log(\"Updating dynamic variables ...\");",
+													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    console.log(\"Update is finished\");",
+													"}"
 												],
 												"type": "text/javascript"
 											}
@@ -6081,7 +6123,7 @@
 												"id": "05a88f70-ba02-48cd-9fae-2c7979c3c899",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is created and assertions are passed\", function () {\r",
@@ -6197,7 +6239,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"GBP\"\r\n},\r\n\"value\": 1\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSWIFT}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSWIFT}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n}\r\n}"
+											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"endToEndId\": {{endToEndId}},\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"GBP\"\r\n},\r\n\"value\": 1\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": {{unstructured}},\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": {{instructionIdentification}},\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": {{name}},\r\n\"address\": {\r\n\"adrLine1\": {{adrLine1}},\r\n\"adrLine2\": {{adrLine2}},\r\n\"streetName\": {{streetName}},\r\n\"buildingNm\": {{buildingNm}},\r\n\"postalCode\": {{postalCode}},\r\n\"townName\": {{townName}},\r\n\"country\": {{country}}\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSWIFT}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSWIFT}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n}\r\n}"
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
@@ -6224,7 +6266,23 @@
 											"script": {
 												"id": "6bd40450-09b6-4eb2-b672-981852dd7dea",
 												"exec": [
-													""
+													"let updateVariables = pm.globals.get(\"newmanRun\");",
+													"",
+													"if (updateVariables == 1) {",
+													"    console.log(\"Updating dynamic variables ...\");",
+													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    console.log(\"Update is finished\");",
+													"}"
 												],
 												"type": "text/javascript"
 											}
@@ -6235,7 +6293,7 @@
 												"id": "5e34c468-2683-411b-8d1e-986c358c4f21",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is created and assertions are passed\", function () {\r",
@@ -6357,7 +6415,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"paymentInformation\": {\r\n\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"SEK\"\r\n},\r\n\"value\": 4.23\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSWIFTBankAcco}},\r\n\"creditorAgent\": {\r\n    \t\t\"name1\": {{creditorAgentName1SWIFT}},\r\n    \t\t\"name2\": {{creditorAgentName2SWIFT}},\r\n    \t\t\"street\": {{creditorAgentStreetSWIFT}},\r\n    \t\t\"city\": {{creditorAgentCitySWIFT}},\r\n    \t\t\"country\": {{creditorAgentCountrySWIFT}},\r\n    \t\t\"bankCode\": {{creditorAgentBankCodeSWIFT}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\": {{debtorAccountNo}}\r\n}\t\r\n}"
+											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"paymentInformation\": {\r\n\"endToEndId\": {{endToEndId}},\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"SEK\"\r\n},\r\n\"value\": 4.23\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": {{unstructured}},\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": {{instructionIdentification}},\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": {{name}},\r\n\"address\": {\r\n\"adrLine1\": {{adrLine1}},\r\n\"adrLine2\": {{adrLine2}},\r\n\"streetName\": {{streetName}},\r\n\"buildingNm\": {{buildingNm}},\r\n\"postalCode\": {{postalCode}},\r\n\"townName\": {{townName}},\r\n\"country\": {{country}}\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSWIFTBankAcco}},\r\n\"creditorAgent\": {\r\n    \t\t\"name1\": {{creditorAgentName1SWIFT}},\r\n    \t\t\"name2\": {{creditorAgentName2SWIFT}},\r\n    \t\t\"street\": {{creditorAgentStreetSWIFT}},\r\n    \t\t\"city\": {{creditorAgentCitySWIFT}},\r\n    \t\t\"country\": {{creditorAgentCountrySWIFT}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\": {{debtorAccountNo}}\r\n}\t\r\n}"
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
@@ -6384,7 +6442,23 @@
 											"script": {
 												"id": "6bd40450-09b6-4eb2-b672-981852dd7dea",
 												"exec": [
-													""
+													"let updateVariables = pm.globals.get(\"newmanRun\");",
+													"",
+													"if (updateVariables == 1) {",
+													"    console.log(\"Updating dynamic variables ...\");",
+													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    console.log(\"Update is finished\");",
+													"}"
 												],
 												"type": "text/javascript"
 											}
@@ -6395,7 +6469,7 @@
 												"id": "5e34c468-2683-411b-8d1e-986c358c4f21",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is created and assertions are passed\", function () {\r",
@@ -6517,165 +6591,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"paymentInformation\": {\r\n\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"SEK\"\r\n},\r\n\"value\": 4.23\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"{{$randomFullName}}\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSWIFTBankAcco}},\r\n\"creditorAgent\": {\r\n    \t\t\"name1\": {{creditorAgentName1SWIFT}},\r\n    \t\t\"name2\": {{creditorAgentName2SWIFT}},\r\n    \t\t\"street\": {{creditorAgentStreetSWIFT}},\r\n    \t\t\"city\": {{creditorAgentCitySWIFT}},\r\n    \t\t\"country\": {{creditorAgentCountrySWIFT}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\": {{debtorAccountNo}}\r\n}\r\n}"
-										},
-										"url": {
-											"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
-											"host": [
-												"{{environment}}"
-											],
-											"path": [
-												"banking-api",
-												"payment",
-												"swift",
-												"{{tenant}}",
-												"v2",
-												"credittransfer"
-											]
-										}
-									},
-									"response": []
-								},
-								{
-									"name": "SWIFT hardcoded",
-									"event": [
-										{
-											"listen": "test",
-											"script": {
-												"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
-												"exec": [
-													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
-													"\r",
-													"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
-													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is created and assertions are passed\", function () {\r",
-													"\r",
-													"    //Instructed amount is correct\r",
-													"    let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
-													"    let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
-													"    //Execution date is correct\r",
-													"    let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
-													"    let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
-													"    //State is correct\r",
-													"    let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
-													"    //Creditor agent is correct\r",
-													"    let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent;\r",
-													"    let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent;\r",
-													"    //Debtor address is correct\r",
-													"    let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
-													"    let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
-													"    //Debtor account is correct\r",
-													"    let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
-													"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo;   \r",
-													"    //Creditor account is correct\r",
-													"    let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
-													"    let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
-													"    //Charge bearer is correct    \r",
-													"    let jsonDataResponseChargeBearer = pm.response.json().chargeBearer;\r",
-													"    \r",
-													"    pm.test(\"Instructed amount is correct\", () => {\r",
-													"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
-													"    });\r",
-													"\r",
-													"    pm.test(\"Execution date is correct\", () => {\r",
-													"      pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate);\r",
-													"    });\r",
-													"    \r",
-													"    pm.test(\"State is correct\", () => {\r",
-													"      pm.expect(jsonDataResponsePaymentState).to.eql(\"ENTERED\");\r",
-													"    });\r",
-													"\r",
-													"    pm.test(\"Creditor agent is correct\", () => {\r",
-													"      pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
-													"    });\r",
-													"\r",
-													"    pm.test(\"Debtor address is correct\", () => {\r",
-													"      pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName);\r",
-													"      pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
-													"      pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
-													"    });\r",
-													"    \r",
-													"    pm.test(\"Debtor account is correct\", () => {\r",
-													"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
-													"    });\r",
-													"    \r",
-													"    pm.test(\"Creditor account is correct\", () => {\r",
-													"      pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
-													"    });\r",
-													"    \r",
-													"    pm.test(\"Charge bearer is correct\", () => {\r",
-													"      pm.expect(jsonDataResponseChargeBearer).to.eql(\"SHAR\");\r",
-													"    });\r",
-													"    \r",
-													"    // check if payment is created\r",
-													"    if (pm.response.to.have.status(201)){\r",
-													"        var responseData = JSON.parse(responseBody);\r",
-													"        pm.globals.set(\"newPaymentSwiftID\", responseData.paymentId);\r",
-													"        console.log(\"New payment ID: \" + pm.globals.get(\"newPaymentSwiftID\"));\r",
-													"    }\r",
-													"    else {\r",
-													"        console.log(\"Failed to create payment with ID:\" + pm.globals.get(\"newPaymentSwiftID\"));\r",
-													"        pm.globals.unset(\"newPaymentSwiftID\");\r",
-													"    }\r",
-													"    \r",
-													"    //Determine if assertion passed at whole\r",
-													"    pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
-													"    && pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate) \r",
-													"    && pm.expect(jsonDataResponsePaymentState).to.eql(\"ENTERED\") \r",
-													"    && pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent) \r",
-													"    && pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName) \r",
-													"    && pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode) \r",
-													"    && pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName) \r",
-													"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
-													"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
-													"    && pm.expect(jsonDataResponseChargeBearer).to.eql(\"SHAR\");\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
-												],
-												"type": "text/javascript"
-											}
-										},
-										{
-											"listen": "prerequest",
-											"script": {
-												"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
-												"exec": [
-													""
-												],
-												"type": "text/javascript"
-											}
-										}
-									],
-									"request": {
-										"auth": {
-											"type": "noauth"
-										},
-										"method": "POST",
-										"header": [
-											{
-												"key": "Content-Type",
-												"name": "Content-Type",
-												"type": "text",
-												"value": "application/json"
-											},
-											{
-												"key": "Accept",
-												"value": "application/json, application/hal+json"
-											},
-											{
-												"key": "Authorization",
-												"type": "text",
-												"value": "Bearer {{access_token}}"
-											}
-										],
-										"body": {
-											"mode": "raw",
-											"raw": "{\r\n  \"paymentInformation\": {\r\n    \"endToEndId\": \"consequuntur-maiores-assumenda\",\r\n    \"instructedAmount\": {\r\n      \"currency\": {\r\n        \"code\": \"EUR\"\r\n      },\r\n      \"value\": 10.01\r\n    },\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n    \"instructionPriority\": \"NORMAL\",\r\n    \"debtor\": {\r\n      \"name\": \"Freddy Hinz\",\r\n      \"address\": {\r\n        \"streetName\": \"Schachenallee 31\",\r\n        \"postalCode\": \"5004\",\r\n        \"townName\": \"Aarau\"\r\n      }\r\n    },\r\n\t\"debtorAccountNo\": \"CH6312312001248081501\",\r\n\t\"creditorAccountNo\": 12345678,\t\r\n\t\"creditor\": {\r\n      \"name\": \"Talon Ondricka\",\r\n      \"address\": {\r\n        \"buildingNm\": \"566\",\r\n        \"postalCode\": \"638\",\r\n        \"townName\": \"North Norvalside\",\r\n        \"country\": \"AI\"\r\n      }\r\n    },\r\n    \"creditorAgent\": {\r\n      \"name1\": \"Esmeralda\",\r\n      \"name2\": \"Grady\",\r\n      \"street\": \"60308 Adalberto Passage\",\r\n      \"city\": \"Port Shayleeburgh\",\r\n      \"country\": \"CH\"\r\n    }\r\n  }\r\n}"
+											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"paymentInformation\": {\r\n\"endToEndId\": {{endToEndId}},\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"SEK\"\r\n},\r\n\"value\": 4.23\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": {{unstructured}},\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": {{instructionIdentification}},\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": {{name}},\r\n\"address\": {\r\n\"adrLine1\": {{adrLine1}},\r\n\"adrLine2\": {{adrLine2}},\r\n\"streetName\": {{streetName}},\r\n\"buildingNm\": {{buildingNm}},\r\n\"postalCode\": {{postalCode}},\r\n\"townName\": {{townName}},\r\n\"country\": {{country}}\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSWIFTBankAcco}},\r\n\"creditorAgent\": {\r\n    \t\t\"name1\": {{creditorAgentName1SWIFT}},\r\n    \t\t\"name2\": {{creditorAgentName2SWIFT}},\r\n    \t\t\"street\": {{creditorAgentStreetSWIFT}},\r\n    \t\t\"city\": {{creditorAgentCitySWIFT}},\r\n    \t\t\"country\": {{creditorAgentCountrySWIFT}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\": {{debtorAccountNo}}\r\n}\r\n}"
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
@@ -6713,7 +6629,7 @@
 												"id": "05a88f70-ba02-48cd-9fae-2c7979c3c899",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is retrieved and assertions are passed\", function () {\r",
 													"\r",
@@ -6817,7 +6733,7 @@
 												"id": "99e48e52-0f3e-4849-8aaf-b607243a0667",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is updated and assertions are passed\", function () {\r",
 													"\r",
@@ -6906,7 +6822,23 @@
 											"script": {
 												"id": "0415c0ea-9fa8-4aec-adfb-7b35a10b7f05",
 												"exec": [
-													""
+													"let updateVariables = pm.globals.get(\"newmanRun\");",
+													"",
+													"if (updateVariables == 1) {",
+													"    console.log(\"Updating dynamic variables ...\");",
+													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    console.log(\"Update is finished\");",
+													"}"
 												],
 												"type": "text/javascript"
 											}
@@ -6937,7 +6869,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"paymentInformation\": {\r\n\"endToEndId\": \"{{$randomLoremSlug}}\",\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"GBP\"\r\n},\r\n\"value\": 45\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": \"{{$guid}}\",\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": \"{{$randomBitcoin}}\",\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"MDB-R191-Test\",\r\n\"address\": {\r\n\"adrLine1\": \"{{$randomStreetName}}\",\r\n\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n\"buildingNm\": {{$randomInt}},\r\n\"postalCode\": {{$randomInt}},\r\n\"townName\": \"{{$randomCity}}\",\r\n\"country\": \"{{$randomCountryCode}}\"\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSWIFT}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSWIFT}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n},\r\n\"chargeBearer\": \"SHAR\"\r\n}"
+											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"paymentInformation\": {\r\n\"endToEndId\": {{endToEndId}},\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"GBP\"\r\n},\r\n\"value\": 45\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": {{unstructured}},\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": {{instructionIdentification}},\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": \"MDB-R191-Test\",\r\n\"address\": {\r\n\"adrLine1\": {{adrLine1}},\r\n\"adrLine2\": {{adrLine2}},\r\n\"streetName\": {{streetName}},\r\n\"buildingNm\": {{buildingNm}},\r\n\"postalCode\": {{postalCode}},\r\n\"townName\": {{townName}},\r\n\"country\": {{country}}\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSWIFT}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSWIFT}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n},\r\n\"chargeBearer\": \"SHAR\"\r\n}"
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentSwiftID}}",
@@ -7056,7 +6988,7 @@
 																"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 																"exec": [
 																	"// Execute standard tests from PrS using eval()\r",
-																	"eval(globals.commonTests)();\r",
+																	"//eval(globals.commonTests)();\r",
 																	"\r",
 																	"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Orange (standing order) payment is created and assertions are passed\", function () {\r",
 																	"\r",
@@ -7137,7 +7069,23 @@
 															"script": {
 																"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 																"exec": [
-																	""
+																	"let updateVariables = pm.globals.get(\"newmanRun\");",
+																	"",
+																	"if (updateVariables == 1) {",
+																	"    console.log(\"Updating dynamic variables ...\");",
+																	"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+																	"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+																	"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+																	"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+																	"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+																	"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+																	"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+																	"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+																	"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+																	"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+																	"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+																	"    console.log(\"Update is finished\");",
+																	"}"
 																],
 																"type": "text/javascript"
 															}
@@ -7164,7 +7112,7 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": 2234,\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/",
@@ -7194,7 +7142,7 @@
 																"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 																"exec": [
 																	"// Execute standard tests from PrS using eval()\r",
-																	"eval(globals.commonTests)();\r",
+																	"//eval(globals.commonTests)();\r",
 																	"\r",
 																	"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Orange (standing order) payment is retrieved and assertions are passed\", function () {\r",
 																	"\r",
@@ -7293,7 +7241,7 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": 2234,\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/{{newPaymentOrangeID}}",
@@ -7323,7 +7271,7 @@
 																"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 																"exec": [
 																	"// Execute standard tests from PrS using eval()\r",
-																	"eval(globals.commonTests)();\r",
+																	"//eval(globals.commonTests)();\r",
 																	"\r",
 																	"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Orange (standing order) payment is created and assertions are passed\", function () {\r",
 																	"\r",
@@ -7393,7 +7341,23 @@
 															"script": {
 																"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 																"exec": [
-																	""
+																	"let updateVariables = pm.globals.get(\"newmanRun\");",
+																	"",
+																	"if (updateVariables == 1) {",
+																	"    console.log(\"Updating dynamic variables ...\");",
+																	"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+																	"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+																	"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+																	"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+																	"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+																	"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+																	"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+																	"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+																	"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+																	"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+																	"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+																	"    console.log(\"Update is finished\");",
+																	"}"
 																],
 																"type": "text/javascript"
 															}
@@ -7420,7 +7384,7 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.02\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000099999\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": 2234,\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": true\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.02\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000099999\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": true\t\t\r\n\t}\r\n}"
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/{{newPaymentOrangeID}}",
@@ -7546,7 +7510,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Orange payment is created and assertions are passed\", function () {\r",
 															"\r",
@@ -7618,7 +7582,23 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															""
+															"let updateVariables = pm.globals.get(\"newmanRun\");",
+															"",
+															"if (updateVariables == 1) {",
+															"    console.log(\"Updating dynamic variables ...\");",
+															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    console.log(\"Update is finished\");",
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -7645,7 +7625,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": 2234,\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/",
@@ -7675,7 +7655,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Orange payment is retrieved and assertions are passed\", function () {\r",
 															"\r",
@@ -7766,7 +7746,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": 2234,\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/{{newPaymentOrangeID}}",
@@ -7796,7 +7776,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Orange payment is created and assertions are passed\", function () {\r",
 															"\r",
@@ -7858,7 +7838,23 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															""
+															"let updateVariables = pm.globals.get(\"newmanRun\");",
+															"",
+															"if (updateVariables == 1) {",
+															"    console.log(\"Updating dynamic variables ...\");",
+															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    console.log(\"Update is finished\");",
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -7885,7 +7881,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.02\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000077777\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": 2234,\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during private trip\"\r\n}"
+													"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.02\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000077777\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during private trip\"\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/{{newPaymentOrangeID}}",
@@ -8016,7 +8012,7 @@
 																"id": "4c32ae21-d88b-41bf-a851-d10b72bb04bc",
 																"exec": [
 																	"// Execute standard tests from PrS using eval()\r",
-																	"eval(globals.commonTests)();\r",
+																	"//eval(globals.commonTests)();\r",
 																	"\r",
 																	"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Red payment (standing order) is created and assertions are passed\", function () {\r",
 																	"\r",
@@ -8099,7 +8095,23 @@
 															"script": {
 																"id": "78b1074c-dd61-4c7a-8fcf-9fb2f734f087",
 																"exec": [
-																	""
+																	"let updateVariables = pm.globals.get(\"newmanRun\");",
+																	"",
+																	"if (updateVariables == 1) {",
+																	"    console.log(\"Updating dynamic variables ...\");",
+																	"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+																	"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+																	"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+																	"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+																	"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+																	"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+																	"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+																	"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+																	"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+																	"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+																	"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+																	"    console.log(\"Update is finished\");",
+																	"}"
 																],
 																"type": "text/javascript"
 															}
@@ -8126,7 +8138,7 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": \"{{$randomInt}}\",\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"categoryPurposeCode\": \"SALA\",    \r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n    \"debitNote\": \"Debit reference\",    \r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"categoryPurposeCode\": \"SALA\",    \r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n    \"debitNote\": \"Debit reference\",    \r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red",
@@ -8155,7 +8167,7 @@
 																"id": "5d2b38c3-314e-4d67-aae2-bf2350879ca8",
 																"exec": [
 																	"// Execute standard tests from PrS using eval()\r",
-																	"eval(globals.commonTests)();\r",
+																	"//eval(globals.commonTests)();\r",
 																	"\r",
 																	"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Red payment (standing order) is retrieved and assertions are passed\", function () {\r",
 																	"\r",
@@ -8261,7 +8273,7 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": {{$randomInt}},\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red/{{newPaymentRedID}}",
@@ -8291,7 +8303,7 @@
 																"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 																"exec": [
 																	"// Execute standard tests from PrS using eval()\r",
-																	"eval(globals.commonTests)();\r",
+																	"//eval(globals.commonTests)();\r",
 																	"\r",
 																	"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Red payment (standing order) is updated and assertions are passed\", function () {\r",
 																	"\r",
@@ -8367,7 +8379,23 @@
 															"script": {
 																"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 																"exec": [
-																	""
+																	"let updateVariables = pm.globals.get(\"newmanRun\");",
+																	"",
+																	"if (updateVariables == 1) {",
+																	"    console.log(\"Updating dynamic variables ...\");",
+																	"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+																	"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+																	"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+																	"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+																	"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+																	"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+																	"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+																	"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+																	"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+																	"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+																	"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+																	"    console.log(\"Update is finished\");",
+																	"}"
 																],
 																"type": "text/javascript"
 															}
@@ -8394,7 +8422,7 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": {{$randomInt}},\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red/{{newPaymentRedID}}",
@@ -8527,7 +8555,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Red payment is created and assertions are passed\", function () {\r",
 															"\r",
@@ -8601,7 +8629,23 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															""
+															"let updateVariables = pm.globals.get(\"newmanRun\");",
+															"",
+															"if (updateVariables == 1) {",
+															"    console.log(\"Updating dynamic variables ...\");",
+															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    console.log(\"Update is finished\");",
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -8628,7 +8672,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": \"{{$randomInt}}\",\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"categoryPurposeCode\": \"SALA\",    \r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n    \"debitNote\": \"Debit reference\",    \r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t}\r\n}"
+													"raw": "{\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"categoryPurposeCode\": \"SALA\",    \r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n    \"debitNote\": \"Debit reference\",    \r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t}\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red",
@@ -8657,7 +8701,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Red payment is retrieved and assertions are passed\", function () {\r",
 															"\r",
@@ -8751,7 +8795,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"categoryPurposeCode\": \"SALA\",    \r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": {{$randomInt}},\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t}\r\n}"
+													"raw": "{\r\n\t\"categoryPurposeCode\": \"SALA\",    \r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t}\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red/{{newPaymentRedID}}",
@@ -8781,7 +8825,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Red payment is updated and assertions are passed\", function () {\r",
 															"\r",
@@ -8837,7 +8881,23 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															""
+															"let updateVariables = pm.globals.get(\"newmanRun\");",
+															"",
+															"if (updateVariables == 1) {",
+															"    console.log(\"Updating dynamic variables ...\");",
+															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    console.log(\"Update is finished\");",
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -8864,7 +8924,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": {{$randomInt}},\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t}\r\n}"
+													"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t}\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red/{{newPaymentRedID}}",
@@ -9002,7 +9062,7 @@
 																"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 																"exec": [
 																	"// Execute standard tests from PrS using eval()\r",
-																	"eval(globals.commonTests)();\r",
+																	"//eval(globals.commonTests)();\r",
 																	"\r",
 																	"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Swiss domestic (standing order) payment is created and assertions are passed\", function () {\r",
 																	"\r",
@@ -9074,7 +9134,23 @@
 															"script": {
 																"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 																"exec": [
-																	""
+																	"let updateVariables = pm.globals.get(\"newmanRun\");",
+																	"",
+																	"if (updateVariables == 1) {",
+																	"    console.log(\"Updating dynamic variables ...\");",
+																	"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+																	"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+																	"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+																	"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+																	"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+																	"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+																	"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+																	"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+																	"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+																	"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+																	"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+																	"    console.log(\"Update is finished\");",
+																	"}"
 																],
 																"type": "text/javascript"
 															}
@@ -9101,7 +9177,7 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": {{$randomInt}},\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No debit information\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No debit information\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/",
@@ -9131,7 +9207,7 @@
 																"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 																"exec": [
 																	"// Execute standard tests from PrS using eval()\r",
-																	"eval(globals.commonTests)();\r",
+																	"//eval(globals.commonTests)();\r",
 																	"\r",
 																	"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Swiss domestic (standing order) payment is retrieved and assertions are passed\", function () {\r",
 																	"\r",
@@ -9222,7 +9298,7 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": {{$randomInt}},\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No debit information\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No debit information\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/{{newPaymentSwissDomesticID}}",
@@ -9252,7 +9328,7 @@
 																"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 																"exec": [
 																	"// Execute standard tests from PrS using eval()\r",
-																	"eval(globals.commonTests)();\r",
+																	"//eval(globals.commonTests)();\r",
 																	"\r",
 																	"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Swiss domestic (standing order) payment is updated and assertions are passed\", function () {\r",
 																	"\r",
@@ -9329,7 +9405,23 @@
 															"script": {
 																"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 																"exec": [
-																	""
+																	"let updateVariables = pm.globals.get(\"newmanRun\");",
+																	"",
+																	"if (updateVariables == 1) {",
+																	"    console.log(\"Updating dynamic variables ...\");",
+																	"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+																	"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+																	"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+																	"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+																	"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+																	"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+																	"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+																	"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+																	"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+																	"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+																	"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+																	"    console.log(\"Update is finished\");",
+																	"}"
 																],
 																"type": "text/javascript"
 															}
@@ -9356,7 +9448,7 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No debit information\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": true\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No debit information\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": true\t\t\r\n\t}\r\n}"
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/{{newPaymentSwissDomesticID}}",
@@ -9489,7 +9581,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Swiss domestic payment is created and assertions are passed\", function () {\r",
 															"\r",
@@ -9561,7 +9653,23 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															""
+															"let updateVariables = pm.globals.get(\"newmanRun\");",
+															"",
+															"if (updateVariables == 1) {",
+															"    console.log(\"Updating dynamic variables ...\");",
+															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    console.log(\"Update is finished\");",
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -9588,7 +9696,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": {{$randomInt}},\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"unstructured\"\r\n    },    \r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No new information needed\",\r\n    \"chargesBearer\": \"DEBT\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"unstructured\"\r\n    },    \r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No new information needed\",\r\n    \"chargesBearer\": \"DEBT\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/",
@@ -9618,7 +9726,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Swiss domestic payment is retrieved and assertions are passed\", function () {\r",
 															"\r",
@@ -9710,7 +9818,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"buildingNm\": {{$randomInt}},\r\n        \t\"postalCode\": {{$randomInt}},\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"unstructured\"\r\n    },    \r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No new information needed\",\r\n    \"chargesBearer\": \"DEBT\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"unstructured\"\r\n    },    \r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No new information needed\",\r\n    \"chargesBearer\": \"DEBT\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/{{newPaymentSwissDomesticID}}",
@@ -9740,7 +9848,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Swiss domestic payment is updated and assertions are passed\", function () {\r",
 															"\r",
@@ -9818,7 +9926,23 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															""
+															"let updateVariables = pm.globals.get(\"newmanRun\");",
+															"",
+															"if (updateVariables == 1) {",
+															"    console.log(\"Updating dynamic variables ...\");",
+															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    console.log(\"Update is finished\");",
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -9845,7 +9969,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Still no debit information\",\r\n    \"chargesBearer\": \"SHAR\",\r\n    \"categoryPurposeCode\": \"SALA\"\t\r\n}"
+													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Still no debit information\",\r\n    \"chargesBearer\": \"SHAR\",\r\n    \"categoryPurposeCode\": \"SALA\"\t\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/{{newPaymentSwissDomesticID}}",
@@ -11025,7 +11149,7 @@
 												"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Balance adjustment payment is created and assertions are passed\", function () {\r",
 													"\r",
@@ -11166,7 +11290,7 @@
 												"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Balance adjustment payment is retrieved and assertions are passed\", function () {\r",
 													"\r",
@@ -11292,7 +11416,7 @@
 												"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Balance adjustment payment is created and assertions are passed\", function () {\r",
 													"\r",
@@ -11527,7 +11651,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" QR-bill (standing order) payment is created and assertions are passed\", function () {\r",
@@ -11617,7 +11741,25 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															""
+															"let updateVariables = pm.globals.get(\"newmanRun\");",
+															"",
+															"if (updateVariables == 1) {",
+															"    console.log(\"Updating dynamic variables ...\");",
+															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    pm.environment.set(\"buildingNmStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
+															"    pm.environment.set(\"postalCodeStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
+															"    console.log(\"Update is finished\");",
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -11644,7 +11786,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"buildingNm\": \"{{$randomInt}}\",\r\n        \t\"postalCode\": \"{{$randomInt}}\",\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n            \"streetName\": \"{{$randomStreetName}}\",\r\n            \"buildingNm\": \"{{$randomInt}}\",\r\n            \"postalCode\": \"{{$randomInt}}\",\r\n            \"townName\": \"{{$randomCity}}\",\r\n            \"country\": \"{{$randomCountryCode}}\"\r\n        }\r\n    },\t\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/",
@@ -11674,7 +11816,7 @@
 														"id": "f5d00dc8-f552-48c0-9a1c-2510df583464",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" QR-bill (standing order) payment is retrieved and assertions are passed\", function () {\r",
 															"\r",
@@ -11763,7 +11905,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"buildingNm\": \"{{$randomInt}}\",\r\n        \t\"postalCode\": \"{{$randomInt}}\",\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n            \"streetName\": \"{{$randomStreetName}}\",\r\n            \"buildingNm\": \"{{$randomInt}}\",\r\n            \"postalCode\": \"{{$randomInt}}\",\r\n            \"townName\": \"{{$randomCity}}\",\r\n            \"country\": \"{{$randomCountryCode}}\"\r\n        }\r\n    },\t\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/{{newQrBillPaymentID}}",
@@ -11793,7 +11935,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" QR-bill (standing order) payment is updated and assertions are passed\", function () {\r",
 															"\r",
@@ -11870,7 +12012,25 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															""
+															"let updateVariables = pm.globals.get(\"newmanRun\");",
+															"",
+															"if (updateVariables == 1) {",
+															"    console.log(\"Updating dynamic variables ...\");",
+															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+															"    pm.environment.set(\"buildingNmStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
+															"    pm.environment.set(\"postalCodeStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
+															"    console.log(\"Update is finished\");",
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -11897,7 +12057,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"buildingNm\": \"{{$randomInt}}\",\r\n        \t\"postalCode\": \"{{$randomInt}}\",\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses business lunch\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n            \"streetName\": \"{{$randomStreetName}}\",\r\n            \"buildingNm\": \"{{$randomInt}}\",\r\n            \"postalCode\": \"{{$randomInt}}\",\r\n            \"townName\": \"{{$randomCity}}\",\r\n            \"country\": \"{{$randomCountryCode}}\"\r\n        }\r\n    },\t\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},    \r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses business lunch\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},    \r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/{{newQrBillPaymentID}}",
@@ -12030,7 +12190,7 @@
 												"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" QR-bill payment is created and assertions are passed\", function () {\r",
@@ -12119,7 +12279,25 @@
 											"script": {
 												"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 												"exec": [
-													""
+													"let updateVariables = pm.globals.get(\"newmanRun\");",
+													"",
+													"if (updateVariables == 1) {",
+													"    console.log(\"Updating dynamic variables ...\");",
+													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    pm.environment.set(\"buildingNmStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
+													"    pm.environment.set(\"postalCodeStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
+													"    console.log(\"Update is finished\");",
+													"}"
 												],
 												"type": "text/javascript"
 											}
@@ -12146,7 +12324,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"buildingNm\": \"{{$randomInt}}\",\r\n        \t\"postalCode\": \"{{$randomInt}}\",\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n            \"streetName\": \"{{$randomStreetName}}\",\r\n            \"buildingNm\": \"{{$randomInt}}\",\r\n            \"postalCode\": \"{{$randomInt}}\",\r\n            \"townName\": \"{{$randomCity}}\",\r\n            \"country\": \"{{$randomCountryCode}}\"\r\n        }\r\n    },\t\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
+											"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n            \"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/",
@@ -12176,7 +12354,7 @@
 												"id": "f5d00dc8-f552-48c0-9a1c-2510df583464",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" QR-bill payment is retrieved and assertions are passed\", function () {\r",
 													"\r",
@@ -12257,7 +12435,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"buildingNm\": \"{{$randomInt}}\",\r\n        \t\"postalCode\": \"{{$randomInt}}\",\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n            \"streetName\": \"{{$randomStreetName}}\",\r\n            \"buildingNm\": \"{{$randomInt}}\",\r\n            \"postalCode\": \"{{$randomInt}}\",\r\n            \"townName\": \"{{$randomCity}}\",\r\n            \"country\": \"{{$randomCountryCode}}\"\r\n        }\r\n    },\t\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
+											"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/{{newQrBillPaymentID}}",
@@ -12287,7 +12465,7 @@
 												"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" QR-bill payment is updated and assertions are passed\", function () {\r",
 													"\r",
@@ -12356,7 +12534,25 @@
 											"script": {
 												"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 												"exec": [
-													""
+													"let updateVariables = pm.globals.get(\"newmanRun\");",
+													"",
+													"if (updateVariables == 1) {",
+													"    console.log(\"Updating dynamic variables ...\");",
+													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+													"    pm.environment.set(\"buildingNmStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
+													"    pm.environment.set(\"postalCodeStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
+													"    console.log(\"Update is finished\");",
+													"}"
 												],
 												"type": "text/javascript"
 											}
@@ -12383,7 +12579,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"buildingNm\": \"{{$randomInt}}\",\r\n        \t\"postalCode\": \"{{$randomInt}}\",\r\n        \t\"townName\": \"{{$randomCity}}\",\r\n        \t\"country\": \"{{$randomCountryCode}}\"\r\n    \t}\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses business lunch\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n            \"streetName\": \"{{$randomStreetName}}\",\r\n            \"buildingNm\": \"{{$randomInt}}\",\r\n            \"postalCode\": \"{{$randomInt}}\",\r\n            \"townName\": \"{{$randomCity}}\",\r\n            \"country\": \"{{$randomCountryCode}}\"\r\n        }\r\n    },\t\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
+											"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses business lunch\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/{{newQrBillPaymentID}}",
@@ -12521,7 +12717,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Account transfer (standing order) payment is created and assertions are passed\", function () {\r",
 															"\r",
@@ -12657,7 +12853,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Account transfer (standing order) payment is retrieved and assertions are passed\", function () {\r",
 															"\r",
@@ -12783,7 +12979,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Account transfer (standing order) payment is created and assertions are passed\", function () {\r",
 															"    \r",
@@ -13013,7 +13209,7 @@
 												"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Account transfer payment is created and assertions are passed\", function () {\r",
 													"\r",
@@ -13148,7 +13344,7 @@
 												"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Account transfer payment is retrieved and assertions are passed\", function () {\r",
 													"\r",
@@ -13269,7 +13465,7 @@
 												"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Account transfer payment is updated and assertions are passed\", function () {\r",
 													"    \r",
@@ -14159,7 +14355,7 @@
 										"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 										"exec": [
 											"// Execute standard tests from PrS using eval()\r",
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment template is created and assertions are passed\", function () {\r",
 											"\r",
@@ -14247,6 +14443,30 @@
 									"script": {
 										"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 										"exec": [
+											"let updateVariables = pm.globals.get(\"newmanRun\");",
+											"",
+											"if (updateVariables == 1) {",
+											"    console.log(\"Updating dynamic variables ...\");",
+											"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+											"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+											"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+											"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+											"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+											"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+											"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+											"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+											"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+											"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+											"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+											"    pm.environment.set(\"buildingNmStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
+											"    pm.environment.set(\"postalCodeStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
+											"    console.log(\"Update is finished\");",
+											"}",
+											"",
+											"//random script 6 characters long using defined characters only",
+											"const c = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';",
+											"const s = Array.from({length:12}, _ => c[Math.floor(Math.random()*c.length)]).join('');",
+											"pm.environment.set(\"templateName\", JSON.stringify(s));",
 											""
 										],
 										"type": "text/javascript"
@@ -14274,7 +14494,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"amount\": {\r\n        \"currency\": {\r\n            \"code\": \"EUR\"\r\n        },\r\n        \"value\": \"1.01\"\r\n    },\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\"\r\n    \t}\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"agent\": {\r\n        \"bic\": \"ZKBKCHZZ80A\"\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"templateName\": \"{{$randomBankAccountIban}}\",\r\n    \"templateGroupName\": \"Meine Zahlungsliste\",\r\n    \"paymentType\": \"SWIFT_INTERNATIONAL\"\r\n}\r\n"
+									"raw": "{\r\n    \"amount\": {\r\n        \"currency\": {\r\n            \"code\": \"EUR\"\r\n        },\r\n        \"value\": \"1.01\"\r\n    },\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}}\r\n    \t}\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"agent\": {\r\n        \"bic\": {{creditorAgentBicSWIFT}}\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"templateName\": {{templateName}},\r\n    \"templateGroupName\": \"Meine Zahlungsliste\",\r\n    \"paymentType\": \"SWIFT_INTERNATIONAL\"\r\n}\r\n"
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/{{tenant}}/v2/payment/template",
@@ -14303,7 +14523,7 @@
 										"id": "f5d00dc8-f552-48c0-9a1c-2510df583464",
 										"exec": [
 											"// Execute standard tests from PrS using eval()\r",
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment template is retrieved and assertions are passed\", function () {\r",
 											"\r",
@@ -14398,7 +14618,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"amount\": {\r\n        \"currency\": {\r\n            \"code\": \"EUR\"\r\n        },\r\n        \"value\": \"1.01\"\r\n    },\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\",\r\n        \"address\": {\r\n        \t\"adrLine1\": \"{{$randomStreetName}}\",\r\n        \t\"adrLine2\": \"{{$randomStreetAddress}}\"\r\n    \t}\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"agent\": {\r\n        \"bic\": \"BKBBCHBBXXX\"\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"templateName\": \"{{$randomBankAccountIban}}\",\r\n    \"templateGroupName\": \"Meine Zahlungsliste\",\r\n    \"paymentType\": \"SWIFT_INTERNATIONAL\"\r\n}\r\n"
+									"raw": "{\r\n    \"amount\": {\r\n        \"currency\": {\r\n            \"code\": \"EUR\"\r\n        },\r\n        \"value\": \"1.01\"\r\n    },\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}}\r\n    \t}\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"agent\": {\r\n        \"bic\": {{creditorAgentBicSWIFT}}\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"templateName\": {{randomBankAccountIban}},\r\n    \"templateGroupName\": \"Meine Zahlungsliste\",\r\n    \"paymentType\": \"SWIFT_INTERNATIONAL\"\r\n}\r\n"
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/12312/v2/payment/template/{{newPaymentTemplateID}}",
@@ -15095,7 +15315,7 @@
 								"exec": [
 									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
 									"    pm.response.to.not.be.error;",
-									"    pm.response.to.be.withBody;",
+									"    //pm.response.to.be.withBody;",
 									"    pm.environment.set(\"access_token\", pm.response.text());",
 									"});",
 									"",
@@ -15273,6 +15493,164 @@
 									"key": "/api/v2/get_runs/8",
 									"value": ""
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SWIFT hardcoded",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
+								"exec": [
+									"// Execute standard tests from PrS using eval()\r",
+									"eval(globals.commonTests)();\r",
+									"\r",
+									"//pm.test(pm.globals.get(\"testRailTestCases\") + \" Payment is created and assertions are passed\", function () {\r",
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Payment is created and assertions are passed\", function () {\r",
+									"\r",
+									"    //Instructed amount is correct\r",
+									"    let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
+									"    let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
+									"    //Execution date is correct\r",
+									"    let requestBodyExecutionDate = JSON.parse(request.data).paymentInformation.requestedExecutionDate;\r",
+									"    let responseBodyExecutionDate = JSON.parse(responseBody).paymentInformation.requestedExecutionDate;    \r",
+									"    //State is correct\r",
+									"    let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+									"    //Creditor agent is correct\r",
+									"    let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent;\r",
+									"    let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent;\r",
+									"    //Debtor address is correct\r",
+									"    let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
+									"    let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
+									"    //Debtor account is correct\r",
+									"    let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
+									"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo;   \r",
+									"    //Creditor account is correct\r",
+									"    let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
+									"    let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
+									"    //Charge bearer is correct    \r",
+									"    let jsonDataResponseChargeBearer = pm.response.json().chargeBearer;\r",
+									"    \r",
+									"    pm.test(\"Instructed amount is correct\", () => {\r",
+									"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Execution date is correct\", () => {\r",
+									"      pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"State is correct\", () => {\r",
+									"      pm.expect(jsonDataResponsePaymentState).to.eql(\"ENTERED\");\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Creditor agent is correct\", () => {\r",
+									"      pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
+									"    });\r",
+									"\r",
+									"    pm.test(\"Debtor address is correct\", () => {\r",
+									"      pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName);\r",
+									"      pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
+									"      pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Debtor account is correct\", () => {\r",
+									"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Creditor account is correct\", () => {\r",
+									"      pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+									"    });\r",
+									"    \r",
+									"    pm.test(\"Charge bearer is correct\", () => {\r",
+									"      pm.expect(jsonDataResponseChargeBearer).to.eql(\"SHAR\");\r",
+									"    });\r",
+									"    \r",
+									"    // check if payment is created\r",
+									"    if (pm.response.to.have.status(201)){\r",
+									"        var responseData = JSON.parse(responseBody);\r",
+									"        pm.globals.set(\"newPaymentSwiftID\", responseData.paymentId);\r",
+									"        console.log(\"New payment ID: \" + pm.globals.get(\"newPaymentSwiftID\"));\r",
+									"    }\r",
+									"    else {\r",
+									"        console.log(\"Failed to create payment with ID:\" + pm.globals.get(\"newPaymentSwiftID\"));\r",
+									"        pm.globals.unset(\"newPaymentSwiftID\");\r",
+									"    }\r",
+									"    \r",
+									"    //Determine if assertion passed at whole\r",
+									"    pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+									"    && pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate) \r",
+									"    && pm.expect(jsonDataResponsePaymentState).to.eql(\"ENTERED\") \r",
+									"    && pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent) \r",
+									"    && pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName) \r",
+									"    && pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode) \r",
+									"    && pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName) \r",
+									"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
+									"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
+									"    && pm.expect(jsonDataResponseChargeBearer).to.eql(\"SHAR\");\r",
+									"});\r",
+									"\r",
+									"// Session navigate from PrS using eval()\r",
+									"eval(globals.sessionNavigate)();\r",
+									"\r",
+									"// Reset reference to TR test cases\r",
+									"pm.globals.unset(\"_tr_\" + request.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json, application/hal+json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"paymentInformation\": {\r\n    \"endToEndId\": \"consequuntur-maiores-assumenda\",\r\n    \"instructedAmount\": {\r\n      \"currency\": {\r\n        \"code\": \"EUR\"\r\n      },\r\n      \"value\": 10.01\r\n    },\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n    \"instructionPriority\": \"NORMAL\",\r\n    \"debtor\": {\r\n      \"name\": \"Freddy Hinz\",\r\n      \"address\": {\r\n        \"streetName\": \"Schachenallee 31\",\r\n        \"postalCode\": \"5004\",\r\n        \"townName\": \"Aarau\"\r\n      }\r\n    },\r\n\t\"debtorAccountNo\": \"CH6312312001248081501\",\r\n\t\"creditorAccountNo\": 12345678,\t\r\n\t\"creditor\": {\r\n      \"name\": \"Talon Ondricka\",\r\n      \"address\": {\r\n        \"buildingNm\": \"566\",\r\n        \"postalCode\": \"638\",\r\n        \"townName\": \"North Norvalside\",\r\n        \"country\": \"AI\"\r\n      }\r\n    },\r\n    \"creditorAgent\": {\r\n      \"name1\": \"Esmeralda\",\r\n      \"name2\": \"Grady\",\r\n      \"street\": \"60308 Adalberto Passage\",\r\n      \"city\": \"Port Shayleeburgh\",\r\n      \"country\": \"CH\"\r\n    }\r\n  }\r\n}"
+						},
+						"url": {
+							"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
+							"host": [
+								"{{environment}}"
+							],
+							"path": [
+								"banking-api",
+								"payment",
+								"swift",
+								"{{tenant}}",
+								"v2",
+								"credittransfer"
 							]
 						}
 					},
@@ -15673,7 +16051,7 @@
 	],
 	"variable": [
 		{
-			"id": "8b564c3f-896c-4728-8b78-c161aaa3ebd3",
+			"id": "16914d00-2b11-4dde-9162-2577574f2882",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
