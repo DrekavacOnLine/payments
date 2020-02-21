@@ -202,6 +202,7 @@
 											"switch(testsScope) {",
 											"    case \"Full\":",
 											"        var testSession = [",
+											"            \"_Generate access token K8S\",",
 											"            \"Create SEPA payment (C36240114)\",",
 											"            \"Deliver SEPA payment (C34775338)\",",
 											"            \"Update SEPA payment (C36275415)\",",
@@ -281,6 +282,7 @@
 											"            ]; break;",
 											"    case \"Core\":",
 											"        var testSession = [",
+											"            \"_Generate access token K8S\",",
 											"            \"Create SEPA payment (C36240114)\",",
 											"            \"Deliver SEPA payment (C34775338)\",",
 											"            \"Update SEPA payment (C36275415)\",",
@@ -5034,23 +5036,7 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															"let updateVariables = pm.globals.get(\"newmanRun\");",
-															"",
-															"if (updateVariables == 1) {",
-															"    console.log(\"Updating dynamic variables ...\");",
-															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    console.log(\"Update is finished\");",
-															"}"
+															"eval(globals.randomizeVariables)();"
 														],
 														"type": "text/javascript"
 													}
@@ -5342,23 +5328,7 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															"let updateVariables = pm.globals.get(\"newmanRun\");",
-															"",
-															"if (updateVariables == 1) {",
-															"    console.log(\"Updating dynamic variables ...\");",
-															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    console.log(\"Update is finished\");",
-															"}"
+															"eval(globals.randomizeVariables)();"
 														],
 														"type": "text/javascript"
 													}
@@ -5515,27 +5485,7 @@
 											"script": {
 												"id": "9c72540c-8b6e-4022-beb7-ef4a180f1b6b",
 												"exec": [
-													"//************************************************************************************************",
-													"// set parameters ********************************************************************************",
-													"//************************************************************************************************",
-													"",
-													"let updateVariables = pm.globals.get(\"newmanRun\");",
-													"",
-													"if (updateVariables == 1) {",
-													"    console.log(\"Updating dynamic variables ...\");",
-													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    console.log(\"Update is finished\");",
-													"}"
+													"eval(globals.randomizeVariables)();"
 												],
 												"type": "text/javascript"
 											}
@@ -5927,23 +5877,7 @@
 											"script": {
 												"id": "ed4149e4-3b82-4013-8999-2fa27812ab16",
 												"exec": [
-													"let updateVariables = pm.globals.get(\"newmanRun\");",
-													"",
-													"if (updateVariables == 1) {",
-													"    console.log(\"Updating dynamic variables ...\");",
-													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    console.log(\"Update is finished\");",
-													"}"
+													"eval(globals.randomizeVariables)();"
 												],
 												"type": "text/javascript"
 											}
@@ -6096,23 +6030,7 @@
 											"script": {
 												"id": "9c72540c-8b6e-4022-beb7-ef4a180f1b6b",
 												"exec": [
-													"let updateVariables = pm.globals.get(\"newmanRun\");",
-													"",
-													"if (updateVariables == 1) {",
-													"    console.log(\"Updating dynamic variables ...\");",
-													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    console.log(\"Update is finished\");",
-													"}"
+													"eval(globals.randomizeVariables)();"
 												],
 												"type": "text/javascript"
 											}
@@ -6266,23 +6184,7 @@
 											"script": {
 												"id": "6bd40450-09b6-4eb2-b672-981852dd7dea",
 												"exec": [
-													"let updateVariables = pm.globals.get(\"newmanRun\");",
-													"",
-													"if (updateVariables == 1) {",
-													"    console.log(\"Updating dynamic variables ...\");",
-													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    console.log(\"Update is finished\");",
-													"}"
+													"eval(globals.randomizeVariables)();"
 												],
 												"type": "text/javascript"
 											}
@@ -6442,23 +6344,7 @@
 											"script": {
 												"id": "6bd40450-09b6-4eb2-b672-981852dd7dea",
 												"exec": [
-													"let updateVariables = pm.globals.get(\"newmanRun\");",
-													"",
-													"if (updateVariables == 1) {",
-													"    console.log(\"Updating dynamic variables ...\");",
-													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    console.log(\"Update is finished\");",
-													"}"
+													"eval(globals.randomizeVariables)();"
 												],
 												"type": "text/javascript"
 											}
@@ -6822,23 +6708,7 @@
 											"script": {
 												"id": "0415c0ea-9fa8-4aec-adfb-7b35a10b7f05",
 												"exec": [
-													"let updateVariables = pm.globals.get(\"newmanRun\");",
-													"",
-													"if (updateVariables == 1) {",
-													"    console.log(\"Updating dynamic variables ...\");",
-													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    console.log(\"Update is finished\");",
-													"}"
+													"eval(globals.randomizeVariables)();"
 												],
 												"type": "text/javascript"
 											}
@@ -7069,23 +6939,7 @@
 															"script": {
 																"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 																"exec": [
-																	"let updateVariables = pm.globals.get(\"newmanRun\");",
-																	"",
-																	"if (updateVariables == 1) {",
-																	"    console.log(\"Updating dynamic variables ...\");",
-																	"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-																	"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-																	"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-																	"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-																	"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-																	"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-																	"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-																	"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-																	"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-																	"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-																	"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-																	"    console.log(\"Update is finished\");",
-																	"}"
+																	"eval(globals.randomizeVariables)();"
 																],
 																"type": "text/javascript"
 															}
@@ -7341,23 +7195,7 @@
 															"script": {
 																"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 																"exec": [
-																	"let updateVariables = pm.globals.get(\"newmanRun\");",
-																	"",
-																	"if (updateVariables == 1) {",
-																	"    console.log(\"Updating dynamic variables ...\");",
-																	"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-																	"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-																	"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-																	"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-																	"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-																	"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-																	"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-																	"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-																	"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-																	"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-																	"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-																	"    console.log(\"Update is finished\");",
-																	"}"
+																	"eval(globals.randomizeVariables)();"
 																],
 																"type": "text/javascript"
 															}
@@ -7582,23 +7420,7 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															"let updateVariables = pm.globals.get(\"newmanRun\");",
-															"",
-															"if (updateVariables == 1) {",
-															"    console.log(\"Updating dynamic variables ...\");",
-															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    console.log(\"Update is finished\");",
-															"}"
+															"eval(globals.randomizeVariables)();"
 														],
 														"type": "text/javascript"
 													}
@@ -7838,23 +7660,7 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															"let updateVariables = pm.globals.get(\"newmanRun\");",
-															"",
-															"if (updateVariables == 1) {",
-															"    console.log(\"Updating dynamic variables ...\");",
-															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    console.log(\"Update is finished\");",
-															"}"
+															"eval(globals.randomizeVariables)();"
 														],
 														"type": "text/javascript"
 													}
@@ -8095,23 +7901,7 @@
 															"script": {
 																"id": "78b1074c-dd61-4c7a-8fcf-9fb2f734f087",
 																"exec": [
-																	"let updateVariables = pm.globals.get(\"newmanRun\");",
-																	"",
-																	"if (updateVariables == 1) {",
-																	"    console.log(\"Updating dynamic variables ...\");",
-																	"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-																	"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-																	"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-																	"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-																	"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-																	"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-																	"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-																	"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-																	"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-																	"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-																	"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-																	"    console.log(\"Update is finished\");",
-																	"}"
+																	"eval(globals.randomizeVariables)();"
 																],
 																"type": "text/javascript"
 															}
@@ -8379,23 +8169,7 @@
 															"script": {
 																"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 																"exec": [
-																	"let updateVariables = pm.globals.get(\"newmanRun\");",
-																	"",
-																	"if (updateVariables == 1) {",
-																	"    console.log(\"Updating dynamic variables ...\");",
-																	"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-																	"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-																	"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-																	"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-																	"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-																	"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-																	"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-																	"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-																	"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-																	"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-																	"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-																	"    console.log(\"Update is finished\");",
-																	"}"
+																	"eval(globals.randomizeVariables)();"
 																],
 																"type": "text/javascript"
 															}
@@ -8629,23 +8403,7 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															"let updateVariables = pm.globals.get(\"newmanRun\");",
-															"",
-															"if (updateVariables == 1) {",
-															"    console.log(\"Updating dynamic variables ...\");",
-															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    console.log(\"Update is finished\");",
-															"}"
+															"eval(globals.randomizeVariables)();"
 														],
 														"type": "text/javascript"
 													}
@@ -8881,23 +8639,7 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															"let updateVariables = pm.globals.get(\"newmanRun\");",
-															"",
-															"if (updateVariables == 1) {",
-															"    console.log(\"Updating dynamic variables ...\");",
-															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    console.log(\"Update is finished\");",
-															"}"
+															"eval(globals.randomizeVariables)();"
 														],
 														"type": "text/javascript"
 													}
@@ -9134,23 +8876,7 @@
 															"script": {
 																"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 																"exec": [
-																	"let updateVariables = pm.globals.get(\"newmanRun\");",
-																	"",
-																	"if (updateVariables == 1) {",
-																	"    console.log(\"Updating dynamic variables ...\");",
-																	"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-																	"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-																	"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-																	"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-																	"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-																	"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-																	"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-																	"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-																	"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-																	"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-																	"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-																	"    console.log(\"Update is finished\");",
-																	"}"
+																	"eval(globals.randomizeVariables)();"
 																],
 																"type": "text/javascript"
 															}
@@ -9405,23 +9131,7 @@
 															"script": {
 																"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 																"exec": [
-																	"let updateVariables = pm.globals.get(\"newmanRun\");",
-																	"",
-																	"if (updateVariables == 1) {",
-																	"    console.log(\"Updating dynamic variables ...\");",
-																	"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-																	"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-																	"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-																	"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-																	"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-																	"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-																	"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-																	"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-																	"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-																	"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-																	"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-																	"    console.log(\"Update is finished\");",
-																	"}"
+																	"eval(globals.randomizeVariables)();"
 																],
 																"type": "text/javascript"
 															}
@@ -9653,23 +9363,7 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															"let updateVariables = pm.globals.get(\"newmanRun\");",
-															"",
-															"if (updateVariables == 1) {",
-															"    console.log(\"Updating dynamic variables ...\");",
-															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    console.log(\"Update is finished\");",
-															"}"
+															"eval(globals.randomizeVariables)();"
 														],
 														"type": "text/javascript"
 													}
@@ -9926,23 +9620,7 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															"let updateVariables = pm.globals.get(\"newmanRun\");",
-															"",
-															"if (updateVariables == 1) {",
-															"    console.log(\"Updating dynamic variables ...\");",
-															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    console.log(\"Update is finished\");",
-															"}"
+															"eval(globals.randomizeVariables)();"
 														],
 														"type": "text/javascript"
 													}
@@ -11741,25 +11419,7 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															"let updateVariables = pm.globals.get(\"newmanRun\");",
-															"",
-															"if (updateVariables == 1) {",
-															"    console.log(\"Updating dynamic variables ...\");",
-															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    pm.environment.set(\"buildingNmStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
-															"    pm.environment.set(\"postalCodeStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
-															"    console.log(\"Update is finished\");",
-															"}"
+															"eval(globals.randomizeVariables)();"
 														],
 														"type": "text/javascript"
 													}
@@ -12012,25 +11672,7 @@
 													"script": {
 														"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 														"exec": [
-															"let updateVariables = pm.globals.get(\"newmanRun\");",
-															"",
-															"if (updateVariables == 1) {",
-															"    console.log(\"Updating dynamic variables ...\");",
-															"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-															"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-															"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-															"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-															"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-															"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-															"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-															"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-															"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-															"    pm.environment.set(\"buildingNmStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
-															"    pm.environment.set(\"postalCodeStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
-															"    console.log(\"Update is finished\");",
-															"}"
+															"eval(globals.randomizeVariables)();"
 														],
 														"type": "text/javascript"
 													}
@@ -12279,25 +11921,7 @@
 											"script": {
 												"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 												"exec": [
-													"let updateVariables = pm.globals.get(\"newmanRun\");",
-													"",
-													"if (updateVariables == 1) {",
-													"    console.log(\"Updating dynamic variables ...\");",
-													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    pm.environment.set(\"buildingNmStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
-													"    pm.environment.set(\"postalCodeStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
-													"    console.log(\"Update is finished\");",
-													"}"
+													"eval(globals.randomizeVariables)();"
 												],
 												"type": "text/javascript"
 											}
@@ -12534,25 +12158,7 @@
 											"script": {
 												"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 												"exec": [
-													"let updateVariables = pm.globals.get(\"newmanRun\");",
-													"",
-													"if (updateVariables == 1) {",
-													"    console.log(\"Updating dynamic variables ...\");",
-													"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-													"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-													"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-													"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-													"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-													"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-													"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-													"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-													"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-													"    pm.environment.set(\"buildingNmStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
-													"    pm.environment.set(\"postalCodeStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
-													"    console.log(\"Update is finished\");",
-													"}"
+													"eval(globals.randomizeVariables)();"
 												],
 												"type": "text/javascript"
 											}
@@ -14443,31 +14049,12 @@
 									"script": {
 										"id": "4554baa7-4766-4c0d-bd99-4fc6e4de5c1b",
 										"exec": [
-											"let updateVariables = pm.globals.get(\"newmanRun\");",
+											"eval(globals.randomizeVariables)();",
 											"",
-											"if (updateVariables == 1) {",
-											"    console.log(\"Updating dynamic variables ...\");",
-											"    pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
-											"    pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
-											"    pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
-											"    pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
-											"    pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-											"    pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
-											"    pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
-											"    pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
-											"    pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
-											"    pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
-											"    pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
-											"    pm.environment.set(\"buildingNmStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
-											"    pm.environment.set(\"postalCodeStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
-											"    console.log(\"Update is finished\");",
-											"}",
-											"",
-											"//random script 6 characters long using defined characters only",
+											"//random string 6 characters long using defined characters only",
 											"const c = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';",
 											"const s = Array.from({length:12}, _ => c[Math.floor(Math.random()*c.length)]).join('');",
-											"pm.environment.set(\"templateName\", JSON.stringify(s));",
-											""
+											"pm.environment.set(\"templateName\", JSON.stringify(s));"
 										],
 										"type": "text/javascript"
 									}
@@ -16030,6 +15617,38 @@
 					"",
 					"  return vars;",
 					"  ",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"randomizeVariables\", () => {",
+					"    let newmanRun = pm.globals.get(\"newmanRun\");",
+					"    //console.log(\"Global variable: \" + newmanRun);",
+					"    //console.log(\"Randomize variables? - \" + (newmanRun != 1));",
+					"    if (newmanRun != 1) {",
+					"        console.log(\"Randomizing variables ...\");",
+					"        pm.environment.set(\"endToEndId\",JSON.stringify(pm.variables.replaceIn(\"{{$randomLoremSlug}}\")));",
+					"        pm.environment.set(\"unstructured\",JSON.stringify(pm.variables.replaceIn(\"{{$guid}}\")));",
+					"        pm.environment.set(\"instructionIdentification\",JSON.stringify(pm.variables.replaceIn(\"{{$randomBitcoin}}\")));",
+					"        pm.environment.set(\"name\",JSON.stringify(pm.variables.replaceIn(\"{{$randomFullName}}\")));",
+					"        pm.environment.set(\"adrLine1\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+					"        pm.environment.set(\"adrLine2\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetAddress}}\")));",
+					"        pm.environment.set(\"streetName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomStreetName}}\")));",
+					"        pm.environment.set(\"townName\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCity}}\")));",
+					"        pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
+					"        pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
+					"        pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+					"        console.log(\"... randomize is finished\");",
+					"    }",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"getRandomString\", (length) => {",
+					"    //random string with defined length using defined characters only",
+					"   var result           = '';",
+					"   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';",
+					"   var charactersLength = characters.length;",
+					"   for ( var i = 0; i < length; i++ ) {",
+					"      result += characters.charAt(Math.floor(Math.random() * charactersLength));",
+					"   }",
+					"   return result;",
 					"});"
 				]
 			}
@@ -16051,7 +15670,7 @@
 	],
 	"variable": [
 		{
-			"id": "16914d00-2b11-4dde-9162-2577574f2882",
+			"id": "f73a6d91-6a5f-4ea0-931f-57dc01c428dc",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"

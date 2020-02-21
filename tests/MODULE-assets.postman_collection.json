@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "1a699778-b855-4a6a-9e38-0fd2621f46f8",
-		"name": "MODULE: Assets",
+		"name": "MODULE: Assets (actual)",
 		"description": "Asset API:\n\n- Custody account API\n- Assets account\n- Portfolio API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -55,6 +55,31 @@
 									"        break;",
 									"    case \"Core\":",
 									"        var testSession = [",
+									"            \"Accounts_Search (C33529902)\",",
+									"            \"Accounts_Search_contract iban desc (C38950549)\",",
+									"            \"Accounts_Search_contract iban asc (C38950548)\",",
+									"            \"Accounts_Search_Account_Number (C37972701)\",",
+									"            \"Accounts_Search_Multiple_Names (C38950539)\",",
+									"            \"Accounts_Search_AccountType_Current (C38950541)\",",
+									"            \"Accounts_Search_Multiple_Account_Number (C38950540)\",",
+									"            \"Accounts_Search_AccountType_Multiple (C41083339)\",",
+									"            \"Accounts_Search_AccountType_Other (C41083337)\",",
+									"            \"Accounts_Search_iban (C38950543)\",",
+									"            \"Accounts_Search_multiple_iban (C38950544)\",",
+									"            \"Accounts_Search_contractId (C38950547)\",",
+									"            \"List of custody accounts (C41736189)\",",
+									"            \"List of portfolios (C43024137)\",",
+									"            \"Portfolio details (C43024139)\",",
+									"            \"Portfolio performance details (C43181629)\",",
+									"            ",
+									"            \"Check proper custody account (C41853576)\",",
+									"            ",
+									"            \"Custody account details (C41853582)\"",
+									"            ];",
+									"        break;",
+									"    case \"Quick\":",
+									"        var testSession = [",
+									"            \"_Generate access token K8S\",",
 									"            \"Accounts_Search (C33529902)\",",
 									"            \"Accounts_Search_contract iban desc (C38950549)\",",
 									"            \"Accounts_Search_contract iban asc (C38950548)\",",
@@ -2241,6 +2266,51 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "_Generate access token K8S",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ae9a03b6-e62e-48de-b80c-7144951c24e0",
+								"exec": [
+									"var requestsToRun = [",
+									"        \"getAuthTestTokenK8S\"",
+									"    ]; ",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "da97c8d7-19cf-460d-b66c-1dd884a89f7a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "OPTIONS",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -2261,7 +2331,7 @@
 										"exec": [
 											"\r",
 											"\r",
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of portfolios and response schema is validated\", function() {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -2360,7 +2430,7 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of custody accounts by Id is retrieved and response schema is validated\", function() {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -2459,7 +2529,7 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of custody accounts by Id is retrieved and response schema is validated\", function() {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -2754,7 +2824,7 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of custody accounts by Id is retrieved and response schema is validated\", function() {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -2856,7 +2926,7 @@
 										"id": "d015f9cb-901f-4329-bf5c-6cc126cd7e84",
 										"exec": [
 											"// Execute standard tests from PrS using eval()\r",
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of custody accounts is retrieved and response schema i validated\", function () {\r",
 											"\r",
@@ -3471,7 +3541,7 @@
 									"script": {
 										"id": "716d6a3a-ef08-41f1-b9f4-ed582ebb8650",
 										"exec": [
-											"eval(globals.commonTests)();",
+											"//eval(globals.commonTests)();",
 											"",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of custody accounts by Id is retrieved and response schema is validated\", function() {",
 											"    var schemaValidationPassed = true;",
@@ -6079,6 +6149,89 @@
 								}
 							]
 						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tools",
+			"item": [
+				{
+					"name": "getAuthTestTokenK8S",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9e77f489-363b-4a53-9c9f-58be8e9678c8",
+								"exec": [
+									"console.log(\"Test Token url is: \" + pm.environment.get(\"env_security_testToken\"));",
+									"console.log(\"Contract is: \" + pm.environment.get(\"userId_soba\"));",
+									"",
+									"// Set up pre-conditions with Chai Assertion library. https://www.chaijs.com/api/bdd/",
+									"/*",
+									"pm.expect(pm.environment.get(\"env_securemail\")).to.be.a('string', \"The env_securemail is not defined\");",
+									"pm.expect(pm.environment.get(\"env_security_testToken\")).to.be.a('string', \"The testTokenUrl is not defined\");",
+									"pm.expect(pm.environment.get(\"tenantId_security\")).to.be.a('string', \"The tenantId is not defined\");",
+									"pm.expect(pm.environment.get(\"tenantName_security\")).to.be.a('string', \"The tenantName is not defined\");",
+									"pm.expect(pm.environment.get(\"userName_security\")).to.be.a('string', \"The userName is not defined\");",
+									"pm.expect(pm.environment.get(\"contractNo_security\")).to.be.a('string', \"The contractNo is not defined\");",
+									"pm.expect(pm.environment.get(\"bcNo_security\")).to.be.a('string', \"The bcNo is not defined\");",
+									"pm.expect(pm.environment.get(\"userId_security\")).to.be.a('string', \"The userId is not defined\");",
+									"*/"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "095f7911-c115-4798-9cc5-f06e06819ef3",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
+									"    pm.response.to.not.be.error;",
+									"    pm.response.to.be.withBody;",
+									"    let token = pm.response.text();",
+									"    pm.environment.set(\"access_token\", token);",
+									"    pm.environment.set(\"dltoken\", token);",
+									"});",
+									"",
+									"",
+									"// Session navigate from PrS using eval()",
+									"eval(globals.sessionNavigate)();",
+									"",
+									"// Reset reference to TR test cases",
+									"pm.globals.unset(\"_tr_\" + request.name);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"tenant_id\": {{tenantId_soba}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_soba}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_soba}}\",\r\n  \"authorities\": [\"DBAN_ADMIN\", \"DBAN_USER\"],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_soba}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",    \r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/assets/account.accountname.write\",\r\n    \"https://api.crealogix.com/assets/account.accountimage.write\",\r\n    \"https://api.crealogix.com/assets/cuac.readonly\",\r\n    \"https://api.crealogix.com/assets/portfolio.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\",\r\n \t\"https://api.crealogix.com/deeplink/domains\",\r\n    \"https://api.crealogix.com/deeplink/links\"\t\r\n  ],\r\n  \"loginName\": \"{{userId_soba}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+						},
+						"url": {
+							"raw": "{{env_security_testToken}}",
+							"host": [
+								"{{env_security_testToken}}"
+							]
+						},
+						"description": "Retrieve the test token"
 					},
 					"response": []
 				}
