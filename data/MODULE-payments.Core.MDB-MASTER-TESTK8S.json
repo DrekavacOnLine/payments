@@ -29,7 +29,13 @@
 		"creditorAccountNoSEPA": "\"DE12500105170648489890\"",
 		"creditorAgentBicSWIFT": "\"NWBKGB2LXXX\"",
 		"creditorAgentBicSEPA": "\"INGDDEFFXXX\"",
-		"structuredRemittanceRF": "RF64186397856221845279566"
-
+		"structuredRemittanceRF": "\"RF64186397856221845279566\"",
+		"creditorAccountNoSWIFTBankAcco": "\"3122298751\"",
+		"creditorAgentName1SWIFT": "\"HANDELSBANKEN\"",
+		"creditorAgentName2SWIFT": "\"BANK\"",
+		"creditorAgentStreetSWIFT": "\"Kungstradgardsgatan\"",
+		"creditorAgentCitySWIFT": "\"10670 STOCKHOLM\"",
+		"creditorAgentCountrySWIFT": "\"SE\"",
+		"newmanRun": "0"
     }
 ]

@@ -198,6 +198,12 @@
 											"    console.log(\"dataFile/accountAlias: \" + \"1501 CHF\");",
 											"}",
 											"",
+											"var userId_security = data.contractNumber;",
+											"if (userId_security){ ",
+											"    pm.environment.set(\"userId_security\",JSON.parse(data.contractNumber));",
+											"    console.log(\"dataFile/userId_security: \" + userId_security);",
+											"}",
+											"",
 											"//console.log(testsScope); ",
 											"switch(testsScope) {",
 											"    case \"Full\":",
@@ -14205,7 +14211,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"amount\": {\r\n        \"currency\": {\r\n            \"code\": \"EUR\"\r\n        },\r\n        \"value\": \"1.01\"\r\n    },\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}}\r\n    \t}\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"agent\": {\r\n        \"bic\": {{creditorAgentBicSWIFT}}\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"templateName\": {{randomBankAccountIban}},\r\n    \"templateGroupName\": \"Meine Zahlungsliste\",\r\n    \"paymentType\": \"SWIFT_INTERNATIONAL\"\r\n}\r\n"
+									"raw": "{\r\n    \"amount\": {\r\n        \"currency\": {\r\n            \"code\": \"EUR\"\r\n        },\r\n        \"value\": \"1.01\"\r\n    },\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}}\r\n    \t}\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"agent\": {\r\n        \"bic\": {{creditorAgentBicSWIFT}}\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"templateName\": {{templateName}},\r\n    \"templateGroupName\": \"Meine Zahlungsliste\",\r\n    \"paymentType\": \"SWIFT_INTERNATIONAL\"\r\n}\r\n"
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/12312/v2/payment/template/{{newPaymentTemplateID}}",
@@ -14954,7 +14960,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_security}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+							"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": \"{{userId_security}}\",\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
 						},
 						"url": {
 							"raw": "{{env_security_testToken}}",
@@ -15637,6 +15643,8 @@
 					"        pm.environment.set(\"country\",JSON.stringify(pm.variables.replaceIn(\"{{$randomCountryCode}}\")));",
 					"        pm.environment.set(\"buildingNm\",pm.variables.replaceIn('{{$randomInt}}'));",
 					"        pm.environment.set(\"postalCode\",pm.variables.replaceIn('{{$randomInt}}'));",
+					"        pm.environment.set(\"buildingNmStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
+					"        pm.environment.set(\"postalCodeStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
 					"        console.log(\"... randomize is finished\");",
 					"    }",
 					"});"
@@ -15660,7 +15668,7 @@
 	],
 	"variable": [
 		{
-			"id": "44d7a0bf-8796-4e1f-8f4f-4ea28bdfe1fb",
+			"id": "130f4390-9438-49af-a7a8-74381b4f4ada",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
