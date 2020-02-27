@@ -1,6 +1,7 @@
 [
     {
         "testsScope": "Core",
-		"envName": "MDB-MASTER-TESTK8S"
+		"envName": "MDB-MASTER-TESTK8S",
+		"contractNumber": "\"1279311501\""
     }
 ]

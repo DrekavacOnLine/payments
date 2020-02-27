@@ -972,14 +972,14 @@
 							"raw": "{\n  \"name\": \"allegro.pl for newman tests\",\n  \"domainPattern\": \"allegro.pl\",\n  \"loginRequired\": false,\n  \"state\": \"ALLOWED\"\n}"
 						},
 						"url": {
-							"raw": "{{env_deeplink_public}}/deeplink/admin/{{tenant}}/v1/domains/",
+							"raw": "{{env_deeplink_secure}}/deeplink/admin/{{tenantId_security}}/v1/domains/",
 							"host": [
-								"{{env_deeplink_public}}"
+								"{{env_deeplink_secure}}"
 							],
 							"path": [
 								"deeplink",
 								"admin",
-								"{{tenant}}",
+								"{{tenantId_security}}",
 								"v1",
 								"domains",
 								""
@@ -1036,14 +1036,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{env_deeplink_public}}/deeplink/admin/{{tenant}}/v1/domains/?",
+							"raw": "{{env_deeplink_secure}}/deeplink/admin/{{tenantId_security}}/v1/domains/?",
 							"host": [
-								"{{env_deeplink_public}}"
+								"{{env_deeplink_secure}}"
 							],
 							"path": [
 								"deeplink",
 								"admin",
-								"{{tenant}}",
+								"{{tenantId_security}}",
 								"v1",
 								"domains",
 								""
@@ -1101,14 +1101,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{env_deeplink_public}}/deeplink/admin/{{tenant}}/v1/domains/{{newDomainId}}",
+							"raw": "{{env_deeplink_secure}}/deeplink/admin/{{tenantId_security}}/v1/domains/{{newDomainId}}",
 							"host": [
-								"{{env_deeplink_public}}"
+								"{{env_deeplink_secure}}"
 							],
 							"path": [
 								"deeplink",
 								"admin",
-								"{{tenant}}",
+								"{{tenantId_security}}",
 								"v1",
 								"domains",
 								"{{newDomainId}}"
@@ -1163,14 +1163,14 @@
 							"raw": "{\n\t\t\"name\": \"allegro.pl for Newman tests\",\n        \"domainPattern\": \"allegro.pl\",\n        \"loginRequired\": false,\n        \"state\": \"ALLOWED\"\n}"
 						},
 						"url": {
-							"raw": "{{env_deeplink_public}}/deeplink/admin/{{tenant}}/v1/domains/{{newDomainId}}",
+							"raw": "{{env_deeplink_secure}}/deeplink/admin/{{tenantId_security}}/v1/domains/{{newDomainId}}",
 							"host": [
-								"{{env_deeplink_public}}"
+								"{{env_deeplink_secure}}"
 							],
 							"path": [
 								"deeplink",
 								"admin",
-								"{{tenant}}",
+								"{{tenantId_security}}",
 								"v1",
 								"domains",
 								"{{newDomainId}}"
@@ -1232,14 +1232,14 @@
 							"raw": "{\n  \"parameters\": [\n    {\n      \"name\": \"string\",\n      \"state\": \"ALLOWED\"\n    },\n    {\n      \"name\": \"stan\",\n      \"state\": \"ALLOWED\"\n    }\n  ]\n}"
 						},
 						"url": {
-							"raw": "{{env_deeplink_public}}/deeplink/admin/{{tenant}}/v1/domains/{{newDomainId}}/parameters",
+							"raw": "{{env_deeplink_secure}}/deeplink/admin/{{tenantId_security}}/v1/domains/{{newDomainId}}/parameters",
 							"host": [
-								"{{env_deeplink_public}}"
+								"{{env_deeplink_secure}}"
 							],
 							"path": [
 								"deeplink",
 								"admin",
-								"{{tenant}}",
+								"{{tenantId_security}}",
 								"v1",
 								"domains",
 								"{{newDomainId}}",
@@ -1293,14 +1293,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{env_deeplink_public}}/deeplink/admin/{{tenant}}/v1/domains/{{newDomainId}}/parameters",
+							"raw": "{{env_deeplink_secure}}/deeplink/admin/{{tenantId_security}}/v1/domains/{{newDomainId}}/parameters",
 							"host": [
-								"{{env_deeplink_public}}"
+								"{{env_deeplink_secure}}"
 							],
 							"path": [
 								"deeplink",
 								"admin",
-								"{{tenant}}",
+								"{{tenantId_security}}",
 								"v1",
 								"domains",
 								"{{newDomainId}}",
@@ -1388,14 +1388,14 @@
 							"raw": "{\n  \"key\": {\n    \"businessDomain\": \"allegro.pl for Newman tests\",\n    \"linkName\": \"allegro.pl {{$timestamp}}\"\n  },\n  \"registrationType\": \"FREELINK\",\n  \"settings\": {\n    \"active\": true,\n    \"validFrom\": \"{{nowDate}}\",\n    \"validTo\": \"{{futureDate}}\"\n  },\n  \"variables\": [\n  \t{\n     \"name\": \"search\",\n     \"required\": true\n   }\n  ],\n  \"ports\": [\n    {\n      \"key\": \"a1\",\n      \"matcherType\": \"DEFAULT\",\n      \"location\": \"https://allegro.pl/listing?string={$search}&stan=nowe\"\n    },\n    {\n      \"key\": \"e1\",\n      \"matcherType\": \"MC\",\n      \"location\": \"https://allegro.pl/listing?string={$search}&stan=uzywane\"\n    }\n  ]\n}\n"
 						},
 						"url": {
-							"raw": "{{env_deeplink_public}}/deeplink/registration/{{tenant}}/v1/link",
+							"raw": "{{env_deeplink_secure}}/deeplink/registration/{{tenantId_security}}/v1/link",
 							"host": [
-								"{{env_deeplink_public}}"
+								"{{env_deeplink_secure}}"
 							],
 							"path": [
 								"deeplink",
 								"registration",
-								"{{tenant}}",
+								"{{tenantId_security}}",
 								"v1",
 								"link"
 							]
@@ -1487,14 +1487,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{env_deeplink_public}}/deeplink/admin/{{tenant}}/v1/links",
+							"raw": "{{env_deeplink_secure}}/deeplink/admin/{{tenantId_security}}/v1/links",
 							"host": [
-								"{{env_deeplink_public}}"
+								"{{env_deeplink_secure}}"
 							],
 							"path": [
 								"deeplink",
 								"admin",
-								"{{tenant}}",
+								"{{tenantId_security}}",
 								"v1",
 								"links"
 							]
@@ -1571,14 +1571,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{env_deeplink_public}}/deeplink/admin/{{tenant}}/v1/links/{{deepLinkId}}",
+							"raw": "{{env_deeplink_secure}}/deeplink/admin/{{tenantId_security}}/v1/links/{{deepLinkId}}",
 							"host": [
-								"{{env_deeplink_public}}"
+								"{{env_deeplink_secure}}"
 							],
 							"path": [
 								"deeplink",
 								"admin",
-								"{{tenant}}",
+								"{{tenantId_security}}",
 								"v1",
 								"links",
 								"{{deepLinkId}}"
@@ -1659,14 +1659,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{env_deeplink_public}}/deeplink/admin/{{tenant}}/v1/links/{{deepLinkId}}/statistics",
+							"raw": "{{env_deeplink_secure}}/deeplink/admin/{{tenantId_security}}/v1/links/{{deepLinkId}}/statistics",
 							"host": [
-								"{{env_deeplink_public}}"
+								"{{env_deeplink_secure}}"
 							],
 							"path": [
 								"deeplink",
 								"admin",
-								"{{tenant}}",
+								"{{tenantId_security}}",
 								"v1",
 								"links",
 								"{{deepLinkId}}",
@@ -1746,14 +1746,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{env_deeplink_public}}/deeplink/admin/{{tenant}}/v1/links/{{deepLinkId}}/perform?action=deactivate",
+							"raw": "{{env_deeplink_secure}}/deeplink/admin/{{tenantId_security}}/v1/links/{{deepLinkId}}/perform?action=deactivate",
 							"host": [
-								"{{env_deeplink_public}}"
+								"{{env_deeplink_secure}}"
 							],
 							"path": [
 								"deeplink",
 								"admin",
-								"{{tenant}}",
+								"{{tenantId_security}}",
 								"v1",
 								"links",
 								"{{deepLinkId}}",
@@ -1820,14 +1820,14 @@
 							"raw": "{\n\t\t\"name\": \"allegro - allegro.pl{{$timestamp}}\",\n        \"domainPattern\": \"allegro{{$timestamp}}.pl\",\n        \"loginRequired\": false,\n        \"state\": \"ALLOWED\"\n\t\n}"
 						},
 						"url": {
-							"raw": "{{env_deeplink_public}}/deeplink/admin/{{tenant}}/v1/domains/{{newDomainId}}",
+							"raw": "{{env_deeplink_secure}}/deeplink/admin/{{tenantId_security}}/v1/domains/{{newDomainId}}",
 							"host": [
-								"{{env_deeplink_public}}"
+								"{{env_deeplink_secure}}"
 							],
 							"path": [
 								"deeplink",
 								"admin",
-								"{{tenant}}",
+								"{{tenantId_security}}",
 								"v1",
 								"domains",
 								"{{newDomainId}}"
@@ -1926,7 +1926,7 @@
 								"id": "22e6af0d-6a94-48ed-aaf9-8fd907dc488a",
 								"exec": [
 									"console.log(\"Test Token url is: \" + pm.environment.get(\"env_security_testToken\"));",
-									"console.log(\"Contract is: \" + pm.environment.get(\"userId_soba\"));"
+									"console.log(\"Contract is: \" + pm.environment.get(\"userId_security\"));"
 								],
 								"type": "text/javascript"
 							}
@@ -1947,7 +1947,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"tenant_id\": {{tenantId_soba}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_soba}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_soba}}\",\r\n  \"authorities\": [\"DBAN_ADMIN\", \"DBAN_USER\"],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_soba}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",    \r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/assets/account.accountname.write\",\r\n    \"https://api.crealogix.com/assets/account.accountimage.write\",\r\n    \"https://api.crealogix.com/assets/cuac.readonly\",\r\n    \"https://api.crealogix.com/assets/portfolio.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\",\r\n \t\"https://api.crealogix.com/deeplink/domains\",\r\n    \"https://api.crealogix.com/deeplink/links\"\t\r\n  ],\r\n  \"loginName\": \"{{userId_soba}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+							"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [\"DBAN_ADMIN\", \"DBAN_USER\"],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_security}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",    \r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/assets/account.accountname.write\",\r\n    \"https://api.crealogix.com/assets/account.accountimage.write\",\r\n    \"https://api.crealogix.com/assets/cuac.readonly\",\r\n    \"https://api.crealogix.com/assets/portfolio.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\",\r\n \t\"https://api.crealogix.com/deeplink/domains\",\r\n    \"https://api.crealogix.com/deeplink/links\"\t\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
 						},
 						"url": {
 							"raw": "{{env_security_testToken}}",
@@ -2355,7 +2355,7 @@
 	],
 	"variable": [
 		{
-			"id": "329cf5dd-389f-4c88-aff8-6e3e61f6d56d",
+			"id": "8252891f-8738-4ee0-ae82-f53b336e5eeb",
 			"key": "nowUtc",
 			"value": "",
 			"type": "string"

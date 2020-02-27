@@ -27,6 +27,12 @@
 									"let testsScope = data.testsScope;",
 									"//console.log(testsScope); ",
 									"",
+									"var contractNumber = data.contractNumber;",
+									"if (contractNumber){ ",
+									"    pm.environment.set(\"userId_security\",JSON.parse(data.contractNumber));",
+									"    console.log(\"dataFile/contractNumber: \" + contractNumber);",
+									"}",
+									"",
 									"switch (testsScope) {",
 									"    case \"Full\":",
 									"        var testSession = [",
@@ -6167,7 +6173,7 @@
 								"id": "9e77f489-363b-4a53-9c9f-58be8e9678c8",
 								"exec": [
 									"console.log(\"Test Token url is: \" + pm.environment.get(\"env_security_testToken\"));",
-									"console.log(\"Contract is: \" + pm.environment.get(\"userId_soba\"));",
+									"console.log(\"Contract is: \" + pm.environment.get(\"userId_security\"));",
 									"",
 									"// Set up pre-conditions with Chai Assertion library. https://www.chaijs.com/api/bdd/",
 									"/*",
@@ -6223,7 +6229,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"tenant_id\": {{tenantId_soba}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_soba}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_soba}}\",\r\n  \"authorities\": [\"DBAN_ADMIN\", \"DBAN_USER\"],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_soba}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",    \r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/assets/account.accountname.write\",\r\n    \"https://api.crealogix.com/assets/account.accountimage.write\",\r\n    \"https://api.crealogix.com/assets/cuac.readonly\",\r\n    \"https://api.crealogix.com/assets/portfolio.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\",\r\n \t\"https://api.crealogix.com/deeplink/domains\",\r\n    \"https://api.crealogix.com/deeplink/links\"\t\r\n  ],\r\n  \"loginName\": \"{{userId_soba}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+							"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [\"DBAN_ADMIN\", \"DBAN_USER\"],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_security}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",    \r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/assets/account.accountname.write\",\r\n    \"https://api.crealogix.com/assets/account.accountimage.write\",\r\n    \"https://api.crealogix.com/assets/cuac.readonly\",\r\n    \"https://api.crealogix.com/assets/portfolio.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\",\r\n \t\"https://api.crealogix.com/deeplink/domains\",\r\n    \"https://api.crealogix.com/deeplink/links\"\t\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
 						},
 						"url": {
 							"raw": "{{env_security_testToken}}",

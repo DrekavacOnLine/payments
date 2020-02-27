@@ -1,0 +1,41 @@
+[
+    {
+		"testsScope": "Core",
+        "envName": "MDB-MASTER-TESTK8S",
+		"contractNumber": "\"1000061501\"",
+        "paymentType": "\"ACCOUNT_TRANSFER\"",
+        "beneficiaryAccountNo": "\"CH4812312001000061501\"",
+        "debtorAccountNo": "\"CH4812312001000061501\"",
+        "debtorAccountName": "\"Freddy Hinz\"",
+        "debtorStreetName": "\"Schachenallee 31\"",
+        "debtorPostalCode": "\"5004\"",
+        "debtorTownName": "\"Aarau\"",
+        "creditorAccountNo": "\"CH6512312001268411501\"",
+		"creditorAccountNo2": "\"CH2112312001000061502\"",										
+		"creditorAccountNoUK": "\"12345678\"",
+		"creditorAccountNoSwisDomestic": "\"CH6512312001268411501\"",		
+        "creditorAccountNoBalanceAdjustment": "\"CH7412312001000061518\"",
+        "creditorAgentCountry": "\"CH\"",
+        "currencyCode": "\"CHF\"",
+        "endToEndId": "\"1304182224-0000002\"",
+		"postalAccountNo": "\"80-281-6\"",
+		"orangeAccountNo": "\"01-200015-9\"",
+		"accountAlias": "\"Test1320369\"",
+		"bic": "\"ARBHCH22XXX\"",
+				
+		"_____PAYMENTS_TEAM_VARIABLES": "Starts here ___________________________________",
+		
+		"creditorAccountNoSWIFT": "\"GB75NWBK56000379360009\"",
+		"creditorAgentBicSWIFT": "\"NWBKGB2LXXX\"",
+		"creditorAgentBankCodeSWIFT": "\"500\"",
+		"creditorAccountNoSEPA": "\"DE12500105170648489890\"",
+		"creditorAgentBicSEPA": "\"INGDDEFFXXX\"",
+		"structuredRemittanceRF": "\"RF64186397856221845279566\"",
+		"creditorAccountNoSWIFTBankAcco": "\"3122298751\"",
+		"creditorAgentName1SWIFT": "\"HANDELSBANKEN\"",
+		"creditorAgentName2SWIFT": "\"BANK\"",
+		"creditorAgentStreetSWIFT": "\"Kungstradgardsgatan\"",
+		"creditorAgentCitySWIFT": "\"10670 STOCKHOLM\"",
+		"creditorAgentCountrySWIFT": "\"SE\""
+    }
+]

@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "c57e4314-77bd-4a7f-96dd-ea28decfbe69",
-		"name": "MODULE: Brokerage",
+		"_postman_id": "9ef97a5d-769d-4292-a5de-a5ba560b6f77",
+		"name": "MODULE: Brokerage (actual)",
 		"description": "Brokerage API:\n\n- Brokerage order API\n- Brokerage security API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -99,7 +99,6 @@
 											"            \"List securities by ISIN (C43995802)\",",
 											"            \"List securities by title (C43995804)\",",
 											"            \"(WiP) List securities having limited permissions (C43995837)\",",
-											"            \"(WiP) Display security having limited permissions (C43995843)\",",
 											"            \"Display security by ID (C43995806)\",",
 											"            \"Display security by securityNumber (C43995801)\",",
 											"            \"Display security using bad url (C43995832)\",",
@@ -125,7 +124,6 @@
 											"            \"List securities by ISIN (C43995802)\",",
 											"            \"(WiP) List securities having limited permissions (C43995837)\",",
 											"            \"Display securities using bad version (C43995842)\",",
-											"            \"(WiP) Display security having limited permissions (C43995843)\",",
 											"            \"Display security by ID (C43995806)\",",
 											"            \"Display security by securityNumber (C43995801)\",",
 											"            \"Display security using bad url (C43995832)\",",
@@ -240,7 +238,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -293,7 +291,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -346,7 +344,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -382,63 +380,6 @@
 									"    ]; ",
 									"    pm.globals.set(\"_tr_getAuthTestTokenK8SNoAssetsPermissions\",\"[preCondition]\");",
 									"    pm.globals.set(\"_tr_getSecuritiesErrorForbidden\", testRailTestCases);",
-									"    pm.globals.set(\"_tr_getAuthTestTokenK8S\",\"[postCondition]\");",
-									"",
-									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "httpbin.org/uuid",
-							"host": [
-								"httpbin",
-								"org"
-							],
-							"path": [
-								"uuid"
-							]
-						},
-						"description": "PRODUCT-10214"
-					},
-					"response": []
-				},
-				{
-					"name": "(WiP) Display security having limited permissions (C43995843)",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
-								"exec": [
-									"//testRailTestCases = \"C43995821\"",
-									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
-									"eval(globals.testsExecuted)(testRailTestCases);",
-									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
-									"",
-									"var requestsToRun = [",
-									"        \"getSecurities\",",
-									"        \"getAuthTestTokenK8SNoAssetsPermissions\",",
-									"        \"getSecurityByIdErrorForbidden\",",
-									"        \"getAuthTestTokenK8S\"",
-									"    ]; ",
-									"    pm.globals.set(\"_tr_getSecurities\",\"[preCondition]\");",
-									"    pm.globals.set(\"_tr_getAuthTestTokenK8SNoAssetsPermissions\",\"[preCondition]\");",
-									"    pm.globals.set(\"_tr_getSecurityByIdErrorForbidden\", testRailTestCases);",
 									"    pm.globals.set(\"_tr_getAuthTestTokenK8S\",\"[postCondition]\");",
 									"",
 									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
@@ -511,7 +452,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -567,7 +508,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -618,7 +559,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -669,7 +610,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -711,7 +652,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -762,7 +703,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -813,7 +754,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -911,7 +852,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -962,7 +903,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1015,7 +956,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1069,7 +1010,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1122,7 +1063,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1175,7 +1116,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1228,7 +1169,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1279,7 +1220,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1321,7 +1262,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1364,7 +1305,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1416,7 +1357,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1469,7 +1410,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1522,7 +1463,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1573,7 +1514,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1630,7 +1571,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1685,7 +1626,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1742,7 +1683,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1795,7 +1736,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1846,7 +1787,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1881,6 +1822,9 @@
 									"        \"getOrders\",",
 									"        \"postCreateNewOrder\"",
 									"    ]; ",
+									"    pm.globals.set(\"_tr_getSecuritiesByISINNestle\",\"<preCondition>\");",
+									"    pm.globals.set(\"_tr_getListingBySecurityId\",\"<preCondition>\");",
+									"    pm.globals.set(\"_tr_getOrders\",\"<preCondition>\");",
 									"    pm.globals.set(\"_tr_postCreateNewOrder\",testRailTestCases);",
 									"",
 									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
@@ -1900,7 +1844,7 @@
 						}
 					],
 					"request": {
-						"method": "POST",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -1951,7 +1895,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -2002,7 +1946,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -2053,7 +1997,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "HEAD",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -2096,7 +2040,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "OPTIONS",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -2142,7 +2086,7 @@
 						}
 					],
 					"request": {
-						"method": "GET",
+						"method": "OPTIONS",
 						"header": [],
 						"url": {
 							"raw": "httpbin.org/uuid",
@@ -2174,7 +2118,7 @@
 									"script": {
 										"id": "1b6e57ce-adba-4bca-aa82-d1507198b5e1",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders is retrieved and response schema is validated\", function () {\r",
 											"\r",
@@ -2271,7 +2215,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderId is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -2349,7 +2293,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by AccountId is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -2434,7 +2378,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by custodyAccountId is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -2519,7 +2463,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by custodyAccountPositionId is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -2604,7 +2548,7 @@
 									"script": {
 										"id": "1dc1dfe6-3c57-4bf5-a586-7169dc8cb883",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderAction, orderLimitType and orderStatus is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -2722,7 +2666,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderActionBuy is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -2807,7 +2751,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderActionSell is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -2892,7 +2836,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderActionSell is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -2977,7 +2921,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderActionSell is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -3062,7 +3006,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by limitType AT_MARKET is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -3147,7 +3091,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by limitType LIMITED is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -3232,7 +3176,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by limitType STOP_LOSS is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -3317,7 +3261,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderStatus ENTERED is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -3402,7 +3346,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderStatus REJECTED is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -3487,7 +3431,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderStatus ACCEPTED is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -3572,7 +3516,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by orderStatus EXECUTED is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -3657,7 +3601,7 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by securityId is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -3742,7 +3686,7 @@
 									"script": {
 										"id": "856aa18b-4fbe-48fe-a84d-6a900006c4fd",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by startDate 2019-01-01 is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -3974,8 +3918,6 @@
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
 											"//eval(globals.commonTests)();\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Display order fails if bad url is used\", function () {\r",
 											"\r",
 											"    pm.test(\"Status 400 Bad Request is displayed\", function () {\r",
@@ -3986,8 +3928,7 @@
 											"        pm.response.to.not.be.withBody;\r",
 											"    });\r",
 											"\r",
-											"    pm.response.to.have.status(400) &&\r",
-											"    pm.response.to.not.be.withBody;\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([400]);\r",
 											"});\r",
 											"\r",
 											"eval(globals.sessionNavigate)();\r",
@@ -4052,7 +3993,7 @@
 									"script": {
 										"id": "f5bc5481-9a71-459f-a4b9-08e4b605cf9b",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \"New order has been created and order id is displayed\", function () {\r",
 											"    \r",
@@ -4127,7 +4068,7 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of securities is retrieved and response schema i validated\", function () {\r",
 											"\r",
@@ -4237,7 +4178,7 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of securities by ISIN is retrieved and response schema i validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -4338,7 +4279,7 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of securities by ISIN is retrieved and response schema i validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -4438,7 +4379,7 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of securities by ISIN is retrieved and response schema i validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -4540,7 +4481,6 @@
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
 											"//eval(globals.commonTests)();\r",
-											"eval(globals.sessionNavigate)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List securities fail if access token is generated without needed scope\", function () {\r",
 											"\r",
@@ -4562,6 +4502,7 @@
 											"    pm.expect(jsonData._messages[0].text).to.be.eql(\"Access Denied (Scope): Access is denied\");\r",
 											"});\r",
 											"\r",
+											"eval(globals.sessionNavigate)();\r",
 											"pm.globals.unset(\"_tr_\" + request.name);"
 										],
 										"type": "text/javascript"
@@ -4627,7 +4568,6 @@
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
 											"//eval(globals.commonTests)();\r",
-											"eval(globals.sessionNavigate)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Display securities fails if wrong version is provided in url\", function () {\r",
 											"\r",
@@ -4647,6 +4587,7 @@
 											"    pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
 											"});\r",
 											"\r",
+											"eval(globals.sessionNavigate)();\r",
 											"pm.globals.unset(\"_tr_\" + request.name);"
 										],
 										"type": "text/javascript"
@@ -4712,7 +4653,7 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Security by ID is retrieved and response schema i validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
@@ -4804,8 +4745,7 @@
 									"script": {
 										"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
 										"exec": [
-											"// Execute standard tests from PrS using eval()\r",
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Security is retrieved by securityNumber and response schema i validated\", function () {\r",
 											"\r",
@@ -4911,23 +4851,20 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"//eval(globals.commonTests)();\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Display security fails if bad url is used\", function () {\r",
 											"\r",
 											"    pm.test(\"Status 400 Bad Request is displayed\", function () {\r",
-											"        pm.response.to.have.status(400);\r",
+											"        pm.expect(pm.response.code).to.be.oneOf([400]);\r",
 											"    });\r",
 											"\r",
 											"    pm.test(\"Response is without body\", function () {\r",
 											"        pm.response.to.not.be.withBody;\r",
 											"    });\r",
 											"\r",
-											"    pm.response.to.have.status(400) &&\r",
-											"    pm.response.to.not.be.withBody;\r",
+											"    pm.expect(pm.response.code).to.be.oneOf([400]);\r",
 											"});\r",
 											"\r",
+											"eval(globals.sessionNavigate)();\r",
 											"pm.globals.unset(\"_tr_\" + request.name);"
 										],
 										"type": "text/javascript"
@@ -4994,9 +4931,6 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"//eval(globals.commonTests)();\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Display security fails if url is completely broken\", function () {\r",
 											"\r",
 											"    let jsonData = JSON.parse(responseBody);\r",
@@ -5015,6 +4949,7 @@
 											"    pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
 											"});\r",
 											"\r",
+											"eval(globals.sessionNavigate)();\r",
 											"pm.globals.unset(\"_tr_\" + request.name);"
 										],
 										"type": "text/javascript"
@@ -5080,7 +5015,6 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"eval(globals.sessionNavigate)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Display security fails if access token is generated without needed scope\", function () {\r",
 											"\r",
@@ -5102,6 +5036,7 @@
 											"    pm.expect(jsonData._messages[0].text).to.be.eql(\"Access Denied (Scope): Access is denied\");\r",
 											"});\r",
 											"\r",
+											"eval(globals.sessionNavigate)();\r",
 											"pm.globals.unset(\"_tr_\" + request.name);"
 										],
 										"type": "text/javascript"
@@ -5167,8 +5102,7 @@
 									"script": {
 										"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
 										"exec": [
-											"// Execute standard tests from PrS using eval()\r",
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"var jsonData = JSON.parse(responseBody);\r",
 											"    \r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Security types are retrieved and response schema is validated\", function () {\r",
@@ -5265,7 +5199,7 @@
 										"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
 										"exec": [
 											"// Execute standard tests from PrS using eval()\r",
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Security type is retrieved by its' ID and response schema is validated\", function () {\r",
 											"\r",
@@ -5362,7 +5296,7 @@
 										"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
 										"exec": [
 											"// Execute standard tests from PrS using eval()\r",
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Security is retrieved by security type ID and response schema is validated\", function () {\r",
 											"\r",
@@ -5457,7 +5391,7 @@
 									"script": {
 										"id": "590da4a5-4cbe-4116-bedc-ae2fda9b4dec",
 										"exec": [
-											"eval(globals.commonTests)();",
+											"//eval(globals.commonTests)();",
 											"var jsonData = JSON.parse(responseBody);",
 											"",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Listings are returned and all assertions passed\", function (){",
@@ -5544,8 +5478,6 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"//eval(globals.commonTests)();\r",
-											"eval(globals.sessionNavigate)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List listings fails if url is completely broken\", function () {\r",
 											"\r",
@@ -5565,6 +5497,7 @@
 											"    pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
 											"});\r",
 											"\r",
+											"eval(globals.sessionNavigate)();\r",
 											"pm.globals.unset(\"_tr_\" + request.name);"
 										],
 										"type": "text/javascript"
@@ -5643,8 +5576,7 @@
 											"        pm.response.to.not.be.withBody;",
 											"    });",
 											"",
-											"    pm.response.to.have.status(400) &&",
-											"    pm.response.to.not.be.withBody;   ",
+											"    pm.expect(pm.response.code).to.be.oneOf([400]);",
 											"",
 											"});",
 											"",
@@ -5710,7 +5642,6 @@
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
 											"//eval(globals.commonTests)();\r",
-											"eval(globals.sessionNavigate)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List listings fail if access token is generated without needed scope\", function () {\r",
 											"\r",
@@ -5730,6 +5661,7 @@
 											"    pm.expect(jsonData._messages[0].code).to.be.eql(\"ERROR_ACCESS_DENIED\");\r",
 											"});\r",
 											"\r",
+											"eval(globals.sessionNavigate)();\r",
 											"pm.globals.unset(\"_tr_\" + request.name);"
 										],
 										"type": "text/javascript"
@@ -5794,7 +5726,7 @@
 									"script": {
 										"id": "17b7e3b9-73f9-424c-bf53-aa31004f3747",
 										"exec": [
-											"eval(globals.commonTests)();",
+											"//eval(globals.commonTests)();",
 											"var jsonData = JSON.parse(responseBody);",
 											"",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Listings are returns and all assertions passed\", function (){",
@@ -5874,7 +5806,7 @@
 									"script": {
 										"id": "17b7e3b9-73f9-424c-bf53-aa31004f3747",
 										"exec": [
-											"eval(globals.commonTests)();",
+											"//eval(globals.commonTests)();",
 											"var jsonData = JSON.parse(responseBody);",
 											"",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Listings are returns for provided security ID and all assertions passed\", function (){",
@@ -5972,7 +5904,7 @@
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
 											"// Execute standard tests from PrS using eval()\r",
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of trading places is retrieved and response schema is validated\", function () {\r",
 											"\r",
@@ -6070,7 +6002,7 @@
 										"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
 										"exec": [
 											"// Execute standard tests from PrS using eval()\r",
-											"eval(globals.commonTests)();\r",
+											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Trading place is retrieved by tradingPlaceId and response schema is validated\", function () {\r",
 											"\r",
@@ -6451,6 +6383,63 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "(WiP) Display security having limited permissions (C43995843)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"//testRailTestCases = \"C43995821\"",
+									"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+									"eval(globals.testsExecuted)(testRailTestCases);",
+									"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+									"",
+									"var requestsToRun = [",
+									"        \"getSecurities\",",
+									"        \"getAuthTestTokenK8SNoAssetsPermissions\",",
+									"        \"getSecurityByIdErrorForbidden\",",
+									"        \"getAuthTestTokenK8S\"",
+									"    ]; ",
+									"    pm.globals.set(\"_tr_getSecurities\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getAuthTestTokenK8SNoAssetsPermissions\",\"[preCondition]\");",
+									"    pm.globals.set(\"_tr_getSecurityByIdErrorForbidden\", testRailTestCases);",
+									"    pm.globals.set(\"_tr_getAuthTestTokenK8S\",\"[postCondition]\");",
+									"",
+									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						},
+						"description": "PRODUCT-10214"
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -6675,7 +6664,7 @@
 						"exec": [
 							"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
 							"    pm.response.to.not.be.error;",
-							"    pm.response.to.be.withBody;",
+							"    //pm.response.to.be.withBody;",
 							"    pm.environment.set(\"access_token\", pm.response.text());",
 							"});",
 							"",
@@ -6705,7 +6694,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"tenant_id\": {{tenantId_soba}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_soba}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_soba}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_soba}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",    \r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/assets/account.accountname.write\",\r\n    \"https://api.crealogix.com/assets/account.accountimage.write\",\r\n    \"https://api.crealogix.com/assets/cuac.readonly\",\r\n    \"https://api.crealogix.com/assets/portfolio.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\"\r\n  ],\r\n  \"loginName\": \"{{userId_soba}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+					"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_security}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",    \r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/assets/account.accountname.write\",\r\n    \"https://api.crealogix.com/assets/account.accountimage.write\",\r\n    \"https://api.crealogix.com/assets/cuac.readonly\",\r\n    \"https://api.crealogix.com/assets/portfolio.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
 				},
 				"url": {
 					"raw": "{{env_security_testToken}}",
@@ -6751,7 +6740,7 @@
 						"exec": [
 							"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
 							"    pm.response.to.not.be.error;",
-							"    pm.response.to.be.withBody;",
+							"    //pm.response.to.be.withBody;",
 							"    pm.environment.set(\"access_token\", pm.response.text());",
 							"});",
 							"",
@@ -6823,7 +6812,7 @@
 						"exec": [
 							"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
 							"    pm.response.to.not.be.error;",
-							"    pm.response.to.be.withBody;",
+							"    //pm.response.to.be.withBody;",
 							"    pm.environment.set(\"access_token\", pm.response.text());",
 							"});",
 							"",
