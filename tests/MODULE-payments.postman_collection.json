@@ -293,10 +293,10 @@
 											"            \"Deliver SEPA payment (C34775338)\",",
 											"            \"Update SEPA payment (C36275415)\",",
 											"            \"Delete SEPA payment (C36240104)\",",
-											"            \"Create SEPA (standing order) payment (C53860900)\",",
-											"            \"Deliver SEPA (standing order) payment (C53860904)\",",
-											"            \"Update SEPA (standing order) payment (C53860903)\",",
-											"            \"Delete SEPA (standing order) payment (C53860905)\",",
+											"            //\"Create SEPA (standing order) payment (C53860900)\",",
+											"            //\"Deliver SEPA (standing order) payment (C53860904)\",",
+											"            //\"Update SEPA (standing order) payment (C53860903)\",",
+											"            //\"Delete SEPA (standing order) payment (C53860905)\",",
 											"            \"Create SWIFT payment (C36275411)\",",
 											"            \"Create SWIFT payment V2 (C52650414)\",",
 											"            \"Create SWIFT payment V3 (C52718222)\",",
@@ -307,26 +307,26 @@
 											"            \"Deliver Orange payment (C49915362)\",",
 											"            \"Update Orange payment (C48109272)\",",
 											"            \"Delete Orange payment (C49915363)\",",
-											"            \"Create Orange (standing order) payment (C49915384)\",",
-											"            \"Deliver Orange (standing order) payment (C49915385)\",",
-											"            \"Update Orange (standing order) payment (C49915387)\",",
-											"            \"Delete Orange (standing order) payment (C49915386)\",",
+											"            //\"Create Orange (standing order) payment (C49915384)\",",
+											"            //\"Deliver Orange (standing order) payment (C49915385)\",",
+											"            //\"Update Orange (standing order) payment (C49915387)\",",
+											"            //\"Delete Orange (standing order) payment (C49915386)\",",
 											"            \"Create Red payment (C51026510)\",",
 											"            \"Deliver Red payment (C51026511)\",",
 											"            \"Update Red payment (ToDo)\",",
 											"            \"Delete Red payment (ToDo)\",",
-											"            \"Create Red (standing order) payment (C52949280)\",",
-											"            \"Deliver Red (standing order) payment (C52992053)\",",
-											"            \"Update Red (standing order) payment (C52949281)\",",
-											"            \"Delete Red (standing order) payment (C52992055)\",",
+											"            //\"Create Red (standing order) payment (C52949280)\",",
+											"            //\"Deliver Red (standing order) payment (C52992053)\",",
+											"            //\"Update Red (standing order) payment (C52949281)\",",
+											"            //\"Delete Red (standing order) payment (C52992055)\",",
 											"            \"Create Swiss domestic payment (C45840620)\",",
 											"            \"Deliver Swiss domestic payment (C45989797)\",",
 											"            \"Update Swiss domestic payment (C45840627)\",",
 											"            \"Delete Swiss domestic payment (C45989799)\",",
-											"            \"Create Swiss domestic (standing order) payment (C45989795)\",",
-											"            \"Deliver Swiss domestic (standing order) payment (C45989798)\",",
-											"            \"Update Swiss domestic (standing order) payment (C45989796)\",",
-											"            \"Delete Swiss domestic (standing order) payment (C45989800)\",",
+											"            //\"Create Swiss domestic (standing order) payment (C45989795)\",",
+											"            //\"Deliver Swiss domestic (standing order) payment (C45989798)\",",
+											"            //\"Update Swiss domestic (standing order) payment (C45989796)\",",
+											"            //\"Delete Swiss domestic (standing order) payment (C45989800)\",",
 											"            \"Create balance adjustment payment (C47415764)\",",
 											"            \"Deliver balance adjustment payment (C47473069)\",",
 											"            \"Update balance adjustment payment (C47473068)\",",
@@ -335,18 +335,18 @@
 											"            \"Deliver QR-bill payment (C50880198)\",",
 											"            \"Update QR-bill payment (C50483885)\",",
 											"            \"Delete QR-bill payment (C51051785)\",",
-											"            \"Create QR-bill (standing order) payment (C50483887)\",",
-											"            \"Deliver QR-bill (standing order) payment (C51051788)\",",
-											"            \"Update QR-bill (standing order) payment (C50483889)\",",
-											"            \"Delete QR-bill (standing order) payment (C51051791)\",",
+											"            //\"Create QR-bill (standing order) payment (C50483887)\",",
+											"            //\"Deliver QR-bill (standing order) payment (C51051788)\",",
+											"            //\"Update QR-bill (standing order) payment (C50483889)\",",
+											"            //\"Delete QR-bill (standing order) payment (C51051791)\",",
 											"            \"Create account transfer payment (C41939554)\",",
 											"            \"Deliver account transfer payment (C41939552)\",",
 											"            \"Update account transfer payment (C41939560)\",",
 											"            \"Delete account transfer payment (C41939557)\",",
-											"            \"Create account transfer (standing order) payment (C53388199)\",",
-											"            \"Deliver account transfer (standing order) payment (C53388200)\",",
-											"            \"Update account transfer (standing order) payment (C53388201)\",",
-											"            \"Delete account transfer (account transfer) payment (C53388202)\",",
+											"            //\"Create account transfer (standing order) payment (C53388199)\",",
+											"            //\"Deliver account transfer (standing order) payment (C53388200)\",",
+											"            //\"Update account transfer (standing order) payment (C53388201)\",",
+											"            //\"Delete account transfer (account transfer) payment (C53388202)\",",
 											"            \"Search Payment Returns Unique Pages (C49445322)\",",
 											"            \"Search Payment calculates payments count regardles page and size parameters value (C49577618)\",",
 											"            \"Search Payment number of returned payments matches to “totalElements” property value (ToDo)\",",
@@ -4945,58 +4945,58 @@
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" SEPA (standing order) payment is created and assertions are passed\", function () {\r",
 															"\r",
 															"  //Instructed amount is correct\r",
-															"let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
-															"let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
-															"//State is correct\r",
-															"let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
-															"//Creditor agent is correct\r",
-															"let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent.bic;\r",
-															"let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent.bic;\r",
-															"//Debtor address is correct\r",
-															"let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
-															"let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
-															"//Debtor account is correct\r",
-															"let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
-															"let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo; \r",
-															"//Creditor account is correct\r",
-															"let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
-															"let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
-															"//Structured remittance information is correct\r",
-															"let requestBodyStructuredRemittance = JSON.parse(request.data).paymentInformation.remittanceInformation.structured;\r",
-															"let responseBodyStructuredRemittance = JSON.parse(responseBody).paymentInformation.remittanceInformation.structured; \r",
-															"//Standing order info is correct\r",
-															"let requestBodyStandingOrder = JSON.parse(request.data).standingOrder;\r",
-															"let responseBodyStandingOrder = JSON.parse(responseBody).standingOrder; \r",
-															"\r",
-															"pm.test(\"Instructed amount is correct\", () => {\r",
-															"  pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
-															"});\r",
-															"\r",
-															"pm.test(\"Creditor agent is correct\", () => {\r",
-															"  pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
-															"});\r",
-															"\r",
-															"pm.test(\"Debtor address is correct\", () => {\r",
-															"  pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName);\r",
-															"  pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
-															"  pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
-															"});\r",
-															"\r",
-															"pm.test(\"Debtor account is correct\", () => {\r",
-															"  pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
-															"});\r",
-															"\r",
-															"pm.test(\"Creditor account is correct\", () => {\r",
-															"  pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
-															"});\r",
-															"\r",
-															"pm.test(\"Structured remittance information is correct\", () => {\r",
-															"  pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance);\r",
-															"});\r",
-															"\r",
-															"pm.test(\"Standing order info is correct\", () => {\r",
-															"  pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-															"});\r",
+															"    let requestBodyInstructedAmount = JSON.parse(request.data).paymentInformation.instructedAmount;\r",
+															"    let responseBodyInstructedAmount = JSON.parse(responseBody).paymentInformation.instructedAmount;\r",
+															"    //State is correct\r",
+															"    let jsonDataResponsePaymentState = pm.response.json().paymentState;\r",
+															"    //Creditor agent is correct\r",
+															"    let requestBodyCreditorAgent = JSON.parse(request.data).paymentInformation.creditorAgent.bic;\r",
+															"    let responseBodyCreditorAgent = JSON.parse(responseBody).paymentInformation.creditorAgent.bic;\r",
+															"    //Debtor address is correct\r",
+															"    let requestBodyDebtorAddress = JSON.parse(request.data).paymentInformation.debtor.address;\r",
+															"    let responseBodyDebtorAddress = JSON.parse(responseBody).paymentInformation.debtor.address;\r",
+															"    //Debtor account is correct\r",
+															"    let requestBodyDebtorAccountNo = JSON.parse(request.data).paymentInformation.debtorAccountNo;\r",
+															"    let responseBodyDebtorAccountNo = JSON.parse(responseBody).paymentInformation.debtorAccountNo; \r",
+															"    //Creditor account is correct\r",
+															"    let requestBodyCreditorAccountNo = JSON.parse(request.data).paymentInformation.creditorAccountNo;\r",
+															"    let responseBodyCreditorAccountNo = JSON.parse(responseBody).paymentInformation.creditorAccountNo;   \r",
+															"    //Structured remittance information is correct\r",
+															"    let requestBodyStructuredRemittance = JSON.parse(request.data).paymentInformation.remittanceInformation.structured;\r",
+															"    let responseBodyStructuredRemittance = JSON.parse(responseBody).paymentInformation.remittanceInformation.structured; \r",
+															"    //Standing order info is correct\r",
+															"    let requestBodyStandingOrder = JSON.parse(request.data).standingOrder;\r",
+															"    let responseBodyStandingOrder = JSON.parse(responseBody).standingOrder; \r",
+															"    \r",
+															"    pm.test(\"Instructed amount is correct\", () => {\r",
+															"      pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount);\r",
+															"    });\r",
+															"    \r",
+															"    pm.test(\"Creditor agent is correct\", () => {\r",
+															"      pm.expect(responseBodyCreditorAgent).to.eql(requestBodyCreditorAgent);\r",
+															"    });\r",
+															"    \r",
+															"    pm.test(\"Debtor address is correct\", () => {\r",
+															"      pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName);\r",
+															"      pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode);\r",
+															"      pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName);\r",
+															"    });\r",
+															"    \r",
+															"    pm.test(\"Debtor account is correct\", () => {\r",
+															"      pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo);\r",
+															"    });\r",
+															"    \r",
+															"    pm.test(\"Creditor account is correct\", () => {\r",
+															"      pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
+															"    });\r",
+															"    \r",
+															"    pm.test(\"Structured remittance information is correct\", () => {\r",
+															"      pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance);\r",
+															"    });\r",
+															"    \r",
+															"    pm.test(\"Standing order info is correct\", () => {\r",
+															"      pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+															"    });\r",
 															"\r",
 															"    // check if payment is created\r",
 															"    if (pm.response.to.have.status(201)){\r",
@@ -5009,30 +5009,24 @@
 															"        console.log(\"Failed to create SEPA (standing order) payment\");\r",
 															"    }\r",
 															"\r",
-															"//Determine if assertion passed at whole\r",
-															"pm.response.to.have.status(201)\r",
-															"&& pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
-															"&& pm.expect(responseBodyCreditorAgent.bic).to.eql(requestBodyCreditorAgent.bic) \r",
-															"&& pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName) \r",
-															"&& pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode) \r",
-															"&& pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName) \r",
-															"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
-															"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
-															"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance)\r",
-															"&& pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder)\r",
+															"    //Determine if assertion passed at whole\r",
+															"    pm.response.to.have.status(201)\r",
+															"    && pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
+															"    && pm.expect(responseBodyCreditorAgent.bic).to.eql(requestBodyCreditorAgent.bic) \r",
+															"    && pm.expect(responseBodyDebtorAddress.streetName).to.eql(requestBodyDebtorAddress.streetName) \r",
+															"    && pm.expect(responseBodyDebtorAddress.postalCode).to.eql(requestBodyDebtorAddress.postalCode) \r",
+															"    && pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName) \r",
+															"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
+															"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
+															"    && pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance)\r",
+															"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
 															"});\r",
 															"\r",
 															"// Store the used parameters (test relevant)\r",
 															"pm.environment.set(\"instructedAmount\", (JSON.parse(request.data).paymentInformation.instructedAmount));\r",
 															"let response = pm.response.json().paymentInformation.standingOrder,\r",
 															"    savedData = JSON.stringify(response);\r",
-															"pm.environment.set(\"standingOrder\", savedData);\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"pm.environment.set(\"standingOrder\", savedData);"
 														],
 														"type": "text/javascript"
 													}
@@ -5069,7 +5063,7 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 9.99\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": {{unstructured}},\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": {{instructionIdentification}},\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": {{name}},\r\n\"address\": {\r\n\"adrLine1\": {{adrLine1}},\r\n\"adrLine2\": {{adrLine2}},\r\n\"streetName\": {{streetName}},\r\n\"buildingNm\": {{buildingNm}},\r\n\"postalCode\": {{postalCode}},\r\n\"townName\": {{townName}},\r\n\"country\": {{country}}\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}},\r\n\"standingOrder\": {\r\n\"firstOn\": {{PrS:futureWorkingDay}},\r\n\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\"beforeHoliday\": true,\r\n\"interval\": \"WEEKLY\",\r\n\"active\": true,\r\n\"ultimo\": false\t\t\r\n}\r\n}\r\n}"
+													"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"paymentInformation\": {\r\n\t\t\"instructedAmount\": {\r\n\t\t\t\"currency\": {\r\n\t\t\t\t\"code\": \"EUR\"\r\n\t\t\t},\r\n\t\t\t\"value\": 9.99\r\n\t\t},\r\n\t\t\"remittanceInformation\": {\r\n\t\t\t\"unstructured\": {{unstructured}},\r\n\t\t\t\"structured\": {{structuredRemittanceRF}}\r\n\t\t},\r\n\t\t\"instructionIdentification\": {{instructionIdentification}},\r\n\t\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\t\"instructionPriority\": \"NORMAL\",\r\n\t\t\"creditor\": {\r\n\t\t\t\"name\": {{name}},\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\t\"townName\": {{townName}},\r\n\t\t\t\t\"country\": {{country}}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\t\t\"creditorAgent\": {\r\n\t\t\t\"bic\": {{creditorAgentBicSEPA}}\r\n\t\t},\r\n\t\t\"debtor\": {\r\n\t\t\t\"name\": {{debtorAccountName}},\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"streetName\": {{debtorStreetName}},\r\n\t\t\t\t\"postalCode\": {{debtorPostalCode}},\r\n\t\t\t\t\"townName\": {{debtorTownName}}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"debtorAccountNo\":  {{debtorAccountNo}},\r\n\t\t\"standingOrder\": {\r\n\t\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\t\"beforeHoliday\": true,\r\n\t\t\t\"interval\": \"WEEKLY\",\r\n\t\t\t\"active\": true,\r\n\t\t\t\"ultimo\": false\t\t\r\n\t\t}\r\n\t}\r\n}"
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer",
@@ -5168,14 +5162,8 @@
 															"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
 															"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
 															"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance)\r",
-															"&& pm.expect(responseBodyStandingOrder).to.eql(JSON.parse(pm.environment.get(\"standingOrder\")))\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"&& pm.expect(responseBodyStandingOrder).to.eql(JSON.parse(pm.environment.get(\"standingOrder\")));\r",
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -5317,14 +5305,8 @@
 															"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
 															"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
 															"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance)\r",
-															"&& pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder)\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"&& pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -5409,13 +5391,7 @@
 															"}\r",
 															"else {\r",
 															"    console.log(\"Failed to delete SEPA (standing order) payment with ID:\" + pm.globals.get(\"newPaymentSepaID\"));\r",
-															"}\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -5581,18 +5557,12 @@
 													"&& pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName) \r",
 													"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
 													"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
-													"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance)\r",
+													"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance);\r",
 													"});\r",
 													"\r",
 													"// Store the used parameters (test relevant)\r",
 													"pm.environment.set(\"instructedAmount\", (JSON.parse(request.data).paymentInformation.instructedAmount));\r",
-													"pm.environment.set(\"requestedExecutionDate\", (JSON.parse(request.data).paymentInformation.requestedExecutionDate));\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"pm.environment.set(\"requestedExecutionDate\", (JSON.parse(request.data).paymentInformation.requestedExecutionDate));"
 												],
 												"type": "text/javascript"
 											}
@@ -5619,7 +5589,7 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\"storeOnly\": false,\r\n\"locked\": false,\r\n\"categoryPurposeCode\": \"SALA\",\r\n\"paymentInformation\": {\r\n\"endToEndId\": {{endToEndId}},\r\n\"instructedAmount\": {\r\n\"currency\": {\r\n\"code\": \"EUR\"\r\n},\r\n\"value\": 312.00\r\n},\r\n\"remittanceInformation\": {\r\n\"unstructured\": {{unstructured}},\r\n\"structured\": {{structuredRemittanceRF}}\r\n},\r\n\"instructionIdentification\": {{instructionIdentification}},\r\n\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\"instructionPriority\": \"NORMAL\",\r\n\"creditor\": {\r\n\"name\": {{name}},\r\n\"address\": {\r\n\"adrLine1\": {{adrLine1}},\r\n\"adrLine2\": {{adrLine2}},\r\n\"streetName\": {{streetName}},\r\n\"buildingNm\": {{buildingNm}},\r\n\"postalCode\": {{postalCode}},\r\n\"townName\": {{townName}},\r\n\"country\": {{country}}\r\n}\r\n},\r\n\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\"creditorAgent\": {\r\n\"bic\": {{creditorAgentBicSEPA}}\r\n},\r\n\"debtor\": {\r\n\"name\": {{debtorAccountName}},\r\n\"address\": {\r\n\"streetName\": {{debtorStreetName}},\r\n\"postalCode\": {{debtorPostalCode}},\r\n\"townName\": {{debtorTownName}}\r\n}\r\n},\r\n\"debtorAccountNo\":  {{debtorAccountNo}}\r\n}\r\n}"
+											"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"paymentInformation\": {\r\n\t\t\"endToEndId\": {{endToEndId}},\r\n\t\t\"instructedAmount\": {\r\n\t\t\t\"currency\": {\r\n\t\t\t\t\"code\": \"EUR\"\r\n\t\t\t},\r\n\t\t\t\"value\": 312.00\r\n\t\t},\r\n\t\t\"remittanceInformation\": {\r\n\t\t\t\"unstructured\": {{unstructured}},\r\n\t\t\t\"structured\": {{structuredRemittanceRF}}\r\n\t\t},\r\n\t\t\"instructionIdentification\": {{instructionIdentification}},\r\n\t\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\t\"instructionPriority\": \"NORMAL\",\r\n\t\t\"creditor\": {\r\n\t\t\t\"name\": {{name}},\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\t\"townName\": {{townName}},\r\n\t\t\t\t\"country\": {{country}}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\t\t\"creditorAgent\": {\r\n\t\t\t\"bic\": {{creditorAgentBicSEPA}}\r\n\t\t},\r\n\t\t\"debtor\": {\r\n\t\t\t\"name\": {{debtorAccountName}},\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"streetName\": {{debtorStreetName}},\r\n\t\t\t\t\"postalCode\": {{debtorPostalCode}},\r\n\t\t\t\t\"townName\": {{debtorTownName}}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"debtorAccountNo\":  {{debtorAccountNo}}\r\n\t}\r\n}"
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer",
@@ -5728,14 +5698,8 @@
 													"&& pm.expect(responseBodyDebtorAddress.townName).to.eql(JSON.parse(pm.environment.get(\"debtorTownName\")))\r",
 													"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
 													"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
-													"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance)\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance);\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -5866,14 +5830,8 @@
 													"&& pm.expect(responseBodyDebtorAddress.townName).to.eql(requestBodyDebtorAddress.townName) \r",
 													"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
 													"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
-													"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance)\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"&& pm.expect(responseBodyStructuredRemittance).to.eql(requestBodyStructuredRemittance);\r",
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -5958,13 +5916,7 @@
 													"}\r",
 													"else {\r",
 													"    console.log(\"Failed to delete SEPA payment with ID: \" + pm.globals.get(\"newPaymentSepaID\"));\r",
-													"}\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"}"
 												],
 												"type": "text/javascript"
 											}
@@ -6126,13 +6078,7 @@
 													"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
 													"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
 													"&& pm.expect(jsonDataResponseChargeBearer).to.eql(\"SHAR\");\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -6280,13 +6226,7 @@
 													"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
 													"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
 													"&& pm.expect(jsonDataResponseChargeBearer).to.eql(\"SHAR\");\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -6440,13 +6380,7 @@
 													"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
 													"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo) \r",
 													"&& pm.expect(jsonDataResponseChargeBearer).to.eql(\"SHAR\");\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -6556,13 +6490,7 @@
 													"    && pm.expect(jsonDataDebtorAccount).to.eql(JSON.parse(pm.environment.get(\"debtorAccountNo\")))\r",
 													"    && pm.expect(jsonResponseCreditorAgent).to.eql(JSON.parse(pm.environment.get(\"creditorAgentBicSWIFT\")))\r",
 													"    && pm.expect(pm.response.text()).to.include(JSON.parse(pm.environment.get(\"debtorAccountName\")));\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -6698,13 +6626,7 @@
 													"&& pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
 													"&& pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo)\r",
 													"&& pm.expect(requestBodyChargeBearer).to.eql(responseBodyChargeBearer);\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -6788,13 +6710,7 @@
 													"else {\r",
 													"    console.log(\"Failed to delete payment with ID:\" + pm.globals.get(\"newPaymentSwiftID\"));\r",
 													"    pm.globals.set(\"newPaymentSwiftID\", \"ERROR!\");\r",
-													"}\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"}"
 												],
 												"type": "text/javascript"
 											}
@@ -6929,13 +6845,7 @@
 																	"    && pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode)\r",
 																	"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)\r",
 																	"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-																	"});\r",
-																	"\r",
-																	"// Session navigate from PrS using eval()\r",
-																	"eval(globals.sessionNavigate)();\r",
-																	"\r",
-																	"// Reset reference to TR test cases\r",
-																	"pm.globals.unset(\"_tr_\" + request.name);"
+																	"});"
 																],
 																"type": "text/javascript"
 															}
@@ -7055,13 +6965,7 @@
 																	"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode)\r",
 																	"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)\r",
 																	"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-																	"});\r",
-																	"\r",
-																	"// Session navigate from PrS using eval()\r",
-																	"eval(globals.sessionNavigate)();\r",
-																	"\r",
-																	"// Reset reference to TR test cases\r",
-																	"pm.globals.unset(\"_tr_\" + request.name);"
+																	"});"
 																],
 																"type": "text/javascript"
 															}
@@ -7185,13 +7089,7 @@
 																	"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode)\r",
 																	"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)\r",
 																	"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);    \r",
-																	"});\r",
-																	"\r",
-																	"// Session navigate from PrS using eval()\r",
-																	"eval(globals.sessionNavigate)();\r",
-																	"\r",
-																	"// Reset reference to TR test cases\r",
-																	"pm.globals.unset(\"_tr_\" + request.name);"
+																	"});"
 																],
 																"type": "text/javascript"
 															}
@@ -7277,13 +7175,7 @@
 																	"}\r",
 																	"else {\r",
 																	"    console.log(\"Failed to delete Orange (standing order) payment with ID:\" + pm.globals.get(\"newPaymentOrangeID\"));\r",
-																	"}\r",
-																	"\r",
-																	"// Session navigate from PrS using eval()\r",
-																	"eval(globals.sessionNavigate)();\r",
-																	"\r",
-																	"// Reset reference to TR test cases\r",
-																	"pm.globals.unset(\"_tr_\" + request.name);"
+																	"}"
 																],
 																"type": "text/javascript"
 															}
@@ -7410,13 +7302,7 @@
 															"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
 															"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)    \r",
 															"    && pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -7528,13 +7414,7 @@
 															"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
 															"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)        \r",
 															"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -7650,13 +7530,7 @@
 															"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
 															"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)        \r",
 															"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -7741,13 +7615,7 @@
 															"}\r",
 															"else {\r",
 															"    console.log(\"Failed to delete Orange payment with ID:\" + pm.globals.get(\"newPaymentOrangeID\"));\r",
-															"}\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -7891,13 +7759,7 @@
 																	"    && pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode)\r",
 																	"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)\r",
 																	"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-																	"});\r",
-																	"\r",
-																	"// Session navigate from PrS using eval()\r",
-																	"eval(globals.sessionNavigate)();\r",
-																	"\r",
-																	"// Reset reference to TR test cases\r",
-																	"pm.globals.unset(\"_tr_\" + request.name);"
+																	"});"
 																],
 																"type": "text/javascript"
 															}
@@ -8023,13 +7885,7 @@
 																	"    && pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode)\r",
 																	"   && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)\r",
 																	"   && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-																	"});\r",
-																	"\r",
-																	"// Session navigate from PrS using eval()\r",
-																	"eval(globals.sessionNavigate)();\r",
-																	"\r",
-																	"// Reset reference to TR test cases\r",
-																	"pm.globals.unset(\"_tr_\" + request.name);"
+																	"});"
 																],
 																"type": "text/javascript"
 															}
@@ -8158,14 +8014,8 @@
 																	"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
 																	"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)\r",
 																	"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder)\r",
-																	"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode)\r",
-																	"});\r",
-																	"\r",
-																	"// Session navigate from PrS using eval()\r",
-																	"eval(globals.sessionNavigate)();\r",
-																	"\r",
-																	"// Reset reference to TR test cases\r",
-																	"pm.globals.unset(\"_tr_\" + request.name);"
+																	"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode);\r",
+																	"});"
 																],
 																"type": "text/javascript"
 															}
@@ -8251,13 +8101,7 @@
 																	"}\r",
 																	"else {\r",
 																	"    console.log(\"Failed to delete Red (standing order) payment with ID:\" + pm.globals.get(\"newPaymentRedID\"));\r",
-																	"}\r",
-																	"\r",
-																	"// Session navigate from PrS using eval()\r",
-																	"eval(globals.sessionNavigate)();\r",
-																	"\r",
-																	"// Reset reference to TR test cases\r",
-																	"pm.globals.unset(\"_tr_\" + request.name);"
+																	"}"
 																],
 																"type": "text/javascript"
 															}
@@ -8393,13 +8237,7 @@
 															"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
 															"    && pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode)\r",
 															"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -8513,13 +8351,7 @@
 															"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
 															"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode)\r",
 															"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -8629,13 +8461,7 @@
 															"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
 															"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
 															"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -8720,13 +8546,7 @@
 															"}\r",
 															"else {\r",
 															"    console.log(\"Failed to delete Red payment with ID:\" + pm.globals.get(\"newPaymentRedID\"));\r",
-															"}\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -8866,13 +8686,7 @@
 																	"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo)\r",
 																	"    && pm.expect(responseBodyChargesBearer).to.eql(\"SHAR\")\r",
 																	"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-																	"});\r",
-																	"\r",
-																	"// Session navigate from PrS using eval()\r",
-																	"eval(globals.sessionNavigate)();\r",
-																	"\r",
-																	"// Reset reference to TR test cases\r",
-																	"pm.globals.unset(\"_tr_\" + request.name);"
+																	"});"
 																],
 																"type": "text/javascript"
 															}
@@ -8984,13 +8798,7 @@
 																	"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo)\r",
 																	"    && pm.expect(responseBodyChargesBearer).to.eql(\"SHAR\")\r",
 																	"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-																	"});\r",
-																	"\r",
-																	"// Session navigate from PrS using eval()\r",
-																	"eval(globals.sessionNavigate)();\r",
-																	"\r",
-																	"// Reset reference to TR test cases\r",
-																	"pm.globals.unset(\"_tr_\" + request.name);"
+																	"});"
 																],
 																"type": "text/javascript"
 															}
@@ -9121,13 +8929,7 @@
 																	"    && pm.expect(responseBodyDebitNote).to.eql(requestBodyDebitNote)\r",
 																	"    && pm.expect(responseBodyChargesBearer).to.eql(\"SHAR\")\r",
 																	"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-																	"});\r",
-																	"\r",
-																	"// Session navigate from PrS using eval()\r",
-																	"eval(globals.sessionNavigate)();\r",
-																	"\r",
-																	"// Reset reference to TR test cases\r",
-																	"pm.globals.unset(\"_tr_\" + request.name);"
+																	"});"
 																],
 																"type": "text/javascript"
 															}
@@ -9213,13 +9015,7 @@
 																	"}\r",
 																	"else {\r",
 																	"    console.log(\"Failed to delete Swiss domestic (standing order) payment with ID:\" + pm.globals.get(\"newPaymentSwissDomesticID\"));\r",
-																	"}\r",
-																	"\r",
-																	"// Session navigate from PrS using eval()\r",
-																	"eval(globals.sessionNavigate)();\r",
-																	"\r",
-																	"// Reset reference to TR test cases\r",
-																	"pm.globals.unset(\"_tr_\" + request.name);"
+																	"}"
 																],
 																"type": "text/javascript"
 															}
@@ -9353,13 +9149,7 @@
 															"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo)\r",
 															"    && pm.expect(responseBodyChargesBearer).to.eql(requestBodyChargesBearer)\r",
 															"    && pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -9472,13 +9262,7 @@
 															"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo)\r",
 															"    && pm.expect(responseBodyChargesBearer).to.eql(requestBodyChargesBearer)\r",
 															"    && pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -9610,13 +9394,7 @@
 															"    && pm.expect(responseBodyDebitNote).to.eql(requestBodyDebitNote)\r",
 															"    && pm.expect(responseBodyChargesBearer).to.eql(requestBodyChargesBearer)\r",
 															"    && pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -9701,13 +9479,7 @@
 															"}\r",
 															"else {\r",
 															"    console.log(\"Failed to delete Swiss domestic payment with ID:\" + pm.globals.get(\"newPaymentSwissDomesticID\"));\r",
-															"}\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -9795,7 +9567,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" UK (standing order) payment is created and assertions are passed\", function () {\r",
 															"\r",
@@ -9876,13 +9648,7 @@
 															"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
 															"    && pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode)\r",
 															"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -9952,7 +9718,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" UK (standing order) payment is retrieved and assertions are passed\", function () {\r",
 															"\r",
@@ -10013,13 +9779,7 @@
 															"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo)\r",
 															"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode)\r",
 															"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -10088,7 +9848,7 @@
 														"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 														"exec": [
 															"// Execute standard tests from PrS using eval()\r",
-															"eval(globals.commonTests)();\r",
+															"//eval(globals.commonTests)();\r",
 															"\r",
 															"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" UK (standing order) payment is created and assertions are passed\", function () {\r",
 															"\r",
@@ -10150,13 +9910,7 @@
 															"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo)\r",
 															"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
 															"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -10241,13 +9995,7 @@
 															"}\r",
 															"else {\r",
 															"    console.log(\"Failed to delete UK (standing order) payment with ID:\" + pm.globals.get(\"newPaymentUkID\"));\r",
-															"}\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -10324,7 +10072,7 @@
 												"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" UK payment is created and assertions are passed\", function () {\r",
 													"\r",
@@ -10396,13 +10144,7 @@
 													"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
 													"    && pm.expect(responseBodyCategoryPurposeCode).to.eql(requestBodyCategoryPurposeCode)\r",
 													"    && pm.expect(responseBodyRemittanceInfo).to.eql(requestBodyRemittanceInfo);\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -10472,7 +10214,7 @@
 												"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" UK payment is retrieved and assertions are passed\", function () {\r",
 													"\r",
@@ -10528,13 +10270,7 @@
 													"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
 													"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode)\r",
 													"    && pm.expect(responseBodyRemittanceInfo).to.eql(requestBodyRemittanceInfo);\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -10603,7 +10339,7 @@
 												"id": "380b3871-2a51-43bf-a0a6-e3c32104f2e9",
 												"exec": [
 													"// Execute standard tests from PrS using eval()\r",
-													"eval(globals.commonTests)();\r",
+													"//eval(globals.commonTests)();\r",
 													"\r",
 													"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" UK payment is created and assertions are passed\", function () {\r",
 													"\r",
@@ -10657,13 +10393,7 @@
 													"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
 													"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
 													"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode);\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -10747,13 +10477,7 @@
 													"}\r",
 													"else {\r",
 													"    console.log(\"Failed to delete UK payment with ID:\" + pm.globals.get(\"newPaymentUkID\"));\r",
-													"}\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"}"
 												],
 												"type": "text/javascript"
 											}
@@ -10902,13 +10626,7 @@
 													"    && pm.expect(responseBodyTypeOfAmount).to.eql(requestBodyTypeOfAmount)\r",
 													"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
 													"    && pm.expect(responseBodyCreditorAccountNo).to.eql(requestBodyCreditorAccountNo);\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -11024,13 +10742,7 @@
 													"    && pm.expect(responseBodyTypeOfTransfer).to.eql(requestBodyTypeOfTransfer)\r",
 													"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
 													"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode);\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -11154,13 +10866,7 @@
 													"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
 													"    && pm.expect(responseBodyPostalAccountNo).to.eql(requestBodyPostalAccountNo)\r",
 													"    && pm.expect(responseBodyResponseCategoryPurposeCode).to.eql(requestBodyResponseCategoryPurposeCode);\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -11245,13 +10951,7 @@
 													"}\r",
 													"else {\r",
 													"    console.log(\"Failed to delete balance adjustment payment with ID:\" + pm.globals.get(\"newPaymentBalanceAdjustmentID\"));\r",
-													"}\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"}"
 												],
 												"type": "text/javascript"
 											}
@@ -11409,13 +11109,7 @@
 															"    && pm.expect(jsonDataResponseCategoryPurposeCode).to.eql(\"SALA\")\r",
 															"    && pm.expect(responseBodyUltimateDebtor).to.eql(requestBodyUltimateDebtor)\r",
 															"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -11527,13 +11221,7 @@
 															"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
 															"    && pm.expect(jsonDataResponseCategoryPurposeCode).to.eql(\"SALA\")\r",
 															"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -11662,13 +11350,7 @@
 															"    && pm.expect(jsonDataResponseCategoryPurposeCode).to.eql(\"SALA\")\r",
 															"    && pm.expect(responseBodyUltimateDebtor).to.eql(requestBodyUltimateDebtor)\r",
 															"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -11754,13 +11436,7 @@
 															"}\r",
 															"else {\r",
 															"    console.log(\"Failed to delete QR-bill (standing order) payment with ID:\" + pm.globals.get(\"newQrBillPaymentID\"));\r",
-															"}\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -11911,13 +11587,7 @@
 													"    && pm.expect(responseBodyExecutionDate).to.eql(requestBodyExecutionDate) \r",
 													"    && pm.expect(jsonDataResponseCategoryPurposeCode).to.eql(\"SALA\")\r",
 													"    && pm.expect(responseBodyUltimateDebtor).to.eql(requestBodyUltimateDebtor);\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -12021,13 +11691,7 @@
 													"    && pm.expect(responseBodyInstructedAmount).to.eql(requestBodyInstructedAmount) \r",
 													"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
 													"    && pm.expect(jsonDataResponseCategoryPurposeCode).to.eql(\"SALA\");\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -12148,13 +11812,7 @@
 													"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo) \r",
 													"    && pm.expect(jsonDataResponseCategoryPurposeCode).to.eql(\"SALA\")\r",
 													"    && pm.expect(responseBodyUltimateDebtor).to.eql(requestBodyUltimateDebtor);\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -12239,13 +11897,7 @@
 													"}\r",
 													"else {\r",
 													"    console.log(\"Failed to delete QR-bill payment with ID:\" + pm.globals.get(\"newQrBillPaymentID\"));\r",
-													"}\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"}"
 												],
 												"type": "text/javascript"
 											}
@@ -12390,13 +12042,7 @@
 															"    && pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2)\r",
 															"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)\r",
 															"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -12515,13 +12161,7 @@
 															"    && pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2)\r",
 															"    && pm.expect(responseBodyRemittanceInformation.unstructured).to.eql(requestBodyRemittanceInformation.unstructured)\r",
 															"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -12641,13 +12281,7 @@
 															"    && pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2)\r",
 															"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation)\r",
 															"    && pm.expect(responseBodyStandingOrder).to.eql(requestBodyStandingOrder);\r",
-															"});\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"});"
 														],
 														"type": "text/javascript"
 													}
@@ -12737,13 +12371,7 @@
 															"}\r",
 															"else {\r",
 															"    console.log(\"Failed to delete account transfer (standing order) payment with ID:\" + pm.globals.get(\"newPaymentAccountTransferID\"));\r",
-															"}\r",
-															"\r",
-															"// Session navigate from PrS using eval()\r",
-															"eval(globals.sessionNavigate)();\r",
-															"\r",
-															"// Reset reference to TR test cases\r",
-															"pm.globals.unset(\"_tr_\" + request.name);"
+															"}"
 														],
 														"type": "text/javascript"
 													}
@@ -12881,13 +12509,7 @@
 													"    && pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2)\r",
 													"    && pm.expect(responseBodyRequestedExecutionDate).to.eql(requestBodyRequestedExecutionDate)\r",
 													"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation);\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -13001,13 +12623,7 @@
 													"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
 													"    && pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2)\r",
 													"    && pm.expect(responseBodyRemittanceInformation.unstructured).to.eql(requestBodyRemittanceInformation.unstructured);\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -13122,13 +12738,7 @@
 													"    && pm.expect(responseBodyDebtorAccountNo).to.eql(requestBodyDebtorAccountNo)\r",
 													"    && pm.expect(responseBodyCreditorAccountNo2).to.eql(requestBodyCreditorAccountNo2)\r",
 													"    && pm.expect(responseBodyRemittanceInformation).to.eql(requestBodyRemittanceInformation);\r",
-													"});\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"});"
 												],
 												"type": "text/javascript"
 											}
@@ -13217,13 +12827,7 @@
 													"}\r",
 													"else {\r",
 													"    console.log(\"Failed to delete account transfer payment with ID:\" + pm.globals.get(\"newPaymentAccountTransferID\"));\r",
-													"}\r",
-													"\r",
-													"// Session navigate from PrS using eval()\r",
-													"eval(globals.sessionNavigate)();\r",
-													"\r",
-													"// Reset reference to TR test cases\r",
-													"pm.globals.unset(\"_tr_\" + request.name);"
+													"}"
 												],
 												"type": "text/javascript"
 											}
@@ -13332,13 +12936,7 @@
 											"    });\r",
 											"    \r",
 											"    pm.response.to.have.status(200);\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -13437,13 +13035,7 @@
 											"    \r",
 											"    pm.response.to.have.status(200) &&\r",
 											"    pm.expect(pm.response.text()).not.to.include(latestPaymentID);\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -13555,13 +13147,7 @@
 											"        pm.response.to.have.status(200) &&\r",
 											"        pm.expect(valueToCompare).to.eql(responseData.payments.length);\r",
 											"    }\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -13663,13 +13249,7 @@
 											"    \r",
 											"    pm.response.to.have.status(200) &&\r",
 											"    pm.expect(isTrue).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -13762,13 +13342,7 @@
 											"    \r",
 											"    pm.response.to.have.status(200) &&\r",
 											"    pm.expect(parseInt(responseData.pageResponse.totalElements,10)).to.eql(responseData.payments.length);\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -13894,10 +13468,7 @@
 											"    && pm.expect(jsonDataPaymentType).to.eql(paymentType)\r",
 											"    && pm.expect(jsonDataBeneficiaryAccount).to.eql(beneficiaryAccount)\r",
 											"    && pm.expect(pm.response.text()).to.include(\"beneficiaryAccountId\");\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -14039,13 +13610,7 @@
 											"    && pm.expect(responseBodyTemplateName).to.eql(requestBodyTemplateName)\r",
 											"    && pm.expect(responseBodyTemplateGroupName).to.eql(requestBodyTemplateGroupName);\r",
 											"    //&& pm.expect(responseBodyPaymentType).to.eql(requestBodyPaymentType);\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -14167,13 +13732,7 @@
 											"    && pm.expect(responseBodyTemplateName).to.eql(requestBodyTemplateName)\r",
 											"    && pm.expect(responseBodyTemplateGroupName).to.eql(requestBodyTemplateGroupName);\r",
 											"    //&& pm.expect(responseBodyPaymentType).to.eql(requestBodyPaymentType);\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -14255,14 +13814,7 @@
 											"}\r",
 											"else {\r",
 											"    console.log(\"Failed to delete payment template with ID: \" + pm.globals.get(\"newPaymentTemplateID\"));\r",
-											"}\r",
-											"\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"}"
 										],
 										"type": "text/javascript"
 									}
@@ -14372,13 +13924,7 @@
 											"    && pm.expect(typeof responseBodyReportId !== notExists).to.eql(true) \r",
 											"    && pm.expect(responseBodyState).to.eql(\"IN_PROCESS\") \r",
 											"    && pm.expect(typeof responseBodyHref !== notExists).to.eql(true);\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -14458,13 +14004,7 @@
 											"    pm.response.to.have.status(200) \r",
 											"    && pm.response.to.have.header('Content-Type', 'application/zip') \r",
 											"    && pm.response.to.have.header('Content-Disposition', 'attachment; filename=pain001.zip');\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -14626,6 +14166,29 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "aa72ccf4-c0a6-4369-b208-84996ac9140e",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4535163-d01d-49e7-89db-d442371d0449",
+						"type": "text/javascript",
+						"exec": [
+							"eval(globals.sessionNavigate)();",
+							"pm.globals.unset(\"_tr_\" + request.name);"
+						]
+					}
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -15668,7 +15231,7 @@
 	],
 	"variable": [
 		{
-			"id": "130f4390-9438-49af-a7a8-74381b4f4ada",
+			"id": "a7cfa34e-74ac-4f61-b4d0-5669b75b17fb",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"

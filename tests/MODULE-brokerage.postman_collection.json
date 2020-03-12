@@ -2159,14 +2159,7 @@
 											"    pm.environment.unset(\"_tmp_securityId\");\r",
 											"    pm.environment.unset(\"_tmp_orderId\");\r",
 											"    pm.environment.unset(\"_tmp_postEnteredById\");\r",
-											"}\r",
-											"\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"}"
 										],
 										"type": "text/javascript"
 									}
@@ -2240,10 +2233,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -2320,10 +2310,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -2405,10 +2392,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -2464,8 +2448,7 @@
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
 											"//eval(globals.commonTests)();\r",
-											"\r",
-											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by custodyAccountPositionId is retrieved and response schema is validated\", function () {\r",
+											"(responseBody.length == 0 ? pm.test.skip : pm.test)(pm.globals.get(\"_tr_\" + request.name) + \" List of orders by custodyAccountPositionId is retrieved and response schema is validated\", function () {\r",
 											"    var schemaValidationPassed = true;\r",
 											"    var jsonData = JSON.parse(responseBody);\r",
 											"    let custodyAccountPositionId = pm.environment.get(\"_tmp_custodyAccountPositionId\");\r",
@@ -2490,10 +2473,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -2592,10 +2572,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -2693,10 +2670,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -2778,10 +2752,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -2863,10 +2834,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -2948,10 +2916,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -3033,10 +2998,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -3118,10 +3080,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -3203,10 +3162,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -3288,10 +3244,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -3373,10 +3326,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -3458,10 +3408,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -3543,10 +3490,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -3628,10 +3572,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -3716,10 +3657,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -3774,9 +3712,6 @@
 									"script": {
 										"id": "1b6e57ce-adba-4bca-aa82-d1507198b5e1",
 										"exec": [
-											"//eval(globals.commonTests)();\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Display orders fails if wrong version is provided in url\", function () {\r",
 											"\r",
 											"    let jsonData = JSON.parse(responseBody);\r",
@@ -3793,10 +3728,7 @@
 											"    pm.response.to.have.status(404) &&\r",
 											"    pm.expect(jsonData.status).to.be.eql(404) &&\r",
 											"    pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -3845,9 +3777,6 @@
 									"script": {
 										"id": "726cfe4b-2dd4-43b5-82e5-4c4aef5938df",
 										"exec": [
-											"//eval(globals.commonTests)();\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Display orders by order id fails if wrong version is provided in url\", function () {\r",
 											"\r",
 											"    let jsonData = JSON.parse(responseBody);\r",
@@ -3864,10 +3793,7 @@
 											"    pm.response.to.have.status(404) &&\r",
 											"    pm.expect(jsonData.status).to.be.eql(404) &&\r",
 											"    pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -3929,10 +3855,7 @@
 											"    });\r",
 											"\r",
 											"    pm.expect(pm.response.code).to.be.oneOf([400]);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -4005,10 +3928,7 @@
 											"        pm.response.to.have.property(\"id\");\r",
 											"    });\r",
 											"    \r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -4107,14 +4027,7 @@
 											"    pm.environment.unset(\"_tmp_securityNumber\");\r",
 											"    pm.environment.unset(\"_tmp_isin\");\r",
 											"    //pm.environment.unset(\"_tmp_shortDescription\");\r",
-											"}\r",
-											"\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"}"
 										],
 										"type": "text/javascript"
 									}
@@ -4206,10 +4119,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -4305,10 +4215,7 @@
 											"    pm.environment.set(\"_tmp_securityId\",jsonData.securities[0].id);\r",
 											"} else {\r",
 											"    pm.environment.unset(\"_tmp_securityId\");\r",
-											"};\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"}"
 										],
 										"type": "text/javascript"
 									}
@@ -4407,10 +4314,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(result).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -4500,10 +4404,7 @@
 											"    pm.expect(jsonData._messages[0].category).to.be.eql(\"ERROR\") &&\r",
 											"    pm.expect(jsonData._messages[0].code).to.be.eql(\"ERROR_ACCESS_DENIED\");\r",
 											"    pm.expect(jsonData._messages[0].text).to.be.eql(\"Access Denied (Scope): Access is denied\");\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -4585,10 +4486,7 @@
 											"    pm.response.to.have.status(404) &&\r",
 											"    pm.expect(jsonData.status).to.be.eql(404) &&\r",
 											"    pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -4676,11 +4574,8 @@
 											"    \r",
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
-											"    pm.expect(jsonData.id).to.be.eql(id);;\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"    pm.expect(jsonData.id).to.be.eql(id);\r",
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -4772,13 +4667,7 @@
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true)   //pm.expect(tv4.validate(jsonData, securitySchema)).to.be.true\r",
 											"    && pm.expect(jsonDataEmbed.securities.length).to.be.eql(1)\r",
 											"    && pm.expect(jsonDataEmbed.securities[0].securityNumber).to.be.eql(pm.environment.get(\"_tmp_securityNumber\"));\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -4862,10 +4751,7 @@
 											"    });\r",
 											"\r",
 											"    pm.expect(pm.response.code).to.be.oneOf([400]);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -4947,10 +4833,7 @@
 											"    pm.response.to.have.status(404) &&\r",
 											"    pm.expect(jsonData.status).to.be.eql(404) &&\r",
 											"    pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -5015,7 +4898,6 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Display security fails if access token is generated without needed scope\", function () {\r",
 											"\r",
 											"    let jsonData = JSON.parse(responseBody);\r",
@@ -5034,10 +4916,7 @@
 											"    pm.expect(jsonData._messages[0].category).to.be.eql(\"ERROR\") &&\r",
 											"    pm.expect(jsonData._messages[0].code).to.be.eql(\"ERROR_ACCESS_DENIED\");\r",
 											"    pm.expect(jsonData._messages[0].text).to.be.eql(\"Access Denied (Scope): Access is denied\");\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -5102,7 +4981,6 @@
 									"script": {
 										"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
 										"exec": [
-											"//eval(globals.commonTests)();\r",
 											"var jsonData = JSON.parse(responseBody);\r",
 											"    \r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Security types are retrieved and response schema is validated\", function () {\r",
@@ -5128,10 +5006,7 @@
 											"    pm.environment.set(\"_tmp_typeId\",jsonData._embedded.securityTypes[0].id);\r",
 											"} else {\r",
 											"    pm.environment.unset(\"_tmp_typeId\");\r",
-											"}\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"}"
 										],
 										"type": "text/javascript"
 									}
@@ -5198,9 +5073,6 @@
 									"script": {
 										"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
 										"exec": [
-											"// Execute standard tests from PrS using eval()\r",
-											"//eval(globals.commonTests)();\r",
-											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Security type is retrieved by its' ID and response schema is validated\", function () {\r",
 											"\r",
 											"    var schemaValidationPassed = true;\r",
@@ -5224,10 +5096,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true) &&\r",
 											"    pm.expect(jsonData.id).to.eql(typeId);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -5295,9 +5164,6 @@
 									"script": {
 										"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
 										"exec": [
-											"// Execute standard tests from PrS using eval()\r",
-											"//eval(globals.commonTests)();\r",
-											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Security is retrieved by security type ID and response schema is validated\", function () {\r",
 											"\r",
 											"    var schemaValidationPassed = true;\r",
@@ -5315,10 +5181,7 @@
 											"\r",
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true);\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -5391,7 +5254,6 @@
 									"script": {
 										"id": "590da4a5-4cbe-4116-bedc-ae2fda9b4dec",
 										"exec": [
-											"//eval(globals.commonTests)();",
 											"var jsonData = JSON.parse(responseBody);",
 											"",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Listings are returned and all assertions passed\", function (){",
@@ -5425,13 +5287,7 @@
 											"    pm.environment.set(\"tmp_listing_ID\",jsonData._embedded.listings[0].id);",
 											"} else {",
 											"    pm.environment.unset(\"tmp_listing_ID\");",
-											"}",
-											"",
-											"// Session navigate from PrS using eval()",
-											"eval(globals.sessionNavigate)();",
-											"",
-											"// Reset reference to TR test cases",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"}"
 										],
 										"type": "text/javascript"
 									}
@@ -5478,7 +5334,6 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List listings fails if url is completely broken\", function () {\r",
 											"\r",
 											"    let jsonData = JSON.parse(responseBody);\r",
@@ -5495,10 +5350,7 @@
 											"    pm.response.to.have.status(404) &&\r",
 											"    pm.expect(jsonData.status).to.be.eql(404) &&\r",
 											"    pm.expect(jsonData.error).to.be.eql(\"Not Found\");\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -5563,9 +5415,6 @@
 									"script": {
 										"id": "590da4a5-4cbe-4116-bedc-ae2fda9b4dec",
 										"exec": [
-											"//eval(globals.commonTests)();",
-											"//var jsonData = JSON.parse(responseBody);",
-											"",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Display listings fails if bad url is used\", function (){",
 											"",
 											"    pm.test(\"Status 400 Bad Request is displayed\", function () {",
@@ -5578,11 +5427,7 @@
 											"",
 											"    pm.expect(pm.response.code).to.be.oneOf([400]);",
 											"",
-											"});",
-											"",
-											"eval(globals.sessionNavigate)();",
-											"",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -5641,8 +5486,6 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"//eval(globals.commonTests)();\r",
-											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List listings fail if access token is generated without needed scope\", function () {\r",
 											"\r",
 											"    let jsonData = JSON.parse(responseBody);\r",
@@ -5659,10 +5502,7 @@
 											"    pm.response.to.have.status(403) &&\r",
 											"    pm.expect(jsonData._messages[0].category).to.be.eql(\"ERROR\") &&\r",
 											"    pm.expect(jsonData._messages[0].code).to.be.eql(\"ERROR_ACCESS_DENIED\");\r",
-											"});\r",
-											"\r",
-											"eval(globals.sessionNavigate)();\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -5726,36 +5566,27 @@
 									"script": {
 										"id": "17b7e3b9-73f9-424c-bf53-aa31004f3747",
 										"exec": [
-											"//eval(globals.commonTests)();",
 											"var jsonData = JSON.parse(responseBody);",
-											"",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Listings are returns and all assertions passed\", function (){",
-											" pm.test(\"Main elements are present\", () => {",
-											"  pm.expect(jsonData).to.have.property(\"id\");",
-											"  pm.expect(jsonData).to.have.property(\"ticker\");",
-											"  pm.expect(jsonData).to.have.property(\"rate\");",
-											"  pm.expect(jsonData).to.have.property(\"fixAt\");",
-											"  pm.expect(jsonData).to.have.property(\"roundLot\");",
-											" });",
+											"    pm.test(\"Main elements are present\", () => {",
+											"        pm.expect(jsonData).to.have.property(\"id\");",
+											"        pm.expect(jsonData).to.have.property(\"ticker\");",
+											"        pm.expect(jsonData).to.have.property(\"rate\");",
+											"        pm.expect(jsonData).to.have.property(\"fixAt\");",
+											"        pm.expect(jsonData).to.have.property(\"roundLot\");",
+											"    });",
 											"",
-											" pm.test(\"ID is correct\", () => {",
-											"  pm.expect(jsonData.id).to.be.eql(pm.environment.get(\"tmp_listing_ID\"));",
-											" });",
+											"    pm.test(\"ID is correct\", () => {",
+											"        pm.expect(jsonData.id).to.be.eql(pm.environment.get(\"tmp_listing_ID\"));",
+											"    });",
 											" ",
-											"  pm.expect(jsonData).to.have.property(\"id\")&&",
-											"  pm.expect(jsonData).to.have.property(\"ticker\")&&",
-											"  pm.expect(jsonData).to.have.property(\"rate\")&&",
-											"  pm.expect(jsonData).to.have.property(\"fixAt\")&&",
-											"  pm.expect(jsonData).to.have.property(\"roundLot\")&&",
-											"  pm.expect(jsonData.id).to.be.eql(pm.environment.get(\"tmp_listing_ID\"));",
-											" ",
-											"});",
-											"",
-											"// Session navigate from PrS using eval()",
-											"eval(globals.sessionNavigate)();",
-											"",
-											"// Reset reference to TR test cases",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"    pm.expect(jsonData).to.have.property(\"id\")&&",
+											"    pm.expect(jsonData).to.have.property(\"ticker\")&&",
+											"    pm.expect(jsonData).to.have.property(\"rate\")&&",
+											"    pm.expect(jsonData).to.have.property(\"fixAt\")&&",
+											"    pm.expect(jsonData).to.have.property(\"roundLot\")&&",
+											"    pm.expect(jsonData.id).to.be.eql(pm.environment.get(\"tmp_listing_ID\"));",
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -5806,7 +5637,6 @@
 									"script": {
 										"id": "17b7e3b9-73f9-424c-bf53-aa31004f3747",
 										"exec": [
-											"//eval(globals.commonTests)();",
 											"var jsonData = JSON.parse(responseBody);",
 											"",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Listings are returns for provided security ID and all assertions passed\", function (){",
@@ -5841,13 +5671,7 @@
 											"    pm.environment.set(\"_tmp_postSecurityListingId\",jsonData.listings[0].id);",
 											"} else {",
 											"    pm.environment.unset(\"_tmp_postSecurityListingId\");",
-											"};",
-											"",
-											"// Session navigate from PrS using eval()",
-											"eval(globals.sessionNavigate)();",
-											"",
-											"// Reset reference to TR test cases",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"}"
 										],
 										"type": "text/javascript"
 									}
@@ -5903,9 +5727,6 @@
 									"script": {
 										"id": "81b56885-cb8b-4a7b-866e-ba015f333cbc",
 										"exec": [
-											"// Execute standard tests from PrS using eval()\r",
-											"//eval(globals.commonTests)();\r",
-											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of trading places is retrieved and response schema is validated\", function () {\r",
 											"\r",
 											"    var tradingPlacesSchema = pm.environment.get(\"tradingPlacesSchema\");\r",
@@ -5930,14 +5751,7 @@
 											"    pm.environment.set(\"_tmp_tradingPlaceId\",jsonData.tradingPlaces[0].id);\r",
 											"} else {\r",
 											"    pm.environment.unset(\"_tmp_tradingPlaceId\");\r",
-											"}\r",
-											"\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"}"
 										],
 										"type": "text/javascript"
 									}
@@ -6001,9 +5815,6 @@
 									"script": {
 										"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
 										"exec": [
-											"// Execute standard tests from PrS using eval()\r",
-											"//eval(globals.commonTests)();\r",
-											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Trading place is retrieved by tradingPlaceId and response schema is validated\", function () {\r",
 											"\r",
 											"    var tradingPlaceSchema = pm.environment.get(\"tradingPlaceSchema\");\r",
@@ -6021,13 +5832,7 @@
 											"    pm.response.to.have.status(200)\r",
 											"    && pm.expect(schemaValidationPassed).to.be.eql(true)\r",
 											"    && pm.expect(jsonData.id).to.be.eql(pm.environment.get(\"_tmp_tradingPlaceId\"));\r",
-											"});\r",
-											"\r",
-											"// Session navigate from PrS using eval()\r",
-											"eval(globals.sessionNavigate)();\r",
-											"\r",
-											"// Reset reference to TR test cases\r",
-											"pm.globals.unset(\"_tr_\" + request.name);"
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -6087,6 +5892,29 @@
 					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "fd40fe74-20b1-448c-bade-9f0a2df0ba8d",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1c946d0-968b-409d-9761-2a0ef31ccabc",
+						"type": "text/javascript",
+						"exec": [
+							"eval(globals.sessionNavigate)();",
+							"pm.globals.unset(\"_tr_\" + request.name);"
+						]
+					}
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -6210,8 +6038,6 @@
 							"script": {
 								"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
 								"exec": [
-									"eval(globals.commonTests)();\r",
-									"\r",
 									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Securities are retrieved by tradingPlaceId and response schema is validated\", function () {\r",
 									"\r",
 									"    var jsonData = JSON.parse(responseBody);\r",
@@ -6228,10 +6054,7 @@
 									"    pm.response.to.have.status(200)\r",
 									"    && pm.expect(schemaValidationPassed).to.be.eql(true)\r",
 									"    && pm.expect(jsonData.id).to.be.eql(pm.environment.get(\"_tmp_tradingPlaceId\"));\r",
-									"});\r",
-									"\r",
-									"eval(globals.sessionNavigate)();\r",
-									"pm.globals.unset(\"_tr_\" + request.name);"
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -6302,7 +6125,6 @@
 							"script": {
 								"id": "fe77c6af-55b9-481e-a5e0-2616fb531b6a",
 								"exec": [
-									"eval(globals.commonTests)();\r",
 									"var jsonData = JSON.parse(responseBody);\r",
 									"\r",
 									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Listings are returned and all assertions passed\", function () {\r",
@@ -6318,10 +6140,7 @@
 									"\r",
 									"    pm.response.to.have.status(200)\r",
 									"    && pm.expect(schemaValidationPassed).to.be.eql(true)\r",
-									"});\r",
-									"\r",
-									"eval(globals.sessionNavigate)();\r",
-									"pm.globals.unset(\"_tr_\" + request.name);"
+									"});"
 								],
 								"type": "text/javascript"
 							}
@@ -6720,14 +6539,14 @@
 							"console.log(\"Test Token url is: \" + pm.environment.get(\"env_security_testToken\"));",
 							"",
 							"// Set up pre-conditions with Chai Assertion library. https://www.chaijs.com/api/bdd/",
-							"pm.expect(pm.environment.get(\"env_securemail\")).to.be.a('string', \"The env_securemail is not defined\");",
-							"pm.expect(pm.environment.get(\"env_security_testToken\")).to.be.a('string', \"The testTokenUrl is not defined\");",
-							"pm.expect(pm.environment.get(\"tenantId_security\")).to.be.a('string', \"The tenantId is not defined\");",
-							"pm.expect(pm.environment.get(\"tenantName_security\")).to.be.a('string', \"The tenantName is not defined\");",
-							"pm.expect(pm.environment.get(\"userName_security\")).to.be.a('string', \"The userName is not defined\");",
-							"pm.expect(pm.environment.get(\"contractNo_security\")).to.be.a('string', \"The contractNo is not defined\");",
-							"pm.expect(pm.environment.get(\"bcNo_security\")).to.be.a('string', \"The bcNo is not defined\");",
-							"pm.expect(pm.environment.get(\"userId_security\")).to.be.a('string', \"The userId is not defined\");",
+							"//pm.expect(pm.environment.get(\"env_securemail\")).to.be.a('string', \"The env_securemail is not defined\");",
+							"//pm.expect(pm.environment.get(\"env_security_testToken\")).to.be.a('string', \"The testTokenUrl is not defined\");",
+							"//pm.expect(pm.environment.get(\"tenantId_security\")).to.be.a('string', \"The tenantId is not defined\");",
+							"//pm.expect(pm.environment.get(\"tenantName_security\")).to.be.a('string', \"The tenantName is not defined\");",
+							"//pm.expect(pm.environment.get(\"userName_security\")).to.be.a('string', \"The userName is not defined\");",
+							"//pm.expect(pm.environment.get(\"contractNo_security\")).to.be.a('string', \"The contractNo is not defined\");",
+							"//pm.expect(pm.environment.get(\"bcNo_security\")).to.be.a('string', \"The bcNo is not defined\");",
+							"//pm.expect(pm.environment.get(\"userId_security\")).to.be.a('string', \"The userId is not defined\");",
 							""
 						],
 						"type": "text/javascript"
@@ -6792,14 +6611,14 @@
 							"console.log(\"Test Token url is: \" + pm.environment.get(\"env_security_testToken\"));",
 							"",
 							"// Set up pre-conditions with Chai Assertion library. https://www.chaijs.com/api/bdd/",
-							"pm.expect(pm.environment.get(\"env_securemail\")).to.be.a('string', \"The env_securemail is not defined\");",
-							"pm.expect(pm.environment.get(\"env_security_testToken\")).to.be.a('string', \"The testTokenUrl is not defined\");",
-							"pm.expect(pm.environment.get(\"tenantId_security\")).to.be.a('string', \"The tenantId is not defined\");",
-							"pm.expect(pm.environment.get(\"tenantName_security\")).to.be.a('string', \"The tenantName is not defined\");",
-							"pm.expect(pm.environment.get(\"userName_security\")).to.be.a('string', \"The userName is not defined\");",
-							"pm.expect(pm.environment.get(\"contractNo_security\")).to.be.a('string', \"The contractNo is not defined\");",
-							"pm.expect(pm.environment.get(\"bcNo_security\")).to.be.a('string', \"The bcNo is not defined\");",
-							"pm.expect(pm.environment.get(\"userId_security\")).to.be.a('string', \"The userId is not defined\");",
+							"//pm.expect(pm.environment.get(\"env_securemail\")).to.be.a('string', \"The env_securemail is not defined\");",
+							"//pm.expect(pm.environment.get(\"env_security_testToken\")).to.be.a('string', \"The testTokenUrl is not defined\");",
+							"//pm.expect(pm.environment.get(\"tenantId_security\")).to.be.a('string', \"The tenantId is not defined\");",
+							"//pm.expect(pm.environment.get(\"tenantName_security\")).to.be.a('string', \"The tenantName is not defined\");",
+							"//pm.expect(pm.environment.get(\"userName_security\")).to.be.a('string', \"The userName is not defined\");",
+							"//pm.expect(pm.environment.get(\"contractNo_security\")).to.be.a('string', \"The contractNo is not defined\");",
+							"//pm.expect(pm.environment.get(\"bcNo_security\")).to.be.a('string', \"The bcNo is not defined\");",
+							"//pm.expect(pm.environment.get(\"userId_security\")).to.be.a('string', \"The userId is not defined\");",
 							""
 						],
 						"type": "text/javascript"
