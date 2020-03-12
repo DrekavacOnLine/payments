@@ -6286,7 +6286,7 @@
 							"    let runId = JSON.parse(responseBody)[i].id;",
 							"    let runName = JSON.parse(responseBody)[i].name;",
 							"    let runSuiteId = JSON.parse(responseBody)[i].suite_id;",
-							"    if (runName === \"Postman API Tests\") { //determine proper run",
+							"    if (runName === \"MODULE-brokerage\") { //determine proper run",
 							"        //console.log(runId);   ",
 							"        console.log(\"TestRail run '\" + runId + \"' updating for tests: \" + execTests);",
 							"        pm.sendRequest({",
