@@ -6286,7 +6286,7 @@
 							"    let runId = JSON.parse(responseBody)[i].id;",
 							"    let runName = JSON.parse(responseBody)[i].name;",
 							"    let runSuiteId = JSON.parse(responseBody)[i].suite_id;",
-							"    if (runName === \"MODULE-brokerage\") { //determine proper run",
+							"    if (runName === pm.environment.get(\"envName\") + \" \" + \"BROKERAGE\") { //determine proper run",
 							"        //console.log(runId);   ",
 							"        console.log(\"TestRail run '\" + runId + \"' updating for tests: \" + execTests);",
 							"        pm.sendRequest({",
@@ -9660,7 +9660,7 @@
 	],
 	"variable": [
 		{
-			"id": "cab9e367-e1d2-4fcd-8a64-a46b556e3f64",
+			"id": "3ee7858b-5069-449d-9a6a-b512301505c5",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
