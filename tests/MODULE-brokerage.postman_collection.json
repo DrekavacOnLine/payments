@@ -6512,12 +6512,94 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_security}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",    \r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/assets/account.accountname.write\",\r\n    \"https://api.crealogix.com/assets/account.accountimage.write\",\r\n    \"https://api.crealogix.com/assets/cuac.readonly\",\r\n    \"https://api.crealogix.com/assets/portfolio.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+					"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_security}},\r\n  \"scope\": [\r\n\t\"https://api.crealogix.com/dban\",\r\n\t\"read\",\r\n\t\"write\",\r\n\t\"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n\t\"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n\t\"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n\t\"https://api.crealogix.com/payments/payment.initiate\",\r\n\t\"https://api.crealogix.com/payments/payment.read\",\r\n\t\"https://api.crealogix.com/payments/payment.write\",\r\n\t\"https://api.crealogix.com/assets/account/read\",\r\n\t\"https://api.crealogix.com/assets/account.transaction/read\",\r\n\t\"https://api.crealogix.com/assets/account.name\",\r\n\t\"https://api.crealogix.com/assets/account.image\",\r\n\t\"https://api.crealogix.com/assets/cuac/read\",\r\n\t\"https://api.crealogix.com/assets/portfolio/read\",\r\n\t\"https://api.crealogix.com/messages/securemail.write\",\r\n\t\"https://api.crealogix.com/messages/securemail.read\",\r\n\t\"https://api.crealogix.com/messages/document.category.read\",\r\n\t\"https://api.crealogix.com/messages/document.category.write\",\r\n\t\"https://api.crealogix.com/messages/document.write\",\r\n\t\"https://api.crealogix.com/messages/document.read\",\r\n\t\"https://api.crealogix.com/brokerage/order\",\r\n    \"https://api.crealogix.com/brokerage/order#read\",\t\r\n\t\"https://api.crealogix.com/brokerage/security#read\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace#read\",\t\r\n    \"https://api.crealogix.com/brokerage/depository#read\",\r\n\t\"https://api.crealogix.com/deeplink/domains\",\r\n\t\"https://api.crealogix.com/deeplink/links\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
 				},
 				"url": {
 					"raw": "{{env_security_testToken}}",
 					"host": [
 						"{{env_security_testToken}}"
+					]
+				},
+				"description": "Retrieve the test token"
+			},
+			"response": []
+		},
+		{
+			"name": "getAuthTestTokenK8Sv2 (C41673950)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9e77f489-363b-4a53-9c9f-58be8e9678c8",
+						"exec": [
+							"/*determine test case ID from request name*/",
+							"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+							"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+							"",
+							"/*add current test case ID to list of already executed tests*/",
+							"eval(globals.testsExecuted)(testRailTestCases);",
+							"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+							"",
+							"//store test case ID of current request for linking with Test Rail",
+							"pm.globals.set(\"_tr_\" + request.name, testRailTestCases);",
+							"",
+							"//call global function to generate access token",
+							"eval(globals.generateAccessToken)();"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "095f7911-c115-4798-9cc5-f06e06819ef3",
+						"exec": [
+							"/*",
+							"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
+							"    pm.response.to.not.be.error;",
+							"    //pm.response.to.be.withBody;",
+							"    pm.environment.set(\"access_token\", pm.response.text());",
+							"});",
+							"*/",
+							"",
+							"// Session navigate from PrS using eval()",
+							"eval(globals.sessionNavigate)();",
+							"",
+							"// Reset reference to TR test cases",
+							"pm.globals.unset(\"_tr_\" + request.name);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "HEAD",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "httpbin.org/uuid",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"uuid"
 					]
 				},
 				"description": "Retrieve the test token"
@@ -9447,13 +9529,15 @@
 					"postman.setGlobalVariable(\"testsExecuted\", (listOfExecutedTests) => {",
 					"    let tests =  pm.environment.get(\"testRailTestsInRun\");",
 					"    //console.log(\"TestRail tests stored in 'testRailTestsInRun': \" + tests);",
-					"    if (tests.length > 0) {",
-					"        tests = tests + \" \"",
+					"    if (!tests.includes(listOfExecutedTests)){",
+					"        if (tests.length > 0 && listOfExecutedTests.length > 0) {",
+					"            tests = tests + \" \"",
+					"        }",
+					"        tests = tests + listOfExecutedTests;",
+					"        //console.log(\"TestRail tests to be stored to 'testRailTestsInRun': \" + tests);",
+					"        pm.environment.set(\"testRailTestsInRun\",tests);",
+					"        //console.log(\"TestRail tests executed so far: \" + tests);",
 					"    }",
-					"    tests = tests + listOfExecutedTests;",
-					"    //console.log(\"TestRail tests to be stored to 'testRailTestsInRun': \" + tests);",
-					"    pm.environment.set(\"testRailTestsInRun\",tests);",
-					"    //console.log(\"TestRail tests executed so far: \" + tests);",
 					"});",
 					"",
 					"postman.setGlobalVariable(\"extractTestCaseIDFromRequestName\", () => {",
@@ -9479,7 +9563,83 @@
 					"        //console.log(\"schemaValidationPassed :\" + schemaValidationPassed);",
 					"    }    ",
 					"    return schemaValidationPassed;",
-					"}); "
+					"}); ",
+					"",
+					"",
+					"//global function for generating access token",
+					"postman.setGlobalVariable(\"generateAccessToken\", () => {",
+					"    const getAccessTokenRequest = {",
+					"        url: pm.environment.get(\"env_security_testToken\"),",
+					"        method: \"POST\",",
+					"        header: {",
+					"            'Content-Type': 'application/json',",
+					"            'Accept': 'application/json'",
+					"        },",
+					"        body: {",
+					"            mode: 'raw',",
+					"            raw: JSON.stringify({ ",
+					"                tenant_id: pm.environment.get(\"tenantId_security\"), ",
+					"                acsKey: \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",",
+					"                tenant_name: pm.environment.get(\"tenantName_security\"),",
+					"                user_name: pm.environment.get(\"userId_security\"),",
+					"                contractNo: pm.environment.get(\"contractNo_security\"),",
+					"                language: \"en\",",
+					"                bcNo: pm.environment.get(\"bcNo_security\"),",
+					"                authorities: [],",
+					"                client_id: \"postman\",",
+					"                user_id: pm.environment.get(\"userId_security\"),",
+					"                loginName: pm.environment.get(\"userId_security\"),",
+					"                exp: 32479694642,   ",
+					"                jti: \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\", ",
+					"                iat: 1553855569,   ",
+					"                scope: [",
+					"                    \"https://api.crealogix.com/dban\",",
+					"                    \"read\",",
+					"                    \"write\",",
+					"                    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",",
+					"                    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",",
+					"                    \"https://api.crealogix.com/contracts/contract.person.readonly\",",
+					"                    \"https://api.crealogix.com/payments/payment.initiate\",",
+					"                    \"https://api.crealogix.com/payments/payment.read\",",
+					"                    \"https://api.crealogix.com/payments/payment.write\",",
+					"                    \"https://api.crealogix.com/assets/account/read\",",
+					"                    \"https://api.crealogix.com/assets/account.transaction/read\",",
+					"                    \"https://api.crealogix.com/assets/account.name\",",
+					"                    \"https://api.crealogix.com/assets/account.image\",",
+					"                    \"https://api.crealogix.com/assets/cuac/read\",",
+					"                    \"https://api.crealogix.com/assets/portfolio/read\",",
+					"                    \"https://api.crealogix.com/messages/securemail.write\",",
+					"                    \"https://api.crealogix.com/messages/securemail.read\",",
+					"                    \"https://api.crealogix.com/messages/document.category.read\",",
+					"                    \"https://api.crealogix.com/messages/document.category.write\",",
+					"                    \"https://api.crealogix.com/messages/document.write\",",
+					"                    \"https://api.crealogix.com/messages/document.read\",",
+					"                    \"https://api.crealogix.com/brokerage/security/read\",",
+					"                    \"https://api.crealogix.com/brokerage/tradingplace/read\",",
+					"                    \"https://api.crealogix.com/brokerage/depository/read\",",
+					"                    \"https://api.crealogix.com/brokerage/order/read\",",
+					"                    \"https://api.crealogix.com/brokerage/order\",",
+					"                    \"https://api.crealogix.com/deeplink/domains\",",
+					"                    \"https://api.crealogix.com/deeplink/links\"",
+					"                ]",
+					"            })",
+					"        }",
+					"    };",
+					"    pm.environment.set(\"request\", JSON.stringify(getAccessTokenRequest));",
+					"    ",
+					"    pm.sendRequest(getAccessTokenRequest, function(err, res) {",
+					"        pm.environment.set(\"access_token\", res.text());",
+					"        console.log(\"request.name: \" + request.name);",
+					"        pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
+					"            pm.expect(err).to.not.be.ok;",
+					"            pm.expect(res).to.have.property('code', 200);",
+					"            pm.expect(res).to.have.property('status', 'OK');          ",
+					"        });",
+					"    });",
+					"    ",
+					"    //display generated token",
+					"    //console.log(\"Generated Access Token url is: \" + pm.environment.get(\"access_token\"));",
+					"});"
 				]
 			}
 		},
@@ -9490,17 +9650,17 @@
 				"type": "text/javascript",
 				"exec": [
 					"// check if test is executed",
-					"pm.test(\"'\" + request.name +\"' is initiated\", function () {",
-					"    //pm.response.to.have.status(200);",
-					"    //pm.response.to.be.success;",
-					"});"
+					"//pm.test(\"'\" + request.name +\"' is initiated\", function () {",
+					"//    //pm.response.to.have.status(200);",
+					"//    //pm.response.to.be.success;",
+					"//});"
 				]
 			}
 		}
 	],
 	"variable": [
 		{
-			"id": "dc00bee7-aa09-4b45-9fdb-b237c8551bb9",
+			"id": "11a02d2f-d7bf-4165-ac96-66e9b3e63156",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
