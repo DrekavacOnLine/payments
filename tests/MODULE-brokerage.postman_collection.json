@@ -2120,8 +2120,7 @@
 											"//eval(globals.commonTests)();\r",
 											"\r",
 											"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" List of orders is retrieved and response schema is validated\", function () {\r",
-											"\r",
-											"    console.log(pm.globals.get(\"_tr_\" + request.name) + \" List of orders is retrieved and response schema is validated\");    \r",
+											" \r",
 											"    var schemaValidationPassed = true;\r",
 											"    var jsonData = JSON.parse(responseBody);\r",
 											"    \r",
@@ -9661,7 +9660,7 @@
 	],
 	"variable": [
 		{
-			"id": "d453f014-811b-4c8c-ac0c-7c20f5f9be33",
+			"id": "cab9e367-e1d2-4fcd-8a64-a46b556e3f64",
 			"key": "EPIC",
 			"value": "PRODUCT-6323",
 			"type": "string"
