@@ -898,6 +898,60 @@
 						"description": "PRODUCT-10393"
 					},
 					"response": []
+				},
+				{
+					"name": "generate TOKEN with SUB key v2 (ToDo)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3d7a0669-7b9d-42e0-a90e-aa80bd3d97fa",
+								"exec": [
+									"var uuid = require('uuid');",
+									"let deviceUUID = uuid.v4();",
+									"console.log(\"deviceUUID: \" + deviceUUID);",
+									"//pm.environment.set(\"deviceID\", \"03504301-0948-4e44-be20-236970ae5d70\");",
+									"pm.environment.set(\"deviceID\", deviceUUID);",
+									"",
+									"//call global function to generate push token",
+									"eval(globals.generateSecurityTestToken)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "86063036-931f-4f7e-bcca-bd7388d1eca3",
+								"exec": [
+									"/*",
+									"pm.sendRequest(JSON.parse(pm.environment.get(\"request\")), function(err, res) {",
+									"    pm.environment.set(\"pushToken\", res.text());",
+									"    pm.expect(err).to.not.be.ok;",
+									"    pm.expect(res).to.have.property('code', 200);",
+									"    pm.expect(res).to.have.property('status', 'OK');    ",
+									"})",
+									"*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "HEAD",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -929,7 +983,7 @@
 									"var uuid = require('uuid');",
 									"let deviceUUID = uuid.v4();",
 									"console.log(\"deviceUUID: \" + deviceUUID);",
-									"//pm.environment.set(\"deviceID\", \"e6736437-eea4-4130-a5c2-fc956a99dbcf\");",
+									"//pm.environment.set(\"deviceID\", \"03504301-0948-4e44-be20-236970ae5d70\");",
 									"pm.environment.set(\"deviceID\", deviceUUID);"
 								],
 								"type": "text/javascript"
@@ -951,7 +1005,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"tenant_id\": {{tenantId_security}},\r\n \"sub\": \"{{deviceID}}\",\r\n \"client_id\": \"mDevManager\",\r\n \"language\": \"en\",\r\n \"authorities\": [\"DBAN_ADMIN\",\"DBAN_USER\"],\r\n \"scope\": [\r\n   \"https://api.crealogix.com/dban\",\r\n   \"read\",\r\n   \"https://api.crealogix.com/push/messages.device#read\",\r\n   \"https://api.crealogix.com/push/messages\",\r\n   \"https://api.crealogix.com/mdevmanager/device\",\r\n   \"write\",\r\n   \"https://api.crealogix.com/mdevmanager/devices.write\"\r\n ]\r\n}"
+							"raw": "{\r\n \"tenant_id\": {{tenantId_security}},\r\n \"sub\": \"{{deviceID}}\",\r\n \"client_id\": \"mDevManager\",\r\n \"language\": \"en\",\r\n \"authorities\": [\"DBAN_ADMIN\",\"DBAN_USER\"],\r\n \"user_id\": {{userId_security}},\r\n \"scope\": [\r\n   \"https://api.crealogix.com/dban\",\r\n   \"read\",\r\n   \"https://api.crealogix.com/push/messages.device#read\",\r\n   \"https://api.crealogix.com/push/messages\",\r\n   \"https://api.crealogix.com/mdevmanager/device\",\r\n   \"write\",\r\n   \"https://api.crealogix.com/mdevmanager/devices.write\"\r\n ]\r\n}"
 						},
 						"url": {
 							"raw": "{{env_security_testToken}}",
@@ -1218,6 +1272,20 @@
 								],
 								"type": "text/javascript"
 							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "81cb8647-98a2-4e14-8768-d7d77ba34e6f",
+								"exec": [
+									"//var uuid = require('uuid');",
+									"//let deviceUUID = uuid.v4();",
+									"//console.log(\"deviceUUID: \" + deviceUUID);",
+									"//pm.environment.set(\"deviceID\", \"03504301-0948-4e44-be20-236970ae5d70\");",
+									"////pm.environment.set(\"deviceID\", deviceUUID);"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
 					"request": {
@@ -1235,7 +1303,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"tenantId\":19901,\n\t\"deviceId\": \"{{deviceID}}\",\n\t\"content\": \"{{content}}\",\n\t\"mapVersion\": \"2.33\",\n\t\"deviceModel\": \"7\",\n\t\"deviceVendor\": \"Samsung\",\n\t\"osType\": \"ANDROID\",\n\t\"osVersion\": \"XX.XX.XX\",\n\t\"deviceType\": \"SMARTPHONE\",\n\t\"softwareFingerprint\": \"Phone\",\n    \"notificationTokens\": {\n    \t\"FCM\":\"dWIP8Lx3YMU:APA91bEIPVyKVSvzGid_0oScAVjYow7CFxPFBegTdEgBATJgj8FwYkKgKDa6_VTndG6no58s34dyLApKMRrP-pD7rPJhsJ3-IKJ61WHkEBvNl5vOerH0co2OrsO5zTeKcEnwjkf2hpt_\"}\n}"
+							"raw": "{\n    \"tenantId\":19901,\n    \"deviceId\": \"{{deviceID}}\",\n    \"content\": \"{{content}}\",\n    \"mapVersion\": \"2.33\",\n    \"deviceModel\": \"7\",\n    \"deviceVendor\": \"Samsung\",\n    \"osType\": \"ANDROID\",\n    \"osVersion\": \"XX.XX.XX\",\n    \"deviceType\": \"SMARTPHONE\",\n    \"softwareFingerprint\": \"Phone\",\n    \"notificationTokens\": {\n        \"FCM\":\"dWIP8Lx3YMU:APA91bEIPVyKVSvzGid_0oScAVjYow7CFxPFBegTdEgBATJgj8FwYkKgKDa6_VTndG6no58s34dyLApKMRrP-pD7rPJhsJ3-IKJ61WHkEBvNl5vOerH0co2OrsO5zTeKcEnwjkf2hpt_\"}\n}"
 						},
 						"url": {
 							"raw": "{{urlDeviceManager}}/mdevmanager/mdevice/{{tenantId_security}}/map/authenticateJWT?",
@@ -1252,8 +1320,7 @@
 							"query": [
 								{
 									"key": "",
-									"value": "",
-									"disabled": true
+									"value": null
 								}
 							]
 						}
@@ -1282,7 +1349,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRfaWQiOjE5OTAxLCJ0ZW5hbnRfbmFtZSI6Im15YmFuayIsInVzZXJfbmFtZSI6IjEyMzEyOjEwMDAwMDE1MDEiLCJjb250cmFjdE5vIjoiMTAwMDAwMTUwMSIsImxhbmd1YWdlIjoiZW4iLCJ0ZW5hbnRfZXh0ZXJuYWxfaWQiOiIxMjMxMiIsImF1dGhvcml0aWVzIjpbXSwiY2xpZW50X2lkIjoibURldk1hbmFnZXIiLCJ1c2VyX2lkIjoxMDAwMDAxNTAxLCJzY29wZSI6WyJodHRwczovL2FwaS5jcmVhbG9naXguY29tL2RiYW4iLCJyZWFkIiwiaHR0cHM6Ly9hcGkuY3JlYWxvZ2l4LmNvbS9tZGV2bWFuYWdlci9kZXZpY2VzLnJlYWRvbmx5IiwiaHR0cHM6Ly9hcGkuY3JlYWxvZ2l4LmNvbS9wdXNoL21lc3NhZ2VzLnJlYWRvbmx5Iiwid3JpdGUiLCJodHRwczovL2FwaS5jcmVhbG9naXguY29tL21kZXZtYW5hZ2VyL2RldmljZXMud3JpdGUiXSwibG9naW5OYW1lIjoiMTAwMDAwMTUwMSIsImV4cCI6MzI0OTg0NjczNjMsImp0aSI6IjIyOGQyNmRkLTI3NjgtNGJlMy1iYTczLWU0NDkxN2QzZGFiZSIsInN1YiI6IjI0YWYxMTQxLTIyY2QtNDQwYS1hZTliLWJhY2ZjOGJjNzkxOCIsImF1ZCI6Im1EZXZNYW5hZ2VyIiwic2Vzc2lvbl9pZCI6Ikc3WFZMNkU3bmh1djhqNTdNZHY3Smhhd2tTdjc0YVJMOHZLWXM4VmExMDAwMjI4NzE0In0.UJ5X13k5FCnE2GG0RnZ6xMHzInybSPYU4jIMQgy-0y177PQQVz0MLywgOVwAa1MGUX_pGLWdywDVw4Nz3xvuijNMHdA8G8Fm1-Xzehu-pGHw2V2F6eAgd7zst7AwFMsSjhKJs5YyNhEqxbLP8PbhzgGyKzFI4UydVM8eflNaEKXZ1FfhMpD4W3wV9G0kSpgwgUn1fzZhedpO4r_BNxqcm00mxWWhfp3XK-HnwmlwLIihJY224qcGvzQd9ifgV0XhizAmYMqcJ7cP9qJp5Tckjad3yCPlB1MxSi9ltTkLem76-o36PX__-Jb_GR-tUl1xVtHMknVlOG6GmF7LNI9L_Q",
+									"value": "eyJjdHkiOiJKV1QiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwiYWxnIjoiUlNBMV81In0.XY4QNW2ov1vKbIrY5-eFWksCQtbHoZ0bynKPIfkL6qhhhHBVLzdyJ65sIkuNsxWW0dF0cnYJ4LepuFZRtHP8xot2m8Dlu07x-Ayb8ROjSZ7X4503AhxILLG6Nw9CdgOfe-VTVQUB3teLy4GUl89-wNHCecbAQnBnIXItPaEEkaQgkjUSWGwryu3FYGbGuZKTecot_VUqBjPpBKJLd1vOBk_CI3B4AJ8MYfowk-SDsjHmIy7UL_cRnWW1NbBpuZZ1eBTGn-tn25rolmgxm5PXS-gwmI0a_tY_owPlISTQV-4WNZdOkR58zbumc81cZPW46UXO8XWd5Oo1GH4vnSsPOw.R-kfGHTwYQ7s1k1ibIeZdA.ed9U24rPLT0YyNj0B_cmuXPu2ZrEQTLhrI8f_IBsSLH2fTnmN2XtPR3aOJKU3uWU7hXkdODqJkk7aRMyKdx1uGmyYPsTVtYGWUKm7Fc-SNIgaqhZHI8rZ7WBXrRQ9Jnkuw-lIWvjyoeuJsLpKzAlZsJ_BBLJnuGTSfHqVWs39LxJ_tcY94jHqhdh4n0lQDIdbZ03t0y6Hy0or-KF8KfcEbBXynl_CqcAxnzl3Jd0JgOmiD2OGnB0oOBxiySXjzdb8JsRrePwS-V88WCJBi9tHPaS5vXCOhvfHB7YBTHofcBOfjhvJA7YmEztL2wWJCRe5Mb2pKO7PzK5MU5p_LnkbzBkuwdq52Ej5hrgeYDhmWoOK5jHnKVgT4jH5s-76f5Uu5pEQtKq5bqjIu1jMGvwDHjUE0ohDpP3zRETwFFPhEY2krl9-_piBXGz8zUQ2RtrECjvXPOjIkDL1NNoegtXAWiq7y9jr_yBcDFjqKMTmF6MU1sj5N5IIDbHu89cF6nYALPkst_y7F0fE3rgZi5XNqCUsB8_IaMhCtjsvGOBHkgiRo1SbybacvIJnyxqDIbNYc2n9PQvaX9B-Mn9A-V07lwFLdUQfpNjuVcpbhtjsL9ihIj7FOtpI5uCs5fZXupYoloTHNDd_mQoAND4TczNTNKcAK9_7yrcbFEirj5HyAWOjXW9zlDeQjICKjhvcIW05vVRLXwfDcWRVDXpoMHoLUOStQPUDiQUhYGRD9FtY-ggq0I0Rz91OZcyp1364xnTpAPwd4B19yXun-fGQogtaGKGMZYcux-Zd0Rp0_PZ5LJvTInRnnplymBYM6M_ZzYNFvg9UvI4fOcC-QilH1RxNZ5CTqwO-m_oJciuUs6OQ8YkQbxN9-jjxJJNUEqOidE1CxEQdgo7NVKeYkUPOFVnbdhya8wPn5RnyD9TnTpK4Il_mnTIY-rXz37bOllQ6fV5-sw6IKRUMHZzZArktjT7fUI80uNRuzB7OLvqmNxUzkai4CPpxlzNqj7X1HSEVbx8LOyzBVj3w7UEZ-K3t-ECEVKaI0FBkifUrhwzlBVIpXikzIKp-0iiN7CyDpXuOLUhVu0704EmTpeuFmEH1AdwRMXCFLZdkb15KHg_cEGXzry6aVPOosSDkzeCVvcnOdggBgIehPtAHj2E4_EtZXoy7ox-BDXiTQ8rGx1ryvfKFp6dWZh8_NzZ3PskmCBO78moeTj9wiYOX-ziWToAwqO7hMZai-r-vmidZrInKXlCTHPPKVE04GzMk2q68IL5OZJdfBoXNny2nUfYctt-LtN6LZqQJammK2aQUtgf-kHq8mWE_npMSozbDjdL81_NuTLzRUrbIytFC4M1DEqCVDUkYSYhR0nArqtnv1Cl-jALcgbe19Ph3ZDjWTUiPIT0ItdLy4cnBqzbW9l-YBBC9aJpWNsCqPw_EZXhQtFjnnroD8piqU5v5bi_8nCs2wRZCsIf.YXV0aA",
 									"type": "string"
 								}
 							]
@@ -1322,8 +1389,7 @@
 							"query": [
 								{
 									"key": "",
-									"value": "",
-									"disabled": true
+									"value": null
 								}
 							]
 						}
@@ -1471,6 +1537,20 @@
 									"console.log(jsonData.pushId)",
 									"pm.environment.set(\"pushid\", jsonData.pushId);",
 									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "dedf8a09-d5f2-45ce-a85a-a5e66ad707b4",
+								"exec": [
+									"//var uuid = require('uuid');",
+									"//let deviceUUID = uuid.v4();",
+									"//console.log(\"deviceUUID: \" + deviceUUID);",
+									"//pm.environment.set(\"deviceID\", \"c3425985-576d-43d7-ae3c-780b8c461a4a\");",
+									"//pm.environment.set(\"deviceID\", deviceUUID);"
 								],
 								"type": "text/javascript"
 							}
@@ -2225,6 +2305,47 @@
 					"        pm.environment.set(\"postalCodeStr\",JSON.stringify(pm.variables.replaceIn('{{$randomInt}}')));",
 					"        console.log(\"... randomize is finished\");",
 					"    }",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"generateSecurityTestToken\", () => {",
+					"    const getAuthTokenRequest = {",
+					"        url: pm.environment.get(\"env_security_testToken\"),",
+					"        method: \"POST\",",
+					"        header: {",
+					"            'Content-Type': 'application/json',",
+					"            'Accept': 'application/json'",
+					"        },",
+					"        body: {",
+					"            mode: 'raw',",
+					"            raw: JSON.stringify({ ",
+					"                tenant_id: pm.environment.get(\"tenantId_security\"), ",
+					"                sub: pm.environment.get(\"deviceID\"),",
+					"                client_id: \"mDevManager\",",
+					"                language: \"en\",",
+					"                authorities: [\"DBAN_ADMIN\",\"DBAN_USER\"],",
+					"                user_id: pm.environment.get(\"userId_security\"),    ",
+					"                scope: [",
+					"                   \"https://api.crealogix.com/dban\",",
+					"                   \"read\",",
+					"                   \"https://api.crealogix.com/push/messages.device#read\",",
+					"                   \"https://api.crealogix.com/push/messages\",",
+					"                   \"https://api.crealogix.com/mdevmanager/device\",",
+					"                   \"write\",",
+					"                   \"https://api.crealogix.com/mdevmanager/devices.write\"",
+					"                ]            ",
+					"            })",
+					"        }",
+					"    };",
+					"    pm.environment.set(\"request\", JSON.stringify(getAuthTokenRequest));",
+					"    ",
+					"    pm.sendRequest(getAuthTokenRequest, function(err, res) {",
+					"        pm.environment.set(\"pushToken\", res.text());",
+					"        pm.test(\"No error is returned\", function () {",
+					"            pm.expect(err).to.not.be.ok;",
+					"            pm.expect(res).to.have.property('code', 200);",
+					"            pm.expect(res).to.have.property('status', 'OK');          ",
+					"        });",
+					"    });",
 					"});"
 				]
 			}

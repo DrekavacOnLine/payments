@@ -35,6 +35,7 @@
 		"creditorAgentStreetSWIFT": "\"Kungstradgardsgatan\"",
 		"creditorAgentCitySWIFT": "\"10670 STOCKHOLM\"",
 		"creditorAgentCountrySWIFT": "\"SE\"",
+		"language": "de",
 		"newmanRun": "0"
     }
 ]

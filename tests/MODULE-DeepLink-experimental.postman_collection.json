@@ -1,0 +1,1671 @@
+{
+	"info": {
+		"_postman_id": "ae0e7381-2515-441d-bd6d-34363f8a0b5c",
+		"name": "MODULE: DeepLink (experimental, actual)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Configuration",
+			"item": [
+				{
+					"name": ".Test session init",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
+								"exec": [
+									"//reset global variables for controling execution flow",
+									"eval(globals.cleanup)();",
+									"",
+									"//clear list of executed TestRail tests",
+									"pm.environment.set(\"testRailTestsInRun\",\"\");   ",
+									"",
+									"//specify list of tests to be executed in exact order",
+									"//const testsScope = \"Full\"; [Full|Core|Full+TestRail]",
+									"let testsScope = data.testsScope;",
+									"",
+									"var contractNumber = data.contractNumber;",
+									"if (contractNumber){ ",
+									"    pm.environment.set(\"contract\",JSON.parse(data.contractNumber));",
+									"    console.log(\"dataFile/contractNumber: \" + contractNumber);",
+									"}",
+									"",
+									"var paymentType = data.paymentType;",
+									"if (paymentType){ ",
+									"    pm.environment.set(\"paymentType\",data.paymentType);",
+									"    console.log(\"dataFile/paymentType: \" + paymentType);",
+									"}",
+									"var beneficiaryAccount = data.beneficiaryAccountNo;",
+									"if (beneficiaryAccount){ ",
+									"    pm.environment.set(\"beneficiaryAccount\",data.beneficiaryAccountNo);",
+									"    console.log(\"dataFile/beneficiaryAccount: \" + beneficiaryAccount);",
+									"}",
+									"var debtorAccountNo = data.debtorAccountNo;",
+									"if (debtorAccountNo){ ",
+									"    pm.environment.set(\"debtorAccountNo\",data.debtorAccountNo);",
+									"    console.log(\"dataFile/debtorAccountNo: \" + debtorAccountNo);",
+									"}",
+									"var debtorAccountName = data.debtorAccountName;",
+									"if (debtorAccountName){ ",
+									"    pm.environment.set(\"debtorAccountName\",data.debtorAccountName);",
+									"    console.log(\"dataFile/debtorAccountName: \" + debtorAccountName);",
+									"}",
+									"var debtorAdrLine = data.debtorAdrLine;",
+									"if (debtorAdrLine){ ",
+									"    pm.environment.set(\"debtorAdrLine\",data.debtorAdrLine);",
+									"    console.log(\"dataFile/debtorAdrLine: \" + debtorAdrLine);",
+									"}",
+									"var debtorPostalCode = data.debtorPostalCode;",
+									"if (debtorPostalCode){ ",
+									"    pm.environment.set(\"debtorPostalCode\",data.debtorPostalCode);",
+									"    console.log(\"dataFile/debtorPostalCode: \" + debtorPostalCode);",
+									"}",
+									"var debtorTownName = data.debtorTownName;",
+									"if (debtorTownName){ ",
+									"    pm.environment.set(\"debtorTownName\",data.debtorTownName);",
+									"    console.log(\"dataFile/debtorTownName: \" + debtorTownName);",
+									"}",
+									"var creditorAccountNo = data.creditorAccountNo;",
+									"if (creditorAccountNo){ ",
+									"    pm.environment.set(\"creditorAccountNo\",data.creditorAccountNo);",
+									"    console.log(\"dataFile/creditorAccountNo: \" + creditorAccountNo);",
+									"}",
+									"var creditorAccountNoUK = data.creditorAccountNoUK;",
+									"if (creditorAccountNoUK){ ",
+									"    pm.environment.set(\"creditorAccountNoUK\",data.creditorAccountNoUK);",
+									"    console.log(\"dataFile/creditorAccountNoUK: \" + creditorAccountNoUK);",
+									"}",
+									"var creditorAccountNoSwisDomestic = data.creditorAccountNoSwisDomestic;",
+									"if (creditorAccountNoSwisDomestic){ ",
+									"    pm.environment.set(\"creditorAccountNoSwisDomestic\",data.creditorAccountNoSwisDomestic);",
+									"    console.log(\"dataFile/creditorAccountNoSwisDomestic: \" + creditorAccountNoSwisDomestic);",
+									"}",
+									"var creditorAccountNoBalanceAdjustment = data.creditorAccountNoBalanceAdjustment;",
+									"if (creditorAccountNoBalanceAdjustment){ ",
+									"    pm.environment.set(\"creditorAccountNoBalanceAdjustment\",data.creditorAccountNoBalanceAdjustment);",
+									"    console.log(\"dataFile/creditorAccountNoBalanceAdjustment: \" + creditorAccountNoBalanceAdjustment);",
+									"}",
+									"var creditorAgentCountry = data.creditorAgentCountry;",
+									"if (creditorAgentCountry){ ",
+									"    pm.environment.set(\"creditorAgentCountry\",data.creditorAgentCountry);",
+									"    console.log(\"dataFile/creditorAgentCountry: \" + creditorAgentCountry);",
+									"}",
+									"var currencyCode = data.currencyCode;",
+									"if (currencyCode){ ",
+									"    pm.environment.set(\"currencyCode\",data.currencyCode);",
+									"    console.log(\"dataFile/currencyCode: \" + currencyCode);",
+									"}",
+									"var endToEndId = data.endToEndId;",
+									"if (endToEndId){ ",
+									"    pm.environment.set(\"endToEndId\",data.endToEndId);",
+									"    console.log(\"dataFile/endToEndId: \" + endToEndId);",
+									"}",
+									"var postalAccountNo = data.postalAccountNo;",
+									"if (postalAccountNo){ ",
+									"    pm.environment.set(\"postalAccountNo\",data.postalAccountNo);",
+									"    console.log(\"dataFile/postalAccountNo: \" + postalAccountNo);",
+									"}",
+									"var orangeAccountNo = data.orangeAccountNo;",
+									"if (orangeAccountNo){ ",
+									"    pm.environment.set(\"orangeAccountNo\",data.orangeAccountNo);",
+									"    console.log(\"dataFile/orangeAccountNo: \" + orangeAccountNo);",
+									"}",
+									"var accountAlias = data.accountAlias;",
+									"if (accountAlias){ ",
+									"    pm.environment.set(\"accountAlias\",data.accountAlias);",
+									"    console.log(\"dataFile/accountAlias: \" + accountAlias);",
+									"} else {",
+									"    pm.environment.set(\"accountAlias\",\"1501 CHF\");",
+									"    console.log(\"dataFile/accountAlias: \" + \"1501 CHF\");",
+									"}",
+									"var bic = data.bic;",
+									"if (bic){ ",
+									"    pm.environment.set(\"bic\",data.bic);",
+									"    console.log(\"dataFile/bic: \" + bic);",
+									"}",
+									"",
+									"//console.log(testsScope); ",
+									"switch(testsScope) {",
+									"    case \"Full\":",
+									"        var testSession = [",
+									"            \"_Generate access token K8S\",",
+									"            \"Create new domain (C54506871)\",",
+									"            \"Get domains - check if domain was added (C54506875)\",",
+									"            \"Get newly created domain details (C54506876)\",",
+									"            \"Update domain entry (C54506877)\",",
+									"            \"Add parameters configuration for registered domain (C54506879)\",",
+									"            \"Show all params for the domain (C54506880)\",",
+									"            \"Register new link (C47285208)\",",
+									"            \"Get all links for tenant (ToDo)\",",
+									"            \"Get link details (ToDo)\",",
+									"            \"Get link statistics (ToDo)\",",
+									"            \"Deactivate new link (ToDo)\",",
+									"            \"Update domain entry cleanUP (C48109269)\"",
+									"            ]; break;",
+									"    case \"Core\":",
+									"        var testSession = [",
+									"            \"_Generate access token K8S\",",
+									"            \"Create new domain (C54506871)\",",
+									"            \"Get domains - check if domain was added (C54506875)\",",
+									"            \"Get newly created domain details (C54506876)\",",
+									"            \"Update domain entry (C54506877)\",",
+									"            \"Add parameters configuration for registered domain (C54506879)\",",
+									"            \"Show all params for the domain (C54506880)\",",
+									"            \"Register new link (C47285208)\",",
+									"            \"Get all links for tenant (ToDo)\",",
+									"            \"Get link details (ToDo)\",",
+									"            \"Get link statistics (ToDo)\",",
+									"            \"Deactivate new link (ToDo)\",",
+									"            \"Update domain entry cleanUP (C48109269)\"",
+									"            ]; break;",
+									"    case \"Quick\":",
+									"        var testSession = [",
+									"            \"_Generate access token K8S\",",
+									"            \"End to end test (ToDo)\"",
+									"            ]; break;",
+									"    case \"Experimental\":",
+									"        var testSession = [",
+									"            \"Create new domain (C54506871)\",",
+									"            \"Get domains - check if domain was added (C54506875)\",",
+									"            \"Get newly created domain details (C54506876)\",",
+									"            \"Update domain entry (C54506877)\",",
+									"            \"Add parameters configuration for registered domain (C54506879)\",",
+									"            \"Show all params for the domain (C54506880)\",",
+									"            \"Register new link (C47285208)\",",
+									"            \"Get all links for tenant (ToDo)\",",
+									"            \"Get link details (ToDo)\",",
+									"            \"Get link statistics (ToDo)\",",
+									"            \"Deactivate new link (ToDo)\",",
+									"            \"Update domain entry cleanUP (C48109269)\"",
+									"            ]; break;",
+									"    case \"TestRailClean\":        ",
+									"        var testSession = [",
+									"            \"_Test session close\"",
+									"            ]; break;",
+									"    default:",
+									"        throw new Error(\"No tests selected for execution!\");",
+									"}        ",
+									"    ",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(testSession, \"testSession\");",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "OPTIONS",
+						"header": [],
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tests",
+			"item": [
+				{
+					"name": "Create new domain (C54506871)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3c6c5a3a-c7e9-4a63-abd5-ce7d487d476e",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" New domain is created\", function () {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"newDomainId\", jsonData.id);",
+									"",
+									"    //Determine if assertion passed at whole",
+									"    pm.response.to.have.status(201) ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e77748ba-c02f-4aaf-95dc-ebc3703b3c97",
+								"exec": [
+									"const c = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'\r",
+									"const s = Array.from({length:6}, _ => c[Math.floor(Math.random()*c.length)]).join('')\r",
+									"console.log(\"domainPattern\", \"allegro\" + s + \".pl\");\r",
+									"pm.environment.set(\"domainPattern\", \"allegro\" + s + \".pl\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{dltoken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"allegro.pl for newman tests\",\n  \"domainPattern\": \"{{domainPattern}}\",\n  \"loginRequired\": false,\n  \"state\": \"ALLOWED\"\n}"
+						},
+						"url": {
+							"raw": "{{env_deeplink_secure}}/deeplink/admin-api/whitelist/{{tenantId_security}}/v1/domains/",
+							"host": [
+								"{{env_deeplink_secure}}"
+							],
+							"path": [
+								"deeplink",
+								"admin-api",
+								"whitelist",
+								"{{tenantId_security}}",
+								"v1",
+								"domains",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get domains - check if domain was added (C54506875)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9a6cd6bd-cfa9-464b-80dd-1cd828379178",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Domain is added to list of available domains\", function () {",
+									"",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(pm.response.text()).to.include(\"allegro.pl for newman tests\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6a0c81f0-7234-454d-8949-a498cfe1e091",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{dltoken}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{env_deeplink_secure}}/deeplink/admin-api/whitelist/{{tenantId_security}}/v1/domains",
+							"host": [
+								"{{env_deeplink_secure}}"
+							],
+							"path": [
+								"deeplink",
+								"admin-api",
+								"whitelist",
+								"{{tenantId_security}}",
+								"v1",
+								"domains"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get newly created domain details (C54506876)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7471fd9e-4165-4663-b771-7f753ae90fcb",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Domain details are retrieved\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "7f38a65a-0101-4122-a0d3-98a3365e2217",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{dltoken}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{env_deeplink_secure}}/deeplink/admin-api/whitelist/{{tenantId_security}}/v1/domains/{{newDomainId}}",
+							"host": [
+								"{{env_deeplink_secure}}"
+							],
+							"path": [
+								"deeplink",
+								"admin-api",
+								"whitelist",
+								"{{tenantId_security}}",
+								"v1",
+								"domains",
+								"{{newDomainId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update domain entry (C54506877)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "91aadb23-e500-4e0c-b4e7-817b297e7ef1",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Domain is updated\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9930d78d-d404-43b3-97ca-86bfffc2feef",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{dltoken}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"allegro.pl for Newman tests\",\n    \"domainPattern\": \"allegro.pl\",\n    \"loginRequired\": false,\n    \"state\": \"ALLOWED\"\n}"
+						},
+						"url": {
+							"raw": "{{env_deeplink_secure}}/deeplink/admin-api/whitelist/{{tenantId_security}}/v1/domains/{{newDomainId}}",
+							"host": [
+								"{{env_deeplink_secure}}"
+							],
+							"path": [
+								"deeplink",
+								"admin-api",
+								"whitelist",
+								"{{tenantId_security}}",
+								"v1",
+								"domains",
+								"{{newDomainId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add parameters configuration for registered domain (C54506879)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5941fd50-aaa7-43e6-9ef8-19e01d2b46a1",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Parameters are added to domain\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    ",
+									"    setTimeout(function(){",
+									"        console.log(\"Sleeping for 10 seconds before next request.\");",
+									"    }, 10000);    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "73dcf0cd-90c4-41ba-ae6c-cc935b89f688",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{dltoken}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"parameters\": [\n    {\n      \"name\": \"string\",\n      \"state\": \"ALLOWED\"\n    },\n    {\n      \"name\": \"stan\",\n      \"state\": \"ALLOWED\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{env_deeplink_secure}}/deeplink/admin-api/whitelist/{{tenantId_security}}/v1/domains/{{newDomainId}}/parameters",
+							"host": [
+								"{{env_deeplink_secure}}"
+							],
+							"path": [
+								"deeplink",
+								"admin-api",
+								"whitelist",
+								"{{tenantId_security}}",
+								"v1",
+								"domains",
+								"{{newDomainId}}",
+								"parameters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show all params for the domain (C54506880)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fa0d021a-48fa-444a-bee1-2ce5fa96d54e",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Domain parameters are retrieved\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    ",
+									"    setTimeout(function(){",
+									"          console.log(\"Sleeping for 10 seconds before next request.\");",
+									"    }, 10000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "c9dcf7bf-7d9f-4943-b532-79d209ebf282",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{dltoken}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{env_deeplink_secure}}/deeplink/admin-api/whitelist/{{tenantId_security}}/v1/domains/{{newDomainId}}/parameters",
+							"host": [
+								"{{env_deeplink_secure}}"
+							],
+							"path": [
+								"deeplink",
+								"admin-api",
+								"whitelist",
+								"{{tenantId_security}}",
+								"v1",
+								"domains",
+								"{{newDomainId}}",
+								"parameters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register new link (C47285208)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6fb29c85-446a-4150-b8d2-a40467f18023",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Link is registered\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"lilnkUrl\", jsonData.link);",
+									"",
+									"    pm.response.to.have.status(201);",
+									"    pm.expect(jsonData._status).to.be.true;",
+									"    pm.expect(pm.response.text()).to.include(\"http\");",
+									"    ",
+									"    setTimeout(function(){",
+									"          console.log(\"Sleeping for 3 seconds before next request.\");",
+									"    }, 3000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d766d4d2-bb3c-4250-9a63-189e1d144430",
+								"exec": [
+									"var moment = require('moment')",
+									"pm.globals.set('nowDate', moment().add(0, 'hour').add(15, 'second').utc().format())",
+									"pm.globals.set('futureDate', moment().add(20, 'day').add(2, 'minute').utc().format())",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{dltoken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"key\": {\n    \"businessDomain\": \"allegro.pl for Newman tests\",\n    \"linkName\": \"allegro.pl {{$timestamp}}\"\n  },\n  \"registrationType\": \"FREELINK\",\n  \"settings\": {\n    \"active\": true,\n    \"validFrom\": \"{{nowDate}}\",\n    \"validTo\": \"{{futureDate}}\"\n  },\n  \"variables\": [\n  \t{\n     \"name\": \"search\",\n     \"required\": true\n   }\n  ],\n  \"ports\": [\n    {\n      \"key\": \"a1\",\n      \"matcherType\": \"DEFAULT\",\n      \"location\": \"https://allegro.pl/listing?string={$search}&stan=nowe\"\n    },\n    {\n      \"key\": \"e1\",\n      \"matcherType\": \"MC\",\n      \"location\": \"https://allegro.pl/listing?string={$search}&stan=uzywane\"\n    }\n  ]\n}\n"
+						},
+						"url": {
+							"raw": "{{env_deeplink_secure}}/deeplink/api/link/{{tenantId_security}}/v1/links",
+							"host": [
+								"{{env_deeplink_secure}}"
+							],
+							"path": [
+								"deeplink",
+								"api",
+								"link",
+								"{{tenantId_security}}",
+								"v1",
+								"links"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all links for tenant (ToDo)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6fb29c85-446a-4150-b8d2-a40467f18023",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" All links for tenant are retrieved\", function () {",
+									"    var deepLinkId;",
+									"    var jsonData = pm.response.json();",
+									"    ",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(jsonData._status).to.be.true;",
+									"",
+									"    setTimeout(function(){",
+									"          console.log(\"Sleeping for 3 seconds before next request.\");",
+									"    }, 3000);",
+									"    ",
+									"    jsonData.links.forEach(function(link) {",
+									"        if (link.businessDomain === \"allegro.pl for Newman tests\" && link.active === true){",
+									"            deepLinkId = link.id;",
+									"        }",
+									"    });",
+									"    postman.setEnvironmentVariable(\"deepLinkId\", deepLinkId);    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d766d4d2-bb3c-4250-9a63-189e1d144430",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{dltoken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{env_deeplink_secure}}/deeplink/admin-api/link/{{tenantId_security}}/v1/links",
+							"host": [
+								"{{env_deeplink_secure}}"
+							],
+							"path": [
+								"deeplink",
+								"admin-api",
+								"link",
+								"{{tenantId_security}}",
+								"v1",
+								"links"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get link details (ToDo)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6fb29c85-446a-4150-b8d2-a40467f18023",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Link details are retrieved\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    setTimeout(function(){",
+									"          console.log(\"Sleeping for 3 seconds before next request.\");",
+									"    }, 2000);    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d766d4d2-bb3c-4250-9a63-189e1d144430",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{dltoken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{env_deeplink_secure}}/deeplink/admin-api/link/{{tenantId_security}}/v1/links/{{deepLinkId}}",
+							"host": [
+								"{{env_deeplink_secure}}"
+							],
+							"path": [
+								"deeplink",
+								"admin-api",
+								"link",
+								"{{tenantId_security}}",
+								"v1",
+								"links",
+								"{{deepLinkId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get link statistics (ToDo)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6fb29c85-446a-4150-b8d2-a40467f18023",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Link statistics are retrieved\", function () {",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(jsonData._status).to.be.true;",
+									"",
+									"    setTimeout(function(){",
+									"          console.log(\"Sleeping for 3 seconds before next request.\");",
+									"    }, 2000);    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d766d4d2-bb3c-4250-9a63-189e1d144430",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{dltoken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{env_deeplink_secure}}/deeplink/admin-api/link/{{tenantId_security}}/v1/links/{{deepLinkId}}/statistics",
+							"host": [
+								"{{env_deeplink_secure}}"
+							],
+							"path": [
+								"deeplink",
+								"admin-api",
+								"link",
+								"{{tenantId_security}}",
+								"v1",
+								"links",
+								"{{deepLinkId}}",
+								"statistics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate new link (ToDo)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6fb29c85-446a-4150-b8d2-a40467f18023",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Link is deactivated\", function () {",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.response.to.have.status(200);",
+									"    pm.expect(jsonData._status).to.be.true;",
+									"    ",
+									"    setTimeout(function(){",
+									"          console.log(\"Sleeping for 3 seconds before next request.\");",
+									"    }, 3000);    ",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d766d4d2-bb3c-4250-9a63-189e1d144430",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{dltoken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{env_deeplink_secure}}/deeplink/admin-api/link/{{tenantId_security}}/v1/links/{{deepLinkId}}/perform?action=deactivate",
+							"host": [
+								"{{env_deeplink_secure}}"
+							],
+							"path": [
+								"deeplink",
+								"admin-api",
+								"link",
+								"{{tenantId_security}}",
+								"v1",
+								"links",
+								"{{deepLinkId}}",
+								"perform"
+							],
+							"query": [
+								{
+									"key": "action",
+									"value": "deactivate"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update domain entry cleanUP (C48109269)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "795f2ccb-5133-4165-aba9-832314fabfe3",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Domains clean up is performed successfully\", function () {",
+									"    pm.response.to.have.status(200);",
+									"",
+									"    setTimeout(function(){",
+									"          console.log(\"Sleeping for 3 seconds before next request.\");",
+									"    }, 3000);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ba825a35-8da8-4918-a2b5-bbb286f82437",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{dltoken}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"allegro - allegro.pl{{$timestamp}}\",\n    \"domainPattern\": \"allegro{{$timestamp}}.pl\",\n    \"loginRequired\": false,\n    \"state\": \"ALLOWED\"\n}"
+						},
+						"url": {
+							"raw": "{{env_deeplink_secure}}/deeplink/admin-api/whitelist/{{tenantId_security}}/v1/domains/{{newDomainId}}",
+							"host": [
+								"{{env_deeplink_secure}}"
+							],
+							"path": [
+								"deeplink",
+								"admin-api",
+								"whitelist",
+								"{{tenantId_security}}",
+								"v1",
+								"domains",
+								"{{newDomainId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "647c5d94-4e54-400f-bce3-15aab7fd22ed",
+						"type": "text/javascript",
+						"exec": [
+							"/*determine test case ID from request name*/",
+							"var testRailTestCases = eval(globals.extractTestCaseIDFromRequestName)();",
+							"//console.log(\"TC ID extracted from request name: \" + testRailTestCases);",
+							"",
+							"/*add current test case ID to list of already executed tests*/",
+							"eval(globals.testsExecuted)(testRailTestCases);",
+							"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+							"",
+							"//store test case ID of current request for linking with Test Rail",
+							"pm.globals.set(\"_tr_\" + request.name, testRailTestCases);",
+							"",
+							"//call global function to generate access token",
+							"eval(globals.generateAccessToken)();"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "c21f64a6-a21b-4f66-8644-d10ae579ebce",
+						"type": "text/javascript",
+						"exec": [
+							"eval(globals.sessionNavigate)();"
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Tools",
+			"item": [
+				{
+					"name": "getDeviceAccessTokenV2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "32d608bf-f918-41d2-96d3-9f601c4122d1",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
+									"    pm.response.to.not.be.error;",
+									"    //pm.response.to.be.withBody;",
+									"    let token = pm.response.text();",
+									"    pm.environment.set(\"access_token\", token);",
+									"    pm.environment.set(\"dltoken\", token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "22e6af0d-6a94-48ed-aaf9-8fd907dc488a",
+								"exec": [
+									"console.log(\"Test Token url is: \" + pm.environment.get(\"env_security_testToken\"));",
+									"console.log(\"Contract is: \" + pm.environment.get(\"userId_security\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"aud\":  \"deeplink\",  \r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [\"DBAN_ADMIN\", \"DBAN_USER\"],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": {{userId_security}},\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",    \r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/assets/account.accountname.write\",\r\n    \"https://api.crealogix.com/assets/account.accountimage.write\",\r\n    \"https://api.crealogix.com/assets/cuac.readonly\",\r\n    \"https://api.crealogix.com/assets/portfolio.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\",\r\n \t\"https://api.crealogix.com/deeplink/domains\",\r\n    \"https://api.crealogix.com/deeplink/links\",\r\n    \"https://api.crealogix.com/mdevmanager/devices.readonly\",\r\n    \"https://api.crealogix.com/push/messages.readonly\",   \r\n    \"https://api.crealogix.com/mdevmanager/devices.write\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+						},
+						"url": {
+							"raw": "{{env_security_testToken}}",
+							"host": [
+								"{{env_security_testToken}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "eb735a54-7d17-4f1c-bfab-57fa86aa3302",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "11f2beb8-8cfc-4f22-b320-2e75dd9e3490",
+						"type": "text/javascript",
+						"exec": [
+							"eval(globals.sessionNavigate)();",
+							"pm.globals.unset(\"_tr_\" + request.name);"
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1f56ead3-8a04-49ba-8b92-6fa50223f4a5",
+				"type": "text/javascript",
+				"exec": [
+					"//************************************************************************************************",
+					"// variable initialization************************************************************************",
+					"//************************************************************************************************",
+					"var test = pm.environment.get(\"testRailTestsInRun\");",
+					"if( !test) {",
+					"    pm.environment.set(\"testRailTestsInRun\",\"\");",
+					"}",
+					"",
+					"",
+					"// Define test data, setup configuration per environment",
+					"let pmEnv = pm.environment.get(\"envName\");",
+					"//let pmEnv = pm.environment.name;",
+					"let dataEnv = data.envName;",
+					"if (dataEnv){",
+					"    if (pmEnv !== dataEnv) {",
+					"        throw new Error(\"Wrong environment selected, testing is terminated!\");",
+					"    }",
+					"}",
+					"//************************************************************************************************",
+					"// DEPRECATED !!!",
+					"// set access token ******************************************************************************",
+					"//************************************************************************************************",
+					"//pm.environment.set(\"token\",data.accessToken);",
+					"",
+					"//************************************************************************************************",
+					"// set parameters ********************************************************************************",
+					"//************************************************************************************************",
+					"",
+					"/*",
+					"var contractNumber = data.contractNumber;",
+					"if (contractNumber){ ",
+					"    pm.environment.set(\"contract\",JSON.parse(data.contractNumber));",
+					"    console.log(\"dataFile/contractNumber: \" + contractNumber);",
+					"}",
+					"",
+					"var paymentType = data.paymentType;",
+					"if (paymentType){ ",
+					"    pm.environment.set(\"paymentType\",data.paymentType);",
+					"    console.log(\"dataFile/paymentType: \" + paymentType);",
+					"}",
+					"var beneficiaryAccount = data.beneficiaryAccount;",
+					"if (beneficiaryAccount){ ",
+					"    pm.environment.set(\"beneficiaryAccount\",data.beneficiaryAccount);",
+					"    console.log(\"dataFile/beneficiaryAccount: \" + beneficiaryAccount);",
+					"}",
+					"var debtorAccountNo = data.debtorAccountNo;",
+					"if (debtorAccountNo){ ",
+					"    pm.environment.set(\"debtorAccountNo\",data.debtorAccountNo);",
+					"    console.log(\"dataFile/debtorAccountNo: \" + debtorAccountNo);",
+					"}",
+					"var debtorAccountName = data.debtorAccountName;",
+					"if (debtorAccountName){ ",
+					"    pm.environment.set(\"debtorAccountName\",data.debtorAccountName);",
+					"    console.log(\"dataFile/debtorAccountName: \" + debtorAccountName);",
+					"}",
+					"var debtorAdrLine = data.debtorAdrLine;",
+					"if (debtorAdrLine){ ",
+					"    pm.environment.set(\"debtorAdrLine\",data.debtorAdrLine);",
+					"    console.log(\"dataFile/debtorAdrLine: \" + debtorAdrLine);",
+					"}",
+					"var debtorPostalCode = data.debtorPostalCode;",
+					"if (debtorPostalCode){ ",
+					"    pm.environment.set(\"debtorPostalCode\",data.debtorPostalCode);",
+					"    console.log(\"dataFile/debtorPostalCode: \" + debtorPostalCode);",
+					"}",
+					"var debtorTownName = data.debtorTownName;",
+					"if (debtorTownName){ ",
+					"    pm.environment.set(\"debtorTownName\",data.debtorTownName);",
+					"    console.log(\"dataFile/debtorTownName: \" + debtorTownName);",
+					"}",
+					"var creditorAccountNo = data.creditorAccountNo;",
+					"if (creditorAccountNo){ ",
+					"    pm.environment.set(\"creditorAccountNo\",data.creditorAccountNo);",
+					"    console.log(\"dataFile/creditorAccountNo: \" + creditorAccountNo);",
+					"}",
+					"var creditorAgentCountry = data.creditorAgentCountry;",
+					"if (creditorAgentCountry){ ",
+					"    pm.environment.set(\"creditorAgentCountry\",data.creditorAgentCountry);",
+					"    console.log(\"dataFile/creditorAgentCountry: \" + creditorAgentCountry);",
+					"}",
+					"var currencyCode = data.currencyCode;",
+					"if (currencyCode){ ",
+					"    pm.environment.set(\"currencyCode\",data.currencyCode);",
+					"    console.log(\"dataFile/currencyCode: \" + currencyCode);",
+					"}",
+					"var endToEndId = data.endToEndId;",
+					"if (endToEndId){ ",
+					"    pm.environment.set(\"endToEndId\",data.endToEndId);",
+					"    console.log(\"dataFile/endToEndId: \" + endToEndId);",
+					"}",
+					"var postalAccountNo = data.postalAccountNo;",
+					"if (postalAccountNo){ ",
+					"    pm.environment.set(\"postalAccountNo\",data.postalAccountNo);",
+					"    console.log(\"dataFile/postalAccountNo: \" + postalAccountNo);",
+					"}",
+					"*/",
+					"",
+					"//************************************************************************************************",
+					"// connect to TestRail ***************************************************************************",
+					"//************************************************************************************************",
+					"pm.globals.set(\"TESTRAIL_DOMAIN\",\"testrail.ebs.crealogix.net\");",
+					"pm.globals.set(\"TESTRAIL_USERNAME\",\"milan.karadeglic@crealogix.com\"); ",
+					"pm.globals.set(\"TESTRAIL_APIKEY\",\"Q4MlDw1e70Kxh1g1YPq9-Dg0abDWer.pSWcVWcxO4\");",
+					"pm.globals.set(\"TESTRAIL_PROJECTID\",8); ",
+					"pm.globals.set(\"TESTRAIL_TITLE\",\"Postman API Tests\");",
+					"",
+					"//************************************************************************************************",
+					"//global function to determine next day/next working day *****************************************",
+					"//************************************************************************************************",
+					"var moment = require('moment');",
+					"let nextDay = moment().add(\"days\",1).format(\"YYYY-MM-DD\"); //next day in specified format",
+					"let futureDay = moment().add(\"days\",30).format(\"YYYY-MM-DD\"); //next day in specified format",
+					"switch (moment().add(\"days\",1).format(\"dddd\")){",
+					"    case \"Sunday\":",
+					"        var nextWorkingDay = moment().add(\"days\",2).format(\"YYYY-MM-DD\");",
+					"        break;",
+					"    case \"Saturday\":",
+					"        var nextWorkingDay = moment().add(\"days\",3).format(\"YYYY-MM-DD\");",
+					"        break;",
+					"    default:",
+					"        var nextWorkingDay = moment().add(\"days\",1).format(\"YYYY-MM-DD\");",
+					"}",
+					"switch (moment().add(\"days\",30).format(\"dddd\")){",
+					"    case \"Sunday\":",
+					"        var futureWorkingDay = moment().add(\"days\",31).format(\"YYYY-MM-DD\");",
+					"        var futurePlusWorkingDay = moment().add(\"days\",38).format(\"YYYY-MM-DD\");",
+					"        break;",
+					"    case \"Saturday\":",
+					"        var futureWorkingDay = moment().add(\"days\",32).format(\"YYYY-MM-DD\");",
+					"        var futurePlusWorkingDay = moment().add(\"days\",39).format(\"YYYY-MM-DD\");",
+					"        break;",
+					"    default:",
+					"        var futureWorkingDay = moment().add(\"days\",30).format(\"YYYY-MM-DD\");",
+					"        var futurePlusWorkingDay = moment().add(\"days\",37).format(\"YYYY-MM-DD\");",
+					"}",
+					"",
+					"pm.globals.set('PrS:nextDay', JSON.stringify(nextDay));",
+					"pm.globals.set('PrS:nextWorkingDay', JSON.stringify(nextWorkingDay));",
+					"pm.globals.set('PrS:futureWorkingDay', JSON.stringify(futureWorkingDay));",
+					"pm.globals.set('PrS:futurePlusWorkingDay', JSON.stringify(futurePlusWorkingDay));",
+					"",
+					"/*",
+					"// Define test data, setup configuration per environment",
+					"var env = pm.environment.get(\"envName\");",
+					"if (env === \"MDB-R191-TEST\") {",
+					"//    var contractNumber = \"{{contractNumber}}\";",
+					"//    var debtorAccountNo = \"{{debtorAccountNo}}\";",
+					"//    var debtorAccountName = \"{{debtorAccountName}}\";",
+					"//    var creditorAccountNo = \"{{creditorAccountNo}}\";",
+					"    } else if (env === \"MDB-R191-LAT\") {",
+					"} else {",
+					"    throw new Error(\"Wrong environment selected, requests are skipped!\")",
+					"}",
+					"//pm.globals.set('PrS:contractNumber', JSON.stringify(contractNumber));",
+					"//pm.globals.set('PrS:debtorAccountNo', JSON.stringify(debtorAccountNo));",
+					"//pm.globals.set('PrS:debtorAccountName', JSON.stringify(debtorAccountName));",
+					"//pm.globals.set('PrS:creditorAccountNo', JSON.stringify(creditorAccountNo));",
+					"*/",
+					"",
+					"// Save the object as a variable.",
+					"// JSON.stringify will serialize the object so that Postman can save it",
+					"",
+					"//pm.globals.set('PrS:tags', JSON.stringify(tags));",
+					"//pm.environment.set(\"testGroup\",\"Patient Zero\") //set environment variable if/when needed",
+					"",
+					"                //pm.response.to.be.ok;         - Status code must be 200",
+					"                //pm.response.to.be.error       - Checks 4XX or 5XX",
+					"                //pm.response.to.be.serverError - Checks 5XX",
+					"                //pm.response.to.be.clientError - Checks 4XX status code",
+					"",
+					"// Save common tests in a global variable",
+					"postman.setGlobalVariable(\"commonTests\", () => {",
+					"    pm.test(\"Response must be valid with/with out a body and with proper status code\", function () {",
+					"        if ([\"GET\",\"POST\",\"PUT\"].indexOf(request.method) > -1) {",
+					"            pm.response.to.not.be.error;",
+					"            pm.response.to.be.withBody;",
+					"            pm.response.to.be.json;",
+					"            pm.response.to.have.jsonBody();",
+					"            pm.response.to.not.have.jsonBody('error');",
+					"            pm.response.to.have.header('Content-Type', 'application/json;charset=UTF-8');",
+					"        } else {",
+					"            pm.response.to.not.be.withBody;",
+					"        }",
+					"        switch(request.method){",
+					"            case \"POST\":",
+					"                pm.response.to.have.status(201);",
+					"                break;",
+					"            case \"PUT\":",
+					"                pm.response.to.have.status(200);",
+					"                break;",
+					"            case \"GET\":",
+					"                pm.response.to.have.status(200);",
+					"                break;",
+					"            case \"DELETE\":",
+					"                pm.response.to.have.status(204);",
+					"                break;",
+					"        }        ",
+					"    });",
+					"    //pm.test(\"Response time is below 1000ms\", function () {",
+					"    //    pm.expect(pm.response.responseTime).to.be.below(1000);",
+					"    //});",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"assertValidCreditorAgent\", () => {",
+					"    pm.expect(address).to.be.an('object').with.keys('name1', 'name2', 'street', 'city', 'country', 'bic');",
+					"    pm.expect(address.name1).to.be.a('string').and.not.empty;",
+					"    pm.expect(address.name2).to.be.a('string').and.not.empty;",
+					"    pm.expect(address.street).to.be.a('string').and.not.empty;",
+					"    pm.expect(address.city).to.be.a('string').and.not.empty;",
+					"    pm.expect(address.country).to.be.a('string').with.lengthOf(2).and.match(/[A-Z]+/);",
+					"    pm.expect(address.bic).to.be.a('string').and.not.empty;",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"sessionInit\", (testSession, sessionName) => {",
+					"    //session init section",
+					"    console.log(request.name + \", initialization: \" + testSession + \", global var: \" + sessionName);",
+					"    console.log(request.name + \", executing: \" + testSession[0]);",
+					"    ",
+					"    // Select first test from session to be executed",
+					"    postman.setNextRequest(testSession[0]);",
+					"    testSession.shift();",
+					"    if (testSession.length === 0) {",
+					"        console.log(request.name + \", test session is empty, unset \" + sessionName);",
+					"        pm.globals.unset(sessionName);",
+					"        console.log(request.name + \", terminate tests execution list\");",
+					"    } else {",
+					"        pm.globals.set(sessionName, testSession);",
+					"        console.log(request.name + \" for \" + sessionName + \", updated list of tests to be executed: \" + testSession);",
+					"    }",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"sessionNavigate\", () => {",
+					"    console.log(request.name + \", entering ...\");",
+					"    if (pm.globals.get(\"requestsToRun\") === undefined){",
+					"        console.log(request.name + \", requestsToRun is undefined\");",
+					"        pm.globals.set(\"testRailTestCases\",\"\");",
+					"        console.log(request.name + \", reset global var: testRailTestCases\");    ",
+					"        if (pm.globals.get(\"testSession\") === undefined){",
+					"            console.log(request.name + \", testSession is undefined\");",
+					"            //here >> export list of tests executed",
+					"            var tests = pm.environment.get(\"testRailTestsInRun\");",
+					"            tests = tests.replace(/C/g, \"\");",
+					"            tests = tests.replace(/ /g, \", \");",
+					"            tests = tests.replace(/,,/g, \",\");",
+					"            console.log(\"TestRail tests executed executed in this run: \" + tests);",
+					"            console.log(\"The end\");",
+					"            postman.setNextRequest(null);",
+					"        } else {",
+					"        var testSession = pm.globals.get(\"testSession\");",
+					"        console.log(request.name + \", checking what to run: \" + testSession[0]);",
+					"        postman.setNextRequest(testSession[0]); ",
+					"        testSession.shift();",
+					"        if (testSession.length === 0) {",
+					"            pm.globals.unset(\"testSession\");",
+					"            console.log(request.name + \", terminate execution list\");",
+					"        } else {",
+					"            pm.globals.set(\"testSession\", testSession);",
+					"            console.log(request.name + \", updated list of tests to be executed: \" + testSession);",
+					"        }}",
+					"    } else {",
+					"    var requestsToRun = pm.globals.get(\"requestsToRun\");",
+					"    console.log(request.name + \", checking what to run: \" + requestsToRun[0]);",
+					"    postman.setNextRequest(requestsToRun[0]); ",
+					"    requestsToRun.shift();",
+					"    if (requestsToRun.length === 0) {",
+					"        pm.globals.unset(\"requestsToRun\");",
+					"        console.log(request.name + \", terminate requests execution list\");",
+					"    } else {",
+					"        pm.globals.set(\"requestsToRun\", requestsToRun);",
+					"        console.log(request.name + \", updated list of requests to be executed: \" + requestsToRun);",
+					"    }}",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"cleanup\", () => {",
+					"    const clean = [\"requestsToRun\", \"testSession\"];",
+					"    for(let i = 0; i < clean.length; ++i){",
+					"        pm.globals.unset(clean[i]);",
+					"    }",
+					"    //create single secure mail by default ",
+					"    pm.environment.set(\"mailsToCreate\", 1);    ",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"testsExecuted\", (listOfExecutedTests) => {",
+					"    let tests =  pm.environment.get(\"testRailTestsInRun\");",
+					"    //console.log(\"TestRail tests stored in 'testRailTestsInRun': \" + tests);",
+					"    if (!tests.includes(listOfExecutedTests)){",
+					"        if (tests.length > 0 && listOfExecutedTests.length > 0) {",
+					"            tests = tests + \" \"",
+					"        }",
+					"        tests = tests + listOfExecutedTests;",
+					"        //console.log(\"TestRail tests to be stored to 'testRailTestsInRun': \" + tests);",
+					"        pm.environment.set(\"testRailTestsInRun\",tests);",
+					"        //console.log(\"TestRail tests executed so far: \" + tests);",
+					"    }",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"extractTestCaseIDFromRequestName\", () => {",
+					"    let n = request.name.lastIndexOf(\"(\");",
+					"    if (n == 0 ) {",
+					"        return \"\";",
+					"    } else if (request.name.substr(n + 1, 4) == \"ToDo\") {",
+					"        return \"\";",
+					"    } else {",
+					"        return request.name.substr(n + 1, request.name.length - n - 2);",
+					"    }",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"schemaValidator\", (schema, jsonData) => {",
+					"    //old, deprecated schema validationimplementation",
+					"    //pm.expect(tv4.validate(jsonData, securitiesSchema)).to.be.true;",
+					"    ",
+					"    //new schema validation implementation",
+					"    ",
+					"    var schemaValidationPassed = true;",
+					"    var serviceSchema = pm.environment.get(schema);",
+					"    //var jsonData = JSON.parse(pm.responseBody);",
+					"",
+					"    var validationResult = tv4.validateMultiple(jsonData, serviceSchema, true, true);",
+					"    for(var i =0; i<validationResult.errors.length;i++){",
+					"        console.log(\"path :\"+ validationResult.errors[i].dataPath +\" message :\"+ validationResult.errors[i].message);  ",
+					"        //Skipping all \"Invalid type\" errors as they are expected with current service implementations",
+					"        schemaValidationPassed = schemaValidationPassed && (validationResult.errors[i].message.lastIndexOf(\"Invalid type\") > -1);",
+					"        //console.log(\"schemaValidationPassed :\" + schemaValidationPassed);",
+					"    }    ",
+					"    return schemaValidationPassed;",
+					"}); ",
+					"",
+					"postman.setGlobalVariable(\"isTest\", () => {",
+					"    let reqPurpose = pm.globals.get(\"_tr_\" + request.name);",
+					"    //console.log(request.name + \" has purpose: \" + reqPurpose);",
+					"    if ([\"[cleanUp]\",\"[preCondition]\",\"[postCondition]\"].indexOf(reqPurpose) > -1) {",
+					"        //console.log(\"Conclusion: NOT a test\");",
+					"        return false;",
+					"    } else {",
+					"        //console.log(\"Conclusion: IS a test\");",
+					"        return true;",
+					"    }",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"getQueryParams\", (uri) => {",
+					"  var vars = [];",
+					"",
+					"  // Get the start index of the query string",
+					"  var qsi = uri.indexOf('?');",
+					"  if (qsi == -1)",
+					"    return vars;",
+					"",
+					"  // Get the query string",
+					"  var qs = uri.slice(qsi + 1);",
+					"",
+					"  // Check if there is a subsection reference",
+					"  sri = qs.indexOf('#');",
+					"  if (sri >= 0)",
+					"    qs = qs.slice(0, sri);",
+					"",
+					"  // Build the associative array",
+					"  var hashes = qs.split('&');",
+					"  for (var i = 0; i < hashes.length; i++) {",
+					"    var sep = hashes[i].indexOf('=');",
+					"    if (sep <= 0)",
+					"      continue;",
+					"    var key = decodeURIComponent(hashes[i].slice(0, sep));",
+					"    var val = decodeURIComponent(hashes[i].slice(sep + 1));",
+					"    vars[key] = val;",
+					"  }",
+					"  const jar = pm.cookies.jar();",
+					"",
+					"  jar.clear(pm.request.url, function (error) {",
+					"  // error - <Error>",
+					"  });",
+					"",
+					"  return vars;",
+					"  ",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"generateAccessToken\", () => {",
+					"    const getAccessTokenRequest = {",
+					"        url: pm.environment.get(\"env_security_testToken\"),",
+					"        method: \"POST\",",
+					"        header: {",
+					"            'Content-Type': 'application/json',",
+					"            'Accept': 'application/json'",
+					"        },",
+					"        body: {",
+					"            mode: 'raw',",
+					"            raw: JSON.stringify({ ",
+					"                tenant_id: pm.environment.get(\"tenantId_security\"), ",
+					"                acsKey: \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",",
+					"                tenant_name: pm.environment.get(\"tenantName_security\"),",
+					"                user_name: pm.environment.get(\"userId_security\"),",
+					"                contractNo: pm.environment.get(\"contractNo_security\"),",
+					"                aud: \"deeplink\",",
+					"                language: \"en\",",
+					"                bcNo: pm.environment.get(\"bcNo_security\"),",
+					"                authorities: [\"DBAN_ADMIN\", \"DBAN_USER\"],",
+					"                client_id: \"postman\",",
+					"                user_id: pm.environment.get(\"userId_security\"),",
+					"                loginName: pm.environment.get(\"userId_security\"),",
+					"                exp: 32479694642,   ",
+					"                jti: \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\", ",
+					"                iat: 1553855569,   ",
+					"                scope: [",
+					"                    \"https://api.crealogix.com/dban\",",
+					"                    \"read\",",
+					"                    \"write\",",
+					"                    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",",
+					"                    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",",
+					"                    \"https://api.crealogix.com/contracts/contract.person.readonly\",",
+					"                    \"https://api.crealogix.com/payments/payment.initiate\",",
+					"                    \"https://api.crealogix.com/payments/payment.read\",",
+					"                    \"https://api.crealogix.com/payments/payment.write\",",
+					"                    \"https://api.crealogix.com/assets/account/read\",",
+					"                    \"https://api.crealogix.com/assets/account.transaction/read\",",
+					"                    \"https://api.crealogix.com/assets/account.name\",",
+					"                    \"https://api.crealogix.com/assets/account.image\",",
+					"                    \"https://api.crealogix.com/assets/cuac/read\",",
+					"                    \"https://api.crealogix.com/assets/portfolio/read\",",
+					"                    \"https://api.crealogix.com/messages/securemail.write\",",
+					"                    \"https://api.crealogix.com/messages/securemail.read\",",
+					"                    \"https://api.crealogix.com/messages/document.category.read\",",
+					"                    \"https://api.crealogix.com/messages/document.category.write\",",
+					"                    \"https://api.crealogix.com/messages/document.write\",",
+					"                    \"https://api.crealogix.com/messages/document.read\",",
+					"                    \"https://api.crealogix.com/brokerage/security/read\",",
+					"                    \"https://api.crealogix.com/brokerage/tradingplace/read\",",
+					"                    \"https://api.crealogix.com/brokerage/depository/read\",",
+					"                    \"https://api.crealogix.com/brokerage/order/read\",",
+					"                    \"https://api.crealogix.com/brokerage/order\",",
+					"                    \"https://api.crealogix.com/deeplink/domains\",",
+					"                    \"https://api.crealogix.com/deeplink/links\",",
+					"                    \"https://api.crealogix.com/mdevmanager/devices.readonly\",",
+					"                    \"https://api.crealogix.com/push/messages.readonly\",   ",
+					"                    \"https://api.crealogix.com/mdevmanager/devices.write\"                    ",
+					"                ]",
+					"            })",
+					"        }",
+					"    };",
+					"    pm.environment.set(\"request\", JSON.stringify(getAccessTokenRequest));",
+					"    ",
+					"    pm.sendRequest(getAccessTokenRequest, function(err, res) {",
+					"        pm.environment.set(\"dltoken\", res.text());",
+					"        /*",
+					"        pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
+					"            pm.expect(err).to.not.be.ok;",
+					"            pm.expect(res).to.have.property('code', 200);",
+					"            pm.expect(res).to.have.property('status', 'OK');          ",
+					"        });",
+					"        */",
+					"    });",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3b0b630d-3ac3-4211-b209-6950aaf3c006",
+				"type": "text/javascript",
+				"exec": [
+					"// check if test is executed",
+					"//pm.test(\"'\" + request.name +\"' is initiated\", function () {",
+					"//    //pm.response.to.have.status(200);",
+					"//    //pm.response.to.be.success ",
+					"//});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f021888f-9cf7-4825-93ca-dadc431eee1e",
+			"key": "nowUtc",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

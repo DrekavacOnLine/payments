@@ -1,0 +1,10 @@
+[
+    {
+		"testsScope": "Core",
+        "envName": "SGKB-R200-TEST",
+		"contractNumber": "\"1309961501\"",
+		"order_action": "BUY",
+		"limit_type": "AT_MARKET",
+		"order_status": "REJECTED"
+    }
+]

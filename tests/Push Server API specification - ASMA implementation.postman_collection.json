@@ -1,0 +1,962 @@
+{
+	"info": {
+		"_postman_id": "a8ace684-b722-4411-a314-c7a7a187b33f",
+		"name": "Push Server API specification - ASMA implementation",
+		"description": "# **Introduction**\n\nhttps://docu.ebs.crealogix.net/public-api-concepts/html/api-concepts.html\n\nThe API specification for Push Server.\n\n## __Change List__\n\n<table>\n  <tr>\n    <b>\n    <td>Version</bold></td>\n    <td>Area</td>\n    <td>description</td>\n    <td>Author</td>\n    <td>Date</td>\n    </b>\n  </tr>\n  <tr>\n    <td>1.0.0</td>\n    <td>messages</td>\n    <td>Initial API definition</td>\n    <td>Marcel Signer</td>\n    <td>Dec 2018</td>\n  </tr>\n  <tr>\n    <td>1.0.1</td>\n    <td>messages</td>\n    <td>\n      <li>seperate PushMessage and Message</li>\n      <li>add attributes to message encryption when reading from MAP</li>\n      <li>sortOrder added as a message attribute</li>\n    </td>\n    <td>Marcel Signer</td>\n    <td>Dec 2018</td>\n  </tr>\n  <tr>\n    <td>1.0.2</td>\n    <td>messages</td>\n    <td>category added to the Message for grouping</td>\n    <td>Marcel Signer</td>\n    <td>Dec 2018</td>\n  </tr>\n  <tr>\n    <td>1.0.3</td>\n    <td>messages</td>\n    <td>signedPushId added as a prove that the message is coming from the device</td>\n    <td>Marcel Signer</td>\n    <td>15.01.2019</td>\n  </tr>\n  <tr>\n    <td>1.0.4</td>\n    <td>messages</td>\n    <td>removed message retrieval -> separate Push API</td>\n    <td>Marcel Signer</td>\n    <td>17.01.2019</td>\n  </tr>\n  <tr>\n    <td>1.0.5</td>\n    <td>messages & post message</td>\n    <td>\n      <li>removed encrypted attribute</li>\n      <li>removed signature attribute</li>\n      <li>Name Type Changed TagItem  -> Selector </li>\n      <li>Name Type Changed Message  -> Content  </li>\n      <li>Name Type Changed MapItem  -> DataItem  </li>\n      <li>Limited number of deiveId & selectors to 1000 in one request </li>\n      <li>Changed OK response code from 201 (Created) -> 202 (Accepted)</li>\n      <li>Added 409 (Conflict) response code to report duplicated request</li>\n      <li>Removed 404 (Not Found) in post method response code, added new message state no_devices</li>\n    </td>\n    <td>Krzystzof Zipser</td>\n    <td>13.03.2019</td>\n  </tr>\n  <tr>\n    <td>1.0.6</td>\n     <td>messages</td>\n    <td>\n      <li>message state new enums -> rejected, processed_with_warnings</li>\n      <li>HATEOS links in methods</li>\n      <li>getStateById pagination</li>\n      <li>PushMessageResponse created</li>\n      <li>opertion getMessageById will return PushMessageResponse instead of Content</li>\n      <li>PushQueueInfo added DataTime in Response</li>\n      <li>Response sufix added to <br/>\n      MessageDelivery->MessageDeliveryResponse <br/>\n      PushQueueInfo->PushQueueInfoResponse</li>\n      <li>DeliveryDeviceInfo new error enums added -> error_wrong_device, error_network</li>\n      <li>getStateById, getMessageById Error codes added -> 401,403,default </li>\n      <li>getStateById path changed </li>\n      <li>New error handling Error -> ResponseStatus </li>\n    </td>\n    <td>Krzystzof Zipser</td>\n    <td>08.04.2019</td>\n  </tr>\n  <tr>\n    <td>1.0.7</td>\n    <td>url pattern</td>\n    <td>\n    <li>new url pattern applied: <BR> /&lt;business-domain&gt;/&lt;API-name&gt;[/&lt;tenant-id&gt]/v&lt;API-major-version&gt;/&lt;resource-name&gt; </li>\n    </td>\n    <td>Krzysztof Zipser</td>\n    <td>08.08.2019</td>\n  </tr>\n</table>\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "{tenant Id}",
+			"item": [
+				{
+					"name": "v1",
+					"item": [
+						{
+							"name": "push",
+							"item": [
+								{
+									"name": "messages",
+									"item": [
+										{
+											"name": "Initiate as MessageDelivery transaction",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "1bc65b52-0f53-4203-8b34-743a8c40ab49",
+														"exec": [
+															"var push = JSON.parse(responseBody);\r",
+															"postman.setEnvironmentVariable(\"push\", push.pushId);\r",
+															"\r",
+															"pm.test(\"Status code is 202\", function () {\r",
+															"    pm.response.to.have.status(202);\r",
+															"});\r",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer"
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"deviceids\": [\n        \"dca19cf9-ac2b-41ca-be86-73020179ef91\"\n    ],\n    \"message\": {\n        \"title\": \"Payment\",\n        \"body\": \"Test 1234\",\n        \"category\": \"Auth I\",\n        \"data\": [\n            {\n                \"key\": \"Terminator is back again\",\n                \"value\": \"Arnold\"\n            },\n            {\n                \"key\": \"Ivkominator\",\n                \"value\": \"Milos\"\n            }\n        ],\n        \"sortorder\": 0\n    }\n}"
+												},
+												"url": {
+													"raw": "{{ASMA}}/{{tenant}}/v1/push/messages",
+													"host": [
+														"{{ASMA}}"
+													],
+													"path": [
+														"{{tenant}}",
+														"v1",
+														"push",
+														"messages"
+													]
+												},
+												"description": "Initiate as MessageDelivery transaction"
+											},
+											"response": [
+												{
+													"name": "forbidden access to this transaction.",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"deviceids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ],\n    \"selectors\": [\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ],\n    \"message\": {\n        \"title\": \"<string>\",\n        \"body\": \"<string>\",\n        \"category\": \"<string>\",\n        \"data\": [\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            },\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            }\n        ],\n        \"sortorder\": \"<integer>\"\n    }\n}"
+														},
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages"
+															]
+														}
+													},
+													"status": "Forbidden",
+													"code": 403,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "accepted",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"deviceids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ],\n    \"selectors\": [\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ],\n    \"message\": {\n        \"title\": \"<string>\",\n        \"body\": \"<string>\",\n        \"category\": \"<string>\",\n        \"data\": [\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            },\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            }\n        ],\n        \"sortorder\": \"<integer>\"\n    }\n}"
+														},
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages"
+															]
+														}
+													},
+													"status": "Accepted",
+													"code": 202,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "location",
+															"value": "<string>",
+															"description": "address to get the MessageDelivery transaction"
+														},
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"pushId\": \"<uuid>\"\n}"
+												},
+												{
+													"name": "Bad Request",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"deviceids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ],\n    \"selectors\": [\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ],\n    \"message\": {\n        \"title\": \"<string>\",\n        \"body\": \"<string>\",\n        \"category\": \"<string>\",\n        \"data\": [\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            },\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            }\n        ],\n        \"sortorder\": \"<integer>\"\n    }\n}"
+														},
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages"
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "required a valid oauth2 token",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"deviceids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ],\n    \"selectors\": [\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ],\n    \"message\": {\n        \"title\": \"<string>\",\n        \"body\": \"<string>\",\n        \"category\": \"<string>\",\n        \"data\": [\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            },\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            }\n        ],\n        \"sortorder\": \"<integer>\"\n    }\n}"
+														},
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages"
+															]
+														}
+													},
+													"status": "Unauthorized",
+													"code": 401,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "unexpected error",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"deviceids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ],\n    \"selectors\": [\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ],\n    \"message\": {\n        \"title\": \"<string>\",\n        \"body\": \"<string>\",\n        \"category\": \"<string>\",\n        \"data\": [\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            },\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            }\n        ],\n        \"sortorder\": \"<integer>\"\n    }\n}"
+														},
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages"
+															]
+														}
+													},
+													"status": "Internal Server Error",
+													"code": 500,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "Validation error. Some fields have problems",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"deviceids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ],\n    \"selectors\": [\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ],\n    \"message\": {\n        \"title\": \"<string>\",\n        \"body\": \"<string>\",\n        \"category\": \"<string>\",\n        \"data\": [\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            },\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            }\n        ],\n        \"sortorder\": \"<integer>\"\n    }\n}"
+														},
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages"
+															]
+														}
+													},
+													"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+													"code": 422,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "conflict - duplicate request",
+													"originalRequest": {
+														"method": "POST",
+														"header": [
+															{
+																"key": "Content-Type",
+																"value": "application/json"
+															}
+														],
+														"body": {
+															"mode": "raw",
+															"raw": "{\n    \"deviceids\": [\n        \"<uuid>\",\n        \"<uuid>\"\n    ],\n    \"selectors\": [\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        },\n        {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n        }\n    ],\n    \"message\": {\n        \"title\": \"<string>\",\n        \"body\": \"<string>\",\n        \"category\": \"<string>\",\n        \"data\": [\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            },\n            {\n                \"key\": \"<string>\",\n                \"value\": \"<string>\"\n            }\n        ],\n        \"sortorder\": \"<integer>\"\n    }\n}"
+														},
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages"
+															]
+														}
+													},
+													"status": "Conflict",
+													"code": 409,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												}
+											]
+										},
+										{
+											"name": "Retrieve the information about state of messages",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "e0240601-f783-4267-ab5e-002d26a67cd5",
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {",
+															"    pm.response.to.have.status(200);",
+															"});",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{ASMA}}/{{tenant}}/v1/push/messages/state/{{push}}?page=0",
+													"host": [
+														"{{ASMA}}"
+													],
+													"path": [
+														"{{tenant}}",
+														"v1",
+														"push",
+														"messages",
+														"state",
+														"{{push}}"
+													],
+													"query": [
+														{
+															"key": "page",
+															"value": "0",
+															"description": "page"
+														}
+													]
+												},
+												"description": "Retrieve the information about state of messages. Number of devices state is limited to 1000 in one response. Use 'page' attribute to retrieve next portion of data."
+											},
+											"response": [
+												{
+													"name": "unexpected error",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages/state/<uuid>?page=<integer>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages",
+																"state",
+																"<uuid>"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "<integer>"
+																}
+															]
+														}
+													},
+													"status": "Internal Server Error",
+													"code": 500,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "ok",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages/state/<uuid>?page=<integer>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages",
+																"state",
+																"<uuid>"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "<integer>"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"pushid\": \"<uuid>\",\n \"date\": \"<dateTime>\",\n \"state\": \"<string>\",\n \"deliveryinfos\": [\n  {\n   \"deviceid\": \"<uuid>\",\n   \"state\": \"<string>\",\n   \"error\": \"<string>\"\n  },\n  {\n   \"deviceid\": \"<uuid>\",\n   \"state\": \"<string>\",\n   \"error\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "not found",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages/state/<uuid>?page=<integer>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages",
+																"state",
+																"<uuid>"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "<integer>"
+																}
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "Bad Request",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages/state/<uuid>?page=<integer>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages",
+																"state",
+																"<uuid>"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "<integer>"
+																}
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "forbidden access to this transaction.",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages/state/<uuid>?page=<integer>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages",
+																"state",
+																"<uuid>"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "<integer>"
+																}
+															]
+														}
+													},
+													"status": "Forbidden",
+													"code": 403,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "required a valid oauth2 token",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages/state/<uuid>?page=<integer>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages",
+																"state",
+																"<uuid>"
+															],
+															"query": [
+																{
+																	"key": "page",
+																	"value": "<integer>"
+																}
+															]
+														}
+													},
+													"status": "Unauthorized",
+													"code": 401,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												}
+											]
+										},
+										{
+											"name": "Retrieve the message itself",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "eb7b9656-ab45-4ab6-9306-f40208c934e8",
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {",
+															"    pm.response.to.have.status(200);",
+															"});",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer"
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "pushId",
+														"value": "",
+														"type": "text"
+													}
+												],
+												"url": {
+													"raw": "{{ASMA}}/{{tenant}}/v1/push/messages/{{push}}",
+													"host": [
+														"{{ASMA}}"
+													],
+													"path": [
+														"{{tenant}}",
+														"v1",
+														"push",
+														"messages",
+														"{{push}}"
+													]
+												},
+												"description": "Retrieve the message it self. Can be used to get the origin passed in data. This may be used for data messages"
+											},
+											"response": [
+												{
+													"name": "ok",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages/<uuid>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages",
+																"<uuid>"
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"pushId\": \"<uuid>\",\n \"date\": \"<dateTime>\",\n \"message\": {\n  \"title\": \"<string>\",\n  \"body\": \"<string>\",\n  \"category\": \"<string>\",\n  \"data\": [\n   {\n    \"key\": \"<string>\",\n    \"value\": \"<string>\"\n   },\n   {\n    \"key\": \"<string>\",\n    \"value\": \"<string>\"\n   }\n  ],\n  \"sortorder\": \"<integer>\"\n }\n}"
+												},
+												{
+													"name": "Bad Request",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages/<uuid>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages",
+																"<uuid>"
+															]
+														}
+													},
+													"status": "Bad Request",
+													"code": 400,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "forbidden access to this transaction.",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages/<uuid>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages",
+																"<uuid>"
+															]
+														}
+													},
+													"status": "Forbidden",
+													"code": 403,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "unexpected error",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages/<uuid>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages",
+																"<uuid>"
+															]
+														}
+													},
+													"status": "Internal Server Error",
+													"code": 500,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "not found",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages/<uuid>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages",
+																"<uuid>"
+															]
+														}
+													},
+													"status": "Not Found",
+													"code": 404,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												},
+												{
+													"name": "required a valid oauth2 token",
+													"originalRequest": {
+														"method": "GET",
+														"header": [],
+														"url": {
+															"raw": "{{baseUrl}}/<string>/v1/push/messages/<uuid>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"<string>",
+																"v1",
+																"push",
+																"messages",
+																"<uuid>"
+															]
+														}
+													},
+													"status": "Unauthorized",
+													"code": 401,
+													"_postman_previewlanguage": "json",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "application/json"
+														}
+													],
+													"cookie": [],
+													"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ]\n}"
+												}
+											]
+										},
+										{
+											"name": "Display user notification status",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"id": "2337a16e-93be-46c4-bcc9-569bca160678",
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {",
+															"    pm.response.to.have.status(200);",
+															"});",
+															""
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"name": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"user_notification_id\": \"d4a54eb7-ec2e-4dcc-be79-4309deec0b87\",\n    \"subject_id\": \"da5ecc2f-9562-4809-aa02-4f14363fec8a\",\n    \"service_id\": \"d4a54eb7-ec2e-4dcc-be79-4309deec0b87\",\n    \"external_reference\": \"1007165\",\n    \"status\": \"pending_delivery\",\n    \"expired\": false\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{ASMA_ET}}/{{tenant}}/v1/user_notification/status",
+													"host": [
+														"{{ASMA_ET}}"
+													],
+													"path": [
+														"{{tenant}}",
+														"v1",
+														"user_notification",
+														"status"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"protocolProfileBehavior": {},
+									"_postman_isSubFolder": true
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e5c85b50-6950-4c42-a7fd-17f58a77b745",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d78dd7ce-10b1-4986-9a80-429b5f4d2c2e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "c1da3ab1-5c54-4769-b1a2-22fa6ab32986",
+			"key": "baseUrl",
+			"value": "/",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

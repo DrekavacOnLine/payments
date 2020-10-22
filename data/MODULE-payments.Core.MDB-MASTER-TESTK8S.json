@@ -36,6 +36,7 @@
 		"creditorAgentStreetSWIFT": "\"Kungstradgardsgatan\"",
 		"creditorAgentCitySWIFT": "\"10670 STOCKHOLM\"",
 		"creditorAgentCountrySWIFT": "\"SE\"",
-		"newmanRun": "0"
+		"structuredRemittanceOrange": "\"224812900001336000000054583\"",
+		"newmanRun": "1"
     }
 ]

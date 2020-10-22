@@ -3,6 +3,7 @@
         "testsScope": "Core",
 		"envName": "MDB-MASTER-TESTK8S",
 		"contractNumber1": "\"1279311501\"",
-		"contractNumber": "\"1000001501\""
+		"contractNumber": "\"1329101501\"",
+		"userId_security": "1329101501"
     }
 ]

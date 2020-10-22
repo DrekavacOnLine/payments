@@ -1,0 +1,10 @@
+[
+    {
+		"testsScope": "Core",
+        "envName": "SOBA-R200-REF",
+		"contractNumber": "\"1273301501\"",
+		"order_action": "BUY",
+		"limit_type": "AT_MARKET",
+		"order_status": "REJECTED"
+    }
+]
