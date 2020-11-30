@@ -1,0 +1,1 @@
+newman run ../tests/MODULE-deepLink.postman_collection.json -e ../env/SOBA-R200-TEST.postman_environment.json -d ../data/MODULE-deepLink.Core.SOBA-R200-TEST.json --reporters cli,htmlextra --reporter-htmlextra-logs --reporter-htmlextra-export ../report/SOBAR200/deepLink-core.html --reporter-htmlextra-title "DeepLink module, Core tests" --reporter-htmlextra-titleSize 4

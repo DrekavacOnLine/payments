@@ -1,0 +1,1 @@
+newman run ../tests/MODULE-payments.postman_collection.json -e ../env/SGKB-R200-TEST.postman_environment.json -d ../data/MODULE-payments.Core.SGKB-R200-TEST.json --reporters cli,htmlextra --reporter-htmlextra-logs --reporter-htmlextra-export ../report/SGKBR200/payments-core.html --reporter-htmlextra-title "Payments module, Core tests" --reporter-htmlextra-titleSize 4

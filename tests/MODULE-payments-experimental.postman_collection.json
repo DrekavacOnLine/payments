@@ -192,13 +192,20 @@
 									"    console.log(\"dataFile/accountAlias: \" + accountAlias);",
 									"} else {",
 									"    pm.environment.set(\"accountAlias\",\"1501 CHF\");",
-									"    console.log(\"dataFile/accountAlias: \" + \"1501 CHF\");",
+									"    console.log(\"default/accountAlias: \" + \"1501 CHF\");",
 									"}",
-									"",
 									"var userId_security = data.contractNumber;",
 									"if (userId_security){ ",
 									"    pm.environment.set(\"userId_security\",JSON.parse(data.contractNumber));",
 									"    console.log(\"dataFile/userId_security: \" + userId_security);",
+									"}",
+									"var language = data.language;",
+									"if (language){ ",
+									"    pm.environment.set(\"language\",data.language);",
+									"    console.log(\"dataFile/language: \" + language);",
+									"} else {",
+									"    pm.environment.set(\"language\",\"en\");",
+									"    console.log(\"default/language: \" + \"en\");",
 									"}",
 									"",
 									"//console.log(testsScope); ",
@@ -756,7 +763,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"paymentInformation\": {\r\n        \"endToEndId\": {{endToEndId}},\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"SEK\"\r\n            },\r\n            \"value\": 4.23\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": {{name}},\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSWIFTBankAcco}},\r\n        \"creditorAgent\": {\r\n            \"name1\": {{creditorAgentName1SWIFT}},\r\n            \"name2\": {{creditorAgentName2SWIFT}},\r\n            \"street\": {{creditorAgentStreetSWIFT}},\r\n            \"city\": {{creditorAgentCitySWIFT}},\r\n            \"country\": {{creditorAgentCountrySWIFT}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\": {{debtorAccountNo}}\r\n    }\t\r\n}"
+											"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"paymentInformation\": {\r\n        \"endToEndId\": {{endToEndId}},\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"SEK\"\r\n            },\r\n            \"value\": 4.23\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": {{name}},\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSWIFTBankAcco}},\r\n        \"creditorAgent\": {\r\n            \"name1\": {{creditorAgentName1SWIFT}},\r\n            \"name2\": {{creditorAgentName2SWIFT}},\r\n            \"street\": {{creditorAgentStreetSWIFT}},\r\n            \"city\": {{creditorAgentCitySWIFT}},\r\n            \"country\": {{creditorAgentCountrySWIFT}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\": {{debtorAccountNo}}\r\n    }\t\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
@@ -881,7 +891,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"paymentInformation\": {\r\n        \"endToEndId\": {{endToEndId}},\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"SEK\"\r\n            },\r\n            \"value\": 4.23\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": {{name}},\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSWIFTBankAcco}},\r\n        \"creditorAgent\": {\r\n            \"name1\": {{creditorAgentName1SWIFT}},\r\n            \"name2\": {{creditorAgentName2SWIFT}},\r\n            \"street\": {{creditorAgentStreetSWIFT}},\r\n            \"city\": {{creditorAgentCitySWIFT}},\r\n            \"country\": {{creditorAgentCountrySWIFT}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\": {{debtorAccountNo}}\r\n    }\r\n}"
+											"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"paymentInformation\": {\r\n        \"endToEndId\": {{endToEndId}},\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"SEK\"\r\n            },\r\n            \"value\": 4.23\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": {{name}},\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSWIFTBankAcco}},\r\n        \"creditorAgent\": {\r\n            \"name1\": {{creditorAgentName1SWIFT}},\r\n            \"name2\": {{creditorAgentName2SWIFT}},\r\n            \"street\": {{creditorAgentStreetSWIFT}},\r\n            \"city\": {{creditorAgentCitySWIFT}},\r\n            \"country\": {{creditorAgentCountrySWIFT}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\": {{debtorAccountNo}}\r\n    }\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
@@ -976,7 +989,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": ""
+											"raw": "",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentSwiftID}}",
@@ -1095,7 +1111,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"paymentInformation\": {\r\n        \"endToEndId\": {{endToEndId}},\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"GBP\"\r\n            },\r\n            \"value\": 45\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": \"MDB-R191-Test\",\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSWIFT}},\r\n        \"creditorAgent\": {\r\n            \"bic\": {{creditorAgentBicSWIFT}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\":  {{debtorAccountNo}}\r\n    },\r\n    \"chargeBearer\": \"SHAR\"\r\n}"
+											"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"paymentInformation\": {\r\n        \"endToEndId\": {{endToEndId}},\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"GBP\"\r\n            },\r\n            \"value\": 45\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": \"MDB-R191-Test\",\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSWIFT}},\r\n        \"creditorAgent\": {\r\n            \"bic\": {{creditorAgentBicSWIFT}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\":  {{debtorAccountNo}}\r\n    },\r\n    \"chargeBearer\": \"SHAR\"\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer/{{newPaymentSwiftID}}",
@@ -1315,7 +1334,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"paymentInformation\": {\r\n\t\t\"instructedAmount\": {\r\n\t\t\t\"currency\": {\r\n\t\t\t\t\"code\": \"EUR\"\r\n\t\t\t},\r\n\t\t\t\"value\": 9.99\r\n\t\t},\r\n\t\t\"remittanceInformation\": {\r\n\t\t\t\"unstructured\": {{unstructured}},\r\n\t\t\t\"structured\": {{structuredRemittanceRF}}\r\n\t\t},\r\n\t\t\"instructionIdentification\": {{instructionIdentification}},\r\n\t\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\t\"instructionPriority\": \"NORMAL\",\r\n\t\t\"creditor\": {\r\n\t\t\t\"name\": {{name}},\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\t\"townName\": {{townName}},\r\n\t\t\t\t\"country\": {{country}}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\t\t\"creditorAgent\": {\r\n\t\t\t\"bic\": {{creditorAgentBicSEPA}}\r\n\t\t},\r\n\t\t\"debtor\": {\r\n\t\t\t\"name\": {{debtorAccountName}},\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"streetName\": {{debtorStreetName}},\r\n\t\t\t\t\"postalCode\": {{debtorPostalCode}},\r\n\t\t\t\t\"townName\": {{debtorTownName}}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"debtorAccountNo\":  {{debtorAccountNo}},\r\n\t\t\"standingOrder\": {\r\n\t\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\t\"beforeHoliday\": true,\r\n\t\t\t\"interval\": \"WEEKLY\",\r\n\t\t\t\"active\": true,\r\n\t\t\t\"ultimo\": false\t\t\r\n\t\t}\r\n\t}\r\n}"
+													"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"paymentInformation\": {\r\n\t\t\"instructedAmount\": {\r\n\t\t\t\"currency\": {\r\n\t\t\t\t\"code\": \"EUR\"\r\n\t\t\t},\r\n\t\t\t\"value\": 9.99\r\n\t\t},\r\n\t\t\"remittanceInformation\": {\r\n\t\t\t\"unstructured\": {{unstructured}},\r\n\t\t\t\"structured\": {{structuredRemittanceRF}}\r\n\t\t},\r\n\t\t\"instructionIdentification\": {{instructionIdentification}},\r\n\t\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\t\"instructionPriority\": \"NORMAL\",\r\n\t\t\"creditor\": {\r\n\t\t\t\"name\": {{name}},\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\t\"townName\": {{townName}},\r\n\t\t\t\t\"country\": {{country}}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\t\t\"creditorAgent\": {\r\n\t\t\t\"bic\": {{creditorAgentBicSEPA}}\r\n\t\t},\r\n\t\t\"debtor\": {\r\n\t\t\t\"name\": {{debtorAccountName}},\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"streetName\": {{debtorStreetName}},\r\n\t\t\t\t\"postalCode\": {{debtorPostalCode}},\r\n\t\t\t\t\"townName\": {{debtorTownName}}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"debtorAccountNo\":  {{debtorAccountNo}},\r\n\t\t\"standingOrder\": {\r\n\t\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\t\"beforeHoliday\": true,\r\n\t\t\t\"interval\": \"WEEKLY\",\r\n\t\t\t\"active\": true,\r\n\t\t\t\"ultimo\": false\t\t\r\n\t\t}\r\n\t}\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer",
@@ -1429,7 +1451,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"categoryPurposeCode\": \"SALA\",\r\n    \"paymentInformation\": {\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"EUR\"\r\n            },\r\n            \"value\": 9.99\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": {{name}},\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n        \"creditorAgent\": {\r\n            \"bic\": {{creditorAgentBicSEPA}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\":  {{debtorAccountNo}}\r\n    },\r\n    \"standingOrder\": {\r\n        \"firstOn\": {{PrS:futureWorkingDay}},\r\n        \"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n        \"beforeHoliday\": true,\r\n        \"interval\": \"WEEKLY\",\r\n        \"active\": true,\r\n        \"ultimo\": false\t\t\r\n    }\r\n}"
+													"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"categoryPurposeCode\": \"SALA\",\r\n    \"paymentInformation\": {\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"EUR\"\r\n            },\r\n            \"value\": 9.99\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": {{name}},\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n        \"creditorAgent\": {\r\n            \"bic\": {{creditorAgentBicSEPA}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\":  {{debtorAccountNo}}\r\n    },\r\n    \"standingOrder\": {\r\n        \"firstOn\": {{PrS:futureWorkingDay}},\r\n        \"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n        \"beforeHoliday\": true,\r\n        \"interval\": \"WEEKLY\",\r\n        \"active\": true,\r\n        \"ultimo\": false\t\t\r\n    }\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
@@ -1544,7 +1569,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"categoryPurposeCode\": \"SALA\",\r\n    \"paymentInformation\": {\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"EUR\"\r\n            },\r\n            \"value\": 10.99\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": {{name}},\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n        \"creditorAgent\": {\r\n            \"bic\": {{creditorAgentBicSEPA}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\":  {{debtorAccountNo}},\r\n        \"standingOrder\": {\r\n            \"firstOn\": {{PrS:futureWorkingDay}},\r\n            \"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n            \"beforeHoliday\": false,\r\n            \"interval\": \"DAILY\",\r\n            \"active\": true,\r\n            \"ultimo\": false\t\t\r\n        }\r\n    }\r\n}"
+													"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"categoryPurposeCode\": \"SALA\",\r\n    \"paymentInformation\": {\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"EUR\"\r\n            },\r\n            \"value\": 10.99\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": {{name}},\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n        \"creditorAgent\": {\r\n            \"bic\": {{creditorAgentBicSEPA}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\":  {{debtorAccountNo}},\r\n        \"standingOrder\": {\r\n            \"firstOn\": {{PrS:futureWorkingDay}},\r\n            \"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n            \"beforeHoliday\": false,\r\n            \"interval\": \"DAILY\",\r\n            \"active\": true,\r\n            \"ultimo\": false\t\t\r\n        }\r\n    }\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
@@ -1628,7 +1656,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": ""
+													"raw": "",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
@@ -1758,7 +1789,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"paymentInformation\": {\r\n\t\t\"endToEndId\": {{endToEndId}},\r\n\t\t\"instructedAmount\": {\r\n\t\t\t\"currency\": {\r\n\t\t\t\t\"code\": \"EUR\"\r\n\t\t\t},\r\n\t\t\t\"value\": 312.00\r\n\t\t},\r\n\t\t\"remittanceInformation\": {\r\n\t\t\t\"unstructured\": {{unstructured}},\r\n\t\t\t\"structured\": {{structuredRemittanceRF}}\r\n\t\t},\r\n\t\t\"instructionIdentification\": {{instructionIdentification}},\r\n\t\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\t\"instructionPriority\": \"NORMAL\",\r\n\t\t\"creditor\": {\r\n\t\t\t\"name\": {{name}},\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\t\"townName\": {{townName}},\r\n\t\t\t\t\"country\": {{country}}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\t\t\"creditorAgent\": {\r\n\t\t\t\"bic\": {{creditorAgentBicSEPA}}\r\n\t\t},\r\n\t\t\"debtor\": {\r\n\t\t\t\"name\": {{debtorAccountName}},\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"streetName\": {{debtorStreetName}},\r\n\t\t\t\t\"postalCode\": {{debtorPostalCode}},\r\n\t\t\t\t\"townName\": {{debtorTownName}}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"debtorAccountNo\":  {{debtorAccountNo}}\r\n\t}\r\n}"
+											"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"paymentInformation\": {\r\n\t\t\"endToEndId\": {{endToEndId}},\r\n\t\t\"instructedAmount\": {\r\n\t\t\t\"currency\": {\r\n\t\t\t\t\"code\": \"EUR\"\r\n\t\t\t},\r\n\t\t\t\"value\": 312.00\r\n\t\t},\r\n\t\t\"remittanceInformation\": {\r\n\t\t\t\"unstructured\": {{unstructured}},\r\n\t\t\t\"structured\": {{structuredRemittanceRF}}\r\n\t\t},\r\n\t\t\"instructionIdentification\": {{instructionIdentification}},\r\n\t\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\t\"instructionPriority\": \"NORMAL\",\r\n\t\t\"creditor\": {\r\n\t\t\t\"name\": {{name}},\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\t\"townName\": {{townName}},\r\n\t\t\t\t\"country\": {{country}}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n\t\t\"creditorAgent\": {\r\n\t\t\t\"bic\": {{creditorAgentBicSEPA}}\r\n\t\t},\r\n\t\t\"debtor\": {\r\n\t\t\t\"name\": {{debtorAccountName}},\r\n\t\t\t\"address\": {\r\n\t\t\t\t\"streetName\": {{debtorStreetName}},\r\n\t\t\t\t\"postalCode\": {{debtorPostalCode}},\r\n\t\t\t\t\"townName\": {{debtorTownName}}\r\n\t\t\t}\r\n\t\t},\r\n\t\t\"debtorAccountNo\":  {{debtorAccountNo}}\r\n\t}\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer",
@@ -1871,7 +1905,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"categoryPurposeCode\": \"SALA\",\r\n    \"paymentInformation\": {\r\n        \"endToEndId\": {{endToEndId}},\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"EUR\"\r\n            },\r\n            \"value\": 312.00\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": {{name}},\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n        \"creditorAgent\": {\r\n            \"bic\": {{creditorAgentBicSEPA}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\":  {{debtorAccountNo}}\r\n    }\r\n}"
+											"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"categoryPurposeCode\": \"SALA\",\r\n    \"paymentInformation\": {\r\n        \"endToEndId\": {{endToEndId}},\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"EUR\"\r\n            },\r\n            \"value\": 312.00\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": {{name}},\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n        \"creditorAgent\": {\r\n            \"bic\": {{creditorAgentBicSEPA}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\":  {{debtorAccountNo}}\r\n    }\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
@@ -1984,7 +2021,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"categoryPurposeCode\": \"SALA\",\r\n    \"paymentInformation\": {\r\n        \"endToEndId\": {{endToEndId}},\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"EUR\"\r\n            },\r\n            \"value\": 122.00\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": {{name}},\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n        \"creditorAgent\": {\r\n            \"bic\": {{creditorAgentBicSEPA}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\":  {{debtorAccountNo}}\r\n    }\r\n}"
+											"raw": "{\r\n    \"storeOnly\": false,\r\n    \"locked\": false,\r\n    \"categoryPurposeCode\": \"SALA\",\r\n    \"paymentInformation\": {\r\n        \"endToEndId\": {{endToEndId}},\r\n        \"instructedAmount\": {\r\n            \"currency\": {\r\n                \"code\": \"EUR\"\r\n            },\r\n            \"value\": 122.00\r\n        },\r\n        \"remittanceInformation\": {\r\n            \"unstructured\": {{unstructured}},\r\n            \"structured\": {{structuredRemittanceRF}}\r\n        },\r\n        \"instructionIdentification\": {{instructionIdentification}},\r\n        \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n        \"instructionPriority\": \"NORMAL\",\r\n        \"creditor\": {\r\n            \"name\": {{name}},\r\n            \"address\": {\r\n                \"adrLine1\": {{adrLine1}},\r\n                \"adrLine2\": {{adrLine2}},\r\n                \"streetName\": {{streetName}},\r\n                \"buildingNm\": {{buildingNm}},\r\n                \"postalCode\": {{postalCode}},\r\n                \"townName\": {{townName}},\r\n                \"country\": {{country}}\r\n            }\r\n        },\r\n        \"creditorAccountNo\": {{creditorAccountNoSEPA}},\r\n        \"creditorAgent\": {\r\n            \"bic\": {{creditorAgentBicSEPA}}\r\n        },\r\n        \"debtor\": {\r\n            \"name\": {{debtorAccountName}},\r\n            \"address\": {\r\n                \"streetName\": {{debtorStreetName}},\r\n                \"postalCode\": {{debtorPostalCode}},\r\n                \"townName\": {{debtorTownName}}\r\n            }\r\n        },\r\n        \"debtorAccountNo\":  {{debtorAccountNo}}\r\n    }\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
@@ -2063,7 +2103,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": ""
+											"raw": "",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/sepa/{{tenant}}/v2/credittransfer/{{newPaymentSepaID}}",
@@ -2105,13 +2148,13 @@
 							"",
 							"/*add current test case ID to list of already executed tests*/",
 							"eval(globals.testsExecuted)(testRailTestCases);",
-							"pm.globals.set(\"testRailTestCases\",testRailTestCases);",
+							"pm.globals.set(\"testRailTestCases\", testRailTestCases);",
 							"",
 							"//store test case ID of current request for linking with Test Rail",
 							"pm.globals.set(\"_tr_\" + request.name, testRailTestCases);",
 							"",
 							"//call global function to generate access token",
-							"eval(globals.generateAccessToken)();"
+							"//eval(globals.generateAccessToken)();"
 						]
 					}
 				},
@@ -5920,7 +5963,10 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+															"options": {
+																"raw": {}
+															}
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/",
@@ -6043,7 +6089,10 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+															"options": {
+																"raw": {}
+															}
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/{{newPaymentOrangeID}}",
@@ -6164,7 +6213,10 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.02\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000099999\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": true\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.02\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000099999\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": true\t\t\r\n\t}\r\n}",
+															"options": {
+																"raw": {}
+															}
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/{{newPaymentOrangeID}}",
@@ -6250,7 +6302,10 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": ""
+															"raw": "",
+															"options": {
+																"raw": {}
+															}
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/{{newPaymentOrangeID}}",
@@ -6377,7 +6432,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/",
@@ -6492,7 +6550,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during company trip\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/{{newPaymentOrangeID}}",
@@ -6605,7 +6666,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.02\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000077777\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during private trip\"\r\n}"
+													"raw": "{\r\n    \"creditorAccountNo\":  {{orangeAccountNo}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.02\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000077777\"\r\n    },\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"debitNote\": \"Expenses during private trip\"\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/{{newPaymentOrangeID}}",
@@ -6690,7 +6754,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": ""
+													"raw": "",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/orange/{{newPaymentOrangeID}}",
@@ -6834,7 +6901,10 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"categoryPurposeCode\": \"SALA\",    \r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n    \"debitNote\": \"Debit reference\",    \r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"categoryPurposeCode\": \"SALA\",    \r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n    \"debitNote\": \"Debit reference\",    \r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+															"options": {
+																"raw": {}
+															}
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red",
@@ -6963,7 +7033,10 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+															"options": {
+																"raw": {}
+															}
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red/{{newPaymentRedID}}",
@@ -7090,7 +7163,10 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+															"options": {
+																"raw": {}
+															}
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red/{{newPaymentRedID}}",
@@ -7183,7 +7259,10 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": ""
+															"raw": "",
+															"options": {
+																"raw": {}
+															}
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red/{{newPaymentRedID}}",
@@ -7312,7 +7391,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"categoryPurposeCode\": \"SALA\",    \r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n    \"debitNote\": \"Debit reference\",    \r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t}\r\n}"
+													"raw": "{\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"categoryPurposeCode\": \"SALA\",    \r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n    \"debitNote\": \"Debit reference\",    \r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t}\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red",
@@ -7429,7 +7511,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"categoryPurposeCode\": \"SALA\",    \r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t}\r\n}"
+													"raw": "{\r\n\t\"categoryPurposeCode\": \"SALA\",    \r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD\"\r\n    },\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t}\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red/{{newPaymentRedID}}",
@@ -7536,7 +7621,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t}\r\n}"
+													"raw": "{\r\n\t\"storeOnly\": false,\r\n\t\"locked\": false,       \r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"postalAccountNo\": {{postalAccountNo}},\t\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t}\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red/{{newPaymentRedID}}",
@@ -7628,7 +7716,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": ""
+													"raw": "",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/red/{{newPaymentRedID}}",
@@ -7761,7 +7852,10 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No debit information\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No debit information\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+															"options": {
+																"raw": {}
+															}
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/",
@@ -7876,7 +7970,10 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No debit information\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No debit information\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+															"options": {
+																"raw": {}
+															}
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/{{newPaymentSwissDomesticID}}",
@@ -8004,7 +8101,10 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No debit information\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": true\t\t\r\n\t}\r\n}"
+															"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No debit information\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": true\t\t\r\n\t}\r\n}",
+															"options": {
+																"raw": {}
+															}
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/{{newPaymentSwissDomesticID}}",
@@ -8097,7 +8197,10 @@
 														],
 														"body": {
 															"mode": "raw",
-															"raw": ""
+															"raw": "",
+															"options": {
+																"raw": {}
+															}
 														},
 														"url": {
 															"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/{{newPaymentSwissDomesticID}}",
@@ -8224,7 +8327,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"unstructured\"\r\n    },    \r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No new information needed\",\r\n    \"chargesBearer\": \"DEBT\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"unstructured\"\r\n    },    \r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No new information needed\",\r\n    \"chargesBearer\": \"DEBT\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/",
@@ -8340,7 +8446,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"unstructured\"\r\n    },    \r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No new information needed\",\r\n    \"chargesBearer\": \"DEBT\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNm}},\r\n\t\t\t\"postalCode\": {{postalCode}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"remittanceInformation\": {\r\n        \"unstructured\": \"unstructured\"\r\n    },    \r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"No new information needed\",\r\n    \"chargesBearer\": \"DEBT\",\r\n    \"categoryPurposeCode\": \"SALA\"\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/{{newPaymentSwissDomesticID}}",
@@ -8469,7 +8578,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Still no debit information\",\r\n    \"chargesBearer\": \"SHAR\",\r\n    \"categoryPurposeCode\": \"SALA\"\t\r\n}"
+													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoSwisDomestic}},\t\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Still no debit information\",\r\n    \"chargesBearer\": \"SHAR\",\r\n    \"categoryPurposeCode\": \"SALA\"\t\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/{{newPaymentSwissDomesticID}}",
@@ -8561,7 +8673,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": ""
+													"raw": "",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/swiss/{{newPaymentSwissDomesticID}}",
@@ -8728,7 +8843,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"paymentType\": \"{{paymentTypeUK}}\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"GBP\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"creditorAgentSortCode\": \"601437\",\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\"\r\n    },\r\n    \t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"template\": true,\r\n\t\"debitNote\": \"Expenses during company trip\"\r\n}"
+													"raw": "{\r\n    \"paymentType\": \"{{paymentTypeUK}}\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"GBP\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"creditorAgentSortCode\": \"601437\",\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\"\r\n    },\r\n    \t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"template\": true,\r\n\t\"debitNote\": \"Expenses during company trip\"\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/UKPayment/{{tenant}}/v1/credittransfer",
@@ -8857,7 +8975,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"paymentType\": \"{{paymentTypeUK}}\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"GBP\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"creditorAgentSortCode\": \"601437\",\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\"\r\n    },\r\n    \t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"template\": true,\r\n\t\"debitNote\": \"Expenses during company trip\"\r\n}"
+													"raw": "{\r\n    \"paymentType\": \"{{paymentTypeUK}}\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"GBP\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054583\"\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"creditorAgentSortCode\": \"601437\",\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\"\r\n    },\r\n    \t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"template\": true,\r\n\t\"debitNote\": \"Expenses during company trip\"\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/UKPayment/{{tenant}}/v1/credittransfer/{{newPaymentUkID}}",
@@ -8985,7 +9106,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"paymentType\": \"{{paymentTypeUK}}\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"GBP\"\r\n        },\r\n        \"value\": 2.02\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054385\"\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"creditorAgentSortCode\": \"601437\",\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\"\r\n    },\r\n    \t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"template\": true,\r\n\t\"debitNote\": \"Expenses during company trip\"\r\n}"
+													"raw": "{\r\n    \"paymentType\": \"{{paymentTypeUK}}\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"GBP\"\r\n        },\r\n        \"value\": 2.02\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054385\"\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"creditorAgentSortCode\": \"601437\",\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\"\r\n    },\r\n    \t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"template\": true,\r\n\t\"debitNote\": \"Expenses during company trip\"\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/UKPayment/{{tenant}}/v1/credittransfer/{{newPaymentUkID}}",
@@ -9077,7 +9201,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": ""
+													"raw": "",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/UKPayment/{{tenant}}/v1/credittransfer/{{newPaymentUkID}}",
@@ -9224,7 +9351,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"paymentType\": \"{{paymentTypeUK}}\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"GBP\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n\t\"remittanceInfo\": {\r\n    \t\"unstructured\": \"Beneficiary reference\"\r\n\t},\r\n    \"creditorAccountNo\": {{creditorAccountNoUK}},\r\n    \"creditorAgentSortCode\": \"601437\",\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\"\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"template\": true,\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"debitNote\": \"Expenses during company trip\"\r\n}"
+											"raw": "{\r\n    \"paymentType\": \"{{paymentTypeUK}}\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"GBP\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n\t\"remittanceInfo\": {\r\n    \t\"unstructured\": \"Beneficiary reference\"\r\n\t},\r\n    \"creditorAccountNo\": {{creditorAccountNoUK}},\r\n    \"creditorAgentSortCode\": \"601437\",\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\"\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"template\": true,\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"debitNote\": \"Expenses during company trip\"\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/UKPayment/{{tenant}}/v1/credittransfer",
@@ -9348,7 +9478,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"paymentType\": \"{{paymentTypeUK}}\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"GBP\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n\t\"remittanceInfo\": {\r\n    \t\"unstructured\": \"Beneficiary reference\"\r\n\t},\r\n    \"creditorAccountNo\": {{creditorAccountNoUK}},\r\n    \"creditorAgentSortCode\": \"601437\",\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\"\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"template\": true,\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"debitNote\": \"Expenses during company trip\"\r\n}"
+											"raw": "{\r\n    \"paymentType\": \"{{paymentTypeUK}}\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"GBP\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n\t\"remittanceInfo\": {\r\n    \t\"unstructured\": \"Beneficiary reference\"\r\n\t},\r\n    \"creditorAccountNo\": {{creditorAccountNoUK}},\r\n    \"creditorAgentSortCode\": \"601437\",\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\"\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"template\": true,\r\n\t\"categoryPurposeCode\": \"SALA\",\r\n\t\"debitNote\": \"Expenses during company trip\"\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/UKPayment/{{tenant}}/v1/credittransfer/{{newPaymentUkID}}",
@@ -9468,7 +9601,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"paymentType\": \"{{paymentTypeUK}}\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"GBP\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054385\"\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"creditorAgentSortCode\": \"601437\",\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\"\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"template\": true,\r\n\t\"debitNote\": \"Expenses during company trip\"\r\n}"
+											"raw": "{\r\n    \"paymentType\": \"{{paymentTypeUK}}\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"GBP\"\r\n        },\r\n        \"value\": 2.01\r\n    },\r\n    \"remittanceInformation\": {\r\n        \"structured\": \"224812900001336000000054385\"\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"creditorAgentSortCode\": \"601437\",\r\n    \"creditor\": {\r\n        \"name\": \"{{$randomFullName}}\"\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"template\": true,\r\n\t\"debitNote\": \"Expenses during company trip\"\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/UKPayment/{{tenant}}/v1/credittransfer/{{newPaymentUkID}}",
@@ -9559,7 +9695,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": ""
+											"raw": "",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/UKPayment/{{tenant}}/v1/credittransfer/{{newPaymentUkID}}",
@@ -9701,7 +9840,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"typeOfTransfer\": \"TRANSFER_SPARE_CASH_TO_CREDIT_ACCOUNT\",\r\n\t\"cashBalanceThreshold\": 2303.56,\r\n\t\"typeOfAmount\": \"FIXED_AMOUNT\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"unstructured remittance\"\r\n\t},\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"debitNote\": \"Expenses for SW implementation\",\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitForm\": \"SIA\"\r\n}"
+											"raw": "{\r\n    \"typeOfTransfer\": \"TRANSFER_SPARE_CASH_TO_CREDIT_ACCOUNT\",\r\n\t\"cashBalanceThreshold\": 2303.56,\r\n\t\"typeOfAmount\": \"FIXED_AMOUNT\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"unstructured remittance\"\r\n\t},\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"debitNote\": \"Expenses for SW implementation\",\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitForm\": \"SIA\"\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/balanceadjustment",
@@ -9820,7 +9962,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"typeOfTransfer\": \"TRANSFER_SPARE_CASH_TO_CREDIT_ACCOUNT\",\r\n\t\"cashBalanceThreshold\": 2303.56,\r\n\t\"typeOfAmount\": \"FIXED_AMOUNT\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"\"\r\n\t},\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"debitNote\": \"Expenses for SW implementation\",\r\n\t\"debitForm\": \"SIA\"\r\n}"
+											"raw": "{\r\n    \"typeOfTransfer\": \"TRANSFER_SPARE_CASH_TO_CREDIT_ACCOUNT\",\r\n\t\"cashBalanceThreshold\": 2303.56,\r\n\t\"typeOfAmount\": \"FIXED_AMOUNT\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"\"\r\n\t},\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"debitNote\": \"Expenses for SW implementation\",\r\n\t\"debitForm\": \"SIA\"\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/balanceadjustment/{{newPaymentBalanceAdjustmentID}}",
@@ -9941,7 +10086,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"typeOfTransfer\": \"TRANSFER_SPARE_CASH_TO_CREDIT_ACCOUNT\",\r\n\t\"cashBalanceThreshold\": 2303.63,\r\n\t\"typeOfAmount\": \"FIXED_AMOUNT\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.43\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"\"\r\n\t},\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"debitNote\": \"Expenses for SW implementation\",\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}}\r\n}"
+											"raw": "{\r\n    \"typeOfTransfer\": \"TRANSFER_SPARE_CASH_TO_CREDIT_ACCOUNT\",\r\n\t\"cashBalanceThreshold\": 2303.63,\r\n\t\"typeOfAmount\": \"FIXED_AMOUNT\",\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.43\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"\"\r\n\t},\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"debitNote\": \"Expenses for SW implementation\",\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}}\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/balanceadjustment/{{newPaymentBalanceAdjustmentID}}",
@@ -10033,7 +10181,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": ""
+											"raw": "",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/balanceadjustment/{{newPaymentBalanceAdjustmentID}}",
@@ -10184,7 +10335,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/",
@@ -10297,7 +10451,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/{{newQrBillPaymentID}}",
@@ -10425,7 +10582,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses business lunch\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},    \r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
+													"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses business lunch\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t},    \r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/{{newQrBillPaymentID}}",
@@ -10518,7 +10678,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": ""
+													"raw": "",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/{{newQrBillPaymentID}}",
@@ -10662,7 +10825,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n            \"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
+											"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n            \"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/",
@@ -10767,7 +10933,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
+											"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.01\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses during company trip\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/{{newQrBillPaymentID}}",
@@ -10887,7 +11056,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses business lunch\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}"
+											"raw": "{\r\n\t\"creditorAccountNo\": {{creditorAccountNoBalanceAdjustment}},\r\n\t\"instructedAmount\": {\r\n       \"currency\": {\r\n       \"code\": \"CHF\"\r\n        },\r\n        \"value\": 0.02\r\n\t},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\r\n\t\"debtorAccountNo\": {{debtorAccountNo}},\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"Expenses business lunch\",\r\n    \"ultimateDebtor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"streetName\": {{streetName}},\r\n\t\t\t\"buildingNm\": {{buildingNmStr}},\r\n\t\t\t\"postalCode\": {{postalCodeStr}},\r\n\t\t\t\"townName\": {{townName}},\r\n\t\t\t\"country\": {{country}}\r\n        }\r\n    },\t\r\n\t\"categoryPurposeCode\": \"SALA\"\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/{{newQrBillPaymentID}}",
@@ -10979,7 +11151,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": ""
+											"raw": "",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/swissPayment/{{tenant}}/v1/credittransfer/QRbill/{{newQrBillPaymentID}}",
@@ -11120,7 +11295,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+													"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/accounttransfer",
@@ -11239,7 +11417,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+													"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/accounttransfer/{{newPaymentAccountTransferID}}",
@@ -11359,7 +11540,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.43\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}"
+													"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.43\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\",\r\n\t\"standingOrder\": {\r\n\t\t\"firstOn\": {{PrS:futureWorkingDay}},\r\n\t\t\"lastOn\": {{PrS:futurePlusWorkingDay}},\r\n\t\t\"beforeHoliday\": true,\r\n\t\t\"interval\": \"WEEKLY\",\r\n    \t\"active\": true,\r\n    \t\"ultimo\": false\t\t\r\n\t}\r\n}",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/accounttransfer/{{newPaymentAccountTransferID}}",
@@ -11453,7 +11637,10 @@
 												],
 												"body": {
 													"mode": "raw",
-													"raw": ""
+													"raw": "",
+													"options": {
+														"raw": {}
+													}
 												},
 												"url": {
 													"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/accounttransfer/{{newPaymentAccountTransferID}}",
@@ -11587,7 +11774,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\"\r\n}"
+											"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\"\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/accounttransfer",
@@ -11701,7 +11891,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\"\r\n}"
+											"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.34\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\"\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/accounttransfer/{{newPaymentAccountTransferID}}",
@@ -11816,7 +12009,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.43\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\"\r\n}"
+											"raw": "{\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\t\r\n    \"creditorAccountNo\": {{creditorAccountNo2}},\r\n    \"instructedAmount\": {\r\n        \"currency\": {\r\n            \"code\": \"CHF\"\r\n        },\r\n        \"value\": 2.43\r\n    },\r\n\t\"remittanceInformation\": {\r\n    \t\"unstructured\": \"{{paymentAccountTransferRemittanceInformationUnstructured}}\"\r\n\t},\r\n\t\"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n\t\"debitNote\": \"New reference\",\r\n\t\"debitForm\": \"SIA\"\r\n}",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/accounttransfer/{{newPaymentAccountTransferID}}",
@@ -11909,7 +12105,10 @@
 										],
 										"body": {
 											"mode": "raw",
-											"raw": ""
+											"raw": "",
+											"options": {
+												"raw": {}
+											}
 										},
 										"url": {
 											"raw": "{{environment}}/banking-api/payment/accounttransfer/{{tenant}}/v2/credittransfer/accounttransfer/{{newPaymentAccountTransferID}}",
@@ -12009,7 +12208,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"pageRequest\": {\r\n  \"page\": 0,\r\n  \"size\": 5\r\n  },\r\n   \"paymentFilter\": {\r\n   \"paymentType\":\"SWIFT_INTERNATIONAL\"\r\n   },\r\n   \"orderBy\": {\r\n     \"field\": \"CREATION_DATE\",\r\n     \"sortOrder\": \"DESC\"\r\n  }\r\n \r\n}"
+									"raw": "{\r\n  \"pageRequest\": {\r\n  \"page\": 0,\r\n  \"size\": 5\r\n  },\r\n   \"paymentFilter\": {\r\n   \"paymentType\":\"SWIFT_INTERNATIONAL\"\r\n   },\r\n   \"orderBy\": {\r\n     \"field\": \"CREATION_DATE\",\r\n     \"sortOrder\": \"DESC\"\r\n  }\r\n \r\n}",
+									"options": {
+										"raw": {}
+									}
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/{{tenant}}/v2/payment/search?page=0&size=20",
@@ -12108,7 +12310,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"pageRequest\": {\r\n  \"page\": 1,\r\n  \"size\": 5\r\n  },\r\n   \"paymentFilter\": {\r\n   \"paymentType\":\"SWIFT_INTERNATIONAL\"\r\n   },\r\n   \"orderBy\": {\r\n     \"field\": \"CREATION_DATE\",\r\n     \"sortOrder\": \"DESC\"\r\n  }\r\n \r\n}"
+									"raw": "{\r\n  \"pageRequest\": {\r\n  \"page\": 1,\r\n  \"size\": 5\r\n  },\r\n   \"paymentFilter\": {\r\n   \"paymentType\":\"SWIFT_INTERNATIONAL\"\r\n   },\r\n   \"orderBy\": {\r\n     \"field\": \"CREATION_DATE\",\r\n     \"sortOrder\": \"DESC\"\r\n  }\r\n \r\n}",
+									"options": {
+										"raw": {}
+									}
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/{{tenant}}/v2/payment/search?page=1&size=20",
@@ -12220,7 +12425,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"pageRequest\": {\n  \"page\": 0,\n  \"size\": 100\n  },\n  \"paymentFilter\": {\n\t\"paymentType\":\"SWIFT_INTERNATIONAL\"\n  },\n  \"orderBy\": {\n    \"field\": \"CREATION_DATE\",\n    \"sortOrder\": \"DESC\"\n  }\n}"
+									"raw": "{\n  \"pageRequest\": {\n  \"page\": 0,\n  \"size\": 100\n  },\n  \"paymentFilter\": {\n\t\"paymentType\":\"SWIFT_INTERNATIONAL\"\n  },\n  \"orderBy\": {\n    \"field\": \"CREATION_DATE\",\n    \"sortOrder\": \"DESC\"\n  }\n}",
+									"options": {
+										"raw": {}
+									}
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/{{tenant}}/v2/payment/search?size=1000",
@@ -12322,7 +12530,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{{body}}"
+									"raw": "{{body}}",
+									"options": {
+										"raw": {}
+									}
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/{{tenant}}/v2/payment/search?size=1000",
@@ -12415,7 +12626,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{{body}}"
+									"raw": "{{body}}",
+									"options": {
+										"raw": {}
+									}
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/{{tenant}}/v2/payment/search?size=1000",
@@ -12534,7 +12748,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "",
+									"options": {
+										"raw": {}
+									}
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/{{tenant}}/v1/routing/analyze?routingRequest={{accountAlias}}",
@@ -12690,7 +12907,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"amount\": {\r\n        \"currency\": {\r\n            \"code\": \"EUR\"\r\n        },\r\n        \"value\": \"1.01\"\r\n    },\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}}\r\n    \t}\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"agent\": {\r\n        \"bic\": {{creditorAgentBicSWIFT}}\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"templateName\": {{templateName}},\r\n    \"templateGroupName\": \"Meine Zahlungsliste\",\r\n    \"paymentType\": \"SWIFT_INTERNATIONAL\"\r\n}\r\n"
+									"raw": "{\r\n    \"amount\": {\r\n        \"currency\": {\r\n            \"code\": \"EUR\"\r\n        },\r\n        \"value\": \"1.01\"\r\n    },\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}}\r\n    \t}\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"agent\": {\r\n        \"bic\": {{creditorAgentBicSWIFT}}\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"templateName\": {{templateName}},\r\n    \"templateGroupName\": \"Meine Zahlungsliste\",\r\n    \"paymentType\": \"SWIFT_INTERNATIONAL\"\r\n}\r\n",
+									"options": {
+										"raw": {}
+									}
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/{{tenant}}/v2/payment/template",
@@ -12808,7 +13028,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"amount\": {\r\n        \"currency\": {\r\n            \"code\": \"EUR\"\r\n        },\r\n        \"value\": \"1.01\"\r\n    },\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}}\r\n    \t}\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"agent\": {\r\n        \"bic\": {{creditorAgentBicSWIFT}}\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"templateName\": {{templateName}},\r\n    \"templateGroupName\": \"Meine Zahlungsliste\",\r\n    \"paymentType\": \"SWIFT_INTERNATIONAL\"\r\n}\r\n"
+									"raw": "{\r\n    \"amount\": {\r\n        \"currency\": {\r\n            \"code\": \"EUR\"\r\n        },\r\n        \"value\": \"1.01\"\r\n    },\r\n    \"requestedExecutionDate\": {{PrS:nextWorkingDay}},\r\n    \"creditor\": {\r\n        \"name\": {{name}},\r\n        \"address\": {\r\n\t\t\t\"adrLine1\": {{adrLine1}},\r\n\t\t\t\"adrLine2\": {{adrLine2}}\r\n    \t}\r\n    },\r\n    \"creditorAccountNo\": {{creditorAccountNo}},\r\n    \"agent\": {\r\n        \"bic\": {{creditorAgentBicSWIFT}}\r\n    },\r\n    \"debtorAccountNo\": {{debtorAccountNo}},\r\n    \"templateName\": {{templateName}},\r\n    \"templateGroupName\": \"Meine Zahlungsliste\",\r\n    \"paymentType\": \"SWIFT_INTERNATIONAL\"\r\n}\r\n",
+									"options": {
+										"raw": {}
+									}
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/12312/v2/payment/template/{{newPaymentTemplateID}}",
@@ -12889,7 +13112,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "",
+									"options": {
+										"raw": {}
+									}
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payment/payments/{{tenant}}/v2/payment/template/{{newPaymentTemplateID}}",
@@ -12998,7 +13224,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"xmlData\": \"PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCEtLSAgQ1JFQUxPR0lYIEFHLCBtZnJpICYgbXBpbCBnZW5lcmljIHRlc3QgZmlsZSB0ZW1wbGF0ZSBmb3IgSVNPMjAwMjIgcGFpbi4wMDEgLS0+CjxEb2N1bWVudCB4bWxucz0iaHR0cDovL3d3dy5zaXgtaW50ZXJiYW5rLWNsZWFyaW5nLmNvbS9kZS9wYWluLjAwMS4wMDEuMDMuY2guMDIueHNkIiB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4c2k6c2NoZW1hTG9jYXRpb249Imh0dHA6Ly93d3cuc2l4LWludGVyYmFuay1jbGVhcmluZy5jb20vZGUvcGFpbi4wMDEuMDAxLjAzLmNoLjAyLnhzZCAgcGFpbi4wMDEuMDAxLjAzLmNoLjAyLnhzZCI+Cgk8Q3N0bXJDZHRUcmZJbml0bj4KPCEtLSAKCQlBIGxldmVsCi0tPgkJCgkJPEdycEhkcj4KCQkJPE1zZ0lkPjIwMTkxMTIxMTA1MTQ4OTg0PC9Nc2dJZD4KCQkJPENyZUR0VG0+MjAxOS0xMS0yMVQwMDowMDowMTwvQ3JlRHRUbT4KCQkJPE5iT2ZUeHM+MTwvTmJPZlR4cz4KCQkJPEN0cmxTdW0+MzcuNTg8L0N0cmxTdW0+CgkJCTxJbml0Z1B0eT4KCQkJCTxObT5GcmVkZHkgSGluejwvTm0+CgkJCTwvSW5pdGdQdHk+CgkJPC9HcnBIZHI+CjwhLS0gCQoJCUIgbGV2ZWwJCQotLT4KCQk8UG10SW5mPgoJCQk8UG10SW5mSWQ+QzE2MTA2Mjc8L1BtdEluZklkPgoJCQk8UG10TXRkPlRSRjwvUG10TXRkPgoJCQk8QnRjaEJvb2tnPnRydWU8L0J0Y2hCb29rZz4KCQkJPFJlcWRFeGN0bkR0PjIwMTktMTEtMjI8L1JlcWRFeGN0bkR0PgoJCQk8RGJ0cj4KCQkJCTxObT5GcmVkZHkgSGluejwvTm0+CgkJCTwvRGJ0cj4KCQkJPERidHJBY2N0PgoJCQkJPElkPgoJCQkJCTxJQkFOPkNIMjExMjMxMjAwMTI2MTUzMTUwMTwvSUJBTj4KCQkJCTwvSWQ+CgkJCTwvRGJ0ckFjY3Q+CgkJCTxEYnRyQWd0PgoJCQkJPEZpbkluc3RuSWQ+CgkJCQkJPENsclN5c01tYklkPgoJCQkJCQk8Q2xyU3lzSWQ+CgkJCQkJCQk8Q2Q+Q0hCQ0M8L0NkPgoJCQkJCQk8L0NsclN5c0lkPgoJCQkJCQk8TW1iSWQ+MTIzMTI8L01tYklkPgoJCQkJCTwvQ2xyU3lzTW1iSWQ+CgkJCQk8L0Zpbkluc3RuSWQ+CgkJCTwvRGJ0ckFndD4KPCEtLQoJCUMgbGV2ZWwJCQkKLS0+CQkKCQkJPENkdFRyZlR4SW5mPgoJCQkJPFBtdElkPgoJCQkJCTxJbnN0cklkPkMxNjEwNjI3LUMtRE9NRVNUSUM8L0luc3RySWQ+CgkJCQkJPEVuZFRvRW5kSWQ+MjAxOTExMjExMDUxNDg5ODQwMDAwMDA8L0VuZFRvRW5kSWQ+CgkJCQk8L1BtdElkPgoJCQkJPEFtdD4KCQkJCQk8SW5zdGRBbXQgQ2N5PSJDSEYiPjM3LjU4PC9JbnN0ZEFtdD4KCQkJCTwvQW10PgoJCQkJPENkdHJBZ3Q+CgkJCQkJPEZpbkluc3RuSWQ+CgkJCQkJCTxDbHJTeXNNbWJJZD4KCQkJCQkJCTxDbHJTeXNJZD4KCQkJCQkJCQk8Q2Q+Q0hCQ0M8L0NkPgoJCQkJCQkJPC9DbHJTeXNJZD4KCQkJCQkJCTxNbWJJZD43NzQ8L01tYklkPgoJCQkJCQk8L0NsclN5c01tYklkPgoJCQkJCTwvRmluSW5zdG5JZD4KCQkJCTwvQ2R0ckFndD4KCQkJCTxDZHRyPgoJCQkJCTxObT5IT0NIQUxQSU5FUyBJTlNUSVRVVCBGVEFOPC9ObT4KCQkJCQk8UHN0bEFkcj4KCQkJCQkJPFN0cnRObT5XQUxEV0VHPC9TdHJ0Tm0+CgkJCQkJCTxCbGRnTmI+MTwvQmxkZ05iPgoJCQkJCQk8UHN0Q2Q+NzU1MTwvUHN0Q2Q+CgkJCQkJCTxUd25ObT5GVEFOPC9Ud25ObT4KCQkJCQkJPEN0cnk+Q0g8L0N0cnk+CgkJCQkJPC9Qc3RsQWRyPgoJCQkJPC9DZHRyPgoJCQkJPENkdHJBY2N0PgoJCQkJCTxJZD4KCQkJCQkJPElCQU4+Q0gxNjAwNzc0MDEyMzEyMzQ1Njc4PC9JQkFOPgoJCQkJCTwvSWQ+CgkJCQk8L0NkdHJBY2N0PgoJCQkJPFJtdEluZj4KCQkJCQk8VXN0cmQ+S2F1ZiBTa2lhdXNyw7xzdHVuZzwvVXN0cmQ+CgkJCQk8L1JtdEluZj4KCQkJPC9DZHRUcmZUeEluZj4KCQk8L1BtdEluZj4KCTwvQ3N0bXJDZHRUcmZJbml0bj4KPC9Eb2N1bWVudD4K\"\n}"
+									"raw": "{\n    \"xmlData\": \"PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCEtLSAgQ1JFQUxPR0lYIEFHLCBtZnJpICYgbXBpbCBnZW5lcmljIHRlc3QgZmlsZSB0ZW1wbGF0ZSBmb3IgSVNPMjAwMjIgcGFpbi4wMDEgLS0+CjxEb2N1bWVudCB4bWxucz0iaHR0cDovL3d3dy5zaXgtaW50ZXJiYW5rLWNsZWFyaW5nLmNvbS9kZS9wYWluLjAwMS4wMDEuMDMuY2guMDIueHNkIiB4bWxuczp4c2k9Imh0dHA6Ly93d3cudzMub3JnLzIwMDEvWE1MU2NoZW1hLWluc3RhbmNlIiB4c2k6c2NoZW1hTG9jYXRpb249Imh0dHA6Ly93d3cuc2l4LWludGVyYmFuay1jbGVhcmluZy5jb20vZGUvcGFpbi4wMDEuMDAxLjAzLmNoLjAyLnhzZCAgcGFpbi4wMDEuMDAxLjAzLmNoLjAyLnhzZCI+Cgk8Q3N0bXJDZHRUcmZJbml0bj4KPCEtLSAKCQlBIGxldmVsCi0tPgkJCgkJPEdycEhkcj4KCQkJPE1zZ0lkPjIwMTkxMTIxMTA1MTQ4OTg0PC9Nc2dJZD4KCQkJPENyZUR0VG0+MjAxOS0xMS0yMVQwMDowMDowMTwvQ3JlRHRUbT4KCQkJPE5iT2ZUeHM+MTwvTmJPZlR4cz4KCQkJPEN0cmxTdW0+MzcuNTg8L0N0cmxTdW0+CgkJCTxJbml0Z1B0eT4KCQkJCTxObT5GcmVkZHkgSGluejwvTm0+CgkJCTwvSW5pdGdQdHk+CgkJPC9HcnBIZHI+CjwhLS0gCQoJCUIgbGV2ZWwJCQotLT4KCQk8UG10SW5mPgoJCQk8UG10SW5mSWQ+QzE2MTA2Mjc8L1BtdEluZklkPgoJCQk8UG10TXRkPlRSRjwvUG10TXRkPgoJCQk8QnRjaEJvb2tnPnRydWU8L0J0Y2hCb29rZz4KCQkJPFJlcWRFeGN0bkR0PjIwMTktMTEtMjI8L1JlcWRFeGN0bkR0PgoJCQk8RGJ0cj4KCQkJCTxObT5GcmVkZHkgSGluejwvTm0+CgkJCTwvRGJ0cj4KCQkJPERidHJBY2N0PgoJCQkJPElkPgoJCQkJCTxJQkFOPkNIMjExMjMxMjAwMTI2MTUzMTUwMTwvSUJBTj4KCQkJCTwvSWQ+CgkJCTwvRGJ0ckFjY3Q+CgkJCTxEYnRyQWd0PgoJCQkJPEZpbkluc3RuSWQ+CgkJCQkJPENsclN5c01tYklkPgoJCQkJCQk8Q2xyU3lzSWQ+CgkJCQkJCQk8Q2Q+Q0hCQ0M8L0NkPgoJCQkJCQk8L0NsclN5c0lkPgoJCQkJCQk8TW1iSWQ+MTIzMTI8L01tYklkPgoJCQkJCTwvQ2xyU3lzTW1iSWQ+CgkJCQk8L0Zpbkluc3RuSWQ+CgkJCTwvRGJ0ckFndD4KPCEtLQoJCUMgbGV2ZWwJCQkKLS0+CQkKCQkJPENkdFRyZlR4SW5mPgoJCQkJPFBtdElkPgoJCQkJCTxJbnN0cklkPkMxNjEwNjI3LUMtRE9NRVNUSUM8L0luc3RySWQ+CgkJCQkJPEVuZFRvRW5kSWQ+MjAxOTExMjExMDUxNDg5ODQwMDAwMDA8L0VuZFRvRW5kSWQ+CgkJCQk8L1BtdElkPgoJCQkJPEFtdD4KCQkJCQk8SW5zdGRBbXQgQ2N5PSJDSEYiPjM3LjU4PC9JbnN0ZEFtdD4KCQkJCTwvQW10PgoJCQkJPENkdHJBZ3Q+CgkJCQkJPEZpbkluc3RuSWQ+CgkJCQkJCTxDbHJTeXNNbWJJZD4KCQkJCQkJCTxDbHJTeXNJZD4KCQkJCQkJCQk8Q2Q+Q0hCQ0M8L0NkPgoJCQkJCQkJPC9DbHJTeXNJZD4KCQkJCQkJCTxNbWJJZD43NzQ8L01tYklkPgoJCQkJCQk8L0NsclN5c01tYklkPgoJCQkJCTwvRmluSW5zdG5JZD4KCQkJCTwvQ2R0ckFndD4KCQkJCTxDZHRyPgoJCQkJCTxObT5IT0NIQUxQSU5FUyBJTlNUSVRVVCBGVEFOPC9ObT4KCQkJCQk8UHN0bEFkcj4KCQkJCQkJPFN0cnRObT5XQUxEV0VHPC9TdHJ0Tm0+CgkJCQkJCTxCbGRnTmI+MTwvQmxkZ05iPgoJCQkJCQk8UHN0Q2Q+NzU1MTwvUHN0Q2Q+CgkJCQkJCTxUd25ObT5GVEFOPC9Ud25ObT4KCQkJCQkJPEN0cnk+Q0g8L0N0cnk+CgkJCQkJPC9Qc3RsQWRyPgoJCQkJPC9DZHRyPgoJCQkJPENkdHJBY2N0PgoJCQkJCTxJZD4KCQkJCQkJPElCQU4+Q0gxNjAwNzc0MDEyMzEyMzQ1Njc4PC9JQkFOPgoJCQkJCTwvSWQ+CgkJCQk8L0NkdHJBY2N0PgoJCQkJPFJtdEluZj4KCQkJCQk8VXN0cmQ+S2F1ZiBTa2lhdXNyw7xzdHVuZzwvVXN0cmQ+CgkJCQk8L1JtdEluZj4KCQkJPC9DZHRUcmZUeEluZj4KCQk8L1BtdEluZj4KCTwvQ3N0bXJDZHRUcmZJbml0bj4KPC9Eb2N1bWVudD4K\"\n}",
+									"options": {
+										"raw": {}
+									}
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payments/pain/v1/credittransfer",
@@ -13082,7 +13311,10 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": ""
+									"raw": "",
+									"options": {
+										"raw": {}
+									}
 								},
 								"url": {
 									"raw": "{{environment}}/banking-api/payments/pain/v1/credittransfer/{{newPaymentBulkID}}",
@@ -13553,7 +13785,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": \"{{userId_security}}\",\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+							"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"{{language}}\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [],\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": \"{{userId_security}}\",\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n    \"https://api.crealogix.com/messages/document.category.read\",\r\n    \"https://api.crealogix.com/messages/document.category.write\",\r\n    \"https://api.crealogix.com/messages/document.write\",\r\n    \"https://api.crealogix.com/messages/document.read\",    \r\n    \"https://api.crealogix.com/payments/payment.read\",\r\n    \"https://api.crealogix.com/payments/payment.write\",\r\n    \"https://api.crealogix.com/brokerage/security.readonly\",\r\n    \"https://api.crealogix.com/brokerage/tradingplace.readonly\",\r\n    \"https://api.crealogix.com/brokerage/depository.readonly\",\r\n    \"https://api.crealogix.com/brokerage/order.readonly\",\r\n\t\"https://api.crealogix.com/brokerage/order.write\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "{{env_security_testToken}}",
@@ -13660,7 +13895,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "https://testrail.ebs.crealogix.net/index.php?/api/v2/get_runs/8=",
@@ -13816,7 +14054,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"paymentInformation\": {\r\n    \"endToEndId\": \"consequuntur-maiores-assumenda\",\r\n    \"instructedAmount\": {\r\n      \"currency\": {\r\n        \"code\": \"EUR\"\r\n      },\r\n      \"value\": 10.01\r\n    },\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n    \"instructionPriority\": \"NORMAL\",\r\n    \"debtor\": {\r\n      \"name\": \"Freddy Hinz\",\r\n      \"address\": {\r\n        \"streetName\": \"Schachenallee 31\",\r\n        \"postalCode\": \"5004\",\r\n        \"townName\": \"Aarau\"\r\n      }\r\n    },\r\n\t\"debtorAccountNo\": \"CH6312312001248081501\",\r\n\t\"creditorAccountNo\": 12345678,\t\r\n\t\"creditor\": {\r\n      \"name\": \"Talon Ondricka\",\r\n      \"address\": {\r\n        \"buildingNm\": \"566\",\r\n        \"postalCode\": \"638\",\r\n        \"townName\": \"North Norvalside\",\r\n        \"country\": \"AI\"\r\n      }\r\n    },\r\n    \"creditorAgent\": {\r\n      \"name1\": \"Esmeralda\",\r\n      \"name2\": \"Grady\",\r\n      \"street\": \"60308 Adalberto Passage\",\r\n      \"city\": \"Port Shayleeburgh\",\r\n      \"country\": \"CH\"\r\n    }\r\n  }\r\n}"
+							"raw": "{\r\n  \"paymentInformation\": {\r\n    \"endToEndId\": \"consequuntur-maiores-assumenda\",\r\n    \"instructedAmount\": {\r\n      \"currency\": {\r\n        \"code\": \"EUR\"\r\n      },\r\n      \"value\": 10.01\r\n    },\r\n\t\"requestedExecutionDate\":  {{PrS:nextWorkingDay}},\r\n    \"instructionPriority\": \"NORMAL\",\r\n    \"debtor\": {\r\n      \"name\": \"Freddy Hinz\",\r\n      \"address\": {\r\n        \"streetName\": \"Schachenallee 31\",\r\n        \"postalCode\": \"5004\",\r\n        \"townName\": \"Aarau\"\r\n      }\r\n    },\r\n\t\"debtorAccountNo\": \"CH6312312001248081501\",\r\n\t\"creditorAccountNo\": 12345678,\t\r\n\t\"creditor\": {\r\n      \"name\": \"Talon Ondricka\",\r\n      \"address\": {\r\n        \"buildingNm\": \"566\",\r\n        \"postalCode\": \"638\",\r\n        \"townName\": \"North Norvalside\",\r\n        \"country\": \"AI\"\r\n      }\r\n    },\r\n    \"creditorAgent\": {\r\n      \"name1\": \"Esmeralda\",\r\n      \"name2\": \"Grady\",\r\n      \"street\": \"60308 Adalberto Passage\",\r\n      \"city\": \"Port Shayleeburgh\",\r\n      \"country\": \"CH\"\r\n    }\r\n  }\r\n}",
+							"options": {
+								"raw": {}
+							}
 						},
 						"url": {
 							"raw": "{{environment}}/banking-api/payment/swift/{{tenant}}/v2/credittransfer",
@@ -14274,7 +14515,7 @@
 					"                tenant_name: pm.environment.get(\"tenantName_security\"),",
 					"                user_name: pm.environment.get(\"userId_security\"),",
 					"                contractNo: pm.environment.get(\"contractNo_security\"),",
-					"                language: \"en\",",
+					"                language: pm.environment.get(\"language\"),",
 					"                bcNo: pm.environment.get(\"bcNo_security\"),",
 					"                authorities: [\"DBAN_ADMIN\", \"DBAN_USER\"],",
 					"                client_id: \"postman\",",
@@ -14700,10 +14941,9 @@
 	],
 	"variable": [
 		{
-			"id": "c52db986-1f0a-4089-b5b7-817da3cd10f9",
+			"id": "2c8f5bbc-f22b-4405-a4a7-e6e276f127e1",
 			"key": "EPIC",
-			"value": "PRODUCT-6323",
-			"type": "string"
+			"value": "PRODUCT-6323"
 		}
 	],
 	"protocolProfileBehavior": {}

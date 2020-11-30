@@ -1,0 +1,883 @@
+{
+	"info": {
+		"_postman_id": "bbb5f6ee-2bcb-4296-b0ce-b409031e61e6",
+		"name": "MODULE: OAuth2 API (Actual)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Authorization Code",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1d465260-2b2e-4586-91d0-3f91fa30e6a1",
+						"exec": [
+							"var locationHeader = postman.getResponseHeader(\"location\");",
+							"var code = getQueryParams(locationHeader)['code'];",
+							"postman.setEnvironmentVariable(\"authorization_code\", code);",
+							"",
+							"function getQueryParams(uri) {",
+							"  var vars = [];",
+							"",
+							"  // Get the start index of the query string",
+							"  var qsi = uri.indexOf('?');",
+							"  if (qsi == -1)",
+							"    return vars;",
+							"",
+							"  // Get the query string",
+							"  var qs = uri.slice(qsi + 1);",
+							"",
+							"  // Check if there is a subsection reference",
+							"  sri = qs.indexOf('#');",
+							"  if (sri >= 0)",
+							"    qs = qs.slice(0, sri);",
+							"",
+							"  // Build the associative array",
+							"  var hashes = qs.split('&');",
+							"  for (var i = 0; i < hashes.length; i++) {",
+							"    var sep = hashes[i].indexOf('=');",
+							"    if (sep <= 0)",
+							"      continue;",
+							"    var key = decodeURIComponent(hashes[i].slice(0, sep));",
+							"    var val = decodeURIComponent(hashes[i].slice(sep + 1));",
+							"    vars[key] = val;",
+							"  }",
+							"",
+							"  return vars;",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "CLX_LEGACY",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "X-CLX-Auth",
+						"value": "MTMxMzM4MTUwMToxMjMxMjpnNDBMSFNHellkQzFEblR2ZWdObWFCd0ZNZElsb0NBZzhsUlJQSTZjMTA0MzA3MjA0MTplbjoxMzEzMzgxNTAxOjE0NjIyMDA6UEFTU1dPUkQjIyM6bnVsbDoxNjIxMzE2NTUxMzIxOjEzMTMzODE1OkRFU0tUT1A6REJBTl9VU0VS",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{ASO}}/{{tenantId}}/oauth/authorize?response_type=code&client_id=abaxx&redirect_uri=http://dbhcore-qa.dbh.crealogix.net/portal/part&state=&scope=openid",
+					"host": [
+						"{{ASO}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"oauth",
+						"authorize"
+					],
+					"query": [
+						{
+							"key": "response_type",
+							"value": "code"
+						},
+						{
+							"key": "client_id",
+							"value": "abaxx"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://dbhcore-qa.dbh.crealogix.net/portal/part"
+						},
+						{
+							"key": "state",
+							"value": ""
+						},
+						{
+							"key": "scope",
+							"value": "openid"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Access Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "075ed214-e294-4548-9bc9-f72bd4b5e2a9",
+						"exec": [
+							"if (responseBody) {\r",
+							"    var jsonData = JSON.parse(responseBody);\r",
+							"    if (jsonData) {\r",
+							"        postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);\r",
+							"        postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);\r",
+							"        postman.setEnvironmentVariable(\"id_token\", jsonData.id_token);\r",
+							"        \r",
+							"    }\r",
+							"   \r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CLX_LEGACY",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWJheHg6c2VjcmV0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{ASO}}/{{tenantId}}/oauth/token?grant_type=authorization_code&redirect_uri=http://dbhcore-qa.dbh.crealogix.net/portal/part&code={{authorization_code}}",
+					"host": [
+						"{{ASO}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "authorization_code"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://dbhcore-qa.dbh.crealogix.net/portal/part"
+						},
+						{
+							"key": "code",
+							"value": "{{authorization_code}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Access Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8e2417ab-ef20-4d64-99a2-de8b7fdf5ea1",
+						"exec": [
+							"if (responseBody) {\r",
+							"    var jsonData = JSON.parse(responseBody);\r",
+							"    if (jsonData) {\r",
+							"        postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CLX_LEGACY",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic ZGJhbjpzZWNyZXQ=",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{ASO}}/{{tenantId}}/oauth/token?grant_type=refresh_token&refresh_token={{refresh_token}}",
+					"host": [
+						"{{ASO}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "refresh_token"
+						},
+						{
+							"key": "refresh_token",
+							"value": "{{refresh_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Password flow",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "37509544-1450-431c-aead-6011033a08df",
+						"exec": [
+							"if (responseBody) {\r",
+							"    var jsonData = JSON.parse(responseBody);\r",
+							"    if (jsonData) {\r",
+							"        postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CLX_LEGACY",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic cG9zdG1hblBTRDI6c2VjcmV0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{ASO}}/{{tenantId}}/oauth/token?grant_type=password&username=1000011501&password=welcome",
+					"host": [
+						"{{ASO}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "password"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:9000",
+							"disabled": true
+						},
+						{
+							"key": "code",
+							"value": "{{authorization_code}}",
+							"disabled": true
+						},
+						{
+							"key": "username",
+							"value": "1000011501"
+						},
+						{
+							"key": "password",
+							"value": "welcome"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Authorization Code ID Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0828a7d0-57ca-4a6f-b062-d8fd1f96dc64",
+						"exec": [
+							"var locationHeader = postman.getResponseHeader(\"Location\");",
+							"var code = getQueryParams(locationHeader)['code'];",
+							"postman.setEnvironmentVariable(\"authorization_code\", code);",
+							"",
+							"function getQueryParams(uri) {",
+							"  var vars = [];",
+							"",
+							"  // Get the start index of the query string",
+							"  var qsi = uri.indexOf('?');",
+							"  if (qsi == -1)",
+							"    return vars;",
+							"",
+							"  // Get the query string",
+							"  var qs = uri.slice(qsi + 1);",
+							"",
+							"  // Check if there is a subsection reference",
+							"  sri = qs.indexOf('#');",
+							"  if (sri >= 0)",
+							"    qs = qs.slice(0, sri);",
+							"",
+							"  // Build the associative array",
+							"  var hashes = qs.split('&');",
+							"  for (var i = 0; i < hashes.length; i++) {",
+							"    var sep = hashes[i].indexOf('=');",
+							"    if (sep <= 0)",
+							"      continue;",
+							"    var key = decodeURIComponent(hashes[i].slice(0, sep));",
+							"    var val = decodeURIComponent(hashes[i].slice(sep + 1));",
+							"    vars[key] = val;",
+							"  }",
+							"",
+							"  return vars;",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "CLX_LEGACY",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "X-CLX-Auth",
+						"value": "MTMxMzM4MTUwMToxMjMxMjpnNDBMSFNHellkQzFEblR2ZWdObWFCd0ZNZElsb0NBZzhsUlJQSTZjMTA0MzA3MjA0MTplbjoxMzEzMzgxNTAxOjE0NjIyMDA6UEFTU1dPUkQjIyM6bnVsbDoxNjIxMzE2NTUxMzIxOjEzMTMzODE1OkRFU0tUT1A6REJBTl9VU0VS",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{ASO}}/{{tenantId}}/oauth/authorize?response_type=code id_token&client_id=dban&redirect_uri=http://localhost:9000&state=&scope=openid",
+					"host": [
+						"{{ASO}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"oauth",
+						"authorize"
+					],
+					"query": [
+						{
+							"key": "response_type",
+							"value": "code id_token"
+						},
+						{
+							"key": "client_id",
+							"value": "dban"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:9000"
+						},
+						{
+							"key": "state",
+							"value": ""
+						},
+						{
+							"key": "scope",
+							"value": "openid"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Access Token ID Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "072369f0-7604-46b5-919c-941a24c86080",
+						"exec": [
+							"var locationHeader = postman.getResponseHeader(\"Location\");",
+							"var code = getQueryParams(locationHeader)['code'];",
+							"postman.setEnvironmentVariable(\"authorization_code\", code);",
+							"",
+							"function getQueryParams(uri) {",
+							"  var vars = [];",
+							"",
+							"  // Get the start index of the query string",
+							"  var qsi = uri.indexOf('?');",
+							"  if (qsi == -1)",
+							"    return vars;",
+							"",
+							"  // Get the query string",
+							"  var qs = uri.slice(qsi + 1);",
+							"",
+							"  // Check if there is a subsection reference",
+							"  sri = qs.indexOf('#');",
+							"  if (sri >= 0)",
+							"    qs = qs.slice(0, sri);",
+							"",
+							"  // Build the associative array",
+							"  var hashes = qs.split('&');",
+							"  for (var i = 0; i < hashes.length; i++) {",
+							"    var sep = hashes[i].indexOf('=');",
+							"    if (sep <= 0)",
+							"      continue;",
+							"    var key = decodeURIComponent(hashes[i].slice(0, sep));",
+							"    var val = decodeURIComponent(hashes[i].slice(sep + 1));",
+							"    vars[key] = val;",
+							"  }",
+							"",
+							"  return vars;",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "CLX_LEGACY",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "X-CLX-Auth",
+						"value": "MTMxMzM4MTUwMToxMjMxMjpnNDBMSFNHellkQzFEblR2ZWdObWFCd0ZNZElsb0NBZzhsUlJQSTZjMTA0MzA3MjA0MTplbjoxMzEzMzgxNTAxOjE0NjIyMDA6UEFTU1dPUkQjIyM6bnVsbDoxNTk1NTc4NDY2MzA3OjEzMTMzODE1OkRFU0tUT1A6M2F1c2VyIyMjZmlwbw==",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{ASO}}/{{tenantId}}/oauth/authorize?response_type=id_token&client_id=dban&redirect_uri=http://localhost:9000&state=&scope=openid",
+					"host": [
+						"{{ASO}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"oauth",
+						"authorize"
+					],
+					"query": [
+						{
+							"key": "response_type",
+							"value": "id_token"
+						},
+						{
+							"key": "client_id",
+							"value": "dban"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:9000"
+						},
+						{
+							"key": "state",
+							"value": ""
+						},
+						{
+							"key": "scope",
+							"value": "openid"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get ID Token  (User login with OpenID Connect)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "13ad7ca6-5c9c-4186-9adf-4eaec1d528c2",
+						"exec": [
+							"var locationHeader = postman.getResponseHeader(\"location\");",
+							"var code = getQueryParams(locationHeader)['code'];",
+							"postman.setEnvironmentVariable(\"authorization_code\", code);",
+							"",
+							"function getQueryParams(uri) {",
+							"  var vars = [];",
+							"",
+							"  // Get the start index of the query string",
+							"  var qsi = uri.indexOf('?');",
+							"  if (qsi == -1)",
+							"    return vars;",
+							"",
+							"  // Get the query string",
+							"  var qs = uri.slice(qsi + 1);",
+							"",
+							"  // Check if there is a subsection reference",
+							"  sri = qs.indexOf('#');",
+							"  if (sri >= 0)",
+							"    qs = qs.slice(0, sri);",
+							"",
+							"  // Build the associative array",
+							"  var hashes = qs.split('&');",
+							"  for (var i = 0; i < hashes.length; i++) {",
+							"    var sep = hashes[i].indexOf('=');",
+							"    if (sep <= 0)",
+							"      continue;",
+							"    var key = decodeURIComponent(hashes[i].slice(0, sep));",
+							"    var val = decodeURIComponent(hashes[i].slice(sep + 1));",
+							"    vars[key] = val;",
+							"  }",
+							"",
+							"  return vars;",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "CLX_LEGACY",
+						"type": "text",
+						"value": "true"
+					},
+					{
+						"key": "X-CLX-Auth",
+						"type": "text",
+						"value": "MTMxMzM4MTUwMToxMjMxMjpnNDBMSFNHellkQzFEblR2ZWdObWFCd0ZNZElsb0NBZzhsUlJQSTZjMTA0MzA3MjA0MTplbjoxMzEzMzgxNTAxOjE0NjIyMDA6UEFTU1dPUkQjIyM6bnVsbDoxNTk1NTc4NDY2MzA3OjEzMTMzODE1OkRFU0tUT1A6M2F1c2VyIyMjZmlwbw==",
+						"disabled": true
+					},
+					{
+						"key": "X-CLX-Auth",
+						"value": "MTAwMDAzMTUwMToxMjMxMjpDM3Q3OHhjSGNwYUZpV2tuUFBLWWxNRHlrdUhnVTN6bE0zWE95MlhnMTAwMDAwMzA5ODplbjoxMDAwMDMxNTAxOjExNzpQQVNTV09SRCMjIzpudWxsOjE1OTI4MTc1NDM0NDc6MTAwMDAzMTU6REVTS1RPUA==",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{ASO}}/{{tenantId}}/oauth/authorize?response_type=id_token&client_id=abaxx&redirect_uri=http://dbhcore-qa.dbh.crealogix.net/portal/part&state=&scope=openid",
+					"host": [
+						"{{ASO}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"oauth",
+						"authorize"
+					],
+					"query": [
+						{
+							"key": "response_type",
+							"value": "id_token"
+						},
+						{
+							"key": "client_id",
+							"value": "abaxx"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://dbhcore-qa.dbh.crealogix.net/portal/part"
+						},
+						{
+							"key": "state",
+							"value": ""
+						},
+						{
+							"key": "scope",
+							"value": "openid"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "System Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "67ad9162-45df-4308-834e-f35661689aed",
+						"exec": [
+							"if (responseBody) {\r",
+							"    var jsonData = JSON.parse(responseBody);\r",
+							"    if (jsonData) {\r",
+							"        postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CLX_LEGACY",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic ZGJhbjpzZWNyZXQ=",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{ASO}}/{{tenantId}}/oauth/token?grant_type=client_credentials&redirect_uri=http://localhost:9000&code={{authorization_code}}",
+					"host": [
+						"{{ASO}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:9000"
+						},
+						{
+							"key": "code",
+							"value": "{{authorization_code}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Exhange ID to Access Token (User login with OpenID Connect)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5fb21cdb-85a6-4ce0-811a-e5391403268f",
+						"exec": [
+							"if (responseBody) {\r",
+							"    var jsonData = JSON.parse(responseBody);\r",
+							"    if (jsonData) {\r",
+							"        postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);\r",
+							"        postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CLX_LEGACY",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic YWJheHg6c2VjcmV0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{ASO}}/{{tenantId}}/oauth/token?grant_type=token_exchange&subject_token={{id_token}}&subject_token_type=id_token",
+					"host": [
+						"{{ASO}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "token_exchange"
+						},
+						{
+							"key": "subject_token",
+							"value": "{{id_token}}",
+							"description": "value of identity token"
+						},
+						{
+							"key": "subject_token_type",
+							"value": "id_token"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeviceToken",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CLX_LEGACY",
+						"value": "true",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic bWRldm1hbmFnZXJjbGllbnQ6c2VjcmV0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{ASO}}/{{tenantId}}/oauth/token?grant_type=token_exchange&subject_token=111-2222-222222-3333&subject_token_type=device_id&client_id=mdevmanagerclient&client_secret=secret&audience=mdevmanagerclient",
+					"host": [
+						"{{ASO}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "token_exchange"
+						},
+						{
+							"key": "subject_token",
+							"value": "111-2222-222222-3333"
+						},
+						{
+							"key": "subject_token_type",
+							"value": "device_id"
+						},
+						{
+							"key": "client_id",
+							"value": "mdevmanagerclient"
+						},
+						{
+							"key": "client_secret",
+							"value": "secret"
+						},
+						{
+							"key": "audience",
+							"value": "mdevmanagerclient"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Exchange access token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3842a31e-79e9-4f96-8954-fcf448c39fd1",
+						"exec": [
+							"if (responseBody) {\r",
+							"    var jsonData = JSON.parse(responseBody);\r",
+							"    if (jsonData) {\r",
+							"        postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);\r",
+							"        postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);\r",
+							"    }\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "CLX_LEGACY",
+						"type": "text",
+						"value": "true"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Basic ZGJhbjpzZWNyZXQ="
+					}
+				],
+				"url": {
+					"raw": "{{ASO}}/{{tenantId}}/oauth/token?grant_type=token_exchange&redirect_uri=http://localhost:9000&subject_token_type=access_token&subject_token={{access_token}}",
+					"host": [
+						"{{ASO}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"oauth",
+						"token"
+					],
+					"query": [
+						{
+							"key": "grant_type",
+							"value": "token_exchange"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "http://localhost:9000"
+						},
+						{
+							"key": "subject_token_type",
+							"value": "access_token"
+						},
+						{
+							"key": "subject_token",
+							"value": "{{access_token}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "globalLogoutASO",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic ZGJhbjpzZWNyZXQ=",
+						"type": "text"
+					},
+					{
+						"key": "X-CLX-IDENTITY",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyOjEzMTMzODE1IiwiYW1yIjpbIm1mYSIsInB3ZCJdLCJpc3MiOiJodHRwOi8vbWRiLW1hc3Rlci10ZXN0LXdscy5lYnMuY3JlYWxvZ2l4Lm5ldDo3NjE0IiwibGFuZ3VhZ2UiOiJlbiIsIm5vbmNlIjoiZzQwTEhTR3pZZEMxRG5UdmVnTm1hQndGTWRJbG9DQWc4bFJSUEk2YzEwNDMwNzIwNDEiLCJhdXRob3JpdGllcyI6WyIzYXVzZXI6ZmlwbyJdLCJhdWQiOlsiZGJhbiJdLCJhY3IiOiJwaHIiLCJhdXRoX3RpbWUiOjE1OTU1Nzg0NjYsInByZWZlcnJlZF91c2VyX25hbWUiOiIxMzEzMzgxNTAxIiwibWF5X2FjdCI6WyIxMjMxMjoxMzEzMzgxNTAxIl0sImV4cCI6MTU5NjAxNjIzNiwiaWF0IjoxNTk2MDE1MzM2LCJqdGkiOiJJRC4yLmY0YWM5NWM0LTViZGMtNDg1Zi04NmIwLTA4Y2Y3ZDU5NDE2MiJ9.b6rPpQrpwP5eEffngRvRA0gBH0gOyxW7RfZqNt7CUYCk8g-oN2nhjCDEPs4GD0L6FEtfKIEXNHch5lFJZNGqrOwPr_HsRArsukLcxb3WkUumgjqswOrFuKFEM34iY_VjcoO47vOXmk1jKvof_ozvcWTKf1Gl811DtqFrtU6TVzQ_pOyucDHna-uo8O-AVkw9bKTDfdBq7jSC3rFlgjEerhHBv_6-hIkwzoMsfmgF7fFVIsPQY0FrSbnnuSWEmCdygIbmXv-LoCWN9-7C3KRUZkFS-kZ_koGZTGpemXtYA6wkzdAmLKeZ2CIuiKIIGv5rQtQms2MrM_5grC6KOyj1Wg",
+						"type": "text"
+					},
+					{
+						"key": "CLX_LEGACY",
+						"value": "true",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{ASO}}/{{tenantId}}/oauth/global_logout?Location=/ebankingLogin/login?postlogout",
+					"host": [
+						"{{ASO}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"oauth",
+						"global_logout"
+					],
+					"query": [
+						{
+							"key": "Location",
+							"value": "/ebankingLogin/login?postlogout"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

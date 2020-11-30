@@ -101,8 +101,8 @@
 											"            \"Delete multiple secure mails in bulk (C43995772)\",",
 											"            \"Move multiple secure messages to custom user folder (C41736192)\",",
 											"            \"Get configuration of a specific tenant (C43995783)\",",
-											"            \"Empty message subject validation (C44879394)\",",
-											"            \"Empty message body validation (C44879393)\",",
+											"            \"Empty Message Subject Validation (C44879394)\",",
+											"            \"Empty Message Body Validation (C44879393)\",",
 											"            \"File Size Validation when attachment exceeds limit set in tenant configuration (C45338808)\",",
 											"            \"File Validation when attachment extension is blacklisted (C46823377)\",",
 											"            \"Empty Folder Name Validation (C44879396)\",",
@@ -116,44 +116,45 @@
 											"        var testSession = [",
 											"            \"_Generate access token (C41673950)\",",
 											"            \"Get all message topics (C41673954)\",",
+											"            \"Create folder (C41673956)\",",
+											"            \"Get folder (C41673957)\",",
+											"            \"Get all folders (C41673955)\",",
+											"            \"Get SENT folder (C42292809)\",",
+											"            \"Rename folder (C41673959)\",",
+											"            \"Delete folder (C41673960)\",",
 											"            \"Create secure mail (C41736190)\",",
 											"            \"Get secure mail by id (C43916301)\",",
-											"            \"Get secure mail by priority (C43916302)\",",
+											"            \"Create secure mail (C41736190)\",",
+											"            \"Get secure mail by id (C43916301)\",",
+											"            \"Delete secure mail (C42843218)\",",
 											"            \"Get secure mail by subject (C43916305)\",",
 											"            \"Get secure mail by body (C43995774)\",",
+											"            \"Get all messages contained in SENT folder (C43605135)\",",
+											"            \"Get secure mail by priority (C43916302)\",",
 											"            \"Get secure mail by group (C43995775)\",",
-											"            \"Get all messages contained in SENT folder (C43605135)\",  ",
 											"            \"Get secure mail sorted by alreadySeen showing two messages per page (C44701679 C46978023)\",",
 											"            \"Get secure mail sorted by senderName parameter with specific pageNumber (C44701682)\",",
 											"            \"Get secure mail sorted by Subject parameter (C44701683)\",",
 											"            \"Get secure mail sorted by subject, alreadySeen and senderName parameters (C44701690)\",",
-											"            \"Verify secure mail attachment by mailId and attachmentId (C41853588)\",",
-											"            \"Verify secure mail attachment by mailId (C41853589)\",",
-											"            \"Delete secure mail (C42843218)\",",
-											"            \"Create folder (C41673956)\",",
-											"            \"Get folder (C41673957)\",",
-											"            \"Get all folders (C41673955)\",",
-											"            \"Get SENT folder (C42292809)\",   ",
-											"            \"Rename folder (C41673959)\",",
-											"            \"Delete folder (C41673960)\",",
 											"            \"Move secure mail to custom user folder (C41736191)\",",
 											"            \"Create secure mail with an added attachment (C41853584)\",",
 											"            \"Delete multiple secure mails in bulk (C43995772)\",",
 											"            \"Move multiple secure messages to custom user folder (C41736192)\",",
-											"            //\"Get configuration of a specific tenant (C43995783)\",",
 											"            \"Empty message subject validation (C44879394)\",",
 											"            \"Empty message body validation (C44879393)\",",
-											"            //\"File Size Validation when attachment exceeds limit set in tenant configuration (C45338808)\",",
 											"            \"File Validation when attachment extension is blacklisted (C46823377)\",",
 											"            \"Empty Folder Name Validation (C44879396)\",",
 											"            \"Max Folder Name Length Validation (C44879395)\",",
 											"            \"Rename Folder Empty Folder Name Validation (C44879397)\",",
 											"            \"Rename Folder Max Folder Name Length Validation (C44879398)\",",
-											"            \"Delete all 'CUSTOM' folders\" //keep it as last test to execute",
+											"            \"Verify secure mail attachment by mailId and attachmentId (C41853588)\",",
+											"            \"Verify secure mail attachment by mailId (C41853589)\",",
+											"            \"Delete all 'CUSTOM' folders\"  //keep it as last test to execute",
 											"            ]; ",
 											"        break;",
 											"    case \"Quick\":",
 											"        var testSession = [",
+											"            \"Verify secure mail attachment by mailId (C41853589)\",",
 											"            \"Delete all 'CUSTOM' folders\"  //keep it as last test to execute",
 											"            ]; ",
 											"        break;",
@@ -7550,7 +7551,7 @@
 										{
 											"key": "attachments",
 											"type": "file",
-											"src": ".extra/Test_attachment.pdf"
+											"src": "../files/Test attachment.pdf"
 										}
 									]
 								},
@@ -19034,7 +19035,7 @@
 										{
 											"key": "attachments",
 											"type": "file",
-											"src": ".extra/Word.docx"
+											"src": "../files/Word.docx"
 										}
 									]
 								},
@@ -19562,7 +19563,7 @@
 										{
 											"key": "attachments",
 											"type": "file",
-											"src": ".extra/java_file.jar"
+											"src": "../files/java_file.jar"
 										}
 									]
 								},

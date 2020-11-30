@@ -247,8 +247,8 @@
 											"            \"Delete Orange (standing order) payment (C49915386)\",",
 											"            \"Create Red payment (C51026510)\",",
 											"            \"Deliver Red payment (C51026511)\",",
-											"            \"Update Red payment (ToDo)\",",
-											"            \"Delete Red payment (ToDo)\",",
+											"            \"Update Red payment (C52889235)\",",
+											"            \"Delete Red payment (C52889236)\",",
 											"            \"Create Red (standing order) payment (C52949280)\",",
 											"            \"Deliver Red (standing order) payment (C52992053)\",",
 											"            \"Update Red (standing order) payment (C52949281)\",",
@@ -374,7 +374,7 @@
 											"    case \"Quick\":",
 											"        var testSession = [",
 											"            \"_Generate access token K8S\",",
-											"            \"Create Orange (standing order) payment (C49915384)\"",
+											"            \"Create Swiss domestic payment (C45840620)\"                   ",
 											"        ]; break;",
 											"    case \"TestRailClean\":",
 											"        var testSession = [",
@@ -15455,7 +15455,7 @@
 	],
 	"variable": [
 		{
-			"id": "7d3b4afd-6e18-4664-9997-2436b5ec6bc4",
+			"id": "d628c47b-37d4-41c5-9d6f-2b919cd42201",
 			"key": "EPIC",
 			"value": "PRODUCT-6323"
 		}

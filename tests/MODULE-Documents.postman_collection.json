@@ -7297,15 +7297,15 @@
 											"key": "attachments",
 											"type": "file",
 											"src": [
-												"c:/Work/Postman/payments/.extra/Account_Transfer_TEST.pdf",
-												"c:/Work/Postman/payments/.extra/crealogix_medienmitteilung.pdf",
-												"c:/Work/Postman/payments/.extra/Excell_Worksheet.xlsx",
-												"c:/Work/Postman/payments/.extra/Test attachment.docx",
-												"c:/Work/Postman/payments/.extra/Test attachment.txt",
-												"c:/Work/Postman/payments/.extra/Test CSV.csv",
-												"c:/Work/Postman/payments/.extra/Test JPEG.jpeg",
-												"c:/Work/Postman/payments/.extra/Test PPTX.pptx",
-												"c:/Work/Postman/payments/.extra/Test.png"
+												"c:\\Work\\Postman\\payments\\.extra\\Account_Transfer_TEST.pdf",
+												"c:\\Work\\Postman\\payments\\.extra\\crealogix_medienmitteilung.pdf",
+												"c:\\Work\\Postman\\payments\\.extra\\Excell_Worksheet.xlsx",
+												"c:\\Work\\Postman\\payments\\.extra\\Test attachment.docx",
+												"c:\\Work\\Postman\\payments\\.extra\\Test attachment.txt",
+												"c:\\Work\\Postman\\payments\\.extra\\Test CSV.csv",
+												"c:\\Work\\Postman\\payments\\.extra\\Test JPEG.jpeg",
+												"c:\\Work\\Postman\\payments\\.extra\\Test PPTX.pptx",
+												"c:\\Work\\Postman\\payments\\.extra\\Test.png"
 											]
 										}
 									],
@@ -8309,7 +8309,7 @@
 								{
 									"key": "attachments",
 									"type": "file",
-									"src": "Not allowed/Shell_Script.sh"
+									"src": "c:/Work/Postman/payments/.extra/Shell_Script.sh"
 								}
 							],
 							"options": {
@@ -8433,7 +8433,7 @@
 								{
 									"key": "attachments",
 									"type": "file",
-									"src": "3MB.pdf"
+									"src": "c:/Work/Postman/payments/.extra/3MB.pdf"
 								}
 							],
 							"options": {
@@ -8537,7 +8537,7 @@
 								{
 									"key": "attachment",
 									"type": "file",
-									"src": "3MB.pdf"
+									"src": "c:/Work/Postman/payments/.extra/3MB.pdf"
 								}
 							],
 							"options": {

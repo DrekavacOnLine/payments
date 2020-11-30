@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2ebcac70-9a80-4358-9fbe-98bcc4532c75",
+		"_postman_id": "2d492cfc-1857-49c6-a221-59eb05aee6f8",
 		"name": "MODULE: Assets (wip)",
 		"description": "Asset API:\n\n- Custody account API\n- Assets account\n- Portfolio API\n\nGlobal functions:\n- generateAccessToken //generate access token\n- assetsSearchFunction //list accounts, stores {{_tmp_accountId}}, {{_tmp_accountId2}}, {{_tmp_accountIdAlias}}, \n\t{{_tmp_accountNumber1}}, {{_tmp_accountNumber2}}, {{_tmp_iban1}}, {{_tmp_iban2}}, {{_tmp_id1}}, {{_tmp_id2}} and  {{_tmp_contractId}} \n- portfolioRequest //lists portfolios, stores {{_tmp_customerId}} and {{_tmp_portfolioId}}\n- getCustodyAccounts //list custody accounts, stores {{_tmp_cuacsId}}\n- getPositionsByCustodyAccount //list positions for custody account, stores {{_tmp_positionsId}}\n- getTransactionsByCustodyAccount //list transactions for custody account, stores {{_tmp_transactionsId}}\n- getAssetsList // lisls assets for portfolio, stores {{_tmp_assetsId}}\n\nTest Data needed for:\nAccount Search AccountType SAVINGS (C38950542)\nAccount Search account Name (C37949168)\nAccountId Transaction Search (C37972704)\nAccountId Transaction Search startDate (C37786354)\nAccountId Transaction Search Amount Desc (C38719010)\nAccountId Transaction Search multiple criteria (C38763407)\nAccountId Transaction Search amountFrom (C37905040)\nAccountId Transaction Search amountTo (C37905041)\nAccountId Transaction Search multiple amontFrom amountTo (C37905042)\nGet Maturity List (C43181624)\nUNBOOKED transaction type (C37905047)\nBOOKED transaction type (C37905046)\n---- fixed ---\nAccount Search Multiple names (C38950539) - Done\nGet Portfolio List (C43024137) - Done\nAccount Search (C41736193)\n\nTests to verify (see comments):\nSet New Alias (C37905058)\nUpdate alias (C37905064)\nDelete alias (C37905066)\nAccountId Transaction Search Overview\nCheck custody account for portfolioid (C41853576)\nCheck proper custody account searched by PortfolioId (C41853577)\ncamt053 download with endDate (C39248697)\ncamt053 download with startDate and endDate (C39248700)\ncamt053 download WDETAIL (C39248701)\ncamt052 download (C39248702)\ncamt052 download with startDate (C39248698)\ncamt052 download with startDate and endDate (C39248705)\ncamt054 download (C39248706)\ncamt053 download (C39248710)\n---- fixed ----\nGet transactions for cuacsId (C42065197)\nCustody account position list (C41853583)\nList of custody accounts (C41736189)\nINCOMING transaction flow (C37905043)\nOUTGOING transaction flow (C37905044)\nBOTH transaction flow (C37905045)\nBOTH transaction type (C37905048)\nGet Assets List (C43181622)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -1943,7 +1943,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n  \"orderBy\": [{\n\t\"field\": \"AMOUNT\",\n\t\"sortOrder\": \"DESC\"\n  }],\n  \"criteria\": {\n\t\"startDate\": \"2019-01-01\",\n\t\"endDate\": \"2019-12-31\"\n  }\n}"
+									"raw": "{\n  \"orderBy\": [{\n\t\"field\": \"AMOUNT\",\n\t\"sortOrder\": \"DESC\"\n  }],\n  \"criteria\": {\n\t\"startDate\": \"2019-01-01\",\n\t\"endDate\": {{PrS:today}}\n  }\n}"
 								},
 								"url": {
 									"raw": "{{env_assets}}/assets/api/v2/{{tenantId_assets}}/accounts/{{_tmp_accountId}}/transactions/search",
@@ -10020,7 +10020,7 @@
 							"query": [
 								{
 									"key": "/api/v2/get_runs/8",
-									"value": null
+									"value": ""
 								}
 							]
 						}
@@ -10221,6 +10221,124 @@
 							],
 							"path": [
 								"uuid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clean TestRail Run",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7eb021c5-6cd1-4dcc-967d-4b2db34fc2a5",
+								"exec": [
+									"// Prepare list of TestRail tests for 'Clean TestRail Run' request",
+									"var execTests = data.executedTests;",
+									"console.log(\"TestRail, tests executed in last run: \" + execTests);",
+									"execTests = execTests.replace(/C/g, \"\");",
+									"//console.log(\"TestRail, first cleanup: \" + execTests);",
+									"execTests = execTests.replace(/ /g, \", \");",
+									"//console.log(\"TestRail, second cleanup: \" + execTests);",
+									"execTests = execTests.replace(/,,/g, \",\");",
+									"pm.globals.set(\"testRailTestsInRun\", execTests); ",
+									"",
+									"var array = JSON.parse(\"[\" + execTests + \"]\"); //convert string to array",
+									"for(let i = 0; i < 10; i++){",
+									"    let runId = JSON.parse(responseBody)[i].id;",
+									"    let runName = JSON.parse(responseBody)[i].name;",
+									"    let runSuiteId = JSON.parse(responseBody)[i].suite_id;",
+									"    if (runName === \"MODULE-brokerage\") { //determine proper run",
+									"        //console.log(runId);   ",
+									"        console.log(\"TestRail run '\" + runId + \"' updating for tests: \" + execTests);",
+									"        pm.sendRequest({",
+									"            url: \"https://testrail.ebs.crealogix.net/index.php?/api/v2/update_run/\" + runId,",
+									"            method: \"POST\",",
+									"            header: {",
+									"                \"Authorization\": \"Basic bWlsYW4ua2FyYWRlZ2xpY0BjcmVhbG9naXguY29tOlNTQ25hcG9saTEyMzQ1Njc4OQ==\",",
+									"                \"Content-Type\": \"application/json\"",
+									"            },",
+									"            body: {",
+									"                mode: 'raw',",
+									"                raw: JSON.stringify({ include_all: false, case_ids: array })",
+									"        \t}",
+									"        });",
+									"        break;",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0af662f9-abd2-4768-892a-dafd9bbc73e2",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "SSCnapoli123456789",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "milan.karadeglic@crealogix.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json; charset=UTF-8"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, application/hal+json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{token}}",
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://testrail.ebs.crealogix.net/index.php?/api/v2/get_runs/8=",
+							"protocol": "https",
+							"host": [
+								"testrail",
+								"ebs",
+								"crealogix",
+								"net"
+							],
+							"path": [
+								"index.php"
+							],
+							"query": [
+								{
+									"key": "/api/v2/get_runs/8",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -11693,10 +11811,7 @@
 					"{",
 					"  \"type\": \"object\",",
 					"  \"required\": [",
-					"    \"id\",",
-					"    \"customerId\",",
-					"    \"name\",",
-					"    \"amount\"",
+					"    \"id\"",
 					"  ],",
 					"  \"properties\": {",
 					"    \"id\": {",
@@ -11726,6 +11841,74 @@
 					"  }",
 					"};",
 					"pm.environment.set(\"portfolioDetailsSchema\", portfolioDetailsSchema);",
+					"",
+					"//************************************************************************************************",
+					"// Schema for 'maturity details schema' *********************************************************",
+					"//************************************************************************************************",
+					"const maturityDetailsSchema = ",
+					"{",
+					"  \"type\": \"object\",",
+					"  \"required\": [",
+					"    \"maturities\",",
+					"    \"page\"",
+					"  ],",
+					"  \"properties\": {",
+					"    \"maturities\": {",
+					"      \"type\": \"array\",",
+					"      \"items\": {",
+					"        \"type\": \"object\",",
+					"        \"required\": [",
+					"          \"id\"",
+					"        ],",
+					"        \"properties\": {",
+					"      \"id\": {",
+					"      \"type\": \"string\",",
+					"    },",
+					"\t\"currencyIsoCode\": {",
+					"\t  \"type\": \"string\",",
+					"    },",
+					"\t\"currencyEntryType\": {",
+					"\t  \"type\": \"string\",",
+					"    },",
+					"\t\"onCall\": {",
+					"\t  \"type\": \"number\",",
+					"    },",
+					"\t\"valueDate\t\": {",
+					"\t  \"type\": \"string\",",
+					"    }",
+					"      }",
+					"      }",
+					"    },",
+					"    \"page\": {",
+					"        \"type\": \"object\",",
+					"        \"required\": [",
+					"            \"number\", ",
+					"            \"numberOfElements\",",
+					"            \"size\",",
+					"            \"totalElements\",",
+					"            \"totalPages\"",
+					"        ],                ",
+					"        \"properties\": {",
+					"            \"number\": {",
+					"                \"type\": \"number\"",
+					"            },",
+					"            \"numberOfElements\": {",
+					"                \"type\": \"number\"",
+					"            },",
+					"            \"size\": {",
+					"                \"type\": \"number\"",
+					"            },",
+					"            \"totalElements\": {",
+					"                \"type\": \"number\"",
+					"                },",
+					"            \"totalPages\": {",
+					"                \"type\": \"number\"",
+					"            }",
+					"        }",
+					"    }",
+					"  }",
+					"};",
+					"pm.environment.set(\"maturityDetailsSchema\", maturityDetailsSchema);",
 					"",
 					"//************************************************************************************************",
 					"// Schema for 'portfolio performance schema' *****************************************************",
@@ -12487,7 +12670,7 @@
 	],
 	"variable": [
 		{
-			"id": "2a31bc06-3f34-4e21-9d6d-964beaeb0b97",
+			"id": "9e2a3e07-0ea2-4a8c-aca9-d15708bb55f6",
 			"value": "",
 			"type": "string",
 			"disabled": true

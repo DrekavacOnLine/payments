@@ -1,0 +1,13 @@
+[
+    {
+		"testsScope": "Core",
+        "envName": "BJB-R200-TEST",
+		"contractNumber": "1325351501",
+        "tenantId_security": "98501",
+        "tenantName_security": "CLX EBS",
+        "userName_security": "1325351501",
+        "contractNo_security": "15054",
+        "bcNo_security": "8515",
+        "userId_security": "1325351501"
+    }
+]

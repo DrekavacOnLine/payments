@@ -1,0 +1,13 @@
+[
+    {
+		"testsScope": "Core",
+        "envName": "SGKB-R200-TEST",
+		"contractNumber": "1292991501",
+        "tenantId_security": "11001",
+        "tenantName_security": "CLX EBS",
+        "userName_security": "1292991501",
+        "contractNo_security": "15054",
+        "bcNo_security": "781",
+        "userId_security": "1292991501"
+    }
+]

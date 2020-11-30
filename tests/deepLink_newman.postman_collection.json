@@ -1,0 +1,888 @@
+{
+	"info": {
+		"_postman_id": "c5f011b3-eae2-4c9a-9a23-af13488e3060",
+		"name": "deepLink_newman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getDeviceAccessToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "32d608bf-f918-41d2-96d3-9f601c4122d1",
+						"exec": [
+							"pm.test(\"Body matches string\", function () {",
+							"    var token = pm.response.text();",
+							"    pm.environment.set(\"dltoken\", token);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"tenant_id\": 19901,\r\n \"user_name\": \"12312:1000001501\",\r\n \"client_id\": \"mDevManager\",\r\n \"aud\" :  \"mDevManager\",\r\n \"language\": \"en\",\r\n \"authorities\": [\"DBAN_ADMIN\", \"DBAN_USER\"],\r\n \"scope\": [\r\n   \"https://api.crealogix.com/dban\",\r\n   \"read\",\r\n   \"https://api.crealogix.com/mdevmanager/devices.readonly\",\r\n   \"https://api.crealogix.com/push/messages.readonly\",\r\n   \"write\",\r\n   \"https://api.crealogix.com/mdevmanager/devices.write\",\r\n   \"https://api.crealogix.com/deeplink/domains\",\r\n   \"https://api.crealogix.com/deeplink/links\"\r\n ]\r\n}"
+				},
+				"url": {
+					"raw": "http://test-token.mdb-master-dev.k8s-core.ebs.crealogix.net/test-token",
+					"protocol": "http",
+					"host": [
+						"test-token",
+						"mdb-master-dev",
+						"k8s-core",
+						"ebs",
+						"crealogix",
+						"net"
+					],
+					"path": [
+						"test-token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1. create new domain",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3c6c5a3a-c7e9-4a63-abd5-ce7d487d476e",
+						"exec": [
+							"pm.test(\"Get ID\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.environment.set(\"newDomainId\", jsonData.id);",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{dltoken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"allegro.pl for newman tests\",\n  \"domainPattern\": \"allegro.pl\",\n  \"loginRequired\": false,\n  \"state\": \"ALLOWED\"\n}"
+				},
+				"url": {
+					"raw": "{{deepLinkUrl}}/deeplink/admin/19901/v1/domains/",
+					"host": [
+						"{{deepLinkUrl}}"
+					],
+					"path": [
+						"deeplink",
+						"admin",
+						"19901",
+						"v1",
+						"domains",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2. get domains - check if domain was added",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9a6cd6bd-cfa9-464b-80dd-1cd828379178",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"var jsonData = pm.response.json();",
+							"pm.test(\"Body matches: allegro.pl for newman tests\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"allegro.pl for newman tests\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{dltoken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{deepLinkUrl}}/deeplink/admin/19901/v1/domains/",
+					"host": [
+						"{{deepLinkUrl}}"
+					],
+					"path": [
+						"deeplink",
+						"admin",
+						"19901",
+						"v1",
+						"domains",
+						""
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3. get newly created domain details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7471fd9e-4165-4663-b771-7f753ae90fcb",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{dltoken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{deepLinkUrl}}/deeplink/admin/19901/v1/domains/{{newDomainId}}",
+					"host": [
+						"{{deepLinkUrl}}"
+					],
+					"path": [
+						"deeplink",
+						"admin",
+						"19901",
+						"v1",
+						"domains",
+						"{{newDomainId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4. update domain entry",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "91aadb23-e500-4e0c-b4e7-817b297e7ef1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{dltoken}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\t\"name\": \"allegro.pl for Newman tests\",\n        \"domainPattern\": \"allegro.pl\",\n        \"loginRequired\": false,\n        \"state\": \"ALLOWED\"\n}"
+				},
+				"url": {
+					"raw": "{{deepLinkUrl}}/deeplink/admin/19901/v1/domains/{{newDomainId}}",
+					"host": [
+						"{{deepLinkUrl}}"
+					],
+					"path": [
+						"deeplink",
+						"admin",
+						"19901",
+						"v1",
+						"domains",
+						"{{newDomainId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5. add parameters configuration for registered domain",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5941fd50-aaa7-43e6-9ef8-19e01d2b46a1",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    ",
+							"    ",
+							"    setTimeout(function(){",
+							"          console.log(\"Sleeping for 10 seconds before next request.\");",
+							"    }, 10000);",
+							"  ",
+							"  pm.response.to.have.status(200);",
+							"  ",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{dltoken}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"parameters\": [\n    {\n      \"name\": \"string\",\n      \"state\": \"ALLOWED\"\n    },\n    {\n      \"name\": \"stan\",\n      \"state\": \"ALLOWED\"\n    }\n  ]\n}"
+				},
+				"url": {
+					"raw": "{{deepLinkUrl}}/deeplink/admin/19901/v1/domains/{{newDomainId}}/parameters",
+					"host": [
+						"{{deepLinkUrl}}"
+					],
+					"path": [
+						"deeplink",
+						"admin",
+						"19901",
+						"v1",
+						"domains",
+						"{{newDomainId}}",
+						"parameters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6. show all params for the domain",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa0d021a-48fa-444a-bee1-2ce5fa96d54e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"     setTimeout(function(){",
+							"          console.log(\"Sleeping for 10 seconds before next request.\");",
+							"    }, 10000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{dltoken}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{deepLinkUrl}}/deeplink/admin/19901/v1/domains/{{newDomainId}}/parameters",
+					"host": [
+						"{{deepLinkUrl}}"
+					],
+					"path": [
+						"deeplink",
+						"admin",
+						"19901",
+						"v1",
+						"domains",
+						"{{newDomainId}}",
+						"parameters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "7. register new link - properly formated for 1.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6fb29c85-446a-4150-b8d2-a40467f18023",
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"_status = true\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData._status).to.be.true;",
+							"    ",
+							"    pm.environment.set(\"lilnkUrl\", jsonData.link);",
+							"});",
+							"pm.test(\"link contains http\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.link).to.include(\"http\");",
+							"    ",
+							"    setTimeout(function(){",
+							"          console.log(\"Sleeping for 3 seconds before next request.\");",
+							"    }, 3000);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d766d4d2-bb3c-4250-9a63-189e1d144430",
+						"exec": [
+							"var moment = require('moment')",
+							"pm.globals.set('nowDate', moment().add(0, 'hour').add(1, 'minute').utc().format())",
+							"pm.globals.set('futureDate', moment().add(20, 'day').add(2, 'minute').utc().format())",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{dltoken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"key\": {\n    \"businessDomain\": \"allegro.pl for Newman tests\",\n    \"linkName\": \"allegro.pl {{$timestamp}}\"\n  },\n  \"registrationType\": \"FREELINK\",\n  \"settings\": {\n    \"active\": true,\n    \"validFrom\": \"{{nowDate}}\",\n    \"validTo\": \"{{futureDate}}\"\n  },\n  \"variables\": [\n  \t{\n     \"name\": \"search\",\n     \"required\": true\n   }\n  ],\n  \"ports\": [\n    {\n      \"key\": \"a1\",\n      \"matcherType\": \"DEFAULT\",\n      \"location\": \"https://allegro.pl/listing?string={$search}&stan=nowe\"\n    },\n    {\n      \"key\": \"e1\",\n      \"matcherType\": \"MC\",\n      \"location\": \"https://allegro.pl/listing?string={$search}&stan=uzywane\"\n    }\n  ]\n}\n"
+				},
+				"url": {
+					"raw": "{{deepLinkUrl}}/deeplink/registration/19901/v1/link",
+					"host": [
+						"{{deepLinkUrl}}"
+					],
+					"path": [
+						"deeplink",
+						"registration",
+						"19901",
+						"v1",
+						"link"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "8. get all links for tenant - properly formated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6fb29c85-446a-4150-b8d2-a40467f18023",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"_status = true\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData._status).to.be.true;",
+							"});",
+							"",
+							"",
+							"var deepLinkId",
+							"var jsonData = pm.response.json();",
+							"",
+							"",
+							"",
+							"pm.test(\"Get an ID\", function () {",
+							"    ",
+							"    setTimeout(function(){",
+							"          console.log(\"Sleeping for 3 seconds before next request.\");",
+							"    }, 3000);",
+							"    ",
+							"    jsonData.links.forEach(function(link) {",
+							"        if (link.businessDomain === \"allegro.pl for Newman tests\" && link.active === true){",
+							"            deepLinkId = link.id;",
+							"        }",
+							"    })",
+							"    postman.setEnvironmentVariable(\"deepLinkId\", deepLinkId);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d766d4d2-bb3c-4250-9a63-189e1d144430",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{dltoken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{deepLinkUrl}}/deeplink/admin/19901/v1/links",
+					"host": [
+						"{{deepLinkUrl}}"
+					],
+					"path": [
+						"deeplink",
+						"admin",
+						"19901",
+						"v1",
+						"links"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "9. get link details - properly formated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6fb29c85-446a-4150-b8d2-a40467f18023",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"/*",
+							"pm.test(\"_status = true\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData._status).to.be.true;",
+							"});",
+							"*/",
+							"pm.test(\"wait\", function () {",
+							"    ",
+							"    setTimeout(function(){",
+							"          console.log(\"Sleeping for 3 seconds before next request.\");",
+							"    }, 2000);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d766d4d2-bb3c-4250-9a63-189e1d144430",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{dltoken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{deepLinkUrl}}/deeplink/admin/19901/v1/links/{{deepLinkId}}",
+					"host": [
+						"{{deepLinkUrl}}"
+					],
+					"path": [
+						"deeplink",
+						"admin",
+						"19901",
+						"v1",
+						"links",
+						"{{deepLinkId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "10. get link statistics",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6fb29c85-446a-4150-b8d2-a40467f18023",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"_status = true\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData._status).to.be.true;",
+							"    setTimeout(function(){",
+							"          console.log(\"Sleeping for 3 seconds before next request.\");",
+							"    }, 2000);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d766d4d2-bb3c-4250-9a63-189e1d144430",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{dltoken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{deepLinkUrl}}/deeplink/admin/19901/v1/links/{{deepLinkId}}/statistics",
+					"host": [
+						"{{deepLinkUrl}}"
+					],
+					"path": [
+						"deeplink",
+						"admin",
+						"19901",
+						"v1",
+						"links",
+						"{{deepLinkId}}",
+						"statistics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "11. deactivate new link - properly formated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6fb29c85-446a-4150-b8d2-a40467f18023",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"_status = true\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData._status).to.be.true;",
+							"    ",
+							"    setTimeout(function(){",
+							"          console.log(\"Sleeping for 3 seconds before next request.\");",
+							"    }, 3000);",
+							"    ",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d766d4d2-bb3c-4250-9a63-189e1d144430",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{dltoken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{deepLinkUrl}}/deeplink/admin/19901/v1/links/{{deepLinkId}}/perform?action=deactivate",
+					"host": [
+						"{{deepLinkUrl}}"
+					],
+					"path": [
+						"deeplink",
+						"admin",
+						"19901",
+						"v1",
+						"links",
+						"{{deepLinkId}}",
+						"perform"
+					],
+					"query": [
+						{
+							"key": "action",
+							"value": "deactivate"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "12. update domain entry cleanUP",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "795f2ccb-5133-4165-aba9-832314fabfe3",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    ",
+							"    setTimeout(function(){",
+							"          console.log(\"Sleeping for 3 seconds before next request.\");",
+							"    }, 3000);",
+							"    ",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{dltoken}}"
+					},
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\t\"name\": \"allegro - allegro.pl{{$timestamp}}\",\n        \"domainPattern\": \"allegro{{$timestamp}}.pl\",\n        \"loginRequired\": false,\n        \"state\": \"ALLOWED\"\n\t\n}"
+				},
+				"url": {
+					"raw": "{{deepLinkUrl}}/deeplink/admin/19901/v1/domains/{{newDomainId}}",
+					"host": [
+						"{{deepLinkUrl}}"
+					],
+					"path": [
+						"deeplink",
+						"admin",
+						"19901",
+						"v1",
+						"domains",
+						"{{newDomainId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1f56ead3-8a04-49ba-8b92-6fa50223f4a5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "3b0b630d-3ac3-4211-b209-6950aaf3c006",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "f25ed34e-864c-45ef-9eca-1028c29ae974",
+			"key": "nowUtc",
+			"value": "",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

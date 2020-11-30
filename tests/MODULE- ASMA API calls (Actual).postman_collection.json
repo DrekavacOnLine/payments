@@ -1,0 +1,1144 @@
+{
+	"info": {
+		"_postman_id": "d1efe40a-61d6-4c1f-bf01-9c6c59ddcd6f",
+		"name": "MODULE: ASMA API calls (Actual)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "ASMA API - Activation codes",
+			"item": [
+				{
+					"name": "GetAuthorizationCodeASMA",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2a5453cc-e3e1-4fb2-b57c-863a0a5225f6",
+								"exec": [
+									"var locationHeader = postman.getResponseHeader(\"Location\");",
+									"var code = getQueryParams(locationHeader)['code'];",
+									"postman.setEnvironmentVariable(\"authorization_code\", code);",
+									"",
+									"function getQueryParams(uri) {",
+									"  var vars = [];",
+									"",
+									"  // Get the start index of the query string",
+									"  var qsi = uri.indexOf('?');",
+									"  if (qsi == -1)",
+									"    return vars;",
+									"",
+									"  // Get the query string",
+									"  var qs = uri.slice(qsi + 1);",
+									"",
+									"  // Check if there is a subsection reference",
+									"  sri = qs.indexOf('#');",
+									"  if (sri >= 0)",
+									"    qs = qs.slice(0, sri);",
+									"",
+									"  // Build the associative array",
+									"  var hashes = qs.split('&');",
+									"  for (var i = 0; i < hashes.length; i++) {",
+									"    var sep = hashes[i].indexOf('=');",
+									"    if (sep <= 0)",
+									"      continue;",
+									"    var key = decodeURIComponent(hashes[i].slice(0, sep));",
+									"    var val = decodeURIComponent(hashes[i].slice(sep + 1));",
+									"    vars[key] = val;",
+									"  }",
+									"  const jar = pm.cookies.jar();",
+									"",
+									"  jar.clear(pm.request.url, function (error) {",
+									"  // error - <Error>",
+									"  });",
+									"",
+									"  return vars;",
+									"  ",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "CLX_LEGACY",
+								"value": "true",
+								"type": "text"
+							},
+							{
+								"key": "X-CLX-Auth",
+								"value": "dGVzdC51c2VyQGNyZWFsb2dpeC5jb206MTIzMTI6V2gyVjN1UGZKdnRlZFVuWjVPb1kwVm5oYUJWVmxMNWFCNEF5WHl6bDEwMDAxNjc3MTI6ZW46Y29udHJhY3ROdW1iZXIxOjEyMzQ=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ASO}}/{{tenantId}}/oauth/authorize?response_type=code&client_id=asmaClient&redirect_uri=http://localhost:9000&state=&scope=",
+							"host": [
+								"{{ASO}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"oauth",
+								"authorize"
+							],
+							"query": [
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "client_id",
+									"value": "asmaClient"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:9000"
+								},
+								{
+									"key": "state",
+									"value": ""
+								},
+								{
+									"key": "scope",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccessTokenASMA",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "9fb811fd-e238-4729-b594-2664646e4149",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "c469634d-c7b3-45ba-9c11-ff26946beec3",
+								"exec": [
+									"if (responseBody) {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    if (jsonData) {\r",
+									"        postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);\r",
+									"    }\r",
+									"}\r",
+									"const jar = pm.cookies.jar();\r",
+									"\r",
+									"jar.clear(pm.request.url, function (error) {\r",
+									"  // error - <Error>\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "CLX_LEGACY",
+								"value": "true",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic cG9zdG1hbjpzZWNyZXQ=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ASO}}/{{tenantId}}/oauth/token?grant_type=authorization_code&redirect_uri=http://localhost:9000&code={{authorization_code}}",
+							"host": [
+								"{{ASO}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:9000"
+								},
+								{
+									"key": "code",
+									"value": "{{authorization_code}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/activationcode/v0",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/activationcode/v0",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"activationcode",
+								"v0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/activationcode/v0",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"1284991501\",\r\n  \"type\": \"SHORT_LIVED\",\r\n  \"retrievalMode\": \"GENERATE_ALWAYS\",\r\n  \"exported\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/activationcode/v0",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"activationcode",
+								"v0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/activationcode/v0/1029220{activationCodeId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/activationcode/v0/1029220",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"activationcode",
+								"v0",
+								"1029220"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/activationcode/v0/1029220{activationCodeId} Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/activationcode/v0/{activationCodeId}",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"activationcode",
+								"v0",
+								"{activationCodeId}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/activationcode/v0/{activationCodeId}/setused",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/activationcode/v0/{activationCodeId}/setused",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"activationcode",
+								"v0",
+								"{activationCodeId}",
+								"setused"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/activationcode/v0/{activationCodeId}/export",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"exportedAt\": \"2020-07-30T13:14:52.253Z\",\r\n  \"exportConfirmedAt\": \"2020-07-30T13:14:52.253Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/activationcode/v0/1029263/export",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"activationcode",
+								"v0",
+								"1029263",
+								"export"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/activationcode/v0/export",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"exportedAt\": \"2020-07-31T13:14:52.253Z\",\r\n  \"exportConfirmedAt\": \"2020-07-31T13:14:52.253Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/activationcode/v0/export",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"activationcode",
+								"v0",
+								"export"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ASMA API - device bindings",
+			"item": [
+				{
+					"name": "GetAuthorizationCodeASMA",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4951e45d-3f0c-4172-8baf-2dbccd690059",
+								"exec": [
+									"var locationHeader = postman.getResponseHeader(\"Location\");",
+									"var code = getQueryParams(locationHeader)['code'];",
+									"postman.setEnvironmentVariable(\"authorization_code\", code);",
+									"",
+									"function getQueryParams(uri) {",
+									"  var vars = [];",
+									"",
+									"  // Get the start index of the query string",
+									"  var qsi = uri.indexOf('?');",
+									"  if (qsi == -1)",
+									"    return vars;",
+									"",
+									"  // Get the query string",
+									"  var qs = uri.slice(qsi + 1);",
+									"",
+									"  // Check if there is a subsection reference",
+									"  sri = qs.indexOf('#');",
+									"  if (sri >= 0)",
+									"    qs = qs.slice(0, sri);",
+									"",
+									"  // Build the associative array",
+									"  var hashes = qs.split('&');",
+									"  for (var i = 0; i < hashes.length; i++) {",
+									"    var sep = hashes[i].indexOf('=');",
+									"    if (sep <= 0)",
+									"      continue;",
+									"    var key = decodeURIComponent(hashes[i].slice(0, sep));",
+									"    var val = decodeURIComponent(hashes[i].slice(sep + 1));",
+									"    vars[key] = val;",
+									"  }",
+									"  const jar = pm.cookies.jar();",
+									"",
+									"  jar.clear(pm.request.url, function (error) {",
+									"  // error - <Error>",
+									"  });",
+									"",
+									"  return vars;",
+									"  ",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "CLX_LEGACY",
+								"value": "true",
+								"type": "text"
+							},
+							{
+								"key": "X-CLX-Auth",
+								"value": "dGVzdC51c2VyQGNyZWFsb2dpeC5jb206MTIzMTI6V2gyVjN1UGZKdnRlZFVuWjVPb1kwVm5oYUJWVmxMNWFCNEF5WHl6bDEwMDAxNjc3MTI6ZW46Y29udHJhY3ROdW1iZXIxOjEyMzQ=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ASO}}/{{tenantId}}/oauth/authorize?response_type=code&client_id=asmaClient&redirect_uri=http://localhost:9000&state=&scope=",
+							"host": [
+								"{{ASO}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"oauth",
+								"authorize"
+							],
+							"query": [
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "client_id",
+									"value": "asmaClient"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:9000"
+								},
+								{
+									"key": "state",
+									"value": ""
+								},
+								{
+									"key": "scope",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAccessTokenASMA",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "df55c82d-1117-4d65-9d4b-05a04061d464",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "273308b9-de66-4b42-b91e-b57968402ca0",
+								"exec": [
+									"if (responseBody) {\r",
+									"    var jsonData = JSON.parse(responseBody);\r",
+									"    if (jsonData) {\r",
+									"        postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);\r",
+									"    }\r",
+									"}\r",
+									"const jar = pm.cookies.jar();\r",
+									"\r",
+									"jar.clear(pm.request.url, function (error) {\r",
+									"  // error - <Error>\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "CLX_LEGACY",
+								"value": "true",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic cG9zdG1hbjpzZWNyZXQ=",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ASO}}/{{tenantId}}/oauth/token?grant_type=authorization_code&redirect_uri=http://localhost:9000&code={{authorization_code}}",
+							"host": [
+								"{{ASO}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"oauth",
+								"token"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:9000"
+								},
+								{
+									"key": "code",
+									"value": "{{authorization_code}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/bindings/v0",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/bindings/v0?userId=1284991501&deviceId=7fe3bb01-0022-4917-b18d-c24944178889",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"bindings",
+								"v0"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "1284991501"
+								},
+								{
+									"key": "deviceId",
+									"value": "7fe3bb01-0022-4917-b18d-c24944178889"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/bindings/v0/{bindingId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/bindings/v0/nOfAfeuoAjFZFRIZ",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"bindings",
+								"v0",
+								"nOfAfeuoAjFZFRIZ"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ASMA API - notifications",
+			"item": [
+				{
+					"name": "{{ASMA}}/{{tenantId}}/notifications/v0",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/notifications/v0",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"notifications",
+								"v0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/notifications/v0/{notificationId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/notifications/v0/1027841",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"notifications",
+								"v0",
+								"1027841"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/notifications/v0/pushtan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"deviceId\": \"b69745cc-bb6b-4de6-86d7-118dde44788f\",\r\n  \"userId\": \"1315901501\",\r\n  \"type\": \"PUSH_TAN\",\r\n  \"usage\": \"sadfasdf\",\r\n  \"languageCode\": \"en\",\r\n  \"text\": \"123123123123\",\r\n  \"parameters\": {\r\n    \"additionalProp1\": \"123123\",\r\n    \"additionalProp2\": \"str123123ing\",\r\n    \"additionalProp3\": \"12312\"\r\n  },\r\n  \"clientSessionId\": \"1234\",\r\n  \"clientReference\": \"123123\",\r\n  \"timeToLive\": 0,\r\n  \"title\": \"Alet\",\r\n  \"messageType\": \"LoginPushTan\",\r\n  \"neutralButtonLabel\": \"OK\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/notifications/v0/pushtan",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"notifications",
+								"v0",
+								"pushtan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/notifications/v0/pushalert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"deviceId\": \"b69745cc-bb6b-4de6-86d7-118dde44788f\",\r\n  \"userId\": \"1315901501\",\r\n  \"type\": \"PUSH_TAN\",\r\n  \"usage\": \"sadfasdf\",\r\n  \"languageCode\": \"en\",\r\n  \"text\": \"123123123123\",\r\n  \"parameters\": {\r\n    \"additionalProp1\": \"123123\",\r\n    \"additionalProp2\": \"str123123ing\",\r\n    \"additionalProp3\": \"12312\"\r\n  },\r\n  \"clientSessionId\": \"1234\",\r\n  \"clientReference\": \"123123\",\r\n  \"timeToLive\": 0,\r\n  \"title\": \"Alet\",\r\n  \"messageType\": \"LoginPushTan\",\r\n  \"neutralButtonLabel\": \"OK\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/notifications/v0/pushalert",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"notifications",
+								"v0",
+								"pushalert"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/notifications/v0/pushauth",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"deviceId\": \"b69745cc-bb6b-4de6-86d7-118dde44788f\",\r\n  \"userId\": \"1315901501\",\r\n  \"type\": \"PUSH_TAN\",\r\n  \"usage\": \"asdfasdfasdfasdf\",\r\n  \"languageCode\": \"en\",\r\n  \"text\": \"asdfasdf\",\r\n  \"parameters\": {\r\n    \"additionalProp1\": \"123412\",\r\n    \"additionalProp2\": \"asdfasdf\",\r\n    \"additionalProp3\": \"asdfasdf\"\r\n  },\r\n  \"clientSessionId\": \"asdfasdf\",\r\n  \"clientReference\": \"asdfasdfasdf\",\r\n  \"timeToLive\": 120,\r\n  \"title\": \"strinasdfasdfasdfasdfg\",\r\n  \"messageType\": \"LoginPushTan\",\r\n  \"positiveButtonLabel\": \"CONFIRM\",\r\n  \"negativeButtonLabel\": \"REJECT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/notifications/v0/pushauth",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"notifications",
+								"v0",
+								"pushauth"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ASMA API - Report",
+			"item": [
+				{
+					"name": "{{ASMA}}/{{tenantId}}/reports/v0/userdevices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/reports/v0/userdevices",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"reports",
+								"v0",
+								"userdevices"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ASMA API - device syncronization",
+			"item": [
+				{
+					"name": "{{ASMA}}/{{tenantId}}/devices/sync/v0/tenantdeviceinfo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/devices/sync/v0/tenantdeviceinfo",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"devices",
+								"sync",
+								"v0",
+								"tenantdeviceinfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/devices/sync/v0/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/devices/sync/v0/register",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"devices",
+								"sync",
+								"v0",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/devices/sync/v0/reregister",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/devices/sync/v0/reregister",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"devices",
+								"sync",
+								"v0",
+								"reregister"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/devices/sync/v0/unregister",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/devices/sync/v0/unregister",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"devices",
+								"sync",
+								"v0",
+								"unregister"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ASMA API - FotoTAN",
+			"item": [
+				{
+					"name": "{{ASMA}}/{{tenantId}}/fototan/v0",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"deviceId\": \"b69745cc-bb6b-4de6-86d7-118dde44788f\",\r\n  \"userId\": \"1315901501\",\r\n  \"type\": \"FOTO_TAN\",\r\n  \"usage\": \"LoginFotoTan\",\r\n  \"languageCode\": \"1234\",\r\n  \"text\": \"asdfsadfsdf\",\r\n  \"timeToLive\": 120\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/fototan/v0",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"fototan",
+								"v0"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ASMA API - devices",
+			"item": [
+				{
+					"name": "{{ASMA}}/{{tenantId}}/devices/v0/{deviceId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/devices/v0/b69745cc-bb6b-4de6-86d7-118dde44788f",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"devices",
+								"v0",
+								"b69745cc-bb6b-4de6-86d7-118dde44788f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/devices/v0/{deviceId}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/devices/v0/b69745cc-bb6b-4de6-86d7-118dde44788f",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"devices",
+								"v0",
+								"b69745cc-bb6b-4de6-86d7-118dde44788f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/devices/v0/{deviceId}/setname",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"deviceName\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/devices/v0/b69745cc-bb6b-4de6-86d7-118dde44788f/setname",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"devices",
+								"v0",
+								"b69745cc-bb6b-4de6-86d7-118dde44788f",
+								"setname"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ASMA API - user devices",
+			"item": [
+				{
+					"name": "{{ASMA}}/{{tenantId}}/users/{userId}/devices/v0/{deviceId}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/users/1315901501/devices/v0/b69745cc-bb6b-4de6-86d7-118dde44788f",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"users",
+								"1315901501",
+								"devices",
+								"v0",
+								"b69745cc-bb6b-4de6-86d7-118dde44788f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/users/{userId}/devices/v0",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/users/1315901501/devices/v0",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"users",
+								"1315901501",
+								"devices",
+								"v0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/users/userId/devices/v0/{deviceId}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/users/1315901501/devices/v0/564686be-c536-478a-8eab-6cff8301ed9f",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"users",
+								"1315901501",
+								"devices",
+								"v0",
+								"564686be-c536-478a-8eab-6cff8301ed9f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/users/{userId}/devices/v0",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/users/1315921501/devices/v0",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"users",
+								"1315921501",
+								"devices",
+								"v0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{ASMA}}/{{tenantId}}/users/{userId}/devices/v0/{deviceId}/setting",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userId\": \"1315900902\",\r\n  \"deviceId\": \"b69745cc-bb6b-4de6-86d7-118dde44788f\",\r\n  \"key\": \"boundContract\",\r\n  \"value\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{ASMA}}/{{tenantId}}/users/1315901501/devices/v0/b69745cc-bb6b-4de6-86d7-118dde44788f/setting",
+							"host": [
+								"{{ASMA}}"
+							],
+							"path": [
+								"{{tenantId}}",
+								"users",
+								"1315901501",
+								"devices",
+								"v0",
+								"b69745cc-bb6b-4de6-86d7-118dde44788f",
+								"setting"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "{{ASMA}}/{{tenantId}}/tan/v0",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 1016242,\r\n  \"code\": \"UN57\",\r\n  \"clientSessionId\": \"asdasdasdasd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{ASMA}}/{{tenantId}}/tan/v0",
+					"host": [
+						"{{ASMA}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"tan",
+						"v0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{ASMA}}/{{tenantId}}/api/v0",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{ASMA}}/{{tenantId}}/api/v0",
+					"host": [
+						"{{ASMA}}"
+					],
+					"path": [
+						"{{tenantId}}",
+						"api",
+						"v0"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

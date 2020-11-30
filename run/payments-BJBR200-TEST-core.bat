@@ -1,0 +1,1 @@
+newman run ../tests/MODULE-payments.postman_collection_NS.json -e ../env/BJB-R200-TEST.postman_environment.json -d ../data/MODULE-payments.Core.BJB-R200-TEST.json --reporters cli,htmlextra --reporter-htmlextra-logs --reporter-htmlextra-export ../report/BJBR200/payments-core.html --reporter-htmlextra-title "Payments module, Core tests" --reporter-htmlextra-titleSize 4

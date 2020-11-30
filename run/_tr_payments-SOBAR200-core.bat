@@ -1,0 +1,1 @@
+set TESTRAIL_SUITEID=630 & set TESTRAIL_DOMAIN=testrail.ebs.crealogix.net & set TESTRAIL_USERNAME=dejan.apostolovic@crealogix.com & set TESTRAIL_PASSWORD=Im0tpdn0@1389 & set TESTRAIL_APIKEY=Q4MlDw1e70Kxh1g1YPq9-Dg0abDWer.pSWcVWcxO4 & set TESTRAIL_PROJECTID=8 & set  TESTRAIL_TITLE='MODULE-payments' & npm run newman-test

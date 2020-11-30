@@ -1,0 +1,1 @@
+newman run ../tests/MODULE-secureMail.postman_collectionV1.json -e ../env/BJB-R200-TEST.postman_environment.json -d ../data/MODULE-secureMail.Core.BJB-R200-TEST.json --reporters cli,htmlextra --reporter-htmlextra-logs --reporter-htmlextra-export ../report/BJBR200/secureMail-core.html --reporter-htmlextra-title "Secure Mail module, Core tests" --reporter-htmlextra-titleSize 4

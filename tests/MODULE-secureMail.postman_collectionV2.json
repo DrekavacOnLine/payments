@@ -154,7 +154,7 @@
 											"        break;",
 											"    case \"Quick\":",
 											"        var testSession = [",
-											"            \"Delete all 'CUSTOM' folders\"  //keep it as last test to execute",
+											"            \"Verify secure mail attachment by mailId and attachmentId (C41853588)\"",
 											"            ]; ",
 											"        break;",
 											"    case \"TestRailClean\":        ",
@@ -7565,7 +7565,7 @@
 										{
 											"key": "attachments",
 											"type": "file",
-											"src": ".extra/Test_attachment.pdf"
+											"src": "../files/Test_attachment.pdf"
 										}
 									]
 								},
@@ -20081,6 +20081,84 @@
 							"listen": "prerequest",
 							"script": {
 								"id": "6ee2d0e8-1a92-4a19-80b1-45d1262d6230",
+								"exec": [
+									"// This is only required if there are multiple \"getToken\" requests and some need to be skipped",
+									"//postman.setNextRequest(\"getAllTopics (C41673954)\");",
+									"",
+									"console.log(\"Test Token url is: \" + pm.environment.get(\"env_security_testToken\"));",
+									"console.log(\"Contract is: \" + pm.environment.get(\"userId_security\"));",
+									"",
+									"// Set up pre-conditions with Chai Assertion library. https://www.chaijs.com/api/bdd/",
+									"/*",
+									"pm.expect(pm.environment.get(\"env_securemail\")).to.be.a('string', \"The env_securemail is not defined\");",
+									"pm.expect(pm.environment.get(\"env_security_testToken\")).to.be.a('string', \"The testTokenUrl is not defined\");",
+									"pm.expect(pm.environment.get(\"tenantId_security\")).to.be.a('string', \"The tenantId is not defined\");",
+									"pm.expect(pm.environment.get(\"tenantName_security\")).to.be.a('string', \"The tenantName is not defined\");",
+									"pm.expect(pm.environment.get(\"userName_security\")).to.be.a('string', \"The userName is not defined\");",
+									"pm.expect(pm.environment.get(\"contractNo_security\")).to.be.a('string', \"The contractNo is not defined\");",
+									"pm.expect(pm.environment.get(\"bcNo_security\")).to.be.a('string', \"The bcNo is not defined\");",
+									"pm.expect(pm.environment.get(\"userId_security\")).to.be.a('string', \"The userId is not defined\");",
+									"*/"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"user_name\": \"{{userId_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [\"DBAN_USER\"],\r\n  \"aud\": \"MESSAGING\",\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": \"{{userId_security}}\",\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\"\r\n  ],\r\n  \"loginName\": \"{{userId_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+						},
+						"url": {
+							"raw": "{{env_security_testToken}}",
+							"host": [
+								"{{env_security_testToken}}"
+							]
+						},
+						"description": "Retrieve the test token"
+					},
+					"response": []
+				},
+				{
+					"name": "getAuthTestToken Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4a3d85e8-01fd-4389-aad3-bb03d95720ed",
+								"exec": [
+									"pm.test(pm.globals.get(\"_tr_\" + request.name) + \" Fetch a valid test token from the test-token REST service\", function () {",
+									"    pm.response.to.not.be.error;",
+									"    //pm.response.to.be.withBody;",
+									"    pm.environment.set(\"access_token\", pm.response.text());",
+									"});",
+									"",
+									"",
+									"// Session navigate from PrS using eval()",
+									"eval(globals.sessionNavigate)();",
+									"",
+									"// Reset reference to TR test cases",
+									"pm.globals.unset(\"_tr_\" + request.name);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "6281f062-58ca-4abb-b2b9-69d654059909",
 								"exec": [
 									"// This is only required if there are multiple \"getToken\" requests and some need to be skipped",
 									"//postman.setNextRequest(\"getAllTopics (C41673954)\");",

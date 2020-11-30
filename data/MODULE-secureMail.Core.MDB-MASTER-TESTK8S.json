@@ -2,12 +2,12 @@
     {
 		"testsScope": "Core",
         "envName": "MDB-MASTER-TESTK8S",
-		"contractNumber": "1000061501",
+		"contractNumber": "1334231501",
         "tenantId_security": "19901",
         "tenantName_security": "CLX EBS",
-        "userName_security": "1000061501",
+        "userName_security": "1334231501",
         "contractNo_security": "15054",
         "bcNo_security": "12312",
-        "userId_security": "1000061501"
+        "userId_security": "1334231501"
     }
 ]

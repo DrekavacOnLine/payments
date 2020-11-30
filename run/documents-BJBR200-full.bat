@@ -1,0 +1,1 @@
+newman run ../tests/MODULE-Documents.postman_collection.json -e ../env/BJB-R200-TEST.postman_environment.json -d ../data/MODULE-documents.Full.BJB-R200-TEST.json --reporters cli,htmlextra --reporter-htmlextra-logs --reporter-htmlextra-export ../report/BJBR200/documents-full.html --reporter-htmlextra-title "Documents module, All tests" --reporter-htmlextra-titleSize 4
