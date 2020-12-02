@@ -80,7 +80,7 @@
 									"            \"Account Search Multiple Account number (C38950540)\",",
 									"            \"Account Search AccountType Current (C38950541)\",",
 									"            \"Account Search AccountType SAVINGS (C38950542)\",",
-									"            \"Account Search startDate&endDate (C379050538)\",",
+									"            \"Account Search startDate&endDate (C37905038)\",",
 									"            \"Account Search AccountType Multiple (C41083339)\",",
 									"            \"Account Search AccountType Other (C41083337)\",",
 									"            \"Account Search iban (C38950543)\",",
@@ -1023,7 +1023,7 @@
 							"response": []
 						},
 						{
-							"name": "Account Search startDate&endDate (C379050538)",
+							"name": "Account Search startDate&endDate (C37905038)",
 							"event": [
 								{
 									"listen": "test",
@@ -12709,7 +12709,7 @@
 	],
 	"variable": [
 		{
-			"id": "7e34ceaf-7573-4911-922b-e96dfa4be7bd",
+			"id": "79795c7a-c754-4bdf-b601-c207fb7f81c6",
 			"value": "",
 			"type": "string",
 			"disabled": true
