@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "44be9e51-4a30-4766-965a-7e9589098b84",
 		"name": "MODULE: Brokerage (wip)",
-		"description": "Brokerage API:\n\n- Brokerage order API\n- Brokerage security API\n- \nGlobal functions:\n- sessionGet // retrive session for access token (called in Tests folder Pre-request Script)\n- generateAccessToken //generate access token\n- listSecurities //list securities, stores {{_tmp_securityId}}, {{_tmp_securityNumber}}, {{_tmp_isin}}\n- listListings //list listings, stores {{tmp_listing_ID}}\n- listSecurityTypes //list security types, stores {{_tmp_typeId}}\n- listTradingPlaces //list trading places, stores {{tmp_tradingPlaceId}}\n- listOrders // list orders {{_tmp_accountId}}, {{_tmp_custodyAccountId}}, {{_tmp_custodyAccountPositionId}}, {{_tmp_securityId}}, {{_tmp_orderId}}, {{_tmp_postEnteredById}} - C43995758\n\nTests to verify (see comments):\nList securities by title (C43995804)\nDisplay listings by security ID (C43995813)\nDisplay security by security type ID (C43995787)\nList orders (C43995758)\nList orders by orderAction, limitType and orderStatus (C43995819)\nCreate new order (C43995799)\n---- fixed ----",
+		"description": "Brokerage API:\n\n- Brokerage order API\n- Brokerage security API\n- \nGlobal functions:\n- sessionGet // retrive session for access token (called in Tests folder Pre-request Script)\n- generateAccessToken //generate access token\n- listSecurities //list securities, stores {{_tmp_securityId}}, {{_tmp_securityNumber}}, {{_tmp_isin}}\n- listListings //list listings, stores {{tmp_listing_ID}}\n- listSecurityTypes //list security types, stores {{_tmp_typeId}}\n- listTradingPlaces //list trading places, stores {{tmp_tradingPlaceId}}\n- listOrders // list orders {{_tmp_accountId}}, {{_tmp_custodyAccountId}}, {{_tmp_custodyAccountPositionId}}, {{_tmp_securityId}}, {{_tmp_orderId}}, {{_tmp_postEnteredById}} - C43995758\n- getRunId // retrive Test Rail run ID to be cleaned, stores {{runId}}\n\nTests to verify (see comments):\nList securities by title (C43995804)\nDisplay listings by security ID (C43995813)\nDisplay security by security type ID (C43995787)\nList orders (C43995758)\nList orders by orderAction, limitType and orderStatus (C43995819)\nCreate new order (C43995799)\n---- fixed ----",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -10119,7 +10119,7 @@
 			]
 		},
 		{
-			"name": "Clean TestRail Run",
+			"name": "Clean TestRail Run.old",
 			"event": [
 				{
 					"listen": "test",
@@ -10241,6 +10241,97 @@
 						{
 							"key": "/api/v2/get_runs/8",
 							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clean TestRail Run",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7eb021c5-6cd1-4dcc-967d-4b2db34fc2a5",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0af662f9-abd2-4768-892a-dafd9bbc73e2",
+						"exec": [
+							"eval(globals.getRunId)();",
+							"",
+							"var execTests = pm.environment.get(\"testRailTestsInRun\");",
+							"//var execTests = data.executedTests;",
+							"",
+							"console.log(\"TestRail, tests executed in last run: \" + execTests);",
+							"execTests = execTests.replace(/C/g, \"\");",
+							"execTests = execTests.replace(/ /g, \", \");",
+							"execTests = execTests.replace(/,,/g, \",\");",
+							"pm.environment.set(\"testRailTestsInRun\", execTests);",
+							"",
+							"var array = JSON.parse(\"[\" + execTests + \"]\"); ",
+							"pm.environment.set(\"array\", \"[\" + array + \"]\"); ",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "SSCnapoli123456789",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "milan.karadeglic@crealogix.com",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json; charset=UTF-8"
+					},
+					{
+						"key": "accept",
+						"value": "application/json, application/hal+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"include_all\": false, \n\t\"case_ids\": {{array}}\n}"
+				},
+				"url": {
+					"raw": "https://testrail.ebs.crealogix.net/index.php?/api/v2/update_run/{{runId}}",
+					"protocol": "https",
+					"host": [
+						"testrail",
+						"ebs",
+						"crealogix",
+						"net"
+					],
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "/api/v2/update_run/{{runId}}",
+							"value": null
 						}
 					]
 				}
@@ -11966,6 +12057,42 @@
 					"    });",
 					"});",
 					"",
+					"/* function for session retrieve*/",
+					"postman.setGlobalVariable(\"getRunId\", () => {",
+					"    pm.environment.unset(\"runId\");",
+					"    let message = \"FAILURE: Test run for cleaning is not located!\";",
+					"    pm.sendRequest({",
+					"        url: `https://testrail.ebs.crealogix.net/index.php?/api/v2/get_runs/8=`,",
+					"        method: \"GET\",",
+					"        header: {",
+					"          'Content-Type': 'application/json',",
+					"          'Authorization': 'Basic bWlsYW4ua2FyYWRlZ2xpY0BjcmVhbG9naXguY29tOlNTQ25hcG9saTEyMzQ1Njc4OQ=='",
+					"        },",
+					"        body: {",
+					"          mode: 'raw',",
+					"          raw: JSON.stringify({})",
+					"        }",
+					"    }, function(err, res) {",
+					"        if (err) {",
+					"            console.log(err);",
+					"        } else {",
+					"            for(let i = 0; i < 10; i++){",
+					"                var jsonData = res.json();",
+					"                let runId = jsonData[i].id;",
+					"                let runName = jsonData[i].name;",
+					"                let runSuiteId = jsonData[i].suite_id;",
+					"                console.log(\"Run ID: \" + runId + \", name: \" + runName + \", suite: \" + runSuiteId);",
+					"                //if (runName === \"Postman API Automated Tests\") { //determine proper run",
+					"                if (runName === \"MDB-MASTER-TESTK8S BROKERAGE-API-CORE\") { //determine proper run",
+					"                    pm.environment.set(\"runId\",  runId);",
+					"                    message = \"Found run ID: \" + pm.environment.get(\"runId\");",
+					"                    break;",
+					"                } ",
+					"            }",
+					"        }",
+					"        console.log(message);",
+					"    });",
+					"});",
 					"",
 					"postman.setGlobalVariable(\"generateAccessToken\", () => {",
 					"    const getAccessTokenRequest = {",
