@@ -216,7 +216,8 @@
 									"        break;",
 									"    case \"TestRailClean\":        ",
 									"        var testSession = [",
-									"            \"Clean TestRail Run\"",
+									"            \"List securities (C43995762)\",            ",
+									"            \"CleanUp TestRail Run\"",
 									"            ]; ",
 									"        break;",
 									"    default:",
@@ -3759,6 +3760,100 @@
 						}
 					],
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "CleanUp TestRail Run",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7eb021c5-6cd1-4dcc-967d-4b2db34fc2a5",
+								"exec": [
+									"pm.test(\" List of securities is retrieved and response schema is validated\", function () {",
+									"    console.log(\"Test run: \" + pm.environment.get(\"runId\") + \" is updated for tests: \" +  pm.environment.get(\"array\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0af662f9-abd2-4768-892a-dafd9bbc73e2",
+								"exec": [
+									"console.log(\"Initiate clean process ...\");",
+									"",
+									"eval(globals.getRunId)();",
+									"",
+									"var execTests = pm.environment.get(\"testRailTestsInRun\");",
+									"//var execTests = data.executedTests;",
+									"",
+									"console.log(\"TestRail, tests executed in last run: \" + execTests);",
+									"",
+									"execTests = execTests.replace(/C/g, \"\");",
+									"execTests = execTests.replace(/ /g, \", \");",
+									"execTests = execTests.replace(/,,/g, \",\");",
+									"pm.environment.set(\"testRailTestsInRun\", execTests);",
+									"",
+									"var array = JSON.parse(\"[\" + execTests + \"]\"); ",
+									"pm.environment.set(\"array\", \"[\" + array + \"]\"); "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "SSCnapoli123456789",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "milan.karadeglic@crealogix.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json; charset=UTF-8"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, application/hal+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"include_all\": false, \n\t\"case_ids\": {{array}}\n}"
+						},
+						"url": {
+							"raw": "https://testrail.ebs.crealogix.net/index.php?/api/v2/update_run/{{runId}}",
+							"protocol": "https",
+							"host": [
+								"testrail",
+								"ebs",
+								"crealogix",
+								"net"
+							],
+							"path": [
+								"index.php"
+							],
+							"query": [
+								{
+									"key": "/api/v2/update_run/{{runId}}",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"event": [
@@ -10241,97 +10336,6 @@
 						{
 							"key": "/api/v2/get_runs/8",
 							"value": ""
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Clean TestRail Run",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "7eb021c5-6cd1-4dcc-967d-4b2db34fc2a5",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "0af662f9-abd2-4768-892a-dafd9bbc73e2",
-						"exec": [
-							"eval(globals.getRunId)();",
-							"",
-							"var execTests = pm.environment.get(\"testRailTestsInRun\");",
-							"//var execTests = data.executedTests;",
-							"",
-							"console.log(\"TestRail, tests executed in last run: \" + execTests);",
-							"execTests = execTests.replace(/C/g, \"\");",
-							"execTests = execTests.replace(/ /g, \", \");",
-							"execTests = execTests.replace(/,,/g, \",\");",
-							"pm.environment.set(\"testRailTestsInRun\", execTests);",
-							"",
-							"var array = JSON.parse(\"[\" + execTests + \"]\"); ",
-							"pm.environment.set(\"array\", \"[\" + array + \"]\"); ",
-							"",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "SSCnapoli123456789",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "milan.karadeglic@crealogix.com",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "content-type",
-						"value": "application/json; charset=UTF-8"
-					},
-					{
-						"key": "accept",
-						"value": "application/json, application/hal+json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{ \n\t\"include_all\": false, \n\t\"case_ids\": {{array}}\n}"
-				},
-				"url": {
-					"raw": "https://testrail.ebs.crealogix.net/index.php?/api/v2/update_run/{{runId}}",
-					"protocol": "https",
-					"host": [
-						"testrail",
-						"ebs",
-						"crealogix",
-						"net"
-					],
-					"path": [
-						"index.php"
-					],
-					"query": [
-						{
-							"key": "/api/v2/update_run/{{runId}}",
-							"value": null
 						}
 					]
 				}
