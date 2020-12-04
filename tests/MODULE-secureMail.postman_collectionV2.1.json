@@ -1831,7 +1831,7 @@
 										{
 											"key": "attachments",
 											"type": "file",
-											"src": "/var/jenkins_home/workspace/SecureMailV2/files/Test attachment.pdf"
+											"src": "files/Test attachment.pdf"
 										}
 									]
 								},
@@ -3427,7 +3427,7 @@
 										{
 											"key": "attachments",
 											"type": "file",
-											"src": "/var/jenkins_home/workspace/SecureMailV2/files/Test attachment.pdf"
+											"src": "files/Test attachment.pdf"
 										}
 									]
 								},
@@ -3960,7 +3960,7 @@
 										{
 											"key": "attachments",
 											"type": "file",
-											"src": "/var/jenkins_home/workspace/SecureMailV2/files/java_file.jar"
+											"src": "files/java_file.jar"
 										}
 									]
 								},
@@ -12349,7 +12349,7 @@
 										{
 											"key": "attachments",
 											"type": "file",
-											"src": "/var/jenkins_home/workspace/SecureMailV2/files/Test attachment.pdf"
+											"src": "files/Test attachment.pdf"
 										}
 									]
 								},
@@ -24211,7 +24211,7 @@
 										{
 											"key": "attachments",
 											"type": "file",
-											"src": "/var/jenkins_home/workspace/SecureMailV2/files/Word.docx"
+											"src": "files/Word.docx"
 										}
 									]
 								},
@@ -24742,7 +24742,7 @@
 										{
 											"key": "attachments",
 											"type": "file",
-											"src": "/var/jenkins_home/workspace/SecureMailV2/files/java_file.jar"
+											"src": "files/java_file.jar"
 										}
 									]
 								},
