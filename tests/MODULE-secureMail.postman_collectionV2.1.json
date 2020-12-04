@@ -6768,7 +6768,7 @@
 								"id": "7eb021c5-6cd1-4dcc-967d-4b2db34fc2a5",
 								"exec": [
 									"pm.test(\" List of securities is retrieved and response schema is validated\", function () {",
-									"    console.log(\"Test run: \" + pm.environment.get(\"runId\") + \" is updated for tests: \" +  pm.environment.get(\"array\"));",
+									"    console.log(\"Test run: \" + pm.environment.get(\"runId\") + \" is updated for tests: \" +  pm.collectionVariables.get(\"executedTests\"));",
 									"});"
 								],
 								"type": "text/javascript"
