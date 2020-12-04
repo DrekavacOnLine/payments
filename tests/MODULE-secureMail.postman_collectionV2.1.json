@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "82f06dec-8f85-4e49-b009-63415c82edc3",
 		"name": "MODULE: SecureMail (wip)",
-		"description": "CREALOGIX Digital Banking Hub: Secure Mail API\nThe Secure Mail API serves the retrieval of secure mails exchanged between bank and E-Banking users (contracts). Throughout the document we use the term userId, which is equivalent to the contract number.\nThe options OLD (read) and NEW (unread) allow to group notifications. The options VISIBLE and DELETED allow to mark the documents as visible/hidden by the person (login).\n\n# Details #\n\n## Date and Time ##\n\nOpenAPI requires the use of RFC 3339 format for dates and times. Dates showing the time must include the time zone.\n\n## HTTP Headers ##\nThe __X-Correlation-Id__ header is not any more part of this specification. The header still exists but is handled by a specific node (e.g Gateway) of the runtime environment.\n\n## Paging ##\nIf the result of request is a list, it may be split in pages using the __size__ parameter.\nIn this case the result provides the standard HAL page __resource links__ (__first__, __last__, __next__, __previous__ and __self__). \nA __page meta data__ summary (__page number__, __page size__, __total number of pages__ and __total number of items__) is also provided.\n\n ## Tenant ID ##\n\nThe tenant identifier should be a human readable string. For Crealogix could be CLXN. This identifier should be mapped internally by the implementation if required.\n# Entry Points #\n\n## Documents - general entry points ##\nAs Entrypoint or for unspecific queries a request to `/securemails`-URL delivers a list of all secure mails accessible by the authorized contract. `/securemails` returns metadata (such as mail subject) for each secure mail as well as HAL-Links with URLs to more detailled APIs, see below.\n## Document - specific requests ##\nInstead of requesting list of all available documents, a specific secure mail can be accessed by using the *secureMailId* of this secure mail. Please be aware, that all Ids are session specific and will change from one session to the other (for details see general API concepts documentation).\nWith a specific *secureMailId* the following endpoints are available\n - `/securemails/{secureMailId}` delivering metadata of the specific document\n\n## Secure Mail Attachments - specific requests ##\nA secure mail may contain reference to one or more files. The default response is a ZIP formatted archive containing the attachments.\nUsing the index parameter the caller may obtain a single seczre mail in the original format.\nPDF files are always sent in their original format, even when the notification contains only one.  This makes it easy to use on mobile devices.\n## Change Log ##\n\n|Version|Change description                                        |Date      |Author         |\n|-------|----------------------------------------------------------|----------|---------------| |1.0.0  |Initial creation based on the Documents API               |21.12.2018|Marcel Signer  | |1.0.1  |Small updates on the methods + conversion to OpenAPI 3.0.0|07.03.2019|Nabil Benothman| |1.0.2  |Upgrade to OpenAPI 3.0.2                                  |08.03.2019|Nabil Benothman|\n\n\nContact Support: \n{\n\nName : Marcel Signer\n\nEmail : marcel.signer@crealogix.com\n\n}\n\nGlobal functions:\n- sessionGet // retrive session for access token (called in Tests folder Pre-request Script)\n- generateAccessToken //generate regular access token\n- generateAccessTokenScopeWrite // generate access token w/ WRITE only scope\n- generateAccessTokenScopeRead // generate access token w/ READ only scope\n- generateAccessTokenScopeEmpty // generate access token w/ empty scope\n- secureMailCreate // create Secure mail, sets {{secureMailId1/2/3/.../n}}, {{mailsToCreate}}, {{folderId}}, {{startDate}}, {{endDate}}, {{senderName}}\n- secureMailDelete // delete Secure mail, unsets {{secureMailId1}}\n- folderCreate // create custom folder\n- folderRetrieveByName // retrieve custom folder by name, sets {{folderId}}\n- folderRetrieveTypeSent // retrieve sent folder, sets {{sentFolderId}}, {{_tmp_sentFolderId}}\n- folderDelete // delete folder, unsets {{folderId}}\n- foldersCustomDelete // delete all CUSTOM folders\n- secureMailDeleteBulk // delete secure messages in bulk, unsets {{secureMailId1}}, {{secureMailId2}}\n\nTest Rail test cases to create then update ID for:\n- Delete all 'CUSTOM' folders (ToDo)",
+		"description": "CREALOGIX Digital Banking Hub: Secure Mail API\nThe Secure Mail API serves the retrieval of secure mails exchanged between bank and E-Banking users (contracts). Throughout the document we use the term userId, which is equivalent to the contract number.\nThe options OLD (read) and NEW (unread) allow to group notifications. The options VISIBLE and DELETED allow to mark the documents as visible/hidden by the person (login).\n\n# Details #\n\n## Date and Time ##\n\nOpenAPI requires the use of RFC 3339 format for dates and times. Dates showing the time must include the time zone.\n\n## HTTP Headers ##\nThe __X-Correlation-Id__ header is not any more part of this specification. The header still exists but is handled by a specific node (e.g Gateway) of the runtime environment.\n\n## Paging ##\nIf the result of request is a list, it may be split in pages using the __size__ parameter.\nIn this case the result provides the standard HAL page __resource links__ (__first__, __last__, __next__, __previous__ and __self__). \nA __page meta data__ summary (__page number__, __page size__, __total number of pages__ and __total number of items__) is also provided.\n\n ## Tenant ID ##\n\nThe tenant identifier should be a human readable string. For Crealogix could be CLXN. This identifier should be mapped internally by the implementation if required.\n# Entry Points #\n\n## Documents - general entry points ##\nAs Entrypoint or for unspecific queries a request to `/securemails`-URL delivers a list of all secure mails accessible by the authorized contract. `/securemails` returns metadata (such as mail subject) for each secure mail as well as HAL-Links with URLs to more detailled APIs, see below.\n## Document - specific requests ##\nInstead of requesting list of all available documents, a specific secure mail can be accessed by using the *secureMailId* of this secure mail. Please be aware, that all Ids are session specific and will change from one session to the other (for details see general API concepts documentation).\nWith a specific *secureMailId* the following endpoints are available\n - `/securemails/{secureMailId}` delivering metadata of the specific document\n\n## Secure Mail Attachments - specific requests ##\nA secure mail may contain reference to one or more files. The default response is a ZIP formatted archive containing the attachments.\nUsing the index parameter the caller may obtain a single seczre mail in the original format.\nPDF files are always sent in their original format, even when the notification contains only one.  This makes it easy to use on mobile devices.\n## Change Log ##\n\n|Version|Change description                                        |Date      |Author         |\n|-------|----------------------------------------------------------|----------|---------------| |1.0.0  |Initial creation based on the Documents API               |21.12.2018|Marcel Signer  | |1.0.1  |Small updates on the methods + conversion to OpenAPI 3.0.0|07.03.2019|Nabil Benothman| |1.0.2  |Upgrade to OpenAPI 3.0.2                                  |08.03.2019|Nabil Benothman|\n\n\nContact Support: \n{\n\nName : Marcel Signer\n\nEmail : marcel.signer@crealogix.com\n\n}\n\nGlobal functions:\n- sessionGet // retrive session for access token (called in Tests folder Pre-request Script)\n- generateAccessToken //generate regular access token\n- generateAccessTokenScopeWrite // generate access token w/ WRITE only scope\n- generateAccessTokenScopeRead // generate access token w/ READ only scope\n- generateAccessTokenScopeEmpty // generate access token w/ empty scope\n- secureMailCreate // create Secure mail, sets {{secureMailId1/2/3/.../n}}, {{mailsToCreate}}, {{folderId}}, {{startDate}}, {{endDate}}, {{senderName}}\n- secureMailDelete // delete Secure mail, unsets {{secureMailId1}}\n- folderCreate // create custom folder\n- folderRetrieveByName // retrieve custom folder by name, sets {{folderId}}\n- folderRetrieveTypeSent // retrieve sent folder, sets {{sentFolderId}}, {{_tmp_sentFolderId}}\n- folderDelete // delete folder, unsets {{folderId}}\n- foldersCustomDelete // delete all CUSTOM folders\n- secureMailDeleteBulk // delete secure messages in bulk, unsets {{secureMailId1}}, {{secureMailId2}}\n- getRunId // retrive Test Rail run ID to be cleaned, stores {{runId}}\n\nTest Rail test cases to create then update ID for:\n- Delete all 'CUSTOM' folders (ToDo)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -309,11 +309,12 @@
 									"        break;",
 									"    case \"TestRailClean\":        ",
 									"        var testSession = [",
-									"            \"_Test session close\"",
+									"            \"Delete all 'CUSTOM' folders (ToDo)\",            ",
+									"            \"CleanUp TestRail Run\"",
 									"            ]; ",
 									"        break;",
 									"    default:",
-									"        throw new Error(\"No tests selected for execution!\")",
+									"        throw new Error(\"No tests selected for execution!\");",
 									"}        ",
 									"    ",
 									"// Session initiate from PrS using eval()",
@@ -6751,6 +6752,100 @@
 						}
 					],
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "CleanUp TestRail Run",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7eb021c5-6cd1-4dcc-967d-4b2db34fc2a5",
+								"exec": [
+									"pm.test(\" List of securities is retrieved and response schema is validated\", function () {",
+									"    console.log(\"Test run: \" + pm.environment.get(\"runId\") + \" is updated for tests: \" +  pm.environment.get(\"array\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0af662f9-abd2-4768-892a-dafd9bbc73e2",
+								"exec": [
+									"console.log(\"Initiate clean process ...\");",
+									"",
+									"eval(globals.getRunId)();",
+									"",
+									"var execTests = pm.environment.get(\"testRailTestsInRun\");",
+									"//var execTests = data.executedTests;",
+									"",
+									"console.log(\"TestRail, tests executed in last run: \" + execTests);",
+									"",
+									"execTests = execTests.replace(/C/g, \"\");",
+									"execTests = execTests.replace(/ /g, \", \");",
+									"execTests = execTests.replace(/,,/g, \",\");",
+									"pm.environment.set(\"testRailTestsInRun\", execTests);",
+									"",
+									"var array = JSON.parse(\"[\" + execTests + \"]\"); ",
+									"pm.environment.set(\"array\", \"[\" + array + \"]\"); "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "SSCnapoli123456789",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "milan.karadeglic@crealogix.com",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json; charset=UTF-8"
+							},
+							{
+								"key": "accept",
+								"value": "application/json, application/hal+json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n\t\"include_all\": false, \n\t\"case_ids\": {{array}}\n}"
+						},
+						"url": {
+							"raw": "https://testrail.ebs.crealogix.net/index.php?/api/v2/update_run/{{runId}}",
+							"protocol": "https",
+							"host": [
+								"testrail",
+								"ebs",
+								"crealogix",
+								"net"
+							],
+							"path": [
+								"index.php"
+							],
+							"query": [
+								{
+									"key": "/api/v2/update_run/{{runId}}",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"event": [
@@ -35262,7 +35357,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"sub\": \"{{bcNo_security}}:{{userId_secure_mail}}\",\r\n  \"user_name\": \"{{contractNo_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [\"DBAN_USER\"],\r\n  \"aud\": \"MESSAGING\",\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": \"{{contractNo_security}}\",\r\n  \"nonce\": \"{{nonce}}\",\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n\t\"https://api.crealogix.com/messages/document.category.read\",\r\n\t\"https://api.crealogix.com/messages/document.category.write\",\r\n\t\"https://api.crealogix.com/messages/document.write\",\r\n\t\"https://api.crealogix.com/messages/document.read\"    \r\n  ],\r\n  \"loginName\": \"{{contractNo_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
+							"raw": "{\r\n  \"tenant_id\": {{tenantId_security}},\r\n  \"acsKey\": \"i6PiNObtdp2rCNW7mlV51BDSY4zAliSvBCyVsuML1000203567\",\r\n  \"tenant_name\": \"{{tenantName_security}}\",\r\n  \"sub\": \"{{bcNo_security}}:{{contractNo_security}}\",\r\n  \"user_name\": \"{{contractNo_security}}\",\r\n  \"contractNo\": \"{{contractNo_security}}\",\r\n  \"languageCode\": \"en\",\r\n  \"bcNo\": \"{{bcNo_security}}\",\r\n  \"authorities\": [\"DBAN_USER\"],\r\n  \"aud\": \"MESSAGING\",\r\n  \"client_id\": \"postman\",\r\n  \"user_id\": \"{{contractNo_security}}\",\r\n  \"nonce\": \"{{nonce}}\",\r\n  \"scope\": [\r\n    \"https://api.crealogix.com/dban\",\r\n    \"read\",\r\n    \"https://api.crealogix.com/contracts/contract.advisor.readonly\",\r\n    \"https://api.crealogix.com/assets/account.balance.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.metadata.readonly\",\r\n    \"https://api.crealogix.com/contracts/contract.person.readonly\",\r\n    \"https://api.crealogix.com/payments/payment.initiate\",\r\n    \"https://api.crealogix.com/assets/account.transaction.readonly\",\r\n    \"https://api.crealogix.com/assets/account.permission.readonly\",\r\n    \"write\",\r\n    \"https://api.crealogix.com/assets/account.metadata.readonly\",\r\n    \"https://api.crealogix.com/messages/securemail.write\",\r\n    \"https://api.crealogix.com/messages/securemail.read\",\r\n\t\"https://api.crealogix.com/messages/document.category.read\",\r\n\t\"https://api.crealogix.com/messages/document.category.write\",\r\n\t\"https://api.crealogix.com/messages/document.write\",\r\n\t\"https://api.crealogix.com/messages/document.read\"    \r\n  ],\r\n  \"loginName\": \"{{contractNo_security}}\",\r\n  \"exp\": 32479694642,\r\n  \"jti\": \"7f3ab973-18bb-4bcc-a91e-ac38a1ad2287\",\r\n  \"iat\": 1553855569\r\n}"
 						},
 						"url": {
 							"raw": "{{env_security_testToken}}",
@@ -39144,6 +39239,42 @@
 					"            pm.environment.set(\"nonce\",  res.text());",
 					"            console.log(\"New session: \" + pm.environment.get(\"nonce\"));",
 					"        }              ",
+					"    });",
+					"});",
+					"",
+					"/* function for session retrieve*/",
+					"postman.setGlobalVariable(\"getRunId\", () => {",
+					"    pm.environment.unset(\"runId\");",
+					"    let message = \"FAILURE: Test run for cleaning is not located!\";",
+					"    pm.sendRequest({",
+					"        url: `https://testrail.ebs.crealogix.net/index.php?/api/v2/get_runs/8=`,",
+					"        method: \"GET\",",
+					"        header: {",
+					"          'Content-Type': 'application/json',",
+					"          'Authorization': 'Basic bWlsYW4ua2FyYWRlZ2xpY0BjcmVhbG9naXguY29tOlNTQ25hcG9saTEyMzQ1Njc4OQ=='",
+					"        },",
+					"        body: {",
+					"          mode: 'raw',",
+					"          raw: JSON.stringify({})",
+					"        }",
+					"    }, function(err, res) {",
+					"        if (err) {",
+					"            console.log(err);",
+					"        } else {",
+					"            for(let i = 0; i < 10; i++){",
+					"                var jsonData = res.json();",
+					"                let runId = jsonData[i].id;",
+					"                let runName = jsonData[i].name;",
+					"                let runSuiteId = jsonData[i].suite_id;",
+					"                console.log(\"Run ID: \" + runId + \", name: \" + runName + \", suite: \" + runSuiteId);",
+					"                if (runName === pm.environment.get(\"runNameSecureMail\")) { //determine proper run",
+					"                    pm.environment.set(\"runId\",  runId);",
+					"                    message = \"Found run ID: \" + pm.environment.get(\"runId\");",
+					"                    break;",
+					"                } ",
+					"            }",
+					"        }",
+					"        console.log(message);",
 					"    });",
 					"});",
 					"",
