@@ -30,7 +30,7 @@
 									"",
 									"var executedTests = data.executedTests;",
 									"if (executedTests){ ",
-									"    pm.environment.set(\"testRailTestsInRun\", data.executedTests);",
+									"    pm.collectionVariables.set(\"executedTests\", data.executedTests);",
 									"    console.log(\"dataFile/executedTests: \" + executedTests);",
 									"}",
 									"",
@@ -3770,7 +3770,7 @@
 								"id": "7eb021c5-6cd1-4dcc-967d-4b2db34fc2a5",
 								"exec": [
 									"pm.test(\" List of securities is retrieved and response schema is validated\", function () {",
-									"    console.log(\"Test run: \" + pm.environment.get(\"runId\") + \" is updated for tests: \" +  pm.environment.get(\"array\"));",
+									"    console.log(\"Test run: \" + pm.environment.get(\"runId\") + \" is updated for tests: \" +  pm.collectionVariables.get(\"executedTests\"));",
 									"});"
 								],
 								"type": "text/javascript"
@@ -3785,18 +3785,18 @@
 									"",
 									"eval(globals.getRunId)();",
 									"",
-									"var execTests = pm.environment.get(\"testRailTestsInRun\");",
-									"//var execTests = data.executedTests;",
-									"",
+									"var execTests = pm.collectionVariables.get(\"executedTests\");",
 									"console.log(\"TestRail, tests executed in last run: \" + execTests);",
 									"",
+									"/*",
 									"execTests = execTests.replace(/C/g, \"\");",
 									"execTests = execTests.replace(/ /g, \", \");",
 									"execTests = execTests.replace(/,,/g, \",\");",
 									"pm.environment.set(\"testRailTestsInRun\", execTests);",
 									"",
 									"var array = JSON.parse(\"[\" + execTests + \"]\"); ",
-									"pm.environment.set(\"array\", \"[\" + array + \"]\"); "
+									"pm.environment.set(\"array\", \"[\" + array + \"]\"); ",
+									"*/"
 								],
 								"type": "text/javascript"
 							}
@@ -3831,7 +3831,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \n\t\"include_all\": false, \n\t\"case_ids\": {{array}}\n}"
+							"raw": "{ \n\t\"include_all\": false, \n\t\"case_ids\": {{executedTests}}\n}"
 						},
 						"url": {
 							"raw": "https://testrail.ebs.crealogix.net/index.php?/api/v2/update_run/{{runId}}",
@@ -10214,135 +10214,6 @@
 			]
 		},
 		{
-			"name": "Clean TestRail Run.old",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "7eb021c5-6cd1-4dcc-967d-4b2db34fc2a5",
-						"exec": [
-							"// Prepare list of TestRail tests for 'Clean TestRail Run' request",
-							"//var execTests = pm.environment.get(\"testRailTestsInRun\");",
-							"var execTests = data.executedTests;",
-							"//var execRunName = \"MDB-MASTER-TESTK8S BROKERAGE-API-CORE\"; // data.runName;",
-							"var execRunName = data.runName;",
-							"console.log(\"TestRail, tests executed in last run: \" + execTests);",
-							"execTests = execTests.replace(/C/g, \"\");",
-							"//console.log(\"TestRail, first cleanup: \" + execTests);",
-							"execTests = execTests.replace(/ /g, \", \");",
-							"//console.log(\"TestRail, second cleanup: \" + execTests);",
-							"execTests = execTests.replace(/,,/g, \",\");",
-							"pm.environment.set(\"testRailTestsInRun\", execTests); ",
-							"",
-							"var array = JSON.parse(\"[\" + execTests + \"]\"); //convert string to array",
-							"console.log(\"TestRail, array of tests: \" + array);",
-							"for(let i = 0; i < 10; i++){",
-							"    let runId = JSON.parse(responseBody)[i].id;",
-							"    let runName = JSON.parse(responseBody)[i].name;",
-							"    let runSuiteId = JSON.parse(responseBody)[i].suite_id;",
-							"    //if (runName === \"Postman API Automated Tests\") { //determine proper run",
-							"    if (runName === execRunName) { //determine proper run",
-							"        //console.log(runId);   ",
-							"        console.log(\"TestRail run '\" + runId + \"' updating for tests: \" + execTests);",
-							"        pm.sendRequest({",
-							"            url: \"https://testrail.ebs.crealogix.net/index.php?/api/v2/update_run/\" + runId,",
-							"            method: \"POST\",",
-							"            header: {",
-							"                \"Authorization\": request.headers.authorization,",
-							"                \"Content-Type\": \"application/json\"",
-							"            },",
-							"            body: {",
-							"                mode: 'raw',",
-							"                raw: JSON.stringify({ include_all: false, case_ids: array })",
-							"        \t}",
-							"        } , function(err, res) {",
-							"            if (err) {",
-							"                console.log(err);",
-							"            }             ",
-							"        });",
-							"        break;",
-							"    } else {",
-							"        console.log(\"FAILURE: Test run for cleaning is not located!\");",
-							"    }",
-							"}"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "0af662f9-abd2-4768-892a-dafd9bbc73e2",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "SSCnapoli123456789",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "milan.karadeglic@crealogix.com",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "content-type",
-						"value": "application/json; charset=UTF-8"
-					},
-					{
-						"key": "accept",
-						"value": "application/json, application/hal+json"
-					},
-					{
-						"key": "Authorization",
-						"type": "text",
-						"value": "Bearer {{token}}",
-						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://testrail.ebs.crealogix.net/index.php?/api/v2/get_runs/8=",
-					"protocol": "https",
-					"host": [
-						"testrail",
-						"ebs",
-						"crealogix",
-						"net"
-					],
-					"path": [
-						"index.php"
-					],
-					"query": [
-						{
-							"key": "/api/v2/get_runs/8",
-							"value": ""
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "getAuthTestToken",
 			"event": [
 				{
@@ -12086,8 +11957,7 @@
 					"                let runName = jsonData[i].name;",
 					"                let runSuiteId = jsonData[i].suite_id;",
 					"                console.log(\"Run ID: \" + runId + \", name: \" + runName + \", suite: \" + runSuiteId);",
-					"                //if (runName === \"Postman API Automated Tests\") { //determine proper run",
-					"                if (runName === \"MDB-MASTER-TESTK8S BROKERAGE-API-CORE\") { //determine proper run",
+					"                if (runName === pm.environment.name + ' BROKERAGE-API') { //determine proper run",
 					"                    pm.environment.set(\"runId\",  runId);",
 					"                    message = \"Found run ID: \" + pm.environment.get(\"runId\");",
 					"                    break;",
@@ -12333,6 +12203,14 @@
 					"eval(globals.sessionNavigate)();"
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"id": "02523695-cb0a-47ef-8faa-d7ad5bc26777",
+			"key": "executedTests",
+			"value": "[43995802,43995806,43995801,43995832,43995836,43995842,43995811,43995844,43995845,43995816,43995813,43995825,43995831,43995787,43995818,43995821,43995758,43995800,43995760,43995761,43995763,76800770,76800771,76800772,76800773,76800775,76800776,76800777,76800778,76800779,76800780,76800781,43995790,43995792,43995827,43995834,43995822]",
+			"type": "string"
 		}
 	]
 }
