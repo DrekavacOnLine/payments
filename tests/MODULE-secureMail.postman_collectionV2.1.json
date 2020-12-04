@@ -28,6 +28,12 @@
 									"    console.log(\"dataFile/contractNumber: \" + contractNumber);",
 									"}",
 									"",
+									"var executedTests = data.executedTests;",
+									"if (executedTests){ ",
+									"    pm.environment.set(\"testRailTestsInRun\", data.executedTests);",
+									"    console.log(\"dataFile/executedTests: \" + executedTests);",
+									"}",
+									"",
 									"var tenantId_security = data.tenantId_security;",
 									"if (tenantId_security){ ",
 									"    pm.environment.set(\"tenantId_security\",data.tenantId_security);",
@@ -35300,14 +35306,7 @@
 									"    pm.response.to.not.be.error;",
 									"    //pm.response.to.be.withBody;",
 									"    pm.environment.set(\"access_token\", pm.response.text());",
-									"});",
-									"",
-									"",
-									"// Session navigate from PrS using eval()",
-									"eval(globals.sessionNavigate)();",
-									"",
-									"// Reset reference to TR test cases",
-									"pm.globals.unset(\"_tr_\" + request.name);"
+									"});"
 								],
 								"type": "text/javascript"
 							}
