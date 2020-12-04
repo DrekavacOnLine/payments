@@ -6794,7 +6794,7 @@
 									"pm.environment.set(\"testRailTestsInRun\", execTests);",
 									"",
 									"var array = JSON.parse(\"[\" + execTests + \"]\"); ",
-									"pm.environment.set(\"array\", \"[\" + array + \"]\"); "
+									"pm.environment.set(\"arraySecureMail\", \"[\" + array + \"]\"); "
 								],
 								"type": "text/javascript"
 							}
@@ -6829,7 +6829,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \n\t\"include_all\": false, \n\t\"case_ids\": {{array}}\n}"
+							"raw": "{ \n\t\"include_all\": false, \n\t\"case_ids\": {{arraySecureMail}}\n}"
 						},
 						"url": {
 							"raw": "https://testrail.ebs.crealogix.net/index.php?/api/v2/update_run/{{runId}}",
