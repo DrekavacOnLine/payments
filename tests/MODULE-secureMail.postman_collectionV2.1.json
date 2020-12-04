@@ -30,7 +30,7 @@
 									"",
 									"var executedTests = data.executedTests;",
 									"if (executedTests){ ",
-									"    pm.environment.set(\"testRailTestsInRun\", data.executedTests);",
+									"    pm.collectionVariables.set(\"executedTests\", data.executedTests);",
 									"    console.log(\"dataFile/executedTests: \" + executedTests);",
 									"}",
 									"",
@@ -6783,18 +6783,18 @@
 									"",
 									"eval(globals.getRunId)();",
 									"",
-									"var execTests = pm.environment.get(\"testRailTestsInRun\");",
-									"//var execTests = data.executedTests;",
-									"",
+									"var execTests = pm.collectionVariables.get(\"executedTests\");",
 									"console.log(\"TestRail, tests executed in last run: \" + execTests);",
 									"",
+									"/*",
 									"execTests = execTests.replace(/C/g, \"\");",
 									"execTests = execTests.replace(/ /g, \", \");",
 									"execTests = execTests.replace(/,,/g, \",\");",
 									"pm.environment.set(\"testRailTestsInRun\", execTests);",
 									"",
 									"var array = JSON.parse(\"[\" + execTests + \"]\"); ",
-									"pm.environment.set(\"arraySecureMail\", \"[\" + array + \"]\"); "
+									"pm.environment.set(\"arraySecureMail\", \"[\" + array + \"]\"); ",
+									"*/"
 								],
 								"type": "text/javascript"
 							}
@@ -6829,7 +6829,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \n\t\"include_all\": false, \n\t\"case_ids\": {{arraySecureMail}}\n}"
+							"raw": "{ \n\t\"include_all\": false, \n\t\"case_ids\": {{executedTests}}\n}"
 						},
 						"url": {
 							"raw": "https://testrail.ebs.crealogix.net/index.php?/api/v2/update_run/{{runId}}",
@@ -39795,6 +39795,14 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"id": "2b827761-f4aa-4ae1-8b19-6200f188ae5b",
+			"key": "executedTests",
+			"value": "[41673954,41673956,41673957,41673955,42292809,41673959,41673960,41736190,43916301,42843218,41736191,41853584,43995772,41736192,43916305,43995774,43605135,43916302,43995775,44701679,46978023,44701682,44701683,44701690,44879394,44879393,46823377,44879396,44879395,44879397,44879398,54996389,54996390,54996392,54996398,54996399,54996393,54996395,54996394,54996400,54996396,54996397,54996415,54996416,54996418,54996419,54996420,54996421,54996422,54996423,54996424,54996425,54996426,54996427,41853588,41853589]",
+			"type": "string"
 		}
 	]
 }
