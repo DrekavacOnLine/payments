@@ -360,57 +360,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "Test session close",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "5613bab9-009b-4462-80ca-f5bd2c27989e",
-								"exec": [
-									"var requestsToRun = ",
-									"    [",
-									"        \"Clean TestRail Run\"",
-									"    ]; ",
-									"",
-									"// Session initiate from PrS using eval()",
-									"eval(globals.sessionInit)(requestsToRun, \"requestsToRun\");"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "a8d89c55-a197-4bba-8d02-e5e81c58c79c",
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "OPTIONS",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "httpbin.org/uuid",
-							"host": [
-								"httpbin",
-								"org"
-							],
-							"path": [
-								"uuid"
-							]
-						},
-						"description": "PRODUCT-10392"
-					},
-					"response": []
 				}
 			]
 		},
@@ -3649,6 +3598,7 @@
 											"pm.environment.set(\"messageSubject1\", \"\");",
 											"pm.environment.set(\"messageBody1\", \"Body\");",
 											"pm.environment.set(\"errorBadRequestCode\",\"ERROR_BAD_REQUEST\");",
+											"pm.environment.set(\"errorCategory\", \"ERROR\");",
 											"",
 											"eval(globals.generateAccessToken)();"
 										],
@@ -35906,125 +35856,6 @@
 							"body": "{\n \"_status\": \"<boolean>\",\n \"_messages\": [\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  },\n  {\n   \"category\": \"<string>\",\n   \"text\": \"<string>\",\n   \"code\": \"<string>\",\n   \"path\": \"<string>\"\n  }\n ],\n \"_data\": \"<object>\"\n}"
 						}
 					]
-				},
-				{
-					"name": "Clean TestRail Run",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "f5d00dc8-f552-48c0-9a1c-2510df583464",
-								"exec": [
-									"// Prepare list of TestRail tests for 'Clean TestRail Run' request",
-									"//var execTests = pm.globals.get(\"testRailTestsInRun\");",
-									"var execTests = data.executedTests;",
-									"console.log(\"TestRail, tests executed in last run: \" + execTests);",
-									"execTests = execTests.replace(/C/g, \"\");",
-									"//console.log(\"TestRail, first cleanup: \" + execTests);",
-									"execTests = execTests.replace(/ /g, \", \");",
-									"//console.log(\"TestRail, second cleanup: \" + execTests);",
-									"execTests = execTests.replace(/,,/g, \",\");",
-									"pm.globals.set(\"testRailTestsInRun\", execTests); ",
-									"",
-									"var array = JSON.parse(\"[\" + execTests + \"]\"); //convert string to array",
-									"for(let i = 0; i < 10; i++){",
-									"    let runId = JSON.parse(responseBody)[i].id;",
-									"    let runName = JSON.parse(responseBody)[i].name;",
-									"    let runSuiteId = JSON.parse(responseBody)[i].suite_id;",
-									"    if (runName === \"MODULE-SecureMail\") { //determine proper run",
-									"        //console.log(runId);   ",
-									"        console.log(\"TestRail run '\" + runId + \"' updating for tests: \" + execTests);",
-									"        pm.sendRequest({",
-									"            url: \"https://testrail.ebs.crealogix.net/index.php?/api/v2/update_run/\" + runId,",
-									"            method: \"POST\",",
-									"            header: {",
-									"                \"Authorization\": \"Basic bWlsYW4ua2FyYWRlZ2xpY0BjcmVhbG9naXguY29tOlNTQ25hcG9saTEyMzQ1Njc4OQ==\",",
-									"                \"Content-Type\": \"application/json\"",
-									"            },",
-									"            body: {",
-									"                mode: 'raw',",
-									"                raw: JSON.stringify({ include_all: false, case_ids: array })",
-									"        \t}",
-									"        });",
-									"        break;",
-									"    }",
-									"}"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "22f2990b-adb1-4668-a6e9-92884e953577",
-								"exec": [
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "SSCnapoli123456789",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "milan.karadeglic@crealogix.com",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "content-type",
-								"value": "application/json; charset=UTF-8"
-							},
-							{
-								"key": "accept",
-								"value": "application/json, application/hal+json"
-							},
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "Bearer {{token}}",
-								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://testrail.ebs.crealogix.net/index.php?/api/v2/get_runs/8=",
-							"protocol": "https",
-							"host": [
-								"testrail",
-								"ebs",
-								"crealogix",
-								"net"
-							],
-							"path": [
-								"index.php"
-							],
-							"query": [
-								{
-									"key": "/api/v2/get_runs/8",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		}
@@ -39266,7 +39097,7 @@
 					"                let runName = jsonData[i].name;",
 					"                let runSuiteId = jsonData[i].suite_id;",
 					"                console.log(\"Run ID: \" + runId + \", name: \" + runName + \", suite: \" + runSuiteId);",
-					"                if (runName === pm.environment.get(\"runNameSecureMail\")) { //determine proper run",
+					"                if (runName === pm.environment.name + ' SECURE-MAIL-API') { //determine proper run",
 					"                    pm.environment.set(\"runId\",  runId);",
 					"                    message = \"Found run ID: \" + pm.environment.get(\"runId\");",
 					"                    break;",
@@ -39799,7 +39630,7 @@
 	],
 	"variable": [
 		{
-			"id": "2b827761-f4aa-4ae1-8b19-6200f188ae5b",
+			"id": "702aff33-ccd1-48eb-bf3d-2ee87e7de216",
 			"key": "executedTests",
 			"value": "[41673954,41673956,41673957,41673955,42292809,41673959,41673960,41736190,43916301,42843218,41736191,41853584,43995772,41736192,43916305,43995774,43605135,43916302,43995775,44701679,46978023,44701682,44701683,44701690,44879394,44879393,46823377,44879396,44879395,44879397,44879398,54996389,54996390,54996392,54996398,54996399,54996393,54996395,54996394,54996400,54996396,54996397,54996415,54996416,54996418,54996419,54996420,54996421,54996422,54996423,54996424,54996425,54996426,54996427,41853588,41853589]",
 			"type": "string"
