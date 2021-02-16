@@ -1,0 +1,503 @@
+{
+	"info": {
+		"_postman_id": "b1adb8a7-0c95-4efc-ab98-27460e984017",
+		"name": "Video Game Database v2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Config",
+			"item": [
+				{
+					"name": "_Test session",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var videoGameName = \"\\\"\" + data.name + \"\\\"\";",
+									"if (videoGameName){ ",
+									"\tpm.environment.set(\"videoGameName\",videoGameName);",
+									"\tconsole.log(\"dataFile/videoGameName: \" + videoGameName);",
+									"}",
+									"",
+									"var videoGameReleaseDate = \"\\\"\" + data.releaseDate + \"\\\"\";",
+									"if (videoGameReleaseDate){ ",
+									"\tpm.environment.set(\"videoGameReleaseDate\",videoGameReleaseDate);",
+									"\tconsole.log(\"dataFile/videoGameReleaseDate: \" + videoGameReleaseDate);",
+									"}",
+									"",
+									"var videoGameReviewScore = data.reviewScore;",
+									"if (videoGameReviewScore){ ",
+									"\tpm.environment.set(\"videoGameReviewScore\",videoGameReviewScore);",
+									"\tconsole.log(\"dataFile/videoGameReviewScore: \" + videoGameReviewScore);",
+									"}",
+									"",
+									"var videoGameCategory = \"\\\"\" + data.category + \"\\\"\";",
+									"if (videoGameCategory){ ",
+									"\tpm.environment.set(\"videoGameCategory\",videoGameCategory);",
+									"\tconsole.log(\"dataFile/videoGameCategory: \" + videoGameCategory);",
+									"}",
+									"",
+									"var videoGameRating = \"\\\"\" + data.rating + \"\\\"\";",
+									"if (videoGameRating){ ",
+									"\tpm.environment.set(\"videoGameRating\",videoGameRating);",
+									"\tconsole.log(\"dataFile/videoGameRating: \" + videoGameRating);",
+									"}",
+									"",
+									"",
+									"//specify list of tests to be executed in exact order",
+									"//const testsScope = \"Full\"; [Full|Core|ToDo|Quick]",
+									"let testsScope = data.testsScope;",
+									"",
+									"switch (testsScope) {",
+									"\tcase \"Full\":",
+									"\t\tvar testSession = [",
+									"\t\t\t\"Delete a video game\",",
+									"\t\t\t\"Get List of all Video Games\"",
+									"\t\t];",
+									"\t\tbreak;",
+									"\tcase \"Core\":",
+									"\t\tvar testSession = [",
+									"\t\t\t];",
+									"\t\tbreak;",
+									"\tcase \"ToDo\":",
+									"\t\tvar testSession = [",
+									"\t\t\t];",
+									"\t\tbreak;",
+									"\tcase \"Quick\":",
+									"\t\tvar testSession = [",
+									"\t\t\t\"Delete a video game\"",
+									"\t\t];",
+									"\t\tbreak;",
+									"\tdefault:",
+									"\tthrow new Error(\"No tests selected for execution!\");",
+									"}",
+									"",
+									"// Session initiate from PrS using eval()",
+									"eval(globals.sessionInit)(testSession, \"testSession\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "OPTIONS",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "httpbin.org/uuid",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"uuid"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tests",
+			"item": [
+				{
+					"name": "Get List of all Video Games",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var body = JSON.parse(responseBody);\r",
+									"var list = body.length;\r",
+									"pm.environment.set(\"nextID\", body[list-1].id + 1);\r",
+									"\r",
+									"//response validations\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\tpm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response schema is correct\", function () {\r",
+									"\tpm.response.to.have.jsonSchema(pm.environment.get(\"videoGamesListSchema\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}:{{port}}/app/videogames",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"app",
+								"videogames"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new video game",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(globals.videoGameListAll)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//response validations\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\tpm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Message 'Record Added Successfully' is displayed\", function () {\r",
+									"\tvar jsonData = JSON.parse(responseBody);\r",
+									"\tpm.expect(jsonData.status === \"Record Added Successfully\").to.be.eql(true); \r",
+									"});\r",
+									"\r",
+									"//clean up\r",
+									"if (pm.response.code === 200) {\r",
+									"\tpm.environment.set(\"maxID\", pm.environment.get(\"nextID\"));\r",
+									"\tpm.environment.set(\"nextID\", pm.environment.get(\"nextID\") + 1);\r",
+									"\teval(globals.videoGameDelete)();\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": {{nextID}},\r\n  \"name\": {{videoGameName}},\r\n  \"releaseDate\": {{videoGameReleaseDate}},\r\n  \"reviewScore\": {{videoGameReviewScore}},\r\n  \"category\": {{videoGameCategory}},\r\n  \"rating\": {{videoGameRating}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:{{port}}/app/videogames",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"app",
+								"videogames"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a video game",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//response validations\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"\tpm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Message 'Record Deleted Successfully' is displayed\", function () {\r",
+									"\tvar jsonData = JSON.parse(responseBody);\r",
+									"\tpm.expect(jsonData.status === \"Record Deleted Successfully\").to.be.eql(true); \r",
+									"});\r",
+									"\r",
+									"if (pm.response.code === 200) {\r",
+									"\tpm.environment.set(\"nextID\",pm.environment.get(\"maxID\"));\r",
+									"\tpm.environment.unset(\"maxID\");\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(globals.videoGameCreate)();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}:{{port}}/app/videogames/{{maxID}}",
+							"host": [
+								"{{url}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"app",
+								"videogames",
+								"{{maxID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"eval(globals.sessionNavigate)();"
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"//************************************************************************************************",
+					"// Schema for 'Get List of all Video Games' ******************************************************",
+					"//************************************************************************************************",
+					"const videoGamesListSchema = ",
+					"{",
+					"    \"type\": \"array\",",
+					"\t\"items\": [{",
+					"\t\t\"type\": \"object\",",
+					"\t\t\"properties\": {",
+					"\t\t\t\"id\": {",
+					"\t\t\t\t\"type\": \"integer\"",
+					"\t\t\t},",
+					"\t\t\t\"name\": {",
+					"\t\t\t\t\"type\": \"string\"",
+					"\t\t\t},",
+					"\t\t\t\"releaseDate\": {",
+					"\t\t\t\t\"type\": \"string\"",
+					"\t\t\t},",
+					"\t\t\t\"reviewScore\": {",
+					"\t\t\t\t\"type\": \"integer\"",
+					"\t\t\t},",
+					"\t\t\t\"category\": {",
+					"\t\t\t\t\"type\": \"string\"",
+					"\t\t\t},",
+					"\t\t\t\"rating\": {",
+					"\t\t\t\t\"type\": \"string\"",
+					"\t\t\t}",
+					"\t\t},",
+					"\t\t\"required\": [",
+					"\t\t\t\"id\",",
+					"\t\t\t\"name\",",
+					"\t\t\t\"releaseDate\",",
+					"\t\t\t\"reviewScore\",",
+					"\t\t\t\"category\",",
+					"\t\t\t\"rating\"",
+					"\t\t]",
+					"\t}]",
+					"};",
+					"pm.environment.set(\"videoGamesListSchema\", videoGamesListSchema);",
+					"",
+					"postman.setGlobalVariable(\"sessionInit\", (testSession, sessionName) => {",
+					"\t//session init section",
+					"\tconsole.log(request.name + \", initialization: \" + testSession + \", global var: \" + sessionName);",
+					"\tconsole.log(request.name + \", executing: \" + testSession[0]);",
+					"",
+					"\t// Select first test from session to be executed",
+					"\tpostman.setNextRequest(testSession[0]); ",
+					"\ttestSession.shift();",
+					"\tif (testSession.length === 0) {",
+					"\t\tconsole.log(request.name + \", test session is empty, unset \" + sessionName);",
+					"\t\tpm.globals.unset(sessionName);",
+					"\t\tconsole.log(request.name + \", terminate tests execution list\");",
+					"\t} else {",
+					"\t\tpm.globals.set(sessionName, testSession);",
+					"\t\tconsole.log(request.name + \" for \" + sessionName + \", updated list of tests to be executed: \" + testSession);",
+					"\t}",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"sessionNavigate\", () => {",
+					"\tconsole.log(request.name + \", entering ...\");",
+					"\tif (pm.globals.get(\"requestsToRun\") === undefined){",
+					"\t\tconsole.log(request.name + \", requestsToRun is undefined\");",
+					"\t\tif (pm.globals.get(\"testSession\") === undefined){",
+					"\t\t\tconsole.log(request.name + \", testSession is undefined\");",
+					"\t\t\tpostman.setNextRequest(null);",
+					"\t\t} else {",
+					"\t\t\tvar testSession = pm.globals.get(\"testSession\");",
+					"\t\t\tconsole.log(request.name + \", checking what to run: \" + testSession[0]);",
+					"\t\t\tpostman.setNextRequest(testSession[0]); // Run: GET SWIFT payment",
+					"\t\t\ttestSession.shift();",
+					"\t\t\tif (testSession.length === 0) {",
+					"\t\t\t\tpm.globals.unset(\"testSession\");",
+					"\t\t\t\tconsole.log(request.name + \", terminate execution list\");",
+					"\t\t\t} else {",
+					"\t\t\t\tpm.globals.set(\"testSession\", testSession);",
+					"\t\t\t\tconsole.log(request.name + \", updated list of tests to be executed: \" + testSession);",
+					"\t\t\t}",
+					"\t\t}",
+					"\t} else {",
+					"\t\tvar requestsToRun = pm.globals.get(\"requestsToRun\");",
+					"\t\tconsole.log(request.name + \", checking what to run: \" + requestsToRun[0]);",
+					"\t\tpostman.setNextRequest(requestsToRun[0]); ",
+					"\t\trequestsToRun.shift();",
+					"\t\tif (requestsToRun.length === 0) {",
+					"\t\t\tpm.globals.unset(\"requestsToRun\");",
+					"\t\t\tconsole.log(request.name + \", terminate requests execution list\");",
+					"\t\t} else {",
+					"\t\t\tpm.globals.set(\"requestsToRun\", requestsToRun);",
+					"\t\t\tconsole.log(request.name + \", updated list of requests to be executed: \" + requestsToRun);",
+					"\t\t}",
+					"\t}",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"videoGameListAll\", () => {",
+					"\tpm.sendRequest({",
+					"\t\turl: `${pm.environment.get(\"url\")}:${pm.environment.get(\"port\")}/app/videogames`,",
+					"\t\tmethod: \"GET\",",
+					"\t\theader: {",
+					"\t\t\t'Content-Type': 'application/json',",
+					"\t\t\t'Accept': 'application/json'",
+					"\t\t},",
+					"\t\tbody: {",
+					"\t\t\tmode: 'raw',",
+					"\t\t\traw: JSON.stringify({})",
+					"\t\t}",
+					"\t}, function(err, res) {",
+					"\t\tif (err) {",
+					"\t\t\tconsole.log(err ? err : res.json());",
+					"\t\t} else {",
+					"\t\t\tvar list = res.json().length;",
+					"\t\t\tpm.environment.set(\"nextID\", res.json()[list-1].id + 1);\t\t\t",
+					"\t\t\tconsole.log(\"Next free ID: \" + pm.environment.get(\"nextID\"));",
+					"\t\t}",
+					"\t});",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"videoGameCreate\", () => {",
+					"\t//1. determine next free ID",
+					"\teval(globals.videoGameListAll)();",
+					"\t//2. wait for 1000 ms (for previous request to finish) then send request to create video game",
+					"    setTimeout(function(){",
+					"\t\tpm.sendRequest({",
+					"\t\t\turl: `${pm.environment.get(\"url\")}:${pm.environment.get(\"port\")}/app/videogames`,",
+					"\t\t\tmethod: \"POST\",",
+					"\t\t\theader: {",
+					"\t\t\t\t'Content-Type': 'application/json',",
+					"\t\t\t\t'Accept': 'application/json, application/hal+json'",
+					"\t\t\t},",
+					"\t\t\tbody: {",
+					"\t\t\t\tmode: 'raw',",
+					"\t\t\t\traw:JSON.stringify({ ",
+					"\t\t\t\t\t'id': `${pm.environment.get(\"nextID\")}`,",
+					"\t\t\t\t\t'name': \"Resident Evil XXL\",",
+					"\t\t\t\t\t'releaseDate': \"2021-02-07T21:47:39.715Z\",",
+					"\t\t\t\t\t'reviewScore': 55,",
+					"\t\t\t\t\t'category': \"Shooter\",",
+					"\t\t\t\t\t'rating': \"Universal\"",
+					"\t\t\t\t})",
+					"\t\t\t}",
+					"\t\t}, function(err, res) {",
+					"\t\t\tif (err) {",
+					"\t\t\t\tconsole.log(err ? err : res.json());",
+					"\t\t\t} else {",
+					"\t\t\t\tpm.environment.set(\"maxID\", pm.environment.get(\"nextID\"));",
+					"\t\t\t\tpm.environment.set(\"nextID\", pm.environment.get(\"nextID\") + 1);",
+					"\t\t\t}",
+					"\t\t})",
+					"\t}, 1000);",
+					"});",
+					"",
+					"postman.setGlobalVariable(\"videoGameDelete\", () => {",
+					"\tpm.sendRequest({",
+					"\t\turl: `${pm.environment.get(\"url\")}:${pm.environment.get(\"port\")}/app/videogames/${pm.environment.get(\"maxID\")}`,",
+					"\t\tmethod: \"DELETE\",",
+					"\t\theader: {",
+					"\t\t\t'Content-Type': 'application/json',",
+					"\t\t\t'Accept': 'application/json'",
+					"\t\t},",
+					"\t\tbody: {",
+					"\t\t\tmode: 'raw',",
+					"\t\t\traw: JSON.stringify({})",
+					"\t\t}    ",
+					"\t}, function(err, res) {",
+					"\t\tif (err) {",
+					"\t\t\tconsole.log(err ? err : res.json());",
+					"\t\t} else {",
+					"\t\t\tpm.environment.set(\"nextID\",pm.environment.get(\"maxID\"));",
+					"\t\t\tpm.environment.unset(\"maxID\");",
+					"\t\t}",
+					"\t});",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
